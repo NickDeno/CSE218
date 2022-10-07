@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="613.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="p5_with_SceneBuilder.SignInSignUpController">
+   <left>
+      <AnchorPane prefHeight="596.0" prefWidth="285.0" style="-fx-background-color: #2576DF;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="230.0" fitWidth="226.0" layoutX="23.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/UserIcon.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="31.0" layoutY="385.0" prefHeight="70.0" prefWidth="223.0" text="Deno Inc.">
+               <font>
+                  <Font name="Eras Demi ITC" size="47.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.9078947305679321" green="0.26480263471603394" blue="0.26480263471603394" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.8552631735801697" green="0.8552631735801697" blue="0.8552631735801697" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+         </children>
+      </AnchorPane>
+   </left>
+   <right>
+      <AnchorPane prefHeight="613.0" prefWidth="794.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="144.0" fitWidth="136.0" layoutX="324.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/LockIcon.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="92.0" layoutY="187.0" prefHeight="62.0" prefWidth="146.0" text="Email" textFill="#2576df">
+               <font>
+                  <Font name="Bookman Old Style" size="36.0" />
+               </font>
+            </Label>
+            <TextField fx:id="signUpEmailField" alignment="CENTER" layoutX="331.0" layoutY="194.0" prefHeight="49.0" prefWidth="308.0" promptText="Email Address" style="-fx-background-radius: 25;">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="signUpUsernameField" alignment="CENTER" layoutX="331.0" layoutY="264.0" prefHeight="49.0" prefWidth="308.0" promptText="Username" style="-fx-background-radius: 25;">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+            <Label layoutX="92.0" layoutY="253.0" prefHeight="70.0" prefWidth="207.0" text="Username" textFill="#2576df">
+               <font>
+                  <Font name="Bookman Old Style" size="35.0" />
+               </font>
+            </Label>
+            <Label layoutX="92.0" layoutY="323.0" prefHeight="70.0" prefWidth="207.0" text="Password" textFill="#2576df">
+               <font>
+                  <Font name="Bookman Old Style" size="35.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="signUpPasswordField" alignment="CENTER" layoutX="331.0" layoutY="335.0" prefHeight="46.0" prefWidth="308.0" promptText="Password" style="-fx-background-radius: 25;">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </PasswordField>
+            <Button fx:id="signUpBtn" layoutX="238.0" layoutY="445.0" mnemonicParsing="false" onAction="#signUpBtnOnAction" prefHeight="64.0" prefWidth="247.0" style="-fx-background-color: #2576DF; -fx-background-radius: 25;" text="Sign Up" textFill="WHITE">
+               <font>
+                  <Font name="Baskerville Old Face" size="22.0" />
+               </font>
+            </Button>
+            <Button fx:id="backBtn" layoutX="238.0" layoutY="528.0" mnemonicParsing="false" onAction="#backBtnOnAction" prefHeight="64.0" prefWidth="247.0" style="-fx-background-color: #2576DF; -fx-background-radius: 25;" text="Back" textFill="WHITE">
+               <font>
+                  <Font name="Baskerville Old Face" size="22.0" />
+               </font>
+            </Button>
+            <Label fx:id="signUpMessageLabel" alignment="CENTER" layoutX="75.0" layoutY="393.0" prefHeight="47.0" prefWidth="659.0" textAlignment="CENTER" textFill="#ff0202" visible="false">
+               <font>
+                  <Font name="Consolas" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>

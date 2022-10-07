@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="809.0" prefWidth="1235.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.LandingPage">
+   <top>
+      <Label fx:id="userLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="92.0" prefWidth="530.0" text="Welcome back User!" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Eras Bold ITC" size="37.0" />
+         </font></Label>
+   </top>
+</BorderPane>

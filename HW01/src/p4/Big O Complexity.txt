@@ -1,0 +1,55 @@
+0. Constructor Method:
+	
+	
+1. Insert Method:
+	The Big O complexity of this method is 0(1) since no matter how big the array is, insert method still takes the same amount 
+	of time to complete
+	
+2. Display Method:
+	The Big O complexity of this method is O(n) since the time to complete is linear, I.E if the length of the array is doubled, 
+	it will take double the time to display the array
+	
+3. sequentialSearchByISBN Method:
+	The Big O complexity of this method is O(n) due to the time to search the array sequentially by ISBN being linear.
+	
+4. sequentialSearchByLastName Method:
+	The Big O complexity of this method is also O(n) however it does take longer to complete then the sequentialSearchByISBN
+	method. This is because the time complexity to sequentially search the array is linear, however this method also has to copy over
+	the books found of the last names that match. So worst case scenario if every last name matches the "key", it would take O(n) 
+	to iterate through the array plus O(n) time to copy every match into a new array. So this would be O(n) + O(n) = O(2(n)) = O(n).
+
+5. binarySearchByISBN Method:
+	The Big O complexity of this method is also O(log(n)). This is because for every pass, the binary search effectively cuts
+	the amount of items it has to search for in half. So if the length of the array is doubled, this method only needs to make 
+	one more comparison to account for it.
+	
+6. bubbleSortByISBN Method:
+	The Big O complexity of this method is O(n^2). This is because it uses a nested for loop, so for each pass in the inner loop it 
+	does O(n) iterations and the outer loop runs O(n) times making the time complexity O(n^2).
+	
+7. insertionSortByLastName Method:
+	In general, the Big O complexity of this method is O(n^2) just like the bubbleSort method. However, if the data in the array
+	is "nearly sorted" already, I.E no more then 2 off of where it should be, the time complexity of the insertionSort would be 
+	just O(n).
+
+8. selectionSortByPrice Method:
+	The Big O complexity of this method is also O(n^2). This is due to using nested loops in the method. However, even though the
+	time complexity is the same as the bubbleSort method, it is more efficient. This is because unlike the bubbleSort method, 
+	selectionSort only makes one swap for each pass of the inner loop instead of swapping multiple times every pass. So even though
+	it makes the same amount of comparisons each pass as the bubbleSort, it does less swaps. However the time complexity is still
+	O(n^2).
+	
+9. deleteByISBN Method:
+	
+	
+10. deleteByLastName Method:
+	 Due to the fact that lastName is not unique like isbn, we can assume the worst case scenario being that every last name matches
+	 the "key" last name. This would mean that for every match, we would have to decrement n number of elements by one which would take
+	 O(n) time b/c the more elements there are in the array, the greater the amount of decrements we would have to do. Also, it would
+	 take O(n) time to iterate through an array of n elements making the Big O complexity of this method O(n^2)	
+	
+
+		
+	
+	
+	

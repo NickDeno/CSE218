@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="597.0" prefWidth="994.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.SignInSignUpPage">
+   <left>
+      <AnchorPane prefHeight="520.0" prefWidth="289.0" style="-fx-background-color: #2576DF;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="225.0" fitWidth="223.0" layoutX="32.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/UserIcon.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="37.0" layoutY="357.0" prefHeight="85.0" prefWidth="216.0" text="Deno Inc.">
+               <font>
+                  <Font name="Eras Demi ITC" size="47.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.9078947305679321" green="0.30263158679008484" blue="0.30263158679008484" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.006711409395973154">
+                           <color>
+                              <Color red="0.9078947305679321" green="0.30263158679008484" blue="0.30263158679008484" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.9868420958518982" green="0.8040935397148132" blue="0.8040935397148132" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+         </children>
+      </AnchorPane>
+   </left>
+   <right>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="602.0" prefWidth="714.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="signInMessageLabel" alignment="CENTER" layoutX="67.0" layoutY="326.0" prefHeight="41.0" prefWidth="573.0" textFill="#e42525" visible="false">
+               <font>
+                  <Font name="Consolas" size="23.0" />
+               </font>
+            </Label>
+            <TextField id="userNameField" fx:id="signInUsernameField" alignment="CENTER" layoutX="283.0" layoutY="181.0" prefHeight="47.0" prefWidth="307.0" promptText="Username" style="-fx-background-radius: 25;">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+            <Label layoutX="56.0" layoutY="179.0" prefHeight="50.0" prefWidth="188.0" text="Username" textFill="#2576df">
+               <font>
+                  <Font name="Bookman Old Style" size="34.0" />
+               </font>
+            </Label>
+            <Label layoutX="54.0" layoutY="262.0" prefHeight="45.0" prefWidth="193.0" text="Password" textFill="#2576df">
+               <font>
+                  <Font name="Bookman Old Style" size="36.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="signInPasswordField" alignment="CENTER" layoutX="283.0" layoutY="262.0" prefHeight="46.0" prefWidth="307.0" promptText="Password" style="-fx-background-radius: 25;">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </PasswordField>
+            <Button fx:id="signInBtn" layoutX="191.0" layoutY="367.0" mnemonicParsing="false" onAction="#signInBtnOnAction" prefHeight="59.0" prefWidth="293.0" style="-fx-background-color: #2576DF; -fx-background-radius: 25;" text="Sign In" textFill="WHITE">
+               <font>
+                  <Font name="Baskerville Old Face" size="22.0" />
+               </font>
+            </Button>
+            <Button fx:id="cancelBtn" layoutX="192.0" layoutY="450.0" mnemonicParsing="false" onAction="#cancelBtnOnAction" prefHeight="60.0" prefWidth="292.0" style="-fx-background-color: #2576DF; -fx-background-radius: 25;" text="Cancel" textFill="WHITE">
+               <font>
+                  <Font name="Baskerville Old Face" size="22.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="123.0" fitWidth="105.0" layoutX="283.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/LockIcon.png" />
+               </image>
+            </ImageView>
+            <Hyperlink fx:id="clickHereText" alignment="CENTER" layoutX="159.0" layoutY="524.0" onAction="#clickHereOnAction" prefHeight="21.0" prefWidth="341.0" text="Dont have an account? Click here." textFill="#e80e0e">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Hyperlink>
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>
