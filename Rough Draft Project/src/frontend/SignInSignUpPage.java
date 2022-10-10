@@ -36,30 +36,33 @@ public class SignInSignUpPage {
 	@FXML private Button signUpBtn;
 	@FXML private Button backBtn;
 	
-	private Stage stage;
-	private Scene scene;
-	private Parent root;
-	
 	private static UserCenter users;
+	private static User currentUser;
+	
+	public SignInSignUpPage() {
+		
+	}
 	
 	public void initialize() {
 		users = new File("backupData/Users.dat").isFile() ? Utilities.restoreUsers() : new UserCenter(50);;
-		System.out.println("Initialized!");
+		users.display();
+		System.out.println("Initialized Sign In/Up Page!");
 	}
 	
-	@FXML public void signInBtnOnAction(ActionEvent event) throws IOException {
+	@FXML public void signInBtnOnAction(ActionEvent event) {
 		if(users.userExists(signInUsernameField.getText(), signInPasswordField.getText())) {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/frontend/fxmls/LandingPage.fxml"));
-			root = loader.load();
-			LandingPage landingPage = loader.getController();
-			landingPage.displayUsername(signInUsernameField.getText());
-			
-			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-			scene = new Scene(root);
-			stage.setScene(scene);
-			stage.setTitle("Main Page!");
-			stage.show();
-			
+			currentUser = users.userSearch(signInUsernameField.getText());
+			try {
+				Parent root = FXMLLoader.load(getClass().getResource("/frontend/fxmls/LandingPage.fxml"));
+				Scene scene = new Scene(root);
+				Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+				stage.setScene(scene);
+				stage.setTitle("Main Page!");
+				stage.show();		
+			} catch (IOException e) {
+				System.out.println("Unable to load LandingPage scene.");
+				e.printStackTrace();
+			}
 		} else {
 			signInMessageLabel.setText("Account not found.");
 			signInMessageLabel.setVisible(true);
@@ -73,14 +76,19 @@ public class SignInSignUpPage {
     	stage.close();
     }
     
-    @FXML public void clickHereOnAction(ActionEvent event) throws IOException {
-			Parent root = FXMLLoader.load(getClass().getResource("/frontend/fxmls/SignUpPage.fxml"));
-			Scene scene = new Scene(root);
-			Stage stage = new Stage();
-			stage.setScene(scene);
-			stage.setTitle("Sign Up!");
-			stage.setResizable(false);
-			stage.show();
+    @FXML public void clickHereOnAction(ActionEvent event) {
+			try {
+				Parent root = FXMLLoader.load(getClass().getResource("/frontend/fxmls/SignUpPage.fxml"));
+				Scene scene = new Scene(root);
+				Stage stage = new Stage();
+				stage.setScene(scene);
+				stage.setTitle("Sign Up!");
+				stage.setResizable(false);
+				stage.show();
+			} catch (IOException e) {
+				System.out.println("Unable to load SignUpPage scene.");
+				e.printStackTrace();
+			}
 	}
     
     @FXML public void checkFieldIsValid(MouseEvent event) {
@@ -90,10 +98,7 @@ public class SignInSignUpPage {
             	if(UserCenter.validEmail(newValue))
             		signUpEmailField.setStyle(tempStyle + "-fx-border-color:#38ff13;");
             	else if(!UserCenter.validEmail(newValue))
-            		signUpEmailField.setStyle(tempStyle + "-fx-border-color:#ff0000;");
-            	else if (newValue == null || newValue.trim().isEmpty()) {
-            		signUpPasswordField.setStyle(tempStyle);
-            	} 
+            		signUpEmailField.setStyle(tempStyle + "-fx-border-color:#ff0000;"); 
         	});
     	}else if(event.getSource().equals(signUpUsernameField)) {
     		String tempStyle = signUpUsernameField.getStyle();
@@ -102,10 +107,6 @@ public class SignInSignUpPage {
             		signUpUsernameField.setStyle(tempStyle + "-fx-border-color:#38ff13;");
             	else if(!users.usernameIsUnique(newValue)) 
             		signUpUsernameField.setStyle(tempStyle + "-fx-border-color:#ff0000;"); 
-            	else if (newValue == null || newValue.trim().isEmpty()) {
-            		signUpUsernameField.setStyle(tempStyle);
-            	}
-            	
         	});
     		
     	}else if(event.getSource().equals(signUpPasswordField)) {
@@ -115,9 +116,6 @@ public class SignInSignUpPage {
             		signUpPasswordField.setStyle(tempStyle + "-fx-border-color:#38ff13;");
             	else if(!UserCenter.validPassword(newValue))
             		signUpPasswordField.setStyle(tempStyle + "-fx-border-color:#ff0000;");
-            	else if (newValue == null || newValue.trim().isEmpty()) {
-            		signUpPasswordField.setStyle(tempStyle);
-            	}
         	});
     	}
     }
@@ -126,31 +124,36 @@ public class SignInSignUpPage {
     	if(!users.usernameIsUnique(signUpUsernameField.getText()) || !UserCenter.validPassword(signUpPasswordField.getText())|| !UserCenter.validEmail(signUpEmailField.getText())){
     		signUpMessageLabel.setText("Failed, please try again.");
 			signUpMessageLabel.setVisible(true);
-			signUpUsernameField.clear();
-			signUpPasswordField.clear();
-			signUpEmailField.clear();
+			resetTextFields();
 			return;
     	}
     	users.insert(new User(signUpUsernameField.getText(), signUpPasswordField.getText(), signUpEmailField.getText()));
     	signUpMessageLabel.setText("Success, account was created!");
     	signUpMessageLabel.setVisible(true);
-    	signUpUsernameField.clear();
-		signUpPasswordField.clear();
-		signUpEmailField.clear();
-		
-		signUpEmailField.setStyle("-fx-background-radius: 25; -fx-border-radius: 25; -fx-border-insets: -3; -fx-border-width: 3;");
-		signUpUsernameField.setStyle("-fx-background-radius: 25; -fx-border-radius: 25; -fx-border-insets: -3; -fx-border-width: 3;");
-		signUpPasswordField.setStyle("-fx-background-radius: 25; -fx-border-radius: 25; -fx-border-insets: -3; -fx-border-width: 3;");
-    	
+    	resetTextFields();
 		Utilities.backupUsers(users);
 	}
     
     @FXML public void backBtnOnAction(ActionEvent event) {
     	Stage stage = (Stage) backBtn.getScene().getWindow();
     	stage.close();
+    	users.display();
     }
     
     public static UserCenter getUsers() {
     	return users;
+    }
+    
+    public static User getCurrentUser() {
+    	return currentUser;
+    }
+    
+    private void resetTextFields() {
+    	signUpUsernameField.clear();
+		signUpPasswordField.clear();
+		signUpEmailField.clear();
+		signUpEmailField.setStyle("-fx-background-radius: 25; -fx-border-radius: 25; -fx-border-insets: -3; -fx-border-width: 3;");
+		signUpUsernameField.setStyle("-fx-background-radius: 25; -fx-border-radius: 25; -fx-border-insets: -3; -fx-border-width: 3;");
+		signUpPasswordField.setStyle("-fx-background-radius: 25; -fx-border-radius: 25; -fx-border-insets: -3; -fx-border-width: 3;");
     }
 }

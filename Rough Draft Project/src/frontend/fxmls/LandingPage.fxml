@@ -1,14 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="809.0" prefWidth="1235.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.LandingPage">
-   <top>
-      <Label fx:id="userLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="92.0" prefWidth="530.0" text="Welcome back User!" BorderPane.alignment="CENTER">
-         <font>
-            <Font name="Eras Bold ITC" size="37.0" />
-         </font></Label>
-   </top>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1330.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.LandingPage">
+   <left>
+      <AnchorPane prefHeight="760.0" prefWidth="241.0" style="-fx-background-color: #2576DF;" BorderPane.alignment="CENTER">
+         <children>
+            <Circle fill="#f5f5f5" layoutX="123.0" layoutY="75.0" radius="52.0" stroke="BLACK" strokeType="INSIDE" />
+            <ImageView fitHeight="74.0" fitWidth="73.0" layoutX="87.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/TempProfilePic.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="usernameLabel" alignment="CENTER" layoutX="4.0" layoutY="133.0" prefHeight="37.0" prefWidth="233.0" text="User" textFill="WHITE">
+               <font>
+                  <Font name="Elephant" size="27.0" />
+               </font>
+            </Label>
+            <Button layoutX="11.0" layoutY="189.0" mnemonicParsing="false" onAction="#homeButtonOnAction" prefHeight="69.0" prefWidth="206.0" styleClass="sideBarButton" stylesheets="@Stylesheet.css" text=" Home" textFill="WHITE">
+               <font>
+                  <Font name="Georgia" size="34.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="46.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/HomeIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="profileButton" layoutX="4.0" layoutY="266.0" mnemonicParsing="false" onAction="#profileButtonOnAction" prefHeight="76.0" prefWidth="221.0" styleClass="sideBarButton" stylesheets="@Stylesheet.css" text=" Profile" textFill="WHITE">
+               <font>
+                  <Font name="Georgia" size="34.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="54.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/UserIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="8.0" layoutY="355.0" mnemonicParsing="false" onAction="#settingsButtonOnAction" prefHeight="76.0" prefWidth="221.0" styleClass="sideBarButton" stylesheets="@Stylesheet.css" text=" Settings" textFill="WHITE">
+               <font>
+                  <Font name="Georgia" size="33.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="53.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/SettingsIcon.jpg" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="12.0" layoutY="678.0" mnemonicParsing="false" onAction="#logoutButtonOnAction" prefHeight="64.0" prefWidth="205.0" scaleShape="false" styleClass="sideBarButton" stylesheets="@Stylesheet.css" text="Log Out" textFill="WHITE">
+               <font>
+                  <Font name="Georgia" size="30.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="54.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/LogOutIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane fx:id="contentPane" prefHeight="760.0" prefWidth="1090.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #656161 0.0%, #393636 100.0%);" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="userLabel" alignment="CENTER" layoutX="311.0" layoutY="14.0" prefHeight="49.0" prefWidth="464.0" text="Welcome Back User!" textFill="WHITE">
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="38.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+   </center>
 </BorderPane>

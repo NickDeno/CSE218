@@ -1,0 +1,14 @@
+.sideBarButton {
+	-fx-background-color : transparent;
+	-fx-background-radius : 25 0 0 25;
+}
+
+.sideBarButton:hover {
+	-fx-background-color: #464545;
+	-fx-background-radius : 25;
+}
+
+.sideBarButton:pressed {
+	-fx-background-color: #979191;
+	-fx-background-radius : 25;
+}

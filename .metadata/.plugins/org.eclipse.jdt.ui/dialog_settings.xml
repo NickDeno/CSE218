@@ -15,13 +15,14 @@
 	<section name="JavaElementSearchActions">
 	</section>
 	<section name="ClasspathContainerSelectionPage">
-		<item key="index" value="6"/>
+		<item key="index" value="0"/>
 	</section>
 	<section name="NewPackageWizardPage">
 		<item key="create_package_info_java" value="false"/>
 	</section>
 	<section name="OptionalMessageDialog.hide.">
 		<item key="org.eclipse.jdt.ui.typecomment.deprecated" value="true"/>
+		<item key="configure_problem_severity_dialog_id" value="false"/>
 	</section>
 	<section name="NewClassWizardPage">
 		<item key="create_constructor" value="false"/>
