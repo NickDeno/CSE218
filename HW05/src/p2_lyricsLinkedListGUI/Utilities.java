@@ -7,7 +7,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Utilities {
-	public static String produceParagraph(LinkedList<ParentLink> list, String key, int length) {
+	public static String generateParagraph(String key, int length, LinkedList<ParentLink> list) {
 		Random random = new Random();
 		String paragraph = "";
 		for(int i = 0; i < length; i++) {
@@ -24,7 +24,7 @@ public class Utilities {
 	}
 	
 	//Checks if keyword user inputed is present in the list
-	public static boolean keyIsPresent(LinkedList<ParentLink> list, String key) {
+	public static boolean keyIsPresent(String key, LinkedList<ParentLink> list) {
     	for(ParentLink p: list) {
 			if(p.getKeyword().equals(key))	{
 				return true;

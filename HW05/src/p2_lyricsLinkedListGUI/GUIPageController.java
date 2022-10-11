@@ -64,8 +64,8 @@ public class GUIPageController {
 			alert.showAndWait();
 			return;
     	}
-    	if(Utilities.keyIsPresent(lyricsList, keywordTextField.getText())) {
-    		textArea.appendText(Utilities.produceParagraph(lyricsList, keywordTextField.getText(), Integer.parseInt(numberTextField.getText())));
+    	if(Utilities.keyIsPresent(keywordTextField.getText(), lyricsList)) {
+    		textArea.appendText(Utilities.generateParagraph(keywordTextField.getText(), Integer.parseInt(numberTextField.getText()), lyricsList));
     	} else {
     		Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Keyword Not Found");
@@ -80,14 +80,14 @@ public class GUIPageController {
     		PrintWriter pw = new PrintWriter("F:\\Users\\Nick DeNobrega\\Desktop\\CSE Workspaces\\CSE218 Workspace\\HW05\\output\\output.txt");
 			pw.println(textArea.getText());
 			pw.close();
-			keywordTextField.clear();
-			numberTextField.clear();
-			textArea.clear();
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Sucessfully Saved!");
 			alert.setHeaderText(null);
 			alert.setContentText("The produced paragraph was saved in output\\output.txt");
 			alert.showAndWait();
+			keywordTextField.clear();
+			numberTextField.clear();
+			textArea.clear();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
