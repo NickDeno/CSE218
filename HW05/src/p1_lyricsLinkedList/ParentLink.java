@@ -1,4 +1,4 @@
-package p1_linkedLists;
+package p1_lyricsLinkedList;
 
 import java.util.LinkedList;
 
@@ -13,6 +13,10 @@ public class ParentLink {
 
 	public String getKeyword() {
 		return keyword;
+	}
+	
+	public LinkedList<String> getBabyList(){
+		return babyList;
 	}
 
 	@Override
