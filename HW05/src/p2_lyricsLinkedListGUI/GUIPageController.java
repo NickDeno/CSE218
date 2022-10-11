@@ -48,6 +48,9 @@ public class GUIPageController {
     	} else {
     		lyricsList = Utilities.lyricsToList(selectedFile);
     		lyricsLabel.setText(selectedFile.getName());
+    		for(ParentLink p: lyricsList) {
+    			System.out.println(p.toString());
+    		}
     	}
     }
     
