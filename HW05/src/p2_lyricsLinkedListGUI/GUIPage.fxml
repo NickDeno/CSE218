@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="765.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #656161 0.0%, #393636 100.0%);" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="p2_lyricsLinkedListGUI.GUIPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="765.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #656161 0.0%, #393636 100.0%);" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="p2_lyricsLinkedListGUI.GUIPageController">
    <children>
       <MenuBar prefHeight="25.0" prefWidth="765.0">
         <menus>
@@ -23,9 +23,9 @@
             <Menu fx:id="exit" mnemonicParsing="false" onAction="#exitOnAction" text="Exit" />
         </menus>
       </MenuBar>
-      <Label alignment="CENTER" layoutX="145.0" layoutY="27.0" prefHeight="43.0" prefWidth="475.0" text="Machine Learning" textFill="WHITE">
+      <Label alignment="CENTER" layoutX="145.0" layoutY="42.0" prefHeight="43.0" prefWidth="475.0" text="Machine Learning" textFill="WHITE">
          <font>
-            <Font name="Caveat Bold" size="56.0" />
+            <Font name="Candara Light" size="56.0" />
          </font>
       </Label>
       <TextField fx:id="keywordTextField" alignment="CENTER" layoutX="124.0" layoutY="118.0" prefHeight="48.0" prefWidth="197.0" promptText="Keyword">
@@ -38,28 +38,28 @@
             <Font size="25.0" />
          </font>
       </TextField>
-      <TextArea fx:id="textArea" layoutX="124.0" layoutY="274.0" prefHeight="315.0" prefWidth="514.0" promptText="Produced Paragraph:" wrapText="true">
+      <TextArea fx:id="textArea" editable="false" layoutX="124.0" layoutY="274.0" prefHeight="315.0" prefWidth="514.0" promptText="Produced Paragraph:" wrapText="true">
          <font>
             <Font name="Century Gothic" size="18.0" />
          </font></TextArea>
-      <Button fx:id="produceBtn" layoutX="89.0" layoutY="200.0" mnemonicParsing="false" onAction="#produceOnAction" prefHeight="52.0" prefWidth="177.0" text="Produce Paragraph">
+      <Button fx:id="produceBtn" layoutX="80.0" layoutY="200.0" mnemonicParsing="false" onAction="#produceOnAction" prefHeight="52.0" prefWidth="186.0" text="Produce Paragraph">
          <font>
-            <Font name="Cormorant Infant Regular" size="19.0" />
+            <Font name="Candara" size="19.0" />
          </font>
       </Button>
       <Button fx:id="saveBtn" layoutX="303.0" layoutY="200.0" mnemonicParsing="false" onAction="#saveOutputOnAction" prefHeight="52.0" prefWidth="177.0" text="Save Paragraph">
          <font>
-            <Font name="Cormorant Infant Regular" size="21.0" />
+            <Font name="Candara" size="21.0" />
          </font>
       </Button>
       <Label fx:id="lyricsLabel" alignment="CENTER" layoutX="6.0" layoutY="589.0" prefHeight="74.0" prefWidth="751.0" text="Chosen Lyrics: " textFill="WHITE">
          <font>
-            <Font name="Caveat Bold" size="52.0" />
+            <Font name="Lucida Sans Demibold Italic" size="52.0" />
          </font>
       </Label>
       <Button fx:id="clearBtn" layoutX="518.0" layoutY="200.0" mnemonicParsing="false" onAction="#clearOnAction" prefHeight="52.0" prefWidth="177.0" text="Clear Paragraph">
          <font>
-            <Font name="Cormorant Infant Regular" size="21.0" />
+            <Font name="Candara" size="21.0" />
          </font>
       </Button>
    </children>

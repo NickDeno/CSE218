@@ -2,6 +2,7 @@ package p2_lyricsLinkedListGUI;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
@@ -36,6 +37,8 @@ public class Utilities {
 		String[] lyrics = getLyrics(file);
 		LinkedList<String> usedKeywords = new LinkedList<String>();	
 		LinkedList<ParentLink> parentList = new LinkedList<ParentLink>();	
+//		HashSet<String> usedKeywords = new HashSet<>();
+		
 		for(int i = 0; i < lyrics.length ; i++) {
 			if(!usedKeywords.contains(lyrics[i])) { 
 				LinkedList<String> babyList = new LinkedList<String>();

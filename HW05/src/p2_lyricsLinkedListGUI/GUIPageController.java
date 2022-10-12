@@ -36,7 +36,8 @@ public class GUIPageController {
     
     @FXML public void choseFileOnAction(ActionEvent event) {
     	FileChooser fc= new FileChooser();
-    	fc.setInitialDirectory(new File("F:\\Users\\Nick DeNobrega\\Desktop\\CSE Workspaces\\CSE218 Workspace\\HW05\\data"));
+//    	fc.setInitialDirectory(new File("F:\\Users\\Nick DeNobrega\\Desktop\\CSE Workspaces\\CSE218 Workspace\\HW05\\data"));
+    	fc.setInitialDirectory(new File("C:\\Users\\Nickd\\Desktop\\CSE Workspaces\\CSE218 Workspace\\HW05\\data"));
     	fc.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.txt"));
     	selectedFile = fc.showOpenDialog(null);
     	if(selectedFile == null) {
@@ -64,6 +65,14 @@ public class GUIPageController {
 			alert.showAndWait();
 			return;
     	}
+    	
+    	if(keywordTextField.getText().isEmpty() || numberTextField.getText().isEmpty()) {
+    		Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Empty Input(s)");
+			alert.setHeaderText(null);
+			alert.setContentText("Please make sure a chosen keyword and the length of the paragraph was entered");
+			alert.showAndWait();
+    	}
     	if(Utilities.keyIsPresent(keywordTextField.getText(), lyricsList)) {
     		textArea.appendText(Utilities.generateParagraph(keywordTextField.getText(), Integer.parseInt(numberTextField.getText()), lyricsList));
     	} else {
@@ -77,7 +86,8 @@ public class GUIPageController {
 
     @FXML public void saveOutputOnAction(ActionEvent event) {
     	try {
-    		PrintWriter pw = new PrintWriter("F:\\Users\\Nick DeNobrega\\Desktop\\CSE Workspaces\\CSE218 Workspace\\HW05\\output\\output.txt");
+//    		PrintWriter pw = new PrintWriter("F:\\Users\\Nick DeNobrega\\Desktop\\CSE Workspaces\\CSE218 Workspace\\HW05\\output\\output.txt");
+    		PrintWriter pw = new PrintWriter("C:\\Users\\Nickd\\Desktop\\CSE Workspaces\\CSE218 Workspace\\HW05\\output\\output.txt");
 			pw.println(textArea.getText());
 			pw.close();
 			Alert alert = new Alert(AlertType.INFORMATION);
@@ -100,7 +110,7 @@ public class GUIPageController {
     }
     
     @FXML public void exitOnAction(ActionEvent event) {
-    	Stage stage = (Stage)textArea.getScene().getWindow();
+    	Stage stage = (Stage)clearBtn.getScene().getWindow();
     	stage.close();
     }
 }
