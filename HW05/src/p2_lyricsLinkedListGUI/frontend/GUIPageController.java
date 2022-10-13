@@ -1,9 +1,8 @@
-package p2_lyricsLinkedListGUI;
+package p2_lyricsLinkedListGUI.frontend;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.LinkedList;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
+import p2_lyricsLinkedListGUI.backend.ParentList;
 
 public class GUIPageController {
 	@FXML private Menu exit;
@@ -32,12 +32,12 @@ public class GUIPageController {
     @FXML private Label lyricsLabel;
     
     private static File selectedFile;
-    private static LinkedList<ParentLink> lyricsList;
+    private static ParentList lyricsList;
     
     @FXML public void choseFileOnAction(ActionEvent event) {
     	FileChooser fc= new FileChooser();
-//    	fc.setInitialDirectory(new File("F:\\Users\\Nick DeNobrega\\Desktop\\CSE Workspaces\\CSE218 Workspace\\HW05\\data"));
-    	fc.setInitialDirectory(new File("C:\\Users\\Nickd\\Desktop\\CSE Workspaces\\CSE218 Workspace\\HW05\\data"));
+    	fc.setInitialDirectory(new File("F:\\Users\\Nick DeNobrega\\Desktop\\CSE Workspaces\\CSE218 Workspace\\HW05\\data"));
+//    	fc.setInitialDirectory(new File("C:\\Users\\Nickd\\Desktop\\CSE Workspaces\\CSE218 Workspace\\HW05\\data"));
     	fc.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.txt"));
     	selectedFile = fc.showOpenDialog(null);
     	if(selectedFile == null) {
@@ -47,11 +47,10 @@ public class GUIPageController {
 			alert.setContentText("Either chosen lyrics file was invalid, or no file was chosen. Please try again.");
 			alert.showAndWait();
     	} else {
-    		lyricsList = Utilities.lyricsToList(selectedFile);
+    		lyricsList = new ParentList();
+    		lyricsList.fillWithLyrics(selectedFile);
+    		lyricsList.display();
     		lyricsLabel.setText(selectedFile.getName());
-    		for(ParentLink p: lyricsList) {
-    			System.out.println(p.toString());
-    		}
     	}
     }
     
@@ -73,8 +72,8 @@ public class GUIPageController {
 			alert.setContentText("Please make sure a chosen keyword and the length of the paragraph was entered");
 			alert.showAndWait();
     	}
-    	if(Utilities.keyIsPresent(keywordTextField.getText(), lyricsList)) {
-    		textArea.appendText(Utilities.generateParagraph(keywordTextField.getText(), Integer.parseInt(numberTextField.getText()), lyricsList));
+    	if(lyricsList.search(keywordTextField.getText()) != null) {
+    		textArea.appendText(lyricsList.generateParagraph(keywordTextField.getText(), Integer.parseInt(numberTextField.getText())));
     	} else {
     		Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Keyword Not Found");
@@ -86,8 +85,8 @@ public class GUIPageController {
 
     @FXML public void saveOutputOnAction(ActionEvent event) {
     	try {
-//    		PrintWriter pw = new PrintWriter("F:\\Users\\Nick DeNobrega\\Desktop\\CSE Workspaces\\CSE218 Workspace\\HW05\\output\\output.txt");
-    		PrintWriter pw = new PrintWriter("C:\\Users\\Nickd\\Desktop\\CSE Workspaces\\CSE218 Workspace\\HW05\\output\\output.txt");
+    		PrintWriter pw = new PrintWriter("F:\\Users\\Nick DeNobrega\\Desktop\\CSE Workspaces\\CSE218 Workspace\\HW05\\output\\output.txt");
+//    		PrintWriter pw = new PrintWriter("C:\\Users\\Nickd\\Desktop\\CSE Workspaces\\CSE218 Workspace\\HW05\\output\\output.txt");
 			pw.println(textArea.getText());
 			pw.close();
 			Alert alert = new Alert(AlertType.INFORMATION);

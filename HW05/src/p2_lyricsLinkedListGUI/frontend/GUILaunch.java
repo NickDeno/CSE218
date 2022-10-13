@@ -1,4 +1,4 @@
-package p2_lyricsLinkedListGUI;
+package p2_lyricsLinkedListGUI.frontend;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +14,7 @@ public class GUILaunch extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("/p2_lyricsLinkedListGUI/GUIPage.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/p2_lyricsLinkedListGUI/frontend/GUIPage.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Machine Learning!");

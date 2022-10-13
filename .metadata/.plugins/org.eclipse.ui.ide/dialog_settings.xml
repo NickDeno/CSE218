@@ -12,6 +12,7 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="F:\Users\Nick DeNobrega\Downloads\CSE218CCA-main"/>
 			<item value="C:\Users\Nickd\Desktop\CSE Workspaces\CSE218 Workspace"/>
 			<item value="F:\Users\Nick DeNobrega\Desktop\CSE Workspaces\CSE218 Workspace\PM L08 Linked Lists"/>
 			<item value="F:\Users\Nick DeNobrega\Desktop\CSE Workspaces\CSE218 Workspace"/>

@@ -1,4 +1,4 @@
-package p2_lyricsLinkedListGUI;
+package p2_lyricsLinkedListGUI.backend;
 
 import java.util.LinkedList;
 
