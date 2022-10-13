@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.ListIterator;
-import java.util.Random;
 import java.util.Scanner;
 
 public class ParentList {
