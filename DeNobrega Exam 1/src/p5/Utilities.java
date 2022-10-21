@@ -9,7 +9,7 @@ public class Utilities {
 	public static void fillWithLyrics(LinkedList<String> lyricsList, File file) {
 		String[] lyrics = getLyrics(file);
 		for (int i = 0; i < lyrics.length; i++) {
-			if(!lyricsList.contains(lyrics[i])) {
+			if(!lyricsList.contains(lyrics[i].toLowerCase())) {
 				lyricsList.add(lyrics[i]);
 			}		
 		}

@@ -17,6 +17,10 @@ public class Link <E extends Number> {
 		return next;
 	}
 
+	public E getValue() {
+		return value;
+	}
+
 	public void setNext(Link<E> next) {
 		this.next = next;
 	}

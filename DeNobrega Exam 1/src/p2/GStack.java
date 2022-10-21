@@ -14,7 +14,7 @@ public class GStack <E extends Number> {
 		nElems++;
 	}
 	
-	public Link<E> pop() {
+	public E pop() {
 		nElems--;
 		return list.remove();
 	}

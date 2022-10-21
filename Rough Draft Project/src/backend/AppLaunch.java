@@ -17,8 +17,8 @@ public class AppLaunch extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("/frontend/fxmls/SignInPage.fxml"));
-		Scene scene = new Scene(root);
-		primaryStage.setScene(scene);
+		Scene signInScene = new Scene(root);
+		primaryStage.setScene(signInScene);
 		primaryStage.setTitle("Sign In!");
 		primaryStage.setResizable(false);
 		primaryStage.show();	

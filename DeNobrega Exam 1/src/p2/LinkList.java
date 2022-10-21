@@ -17,10 +17,10 @@ public class LinkList <E extends Number> {
 		}
 	}
 	
-	public Link<E> remove() {
+	public E remove() {
 		Link<E> temp = first;
 		first = first.getNext();
-		return temp;
+		return temp.getValue();
 	}
 	
 	public Link<E> getFirst(){

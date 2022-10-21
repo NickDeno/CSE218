@@ -10,7 +10,7 @@ public class Demo {
 		myStack.display();
 		
 		while(!myStack.isEmpty()) {
-			myStack.pop().display();
+			System.out.println(myStack.pop());
 		}
 	}
 
