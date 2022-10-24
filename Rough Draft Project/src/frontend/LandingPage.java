@@ -36,7 +36,7 @@ public class LandingPage {
 	}
 	
 	@FXML public void homeButtonOnAction(ActionEvent event) {
-		
+		loadContentPage("HomeFeedPage");
 	}
 	
 	@FXML public void profileButtonOnAction(ActionEvent event) {
@@ -44,7 +44,7 @@ public class LandingPage {
 	}
 	
 	@FXML public void settingsButtonOnAction(ActionEvent event) {
-		
+		loadContentPage("SettingsPage");
 	}
 	
 	@FXML public void logoutButtonOnAction(ActionEvent event) {
@@ -62,8 +62,9 @@ public class LandingPage {
 	
 	private void loadContentPage(String page) {
 		try {
-			contentPane = FXMLLoader.load(getClass().getResource("/frontend/fxmls/" + page + ".fxml"));
-			contentPane.toFront();
+			AnchorPane pane = FXMLLoader.load(getClass().getResource("/frontend/fxmls/" + page + ".fxml"));
+			contentPane.getChildren().clear();
+			contentPane.getChildren().setAll(pane);
 		} catch (IOException e) {
 			System.out.println("Unable to load content page");
 			e.printStackTrace();
