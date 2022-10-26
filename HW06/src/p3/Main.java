@@ -8,16 +8,13 @@ public class Main {
 		String[] strArr = {"A", "AAAA", "AA", "AAA"};
 		
 		System.out.println("Max Value of Integer Array:");
-		System.out.println(Util.maxElement(intArr));
-		System.out.println();
+		System.out.println(Util.maxElement(intArr) + "\n");
 		
 		System.out.println("Max Value of Double Array:");
-		System.out.println(Util.maxElement(doubArr));
-		System.out.println();
+		System.out.println(Util.maxElement(doubArr) + "\n");
 		
 		System.out.println("Max Value of String Array:");
-		System.out.println(Util.maxElement(strArr));
-		System.out.println();
+		System.out.println(Util.maxElement(strArr) + "\n");
 		
 	}
 

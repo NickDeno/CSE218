@@ -1,14 +1,8 @@
 package p5;
 
+import java.util.Arrays;
+
 public class Util {
-	//Default characterCounter Method. Traverses array from left to right checking if each character is equal to key. Less efficient
-	//since more stack frames are created => more memory used => possibility of StackOverflowError is higher
-	public static int characterCounter(char[] arr, char key, int idx) {
-		if(idx == arr.length) return 0;
-		if(arr[idx] == key) return 1 + (characterCounter(arr, key, idx+1));
-		return characterCounter(arr, key, idx+1);
-	}
-	
 	//Overloaded characterCounter Method. Traverses array from each end. Checks if leftIdx and rightIdx are equal to key. Then increments leftIdx by 
 	//1 and decrements rightIdx by 1. More efficient since fewer stack frames created => less memory used => possibility of StackOverflowError is lower.
 	public static int characterCounter(char[] arr, char key, int leftIdx, int rightIdx) {
@@ -17,5 +11,14 @@ public class Util {
 		if(arr[leftIdx] == key) count++;
 		if(arr[rightIdx] == key) count++;
 		return count + characterCounter(arr, key, leftIdx+1, rightIdx-1);
+	}
+	
+	//Overloaded characterCounter method. Checks if first element in array is equal to key. Then passes a copy of original array with first element removed recursively.
+	//This method is more intuitive for user as they do not have to pass through a leftIdx and rightIdx parameter. However it is less effiecent for each iteration, a
+	//copy of the previous array must be made excluding first element.
+	public static int characterCounter(char[] arr, char key) {
+		if(arr.length == 0) return 0;
+		if(arr[0] == key) return 1 + characterCounter(Arrays.copyOfRange(arr, 1, arr.length), key);
+		return  characterCounter(Arrays.copyOfRange(arr, 1, arr.length), key);
 	}
 }

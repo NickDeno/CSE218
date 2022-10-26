@@ -7,8 +7,8 @@ public class Main {
 		String[] strArr = {"A","B","C","D","E"};
 			
 		System.out.println("isMember Results Integer Array:");
-		System.out.println(Util.isMember(intArr, 4) + "\n");
-		System.out.println(Util.isMember(intArr, 10));
+		System.out.println(Util.isMember(intArr, 4));
+		System.out.println(Util.isMember(intArr, 10) + "\n");
 		
 		
 		System.out.println("isMember Results String Array:");
