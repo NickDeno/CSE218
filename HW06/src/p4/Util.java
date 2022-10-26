@@ -1,21 +1,19 @@
 package p4;
 
 public class Util {
-	//Default isPalindrome Recursive Method. By default, it IS NOT case sensitive
-	public static boolean isPalindrome(String str, int leftIdx, int rightIdx) {
-		if(leftIdx == rightIdx) return true;
-		if(Character.toLowerCase(str.charAt(leftIdx)) != Character.toLowerCase(str.charAt(rightIdx))) return false;
-		return isPalindrome(str, leftIdx+1, rightIdx-1);
-	}
-	
-	// Overloaded isPalindrome Recursive Method. Gives user option to specify if its case sensitive or not
-	public static boolean isPalindrome(String str, int leftIdx, int rightIdx, boolean isCaseSensitive) {
+	// isPalindrome Method from Lecture
+	public static boolean isPalindrome(String str, boolean isCaseSensitive) {
+		int front = 0;
+		int rear = str.length()-1;
+		if(front >= rear) return false;
+		
 		if(isCaseSensitive) {
-			if(leftIdx == rightIdx) return true;
-			if(str.charAt(leftIdx) != str.charAt(rightIdx)) return false;
-			return isPalindrome(str, leftIdx+1, rightIdx-1, isCaseSensitive);
+			if(str.charAt(front) != str.charAt(rear)) return false;
+			return isPalindrome(str.substring(front+1, rear), isCaseSensitive);
 		} else {
-			return isPalindrome(str,leftIdx,rightIdx);
+			if(Character.toLowerCase(str.charAt(front)) != Character.toLowerCase(str.charAt(rear))) return false;
+			return isPalindrome(str.substring(front+1, rear), isCaseSensitive);
 		}
+	
 	}
 }

@@ -36,15 +36,31 @@ public class LandingPage {
 	}
 	
 	@FXML public void homeButtonOnAction(ActionEvent event) {
-		loadContentPage("HomeFeedPage");
+		loadContentPane("HomeFeedPage");
 	}
 	
 	@FXML public void profileButtonOnAction(ActionEvent event) {
-		loadContentPage("ProfilePage");
+		loadContentPane("ProfilePage");
 	}
 	
 	@FXML public void settingsButtonOnAction(ActionEvent event) {
-		loadContentPage("SettingsPage");
+		loadContentPane("SettingsPage");
+	}
+	
+	@FXML public void createPostButtonOnAction(ActionEvent event) {
+		loadContentPane("HomeFeedPage");
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("/frontend/fxmls/CreatePostPage.fxml"));
+			Scene scene = new Scene(root);
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.setTitle("Create New Post!");
+			stage.setResizable(false);
+			stage.show();
+		} catch (IOException e) {
+			System.out.println("Unable to load fxml file.");
+			e.printStackTrace();
+		}	
 	}
 	
 	@FXML public void logoutButtonOnAction(ActionEvent event) {
@@ -55,18 +71,18 @@ public class LandingPage {
 			stage.setTitle("Main Page!");
 			stage.show();
 		} catch (IOException e) {
-			System.out.println("Unable to laod SignInPage scene.");
+			System.out.println("Unable to laod SignInPage fxml file.");
 			e.printStackTrace();
 		}		
 	}
 	
-	private void loadContentPage(String page) {
+	private void loadContentPane(String page) {
 		try {
 			AnchorPane pane = FXMLLoader.load(getClass().getResource("/frontend/fxmls/" + page + ".fxml"));
 			contentPane.getChildren().clear();
 			contentPane.getChildren().setAll(pane);
 		} catch (IOException e) {
-			System.out.println("Unable to load content page");
+			System.out.println("Unable to load content page fxml file");
 			e.printStackTrace();
 		}
 	}
