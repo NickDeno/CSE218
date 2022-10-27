@@ -47,4 +47,5 @@
     <fullyQualifiedTypeName name="java.util.Stack"/>
     <fullyQualifiedTypeName name="backend.AppLaunch"/>
     <fullyQualifiedTypeName name="java.util.Arrays"/>
+    <fullyQualifiedTypeName name="javafx.scene.effect.BoxBlur"/>
 </qualifiedTypeNameHistroy>

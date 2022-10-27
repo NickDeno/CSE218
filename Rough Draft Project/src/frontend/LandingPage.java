@@ -57,6 +57,7 @@ public class LandingPage {
 			stage.setTitle("Create New Post!");
 			stage.setResizable(false);
 			stage.show();
+			
 		} catch (IOException e) {
 			System.out.println("Unable to load fxml file.");
 			e.printStackTrace();
