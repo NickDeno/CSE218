@@ -18,14 +18,14 @@
    <left>
       <AnchorPane prefHeight="520.0" prefWidth="289.0" style="-fx-background-color: #2576DF;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="225.0" fitWidth="223.0" layoutX="32.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="285.0" fitWidth="268.0" layoutX="11.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/UserIcon.png" />
                </image>
             </ImageView>
-            <Label layoutX="24.0" layoutY="364.0" prefHeight="69.0" prefWidth="251.0" text="Deno Inc.">
+            <Label layoutX="23.0" layoutY="374.0" prefHeight="69.0" prefWidth="244.0" text="Chadder">
                <font>
-                  <Font name="Eras Demi ITC" size="54.0" />
+                  <Font name="Eras Demi ITC" size="58.0" />
                </font>
                <textFill>
                   <LinearGradient endX="1.0" endY="1.0">
@@ -38,6 +38,32 @@
                         <Stop offset="1.0">
                            <color>
                               <Color red="0.6578947305679321" green="0.6578947305679321" blue="0.6578947305679321" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+            <Label layoutX="32.0" layoutY="443.0" prefHeight="41.0" prefWidth="226.0" text="&quot;Twitter for Chads!&quot;">
+               <font>
+                  <Font name="Century Schoolbook Italic" size="23.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.8684210777282715" green="0.8684210777282715" blue="0.8684210777282715" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.006711409395973154">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
                            </color>
                         </Stop>
                      </stops>

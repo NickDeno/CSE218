@@ -9,11 +9,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class AppLaunch extends Application {
+	Stage primaryStage;
 	
 	public static void main(String[] args) {
 		launch(args);
 	}
-
+	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("/frontend/fxmls/SignInPage.fxml"));
@@ -21,6 +22,7 @@ public class AppLaunch extends Application {
 		primaryStage.setScene(signInScene);
 		primaryStage.setTitle("Sign In!");
 		primaryStage.setResizable(false);
-		primaryStage.show();	
+		primaryStage.show();
 	}
+	
 }

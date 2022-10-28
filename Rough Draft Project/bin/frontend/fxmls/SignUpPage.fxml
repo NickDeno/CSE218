@@ -17,14 +17,14 @@
    <left>
       <AnchorPane prefHeight="613.0" prefWidth="289.0" style="-fx-background-color: #2576DF;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="230.0" fitWidth="226.0" layoutX="23.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="262.0" fitWidth="281.0" layoutX="14.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/UserIcon.png" />
                </image>
             </ImageView>
-            <Label layoutX="19.0" layoutY="385.0" prefHeight="77.0" prefWidth="252.0" text="Deno Inc.">
+            <Label layoutX="20.0" layoutY="377.0" prefHeight="84.0" prefWidth="269.0" text="Chadder">
                <font>
-                  <Font name="Eras Demi ITC" size="54.0" />
+                  <Font name="Eras Demi ITC" size="60.0" />
                </font>
                <textFill>
                   <LinearGradient endX="1.0" endY="1.0">
@@ -47,6 +47,11 @@
                      </stops>
                   </LinearGradient>
                </textFill>
+            </Label>
+            <Label alignment="CENTER" layoutX="33.0" layoutY="445.0" prefHeight="55.0" prefWidth="223.0" text="&quot;Twitter for Chads!&quot;" textFill="WHITE">
+               <font>
+                  <Font name="Century Schoolbook Italic" size="23.0" />
+               </font>
             </Label>
          </children>
       </AnchorPane>

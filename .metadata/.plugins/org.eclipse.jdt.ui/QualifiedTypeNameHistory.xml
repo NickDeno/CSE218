@@ -9,18 +9,12 @@
     <fullyQualifiedTypeName name="javafx.scene.control.Hyperlink"/>
     <fullyQualifiedTypeName name="javafx.stage.Stage"/>
     <fullyQualifiedTypeName name="java.io.IOException"/>
-    <fullyQualifiedTypeName name="backend.Utilities"/>
-    <fullyQualifiedTypeName name="backend.UserCenter"/>
     <fullyQualifiedTypeName name="java.io.Serializable"/>
     <fullyQualifiedTypeName name="javafx.event.EventHandler"/>
-    <fullyQualifiedTypeName name="backend.User"/>
     <fullyQualifiedTypeName name="javafx.scene.input.MouseEvent"/>
-    <fullyQualifiedTypeName name="javafx.fxml.FXMLLoader"/>
     <fullyQualifiedTypeName name="javafx.scene.control.Button"/>
     <fullyQualifiedTypeName name="javafx.scene.Parent"/>
-    <fullyQualifiedTypeName name="frontend.SignInSignUpPage"/>
     <fullyQualifiedTypeName name="javafx.scene.Scene"/>
-    <fullyQualifiedTypeName name="javafx.scene.layout.AnchorPane"/>
     <fullyQualifiedTypeName name="javafx.scene.layout.Pane"/>
     <fullyQualifiedTypeName name="java.util.Scanner"/>
     <fullyQualifiedTypeName name="java.io.FileNotFoundException"/>
@@ -47,5 +41,15 @@
     <fullyQualifiedTypeName name="java.util.Stack"/>
     <fullyQualifiedTypeName name="backend.AppLaunch"/>
     <fullyQualifiedTypeName name="java.util.Arrays"/>
+    <fullyQualifiedTypeName name="javafx.fxml.FXMLLoader"/>
+    <fullyQualifiedTypeName name="backend.GUIBackend"/>
+    <fullyQualifiedTypeName name="javafx.scene.layout.AnchorPane"/>
+    <fullyQualifiedTypeName name="javafx.scene.layout.BorderPane"/>
     <fullyQualifiedTypeName name="javafx.scene.effect.BoxBlur"/>
+    <fullyQualifiedTypeName name="javafx.scene.effect.GaussianBlur"/>
+    <fullyQualifiedTypeName name="javafx.stage.StageStyle"/>
+    <fullyQualifiedTypeName name="frontend.SignInSignUpPage"/>
+    <fullyQualifiedTypeName name="backend.User"/>
+    <fullyQualifiedTypeName name="backend.Utilities"/>
+    <fullyQualifiedTypeName name="backend.UserCenter"/>
 </qualifiedTypeNameHistroy>

@@ -1,17 +1,13 @@
-package frontend;
+x  package frontend;
 
 import java.io.File;
-import java.io.IOException;
 
 import backend.User;
 import backend.UserCenter;
 import backend.Utilities;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -35,12 +31,8 @@ public class SignInSignUpPage {
 	@FXML private Button signUpBtn;
 	@FXML private Button backBtn;
 	
-	private static UserCenter users;
-	private static User currentUser;
-	
-	public SignInSignUpPage() {
-		
-	}
+	protected static UserCenter users;
+	protected static User currentUser;
 	
 	public void initialize() {
 		users = new File("backupData/Users.dat").isFile() ? Utilities.restoreUsers() : new UserCenter(50);;
@@ -51,17 +43,8 @@ public class SignInSignUpPage {
 	@FXML public void signInBtnOnAction(ActionEvent event) {
 		if(users.userExists(signInUsernameField.getText(), signInPasswordField.getText())) {
 			currentUser = users.userSearch(signInUsernameField.getText());
-			try {
-				Parent root = FXMLLoader.load(getClass().getResource("/frontend/fxmls/LandingPage.fxml"));
-				Scene scene = new Scene(root);
-				Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-				stage.setScene(scene);
-				stage.setTitle("Main Page!");
-				stage.show();		
-			} catch (IOException e) {
-				System.out.println("Unable to load LandingPage scene.");
-				e.printStackTrace();
-			}
+			Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+			GUIBackend.loadNewScene(stage, "LandingPage.fxml");
 		} else {
 			signInMessageLabel.setText("Account not found.");
 			signInMessageLabel.setVisible(true);
@@ -76,18 +59,7 @@ public class SignInSignUpPage {
     }
     
     @FXML public void clickHereOnAction(ActionEvent event) {
-			try {
-				Parent root = FXMLLoader.load(getClass().getResource("/frontend/fxmls/SignUpPage.fxml"));
-				Scene scene = new Scene(root);
-				Stage stage = new Stage();
-				stage.setScene(scene);
-				stage.setTitle("Sign Up!");
-				stage.setResizable(false);
-				stage.show();
-			} catch (IOException e) {
-				System.out.println("Unable to load SignUpPage scene.");
-				e.printStackTrace();
-			}
+		GUIBackend.loadNewWindow("SignUpPage.fxml");
 	}
     
     @FXML public void checkFieldIsValid(MouseEvent event) {
@@ -137,14 +109,6 @@ public class SignInSignUpPage {
     	Stage stage = (Stage) backBtn.getScene().getWindow();
     	stage.close();
     	users.display();
-    }
-    
-    public static UserCenter getUsers() {
-    	return users;
-    }
-    
-    public static User getCurrentUser() {
-    	return currentUser;
     }
     
     private void resetTextFields() {
