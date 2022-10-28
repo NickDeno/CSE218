@@ -13,7 +13,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="613.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.SignInSignUpPage">
+<BorderPane fx:id="signUpPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="613.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.SignUpPage">
    <left>
       <AnchorPane prefHeight="613.0" prefWidth="289.0" style="-fx-background-color: #2576DF;" BorderPane.alignment="CENTER">
          <children>
@@ -69,12 +69,12 @@
                   <Font name="Bookman Old Style Bold" size="44.0" />
                </font>
             </Label>
-            <TextField fx:id="signUpEmailField" alignment="CENTER" layoutX="321.0" layoutY="179.0" onMouseClicked="#checkFieldIsValid" prefHeight="49.0" prefWidth="310.0" promptText="Email Address" style="-fx-background-radius: 25; -fx-border-radius: 25; -fx-border-insets: -3; -fx-border-width: 3;">
+            <TextField fx:id="emailField" alignment="CENTER" layoutX="321.0" layoutY="179.0" onMouseClicked="#checkFieldIsValid" prefHeight="49.0" prefWidth="310.0" promptText="Email Address" style="-fx-background-radius: 25; -fx-border-radius: 25; -fx-border-insets: -3; -fx-border-width: 3;">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-            <TextField fx:id="signUpUsernameField" alignment="CENTER" layoutX="323.0" layoutY="263.0" onMouseClicked="#checkFieldIsValid" prefHeight="49.0" prefWidth="308.0" promptText="Username" style="-fx-background-radius: 25; -fx-border-radius: 25; -fx-border-insets: -3; -fx-border-width: 3;">
+            <TextField fx:id="usernameField" alignment="CENTER" layoutX="323.0" layoutY="263.0" onMouseClicked="#checkFieldIsValid" prefHeight="49.0" prefWidth="308.0" promptText="Username" style="-fx-background-radius: 25; -fx-border-radius: 25; -fx-border-insets: -3; -fx-border-width: 3;">
                <font>
                   <Font size="18.0" />
                </font>
@@ -89,7 +89,7 @@
                   <Font name="Bookman Old Style Bold" size="40.0" />
                </font>
             </Label>
-            <PasswordField fx:id="signUpPasswordField" alignment="CENTER" layoutX="323.0" layoutY="348.0" onMouseClicked="#checkFieldIsValid" prefHeight="46.0" prefWidth="308.0" promptText="Password" style="-fx-border-radius: 25; -fx-background-radius: 25; -fx-border-insets: -3; -fx-border-width: 3;">
+            <PasswordField fx:id="passwordField" alignment="CENTER" layoutX="323.0" layoutY="348.0" onMouseClicked="#checkFieldIsValid" prefHeight="46.0" prefWidth="308.0" promptText="Password" style="-fx-border-radius: 25; -fx-background-radius: 25; -fx-border-insets: -3; -fx-border-width: 3;">
                <font>
                   <Font size="18.0" />
                </font>
@@ -104,7 +104,7 @@
                   <Font name="Baskerville Old Face" size="22.0" />
                </font>
             </Button>
-            <Label fx:id="signUpMessageLabel" alignment="CENTER" layoutX="75.0" layoutY="140.0" prefHeight="34.0" prefWidth="659.0" textAlignment="CENTER" textFill="#ff0202" visible="false">
+            <Label fx:id="msgLabel" alignment="CENTER" layoutX="75.0" layoutY="140.0" prefHeight="34.0" prefWidth="659.0" textAlignment="CENTER" textFill="#ff0202" visible="false">
                <font>
                   <Font name="Consolas" size="20.0" />
                </font>

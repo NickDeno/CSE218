@@ -7,9 +7,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class GUIBackend {
-	//Loads new window with specified fxml file and sets title of window with specified name
+	//Loads new window with specified fxml file
 	public static void loadNewWindow(String fxmlFileName){
 		try{
 			Parent root = FXMLLoader.load(GUIBackend.class.getResource("/frontend/fxmls/" + fxmlFileName));
@@ -17,6 +18,7 @@ public class GUIBackend {
 			Stage stage = new Stage();
 			stage.setScene(scene);
 			stage.setResizable(false);
+//			stage.initStyle(StageStyle.UNDECORATED);
 			stage.show();
 		}catch (IOException e) {
 			System.out.println("Unable to load new window with " + fxmlFileName + ".fxml");
@@ -25,7 +27,7 @@ public class GUIBackend {
 	}
 	
 	//Loads a specified AnchorPane with a specified fxml file
-	public static void loadContentPane(AnchorPane ap, String fxmlFileName) {
+	public static void loadPane(AnchorPane ap, String fxmlFileName) {
 		try {
 			AnchorPane pane = FXMLLoader.load(GUIBackend.class.getResource("/frontend/fxmls/" + fxmlFileName));
 			ap.getChildren().clear();

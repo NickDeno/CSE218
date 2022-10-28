@@ -51,7 +51,7 @@ public class UserCenter implements Serializable {
 		return null;
 	}
 	
-	public boolean userExists(String username, String password) {
+	public User userSearch(String username, String password) {
 		int left = 0;
 		int right = arr.size()-1;
 		
@@ -63,10 +63,10 @@ public class UserCenter implements Serializable {
 			} else if(arr.get(mid).getUsername().compareTo(username) < 0) {
 				left = mid + 1 ;
 			} else if(arr.get(mid).getUsername().equals(username) && arr.get(mid).getPassword().equals(password)) {
-				return true;
+				return arr.get(mid);
 			}
 		}
-		return false;
+		return null;
 	}
 	
 	public boolean usernameIsUnique(String username) {
@@ -88,7 +88,7 @@ public class UserCenter implements Serializable {
 		return true;
 	}
 	
-	public static boolean validPassword(String password) {
+	public static boolean isValidPassword(String password) {
 		if(password.length() < 8) return false;
 		boolean hasDigit = false;
 		boolean hasUpperCase = false;
@@ -99,7 +99,7 @@ public class UserCenter implements Serializable {
 		return hasDigit && hasUpperCase;
 	}
 
-	public static boolean validEmail(String email) {
+	public static boolean isValidEmail(String email) {
 		if(email.isBlank()) return false;
 		boolean hasAt = false;
 		boolean hasDot = false;

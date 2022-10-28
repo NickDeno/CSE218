@@ -14,12 +14,12 @@
       <AnchorPane prefHeight="760.0" prefWidth="241.0" style="-fx-background-color: #2576DF;" BorderPane.alignment="CENTER">
          <children>
             <Circle fill="#f5f5f5" layoutX="123.0" layoutY="75.0" radius="52.0" stroke="BLACK" strokeType="INSIDE" />
-            <ImageView fitHeight="74.0" fitWidth="73.0" layoutX="87.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="profilePic" fitHeight="74.0" fitWidth="73.0" layoutX="87.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/TempProfilePic.png" />
                </image>
             </ImageView>
-            <Label fx:id="usernameLabel" alignment="CENTER" layoutX="4.0" layoutY="133.0" prefHeight="37.0" prefWidth="233.0" text="User" textFill="WHITE">
+            <Label fx:id="userLabel" alignment="CENTER" layoutX="4.0" layoutY="133.0" prefHeight="37.0" prefWidth="233.0" text="User" textFill="WHITE">
                <font>
                   <Font name="Elephant" size="27.0" />
                </font>
@@ -81,13 +81,6 @@
       </AnchorPane>
    </left>
    <center>
-      <AnchorPane fx:id="contentPane" prefHeight="760.0" prefWidth="1090.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #656161 0.0%, #393636 100.0%);" BorderPane.alignment="CENTER">
-         <children>
-            <Label fx:id="userLabel" alignment="CENTER" layoutX="311.0" layoutY="14.0" prefHeight="49.0" prefWidth="464.0" text="Welcome Back User!" textFill="WHITE">
-               <font>
-                  <Font name="Berlin Sans FB Demi Bold" size="38.0" />
-               </font>
-            </Label>
-         </children></AnchorPane>
+      <AnchorPane fx:id="contentPane" prefHeight="760.0" prefWidth="1090.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>
