@@ -39,7 +39,7 @@ public class SignInPage {
 		if(tempUser != null) {
 			currentUser = tempUser;
 			Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-			GUIBackend.loadNewScene(stage, "LandingPage.fxml");
+			GUIBackend.loadNewScene(stage, GUIBackend.LandingScene);
 		} else {
 			msgLabel.setText("Account not found.");
 			msgLabel.setVisible(true);
@@ -54,6 +54,6 @@ public class SignInPage {
     }
     
     @FXML public void clickHereOnAction(ActionEvent event) {
-		GUIBackend.loadNewWindow("SignUpPage.fxml");
+		GUIBackend.loadNewWindow(GUIBackend.SignUpScene);
 	}
 }

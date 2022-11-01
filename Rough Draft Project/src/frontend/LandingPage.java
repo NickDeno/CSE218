@@ -21,30 +21,30 @@ public class LandingPage {
 	
 	public void initialize() {
 		userLabel.setText(SignInPage.currentUser.getUsername());
-		GUIBackend.loadPane(contentPane, "HomeFeedPage.fxml");
+		GUIBackend.loadPane(contentPane, GUIBackend.HomeFeedScene);
 		System.out.println("Initialized Landing Page!");
 	}
 	
 	@FXML public void homeButtonOnAction(ActionEvent event) {
-		GUIBackend.loadPane(contentPane, "HomeFeedPage.fxml");
+		GUIBackend.loadPane(contentPane, GUIBackend.HomeFeedScene);
 	}
 	
 	@FXML public void profileButtonOnAction(ActionEvent event) {
-		GUIBackend.loadPane(contentPane, "ProfilePage.fxml");
+		GUIBackend.loadPane(contentPane, GUIBackend.ProfileScene);
 	}
 	
 	@FXML public void settingsButtonOnAction(ActionEvent event) {
-		GUIBackend.loadPane(contentPane, "SettingsPage.fxml");
+		GUIBackend.loadPane(contentPane, GUIBackend.SettingsScene);
 	}
 	
 	@FXML public void createPostButtonOnAction(ActionEvent event) {
-		GUIBackend.loadPane(contentPane, "HomeFeedPage.fxml");
-		GUIBackend.loadNewWindow("CreatePostPage.fxml");	
+		GUIBackend.loadPane(contentPane, GUIBackend.HomeFeedScene);
+		GUIBackend.loadNewWindow(GUIBackend.CreatePostScene);	
 		mainPane.setEffect(new GaussianBlur(10));
 	}
 	
 	@FXML public void logoutButtonOnAction(ActionEvent event) {
 		Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		GUIBackend.loadNewScene(stage, "SignInPage.fxml");	
+		GUIBackend.loadNewScene(stage, GUIBackend.SignInScene);	
 	}
 }

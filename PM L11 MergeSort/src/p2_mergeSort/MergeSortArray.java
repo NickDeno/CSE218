@@ -36,10 +36,10 @@ public class MergeSortArray {
 	private void merge(int[] workspace, int lowPtr, int highPtr, int upperBound) {
 		int j = 0; 
 		int lowerBound = lowPtr;
-		int mid = highPtr-1;
+		int mid = highPtr-1; //Last element "arrA"
 		int n = upperBound-lowerBound +1;
 		
-		// lowPtr = "aIdx", highPtr = "bIdx", j = "cIdx", workspace = "arrC", j = "cIdx"
+		// lowPtr = "aIdx", highPtr = "bIdx", j = "cIdx", workspace = "arrC"
 		while(lowPtr <= mid && highPtr <= upperBound) { //While neither sub array is done
 			if(theArray[lowPtr] < theArray[highPtr]) {
 				workspace[j++] = theArray[lowPtr++];
@@ -47,7 +47,6 @@ public class MergeSortArray {
 				workspace[j++] = theArray[highPtr++];
 			}
 		}
-		
 		while(lowPtr <= mid) workspace[j++] = theArray[lowPtr++]; //Runs if upper half("arrB") is done copying but lower half is not("arrA")
 		while(highPtr <= upperBound) workspace[j++] = theArray[highPtr++]; //Runs if lower half("arrA") is done copying but upper half is not("arrB") 
 		

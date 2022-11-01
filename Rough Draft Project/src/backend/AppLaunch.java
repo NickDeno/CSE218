@@ -2,14 +2,11 @@ package backend;
 
 import java.io.IOException;
 
+import frontend.GUIBackend;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class AppLaunch extends Application {
-	Stage primaryStage;
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -17,12 +14,9 @@ public class AppLaunch extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("/frontend/fxmls/SignInPage.fxml"));
-		Scene signInScene = new Scene(root);
-		primaryStage.setScene(signInScene);
 		primaryStage.setTitle("Sign In!");
 		primaryStage.setResizable(false);
-		primaryStage.show();
+		GUIBackend.loadNewScene(primaryStage, GUIBackend.SignInScene);
 	}
 	
 }

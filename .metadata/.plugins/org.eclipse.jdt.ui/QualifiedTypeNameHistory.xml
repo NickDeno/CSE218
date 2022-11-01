@@ -51,7 +51,8 @@
     <fullyQualifiedTypeName name="javafx.fxml.FXML"/>
     <fullyQualifiedTypeName name="javafx.scene.image.ImageView"/>
     <fullyQualifiedTypeName name="javafx.stage.FileChooser"/>
-    <fullyQualifiedTypeName name="java.io.File"/>
     <fullyQualifiedTypeName name="java.io.IOException"/>
     <fullyQualifiedTypeName name="javafx.scene.image.Image"/>
+    <fullyQualifiedTypeName name="java.io.File"/>
+    <fullyQualifiedTypeName name="frontend.GUIBackend"/>
 </qualifiedTypeNameHistroy>
