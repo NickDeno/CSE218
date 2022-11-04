@@ -12,6 +12,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="signInPane" prefHeight="597.0" prefWidth="994.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.SignInPage">
@@ -81,7 +82,7 @@
                   <Font name="Consolas" size="23.0" />
                </font>
             </Label>
-            <TextField id="userNameField" fx:id="usernameField" alignment="CENTER" layoutX="283.0" layoutY="181.0" prefHeight="47.0" prefWidth="307.0" promptText="Username" style="-fx-background-radius: 25;">
+            <TextField id="userNameField" fx:id="usernameField" alignment="CENTER" layoutX="285.0" layoutY="185.0" prefHeight="47.0" prefWidth="307.0" promptText="Username" style="-fx-background-color: transparent; -fx-text-fill: white;">
                <font>
                   <Font size="18.0" />
                </font>
@@ -96,17 +97,17 @@
                   <Font name="Bookman Old Style Bold" size="41.0" />
                </font>
             </Label>
-            <PasswordField fx:id="passwordField" alignment="CENTER" layoutX="283.0" layoutY="262.0" prefHeight="46.0" prefWidth="307.0" promptText="Password" style="-fx-background-radius: 25;">
+            <PasswordField fx:id="passwordField" alignment="CENTER" layoutX="285.0" layoutY="262.0" prefHeight="46.0" prefWidth="307.0" promptText="Password" style="-fx-background-color: transparent; -fx-text-fill: white;">
                <font>
                   <Font size="18.0" />
                </font>
             </PasswordField>
-            <Button fx:id="signInBtn" layoutX="191.0" layoutY="367.0" mnemonicParsing="false" onAction="#signInBtnOnAction" prefHeight="59.0" prefWidth="293.0" style="-fx-background-color: #2576DF; -fx-background-radius: 25;" text="Sign In" textFill="WHITE">
+            <Button fx:id="signInBtn" layoutX="191.0" layoutY="367.0" mnemonicParsing="false" onAction="#signInBtnOnAction" prefHeight="59.0" prefWidth="293.0" styleClass="blueButton" stylesheets="@Stylesheet.css" text="Sign In" textFill="WHITE">
                <font>
                   <Font name="Baskerville Old Face" size="22.0" />
                </font>
             </Button>
-            <Button fx:id="cancelBtn" layoutX="192.0" layoutY="450.0" mnemonicParsing="false" onAction="#cancelBtnOnAction" prefHeight="60.0" prefWidth="292.0" style="-fx-background-color: #2576DF; -fx-background-radius: 25;" text="Cancel" textFill="WHITE">
+            <Button fx:id="cancelBtn" layoutX="192.0" layoutY="450.0" mnemonicParsing="false" onAction="#cancelBtnOnAction" prefHeight="60.0" prefWidth="292.0" styleClass="blueButton" stylesheets="@Stylesheet.css" text="Cancel" textFill="WHITE">
                <font>
                   <Font name="Baskerville Old Face" size="22.0" />
                </font>
@@ -121,6 +122,8 @@
                   <Font name="System Bold Italic" size="21.0" />
                </font>
             </Hyperlink>
+            <Line endX="195.0" layoutX="391.0" layoutY="230.0" startX="-100.0" stroke="#3b93ff" strokeWidth="3.0" />
+            <Line endX="194.0" layoutX="391.0" layoutY="308.0" startX="-100.0" stroke="#3b93ff" strokeWidth="3.0" />
          </children>
       </AnchorPane>
    </right>

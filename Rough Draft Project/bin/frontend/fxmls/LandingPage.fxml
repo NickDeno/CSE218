@@ -10,6 +10,9 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1330.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.LandingPage">
+   <right>
+      <AnchorPane fx:id="contentPane" prefHeight="760.0" prefWidth="1090.0" BorderPane.alignment="CENTER" />
+   </right>
    <left>
       <AnchorPane prefHeight="760.0" prefWidth="241.0" style="-fx-background-color: #2576DF;" BorderPane.alignment="CENTER">
          <children>
@@ -24,7 +27,7 @@
                   <Font name="Elephant" size="27.0" />
                </font>
             </Label>
-            <Button layoutX="11.0" layoutY="189.0" mnemonicParsing="false" onAction="#homeButtonOnAction" prefHeight="69.0" prefWidth="206.0" styleClass="sideBarButton" stylesheets="@Stylesheet.css" text=" Home" textFill="WHITE">
+            <Button layoutX="6.0" layoutY="180.0" mnemonicParsing="false" onAction="#homeButtonOnAction" prefHeight="77.0" prefWidth="218.0" styleClass="transparentButton" stylesheets="@Stylesheet.css" text=" Home" textFill="WHITE">
                <font>
                   <Font name="Georgia" size="34.0" />
                </font>
@@ -36,7 +39,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="profileButton" layoutX="4.0" layoutY="266.0" mnemonicParsing="false" onAction="#profileButtonOnAction" prefHeight="76.0" prefWidth="221.0" styleClass="sideBarButton" stylesheets="@Stylesheet.css" text=" Profile" textFill="WHITE">
+            <Button fx:id="profileButton" layoutX="9.0" layoutY="274.0" mnemonicParsing="false" onAction="#profileButtonOnAction" prefHeight="82.0" prefWidth="218.0" styleClass="transparentButton" stylesheets="@Stylesheet.css" text=" Profile" textFill="WHITE">
                <font>
                   <Font name="Georgia" size="34.0" />
                </font>
@@ -48,7 +51,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="8.0" layoutY="355.0" mnemonicParsing="false" onAction="#settingsButtonOnAction" prefHeight="76.0" prefWidth="221.0" styleClass="sideBarButton" stylesheets="@Stylesheet.css" text=" Settings" textFill="WHITE">
+            <Button layoutX="8.0" layoutY="371.0" mnemonicParsing="false" onAction="#settingsButtonOnAction" prefHeight="81.0" prefWidth="221.0" styleClass="transparentButton" stylesheets="@Stylesheet.css" text=" Settings" textFill="WHITE">
                <font>
                   <Font name="Georgia" size="33.0" />
                </font>
@@ -60,7 +63,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="12.0" layoutY="678.0" mnemonicParsing="false" onAction="#logoutButtonOnAction" prefHeight="64.0" prefWidth="205.0" scaleShape="false" styleClass="sideBarButton" stylesheets="@Stylesheet.css" text="Log Out" textFill="WHITE">
+            <Button layoutX="12.0" layoutY="678.0" mnemonicParsing="false" onAction="#logoutButtonOnAction" prefHeight="64.0" prefWidth="205.0" scaleShape="false" styleClass="transparentButton" stylesheets="@Stylesheet.css" text="Log Out" textFill="WHITE">
                <font>
                   <Font name="Georgia" size="30.0" />
                </font>
@@ -72,7 +75,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="postButton" layoutX="16.0" layoutY="441.0" mnemonicParsing="false" onAction="#createPostButtonOnAction" prefHeight="61.0" prefWidth="209.0" styleClass="createPostButton" stylesheets="@Stylesheet.css" text="Create Post" textFill="WHITE">
+            <Button fx:id="postButton" layoutX="13.0" layoutY="479.0" mnemonicParsing="false" onAction="#createPostButtonOnAction" prefHeight="71.0" prefWidth="215.0" styleClass="createPostButton" stylesheets="@Stylesheet.css" text="Create Post" textFill="WHITE">
                <font>
                   <Font name="Bodoni MT" size="26.0" />
                </font>
@@ -80,7 +83,4 @@
          </children>
       </AnchorPane>
    </left>
-   <center>
-      <AnchorPane fx:id="contentPane" prefHeight="760.0" prefWidth="1090.0" BorderPane.alignment="CENTER" />
-   </center>
 </BorderPane>

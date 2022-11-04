@@ -2,6 +2,7 @@ package frontend;
 
 import java.io.File;
 
+import backend.PostList;
 import backend.User;
 import backend.UserCenter;
 import backend.Utilities;
@@ -27,10 +28,16 @@ public class SignInPage {
 	
 	protected static UserCenter users;
 	protected static User currentUser;
+	protected static PostList postList;
 	
 	public void initialize() {
 		users = new File("backupData/Users.dat").isFile() ? Utilities.restoreUsers() : new UserCenter(50);;
+		postList =  new File("backupData/AllUserPosts.dat").isFile() ? Utilities.restorePosts() : new PostList();;
+		
+		System.out.println("All Users:");
 		users.display();
+		System.out.println("All Posts:");
+		postList.display();
 		System.out.println("Initialized Sign In Page!");
 	}
 	

@@ -11,6 +11,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="signUpPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="613.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.SignUpPage">
@@ -59,57 +60,57 @@
    <center>
       <AnchorPane prefHeight="613.0" prefWidth="808.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #656161 0.0%, #393636 100.0%);" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="127.0" fitWidth="109.0" layoutX="331.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="121.0" fitWidth="118.0" layoutX="332.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/LockIcon.png" />
                </image>
             </ImageView>
-            <Label layoutX="75.0" layoutY="171.0" prefHeight="65.0" prefWidth="164.0" text="Email" textFill="#3b93ff">
+            <Label layoutX="75.0" layoutY="157.0" prefHeight="65.0" prefWidth="164.0" text="Email" textFill="#3b93ff">
                <font>
                   <Font name="Bookman Old Style Bold" size="44.0" />
                </font>
             </Label>
-            <TextField fx:id="emailField" alignment="CENTER" layoutX="321.0" layoutY="179.0" onMouseClicked="#checkFieldIsValid" prefHeight="49.0" prefWidth="310.0" promptText="Email Address" style="-fx-background-radius: 25; -fx-border-radius: 25; -fx-border-insets: -3; -fx-border-width: 3;">
+            <TextField fx:id="emailField" alignment="CENTER" layoutX="322.0" layoutY="165.0" onMouseClicked="#checkFieldIsValid" prefHeight="49.0" prefWidth="310.0" promptText="Email Address" style="-fx-background-color: transparent; -fx-text-fill: white;">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-            <TextField fx:id="usernameField" alignment="CENTER" layoutX="323.0" layoutY="263.0" onMouseClicked="#checkFieldIsValid" prefHeight="49.0" prefWidth="308.0" promptText="Username" style="-fx-background-radius: 25; -fx-border-radius: 25; -fx-border-insets: -3; -fx-border-width: 3;">
+            <TextField fx:id="usernameField" alignment="CENTER" layoutX="325.0" layoutY="248.0" onMouseClicked="#checkFieldIsValid" prefHeight="49.0" prefWidth="308.0" promptText="Username" style="-fx-background-color: transparent; -fx-text-fill: white;">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-            <Label layoutX="75.0" layoutY="253.0" prefHeight="69.0" prefWidth="239.0" text="Username" textFill="#3b93ff">
+            <Label layoutX="75.0" layoutY="238.0" prefHeight="69.0" prefWidth="239.0" text="Username" textFill="#3b93ff">
                <font>
                   <Font name="Bookman Old Style Bold" size="41.0" />
                </font>
             </Label>
-            <Label layoutX="75.0" layoutY="336.0" prefHeight="70.0" prefWidth="207.0" text="Password" textFill="#3b93ff">
+            <Label layoutX="75.0" layoutY="323.0" prefHeight="70.0" prefWidth="207.0" text="Password" textFill="#3b93ff">
                <font>
                   <Font name="Bookman Old Style Bold" size="40.0" />
                </font>
             </Label>
-            <PasswordField fx:id="passwordField" alignment="CENTER" layoutX="323.0" layoutY="348.0" onMouseClicked="#checkFieldIsValid" prefHeight="46.0" prefWidth="308.0" promptText="Password" style="-fx-border-radius: 25; -fx-background-radius: 25; -fx-border-insets: -3; -fx-border-width: 3;">
+            <PasswordField fx:id="passwordField" alignment="CENTER" layoutX="325.0" layoutY="341.0" onMouseClicked="#checkFieldIsValid" prefHeight="46.0" prefWidth="308.0" promptText="Password" style="-fx-background-color: transparent; -fx-text-fill: white;">
                <font>
                   <Font size="18.0" />
                </font>
             </PasswordField>
-            <Button fx:id="signUpBtn" layoutX="230.0" layoutY="454.0" mnemonicParsing="false" onAction="#signUpBtnOnAction" prefHeight="64.0" prefWidth="247.0" style="-fx-background-color: #2576DF; -fx-background-radius: 25;" text="Sign Up" textFill="WHITE">
+            <Button fx:id="signUpBtn" layoutX="230.0" layoutY="454.0" mnemonicParsing="false" onAction="#signUpBtnOnAction" prefHeight="64.0" prefWidth="247.0" styleClass="blueButton" stylesheets="@Stylesheet.css" text="Sign Up" textFill="WHITE">
                <font>
                   <Font name="Baskerville Old Face" size="22.0" />
                </font>
             </Button>
-            <Button fx:id="backBtn" layoutX="227.0" layoutY="535.0" mnemonicParsing="false" onAction="#backBtnOnAction" prefHeight="64.0" prefWidth="247.0" style="-fx-background-color: #2576DF; -fx-background-radius: 25;" text="Back" textFill="WHITE">
+            <Button fx:id="backBtn" layoutX="227.0" layoutY="535.0" mnemonicParsing="false" onAction="#backBtnOnAction" prefHeight="64.0" prefWidth="247.0" styleClass="blueButton" stylesheets="@Stylesheet.css" text="Back" textFill="WHITE">
                <font>
                   <Font name="Baskerville Old Face" size="22.0" />
                </font>
             </Button>
-            <Label fx:id="msgLabel" alignment="CENTER" layoutX="75.0" layoutY="140.0" prefHeight="34.0" prefWidth="659.0" textAlignment="CENTER" textFill="#ff0202" visible="false">
+            <Label fx:id="msgLabel" alignment="CENTER" layoutX="75.0" layoutY="132.0" prefHeight="36.0" prefWidth="659.0" textAlignment="CENTER" textFill="#ff0202" visible="false">
                <font>
                   <Font name="Consolas" size="20.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="350.0" layoutY="312.0" prefHeight="14.0" prefWidth="255.0" text="(Username must be unique)" textFill="#3b93ff">
+            <Label alignment="CENTER" layoutX="350.0" layoutY="299.0" prefHeight="14.0" prefWidth="255.0" text="(Username must be unique)" textFill="#3b93ff">
                <font>
                   <Font size="20.0" />
                </font>
@@ -124,6 +125,9 @@
                   <Font size="18.0" />
                </font>
             </Label>
+            <Line fx:id="emailLine" endX="201.0" layoutX="428.0" layoutY="214.0" startX="-100.0" stroke="#3b93ff" strokeWidth="3.0" />
+            <Line fx:id="usernameLine" endX="191.0" layoutX="433.0" layoutY="297.0" startX="-100.0" stroke="#3b93ff" strokeWidth="3.0" />
+            <Line fx:id="passwordLine" endX="197.0" layoutX="427.0" layoutY="387.0" startX="-100.0" stroke="#3b93ff" strokeWidth="3.0" />
          </children>
       </AnchorPane>
    </center>

@@ -8,12 +8,14 @@ public class User implements Serializable {
 	private String username;
 	private String password;
 	private String email;
+	private PostList userPosts;
 	
 	public User(String username, String password, String email) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.email = email;
+		this.userPosts = new PostList();
 	}
 
 	public String getUsername() {
@@ -39,9 +41,17 @@ public class User implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public PostList getUserPosts() {
+		return userPosts;
+	}
+
+	public void setUserPosts(PostList userPosts) {
+		this.userPosts = userPosts;
+	}
 
 	@Override
 	public String toString() {
-		return "User [username=" + username + ", password=" + password + ", email=" + email + "]";
+		return "User [username=" + username + ", password=" + password + ", email=" + email + ", userPosts=" + userPosts + "]";
 	}
 }

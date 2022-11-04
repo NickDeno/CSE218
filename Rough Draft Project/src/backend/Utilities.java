@@ -31,5 +31,31 @@ public class Utilities {
 		return null;
 	}
 	
+	public static void backupPosts(PostList postList) {
+		try {
+			FileOutputStream fos = new FileOutputStream("backupData/AllUserPosts.dat");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(postList);
+			oos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static PostList restorePosts() {
+		try {
+			FileInputStream fis = new FileInputStream("backupData/AllUserPosts.dat");
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			PostList postList = (PostList) ois.readObject();
+			ois.close();
+			return postList;
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	
 	
 }

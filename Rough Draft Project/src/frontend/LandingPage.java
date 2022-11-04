@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -40,7 +39,7 @@ public class LandingPage {
 	@FXML public void createPostButtonOnAction(ActionEvent event) {
 		GUIBackend.loadPane(contentPane, GUIBackend.HomeFeedScene);
 		GUIBackend.loadNewWindow(GUIBackend.CreatePostScene);	
-		mainPane.setEffect(new GaussianBlur(10));
+//		mainPane.setEffect(new GaussianBlur(10));
 	}
 	
 	@FXML public void logoutButtonOnAction(ActionEvent event) {
