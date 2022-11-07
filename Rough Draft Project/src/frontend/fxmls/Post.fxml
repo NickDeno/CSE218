@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="387.0" prefWidth="744.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #e84d4d 0.0%, #a8a8a8 100.0%);;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.fxmlsControllers.PostController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="55.0" layoutX="11.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" width="49.0" />
+      <ImageView fx:id="profilePic" fitHeight="49.0" fitWidth="62.0" layoutX="11.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/TempProfilePic.png" />
+         </image>
+      </ImageView>
+      <TextArea fx:id="descriptionField" editable="false" layoutX="35.0" layoutY="159.0" prefHeight="209.0" prefWidth="674.0" promptText="Topic Description " style="-fx-border-color: #3b93ff; -fx-border-radius: 25; -fx-border-insets: -5; -fx-border-width: 5;" stylesheets="@Stylesheet.css">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </TextArea>
+      <Label fx:id="usernameLabel" layoutX="60.0" layoutY="14.0" prefHeight="49.0" prefWidth="192.0" text="Username Here!" textFill="#fff2f2">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="titleLabel" alignment="CENTER" layoutX="204.0" layoutY="98.0" prefHeight="54.0" prefWidth="299.0" text="Title Here" textFill="WHITE">
+         <font>
+            <Font name="Bookman Old Style Bold" size="44.0" />
+         </font>
+      </Label>
+      <Label fx:id="dateLabel" alignment="CENTER" layoutX="520.0" layoutY="11.0" prefHeight="49.0" prefWidth="219.0" text="Date Here!" textFill="#fff2f2">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

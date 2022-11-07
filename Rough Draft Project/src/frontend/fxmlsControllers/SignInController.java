@@ -1,4 +1,4 @@
-package frontend;
+package frontend.fxmlsControllers;
 
 import java.io.File;
 
@@ -6,6 +6,7 @@ import backend.PostList;
 import backend.User;
 import backend.UserCenter;
 import backend.Utilities;
+import frontend.GUIBackend;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -17,7 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class SignInPage {
+public class SignInController {
 	@FXML private PasswordField passwordField;
 	@FXML private TextField usernameField;
 	@FXML private Label msgLabel;
@@ -28,16 +29,16 @@ public class SignInPage {
 	
 	protected static UserCenter users;
 	protected static User currentUser;
-	protected static PostList postList;
+	protected static PostList allPosts;
 	
 	public void initialize() {
 		users = new File("backupData/Users.dat").isFile() ? Utilities.restoreUsers() : new UserCenter(50);;
-		postList =  new File("backupData/AllUserPosts.dat").isFile() ? Utilities.restorePosts() : new PostList();;
+		allPosts =  new File("backupData/AllUserPosts.dat").isFile() ? Utilities.restorePosts() : new PostList();;
 		
 		System.out.println("All Users:");
 		users.display();
 		System.out.println("All Posts:");
-		postList.display();
+		allPosts.display();
 		System.out.println("Initialized Sign In Page!");
 	}
 	

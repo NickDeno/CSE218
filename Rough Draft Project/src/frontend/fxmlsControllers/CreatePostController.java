@@ -1,4 +1,4 @@
-package frontend;
+package frontend.fxmlsControllers;
 
 import backend.Post;
 import backend.Utilities;
@@ -10,7 +10,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class CreatePostPage {
+public class CreatePostController {
 	 @FXML private Button backBtn;
 	 @FXML private Button createPostButton;
 	 @FXML private TextArea descriptionField;
@@ -21,18 +21,12 @@ public class CreatePostPage {
 	 }
 
 	 @FXML public void createPostButtonOnAction(ActionEvent event) {
-		 Post newPost = new Post(SignInPage.currentUser.getUsername(), titleField.getText(), descriptionField.getText());
-		 SignInPage.postList.add(newPost);
-		 SignInPage.currentUser.getUserPosts().add(newPost);
-		 Utilities.backupPosts(SignInPage.postList);
-		 Utilities.backupUsers(SignInPage.users);	 
-		 ((Stage)((Node)event.getSource()).getScene().getWindow()).close();
-		 
-//		 System.out.println("Current Users Posts:");
-//		 SignInPage.currentUser.getUserPosts().display();
-//		 System.out.println("All Posts:");
-//		 SignInPage.postList.display();
-		 
+		 Post newPost = new Post(SignInController.currentUser.getUsername(), titleField.getText(), descriptionField.getText());
+		 SignInController.allPosts.add(newPost);
+		 SignInController.currentUser.getUserPosts().add(newPost);
+		 Utilities.backupPosts(SignInController.allPosts);
+		 Utilities.backupUsers(SignInController.users);	 
+		 ((Stage)((Node)event.getSource()).getScene().getWindow()).close();	 
 	 }
 	 
 	 @FXML public void backBtnOnAction(ActionEvent event) {

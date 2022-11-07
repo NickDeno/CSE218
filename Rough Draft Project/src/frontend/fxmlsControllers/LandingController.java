@@ -1,5 +1,6 @@
-package frontend;
+package frontend.fxmlsControllers;
 
+import frontend.GUIBackend;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -10,7 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class LandingPage {
+public class LandingController {
 	
 	@FXML private Label userLabel;
 	@FXML private Button profileButton;
@@ -19,7 +20,7 @@ public class LandingPage {
 	@FXML private ImageView profilePic;
 	
 	public void initialize() {
-		userLabel.setText(SignInPage.currentUser.getUsername());
+		userLabel.setText(SignInController.currentUser.getUsername());
 		GUIBackend.loadPane(contentPane, GUIBackend.HomeFeedScene);
 		System.out.println("Initialized Landing Page!");
 	}

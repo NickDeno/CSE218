@@ -16,10 +16,18 @@ public class PostList implements Serializable{
 		postList.add(p);
 	}
 	
+	public Post get(int idx) {
+		return postList.get(idx);
+	}
+	
 	public void display() {
 		for(Post p: postList) {
 			System.out.println(p.toString());
 		}
 		System.out.println();
+	}
+	
+	public int size() {
+		return postList.size();
 	}
 }

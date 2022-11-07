@@ -1,6 +1,7 @@
 package backend;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Post implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -8,12 +9,14 @@ public class Post implements Serializable {
 	private String username;
 	private String title;
 	private String description;
+	private Date postDate;
 	
 	public Post(String username, String title, String description) {
 		super();
 		this.username = username;
 		this.title = title;
 		this.description = description;
+		this.postDate = new Date();
 	}
 
 	public String getUsername() {
@@ -40,9 +43,14 @@ public class Post implements Serializable {
 		this.description = description;
 	}
 	
+	public Date getPostDate() {
+		return postDate;
+	}
+
 	@Override
 	public String toString() {
-		return "Post [username=" + username + ", title=" + title + ", description=" + description + "]";
+		return "Post [username=" + username + ", title=" + title + ", description=" + description + ", postDate="
+				+ postDate + "]";
 	}
 	
 }

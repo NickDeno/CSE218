@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="signInPane" prefHeight="597.0" prefWidth="994.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.SignInPage">
+<BorderPane fx:id="signInPane" prefHeight="597.0" prefWidth="994.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.fxmlsControllers.SignInController">
    <left>
       <AnchorPane prefHeight="520.0" prefWidth="289.0" style="-fx-background-color: #2576DF;" BorderPane.alignment="CENTER">
          <children>

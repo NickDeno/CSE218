@@ -1,4 +1,4 @@
-package frontend;
+package frontend.fxmlsControllers;
 
 import backend.User;
 import backend.UserCenter;
@@ -15,7 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
-public class SignUpPage {
+public class SignUpController {
 	@FXML private Label msgLabel;
 	@FXML private TextField emailField;
 	@FXML private TextField usernameField;
@@ -32,15 +32,15 @@ public class SignUpPage {
 	}
 
 	@FXML public void signUpBtnOnAction(ActionEvent event) {
-		if (!SignInPage.users.usernameIsUnique(usernameField.getText()) || !UserCenter.isValidPassword(passwordField.getText()) || !UserCenter.isValidEmail(emailField.getText())) {
+		if (!SignInController.users.usernameIsUnique(usernameField.getText()) || !UserCenter.isValidPassword(passwordField.getText()) || !UserCenter.isValidEmail(emailField.getText())) {
 			msgLabel.setText("Failed, please try again.");
 			msgLabel.setVisible(true);
 			resetFields();
 		} else {
-			SignInPage.users.insert(new User(usernameField.getText(), passwordField.getText(), emailField.getText()));
+			SignInController.users.insert(new User(usernameField.getText(), passwordField.getText(), emailField.getText()));
 			msgLabel.setText("Success, account was created!");
 			msgLabel.setVisible(true);
-			Utilities.backupUsers(SignInPage.users);	
+			Utilities.backupUsers(SignInController.users);	
 			resetFields();	
 		}
 	}
@@ -59,7 +59,7 @@ public class SignUpPage {
 		} else if (event.getSource().equals(usernameField)) {
 			String tempStyle = usernameField.getStyle();
 			usernameField.textProperty().addListener((observable, oldValue, newValue) -> {
-				if (SignInPage.users.usernameIsUnique(newValue)) usernameLine.setStyle(tempStyle + "-fx-stroke: #38ff13;");
+				if (SignInController.users.usernameIsUnique(newValue)) usernameLine.setStyle(tempStyle + "-fx-stroke: #38ff13;");
 				else usernameLine.setStyle(tempStyle + "-fx-stroke: #ff0000;");
 			});
 
