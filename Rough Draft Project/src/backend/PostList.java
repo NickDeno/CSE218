@@ -13,7 +13,7 @@ public class PostList implements Serializable{
 	}
 	
 	public void add(Post p) {
-		postList.add(p);
+		postList.addFirst(p);
 	}
 	
 	public Post get(int idx) {
@@ -29,5 +29,14 @@ public class PostList implements Serializable{
 	
 	public int size() {
 		return postList.size();
+	}
+	
+	@Override
+	public String toString() {
+		String  s = "";
+		for(int i = 0; i < postList.size(); i++) {
+			s += postList.get(i).toString() + ", ";
+		}
+		return s;
 	}
 }

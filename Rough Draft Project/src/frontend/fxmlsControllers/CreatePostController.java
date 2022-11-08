@@ -16,8 +16,10 @@ public class CreatePostController {
 	 @FXML private TextArea descriptionField;
 	 @FXML private TextField titleField;
 	 
-	 public void initialize() {
-		 
+	 private HomeFeedController homeFeed;
+	 
+	 public CreatePostController() {
+
 	 }
 
 	 @FXML public void createPostButtonOnAction(ActionEvent event) {
@@ -26,10 +28,16 @@ public class CreatePostController {
 		 SignInController.currentUser.getUserPosts().add(newPost);
 		 Utilities.backupPosts(SignInController.allPosts);
 		 Utilities.backupUsers(SignInController.users);	 
+		 homeFeed.loadNewPost(newPost);
 		 ((Stage)((Node)event.getSource()).getScene().getWindow()).close();	 
 	 }
 	 
 	 @FXML public void backBtnOnAction(ActionEvent event) {
 		((Stage)((Node)event.getSource()).getScene().getWindow()).close();
 	 }
+	 
+	 public void setHomeFeed(HomeFeedController homeFeed) {
+		 this.homeFeed = homeFeed;
+	 }
+
 }

@@ -17,18 +17,22 @@ public class GUIBackend {
 	public static final String SettingsScene = "/frontend/fxmls/SettingsPage.fxml";
 	public static final String CreatePostScene = "/frontend/fxmls/CreatePostPage.fxml";
 	
-	//Loads new window with specified fxml file
-	public static void loadNewWindow(String fxmlFileName) {
+	//Loads new window with specified fxml file and returns "Controller" of specified fxml file
+	public static <T> T loadNewWindow(String fxmlFileName) {
 		try {
-			Parent root = FXMLLoader.load(GUIBackend.class.getResource(fxmlFileName));
+//			Parent root = FXMLLoader.load(GUIBackend.class.getResource(fxmlFileName));
+			FXMLLoader loader = new FXMLLoader(GUIBackend.class.getResource(fxmlFileName));
+			Parent root = loader.load();
 			Scene scene = new Scene(root);
 			Stage stage = new Stage();
 			stage.setScene(scene);
 			stage.setResizable(false);
 			stage.show();
+			return loader.getController();
 		} catch (IOException e) {
 			System.out.println("Unable to load new window with " + fxmlFileName);
 			e.printStackTrace();
+			return null;
 		}
 	}
 	
@@ -44,16 +48,19 @@ public class GUIBackend {
 		}
 	}
 	
-	//Loads a specified AnchorPane with a specified fxml file
-	public static void loadPane(AnchorPane ap, String fxmlFileName) {
+	//Loads a specified AnchorPane with a specified fxml file and returns "Controller" of specified fmxl file
+	public static <T> T loadPane(AnchorPane ap, String fxmlFileName) {
 		try {
-			AnchorPane pane = FXMLLoader.load(GUIBackend.class.getResource(fxmlFileName));
+			FXMLLoader loader = new FXMLLoader(GUIBackend.class.getResource(fxmlFileName));
+			AnchorPane pane = loader.load();
 			ap.getChildren().clear();
 			ap.getChildren().setAll(pane);
+			return loader.getController();	
 		} catch (IOException e) {
 			System.out.println("Unable to load content pane with " + fxmlFileName);
 			e.printStackTrace();
 		}
+		return null;
 	}
 	
 }

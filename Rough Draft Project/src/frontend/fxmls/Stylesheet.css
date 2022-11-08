@@ -37,6 +37,21 @@
 	-fx-background-color: #979191;
 }
 
+.post{
+	-fx-background-color :linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #e84d4d 0.0%, #a8a8a8 100.0%);	
+ 	-fx-background-radius: 25;
+ 	-fx-border-radius: 25;
+}
+
+.post:hover {
+	/*-fx-effect: dropshadow(three-pass-box, derive(cadetblue, -20%), 10, 0, 4, 4);*/
+	-fx-background-color: #6d7072;
+}
+
+.post:pressed{
+	-fx-background-color: #979191;	
+}
+
 /*This is used to make text areas transparent since this is unable to be done in SceneBuilder*/
 .text-area {
     -fx-background-color: transparent;

@@ -38,13 +38,15 @@ public class LandingController {
 	}
 	
 	@FXML public void createPostButtonOnAction(ActionEvent event) {
-		GUIBackend.loadPane(contentPane, GUIBackend.HomeFeedScene);
-		GUIBackend.loadNewWindow(GUIBackend.CreatePostScene);	
-//		mainPane.setEffect(new GaussianBlur(10));
+		HomeFeedController homeFeed = GUIBackend.loadPane(contentPane, GUIBackend.HomeFeedScene);
+		CreatePostController newPost = GUIBackend.loadNewWindow(GUIBackend.CreatePostScene);
+		newPost.setHomeFeed(homeFeed); // This is done so when new post is created in the seperate CreatePost window, the home feed will automatically display new post
 	}
 	
 	@FXML public void logoutButtonOnAction(ActionEvent event) {
 		Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		GUIBackend.loadNewScene(stage, GUIBackend.SignInScene);	
 	}
+	
+	
 }

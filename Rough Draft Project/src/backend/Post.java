@@ -10,6 +10,7 @@ public class Post implements Serializable {
 	private String title;
 	private String description;
 	private Date postDate;
+	private PostList postReplies;
 	
 	public Post(String username, String title, String description) {
 		super();
@@ -17,6 +18,7 @@ public class Post implements Serializable {
 		this.title = title;
 		this.description = description;
 		this.postDate = new Date();
+		this.postReplies = new PostList();
 	}
 
 	public String getUsername() {
@@ -46,11 +48,15 @@ public class Post implements Serializable {
 	public Date getPostDate() {
 		return postDate;
 	}
+	
+	public PostList getPostReplies() {
+		return postReplies;
+	}
 
 	@Override
 	public String toString() {
 		return "Post [username=" + username + ", title=" + title + ", description=" + description + ", postDate="
-				+ postDate + "]";
+				+ postDate + ", postReplies=" + postReplies + "]";
 	}
 	
 }
