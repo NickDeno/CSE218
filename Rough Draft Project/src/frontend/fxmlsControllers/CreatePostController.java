@@ -36,6 +36,8 @@ public class CreatePostController {
 		((Stage)((Node)event.getSource()).getScene().getWindow()).close();
 	 }
 	 
+	 //Gets Instance of HomeFeed which displays all posts. This is done so when user creates new post in this scene, the HomeFeed will automatically
+	 //display the newly created post.
 	 public void setHomeFeed(HomeFeedController homeFeed) {
 		 this.homeFeed = homeFeed;
 	 }

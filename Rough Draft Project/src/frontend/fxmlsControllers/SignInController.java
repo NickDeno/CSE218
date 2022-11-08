@@ -41,7 +41,6 @@ public class SignInController {
 		allPosts.display();
 		System.out.println("Initialized Sign In Page!");
 		
-		System.out.println(allPosts.get(0));
 	}
 	
 	@FXML public void signInBtnOnAction(ActionEvent event) {

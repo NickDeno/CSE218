@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 public class PostController {
@@ -16,11 +15,7 @@ public class PostController {
 	@FXML private TextArea descriptionField;
 	@FXML private AnchorPane postPane;
 	
-	private Post post;
-	
-	
 	public void setPostData(Post post) {
-		this.post = post;
 		usernameLabel.setText(post.getUsername());
 		titleLabel.setText(post.getTitle());
 		descriptionField.setText(post.getDescription());
