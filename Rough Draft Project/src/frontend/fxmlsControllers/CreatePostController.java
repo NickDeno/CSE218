@@ -2,6 +2,7 @@ package frontend.fxmlsControllers;
 
 import backend.Post;
 import backend.Utilities;
+import frontend.GUIBackend;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -28,7 +29,7 @@ public class CreatePostController {
 		 SignInController.currentUser.getUserPosts().add(newPost);
 		 Utilities.backupPosts(SignInController.allPosts);
 		 Utilities.backupUsers(SignInController.users);	 
-		 homeFeed.loadNewPost(newPost);
+		 GUIBackend.displayPost(newPost, homeFeed.getTilePane());
 		 ((Stage)((Node)event.getSource()).getScene().getWindow()).close();	 
 	 }
 	 

@@ -19,8 +19,12 @@ public class LandingController {
 	@FXML private AnchorPane contentPane;
 	@FXML private ImageView profilePic;
 	
+	public LandingController() {
+		
+	}
+	
 	public void initialize() {
-		userLabel.setText(SignInController.currentUser.getUsername());
+		userLabel.setText(SignInController.currentUser.getUsername());		
 		GUIBackend.loadPane(contentPane, GUIBackend.HomeFeedScene);
 		System.out.println("Initialized Landing Page!");
 	}
@@ -39,14 +43,13 @@ public class LandingController {
 	
 	@FXML public void createPostButtonOnAction(ActionEvent event) {
 		HomeFeedController homeFeed = GUIBackend.loadPane(contentPane, GUIBackend.HomeFeedScene);
-		CreatePostController newPost = GUIBackend.loadNewWindow(GUIBackend.CreatePostScene);
-		newPost.setHomeFeed(homeFeed); // This is done so when new post is created in the seperate CreatePost window, the home feed will automatically display new post
+		CreatePostController newPost = GUIBackend.loadNewWindow(GUIBackend.CreatePostScene);	
+		newPost.setHomeFeed(homeFeed);
 	}
 	
 	@FXML public void logoutButtonOnAction(ActionEvent event) {
 		Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		GUIBackend.loadNewScene(stage, GUIBackend.SignInScene);	
 	}
-	
 	
 }
