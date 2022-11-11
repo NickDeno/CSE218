@@ -64,6 +64,8 @@ public class UserCenter implements Serializable {
 				left = mid + 1 ;
 			} else if(arr.get(mid).getUsername().equals(username) && arr.get(mid).getPassword().equals(password)) {
 				return arr.get(mid);
+			} else if(arr.get(mid).getUsername().equals(username) &&  !arr.get(mid).getPassword().equals(password)) {
+				return null;
 			}
 		}
 		return null;

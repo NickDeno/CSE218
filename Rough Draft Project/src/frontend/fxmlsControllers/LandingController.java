@@ -19,18 +19,18 @@ public class LandingController {
 	@FXML private AnchorPane contentPane;
 	@FXML private ImageView profilePic;
 	
-	public LandingController() {
-		
+	public LandingController() {	
 	}
 	
 	public void initialize() {
-		userLabel.setText(SignInController.currentUser.getUsername());		
-		GUIBackend.loadPane(contentPane, GUIBackend.HomeFeedScene);
-		System.out.println("Initialized Landing Page!");
+		userLabel.setText(SignInController.currentUser.getUsername());			
+		HomeFeedController homeFeed = GUIBackend.loadPane(contentPane, GUIBackend.HomeFeedScene);
+		homeFeed.setContentPane(contentPane);
 	}
 	
 	@FXML public void homeButtonOnAction(ActionEvent event) {
-		GUIBackend.loadPane(contentPane, GUIBackend.HomeFeedScene);
+		HomeFeedController homeFeed = GUIBackend.loadPane(contentPane, GUIBackend.HomeFeedScene);
+		homeFeed.setContentPane(contentPane);
 	}
 	
 	@FXML public void profileButtonOnAction(ActionEvent event) {
@@ -42,14 +42,17 @@ public class LandingController {
 	}
 	
 	@FXML public void createPostButtonOnAction(ActionEvent event) {
-		HomeFeedController homeFeed = GUIBackend.loadPane(contentPane, GUIBackend.HomeFeedScene);
-		CreatePostController newPost = GUIBackend.loadNewWindow(GUIBackend.CreatePostScene);	
-		newPost.setHomeFeed(homeFeed);
+		CreatePostController createPostController = GUIBackend.loadPane(contentPane, GUIBackend.CreatePostScene);	
+		createPostController.setContentPane(contentPane);
 	}
 	
 	@FXML public void logoutButtonOnAction(ActionEvent event) {
 		Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		GUIBackend.loadNewScene(stage, GUIBackend.SignInScene);	
+	}
+	
+	public AnchorPane getContentPane() {
+		return contentPane;
 	}
 	
 }

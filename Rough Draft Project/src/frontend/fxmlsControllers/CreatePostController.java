@@ -5,42 +5,47 @@ import backend.Utilities;
 import frontend.GUIBackend;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
 
 public class CreatePostController {
 	 @FXML private Button backBtn;
 	 @FXML private Button createPostButton;
 	 @FXML private TextArea descriptionField;
 	 @FXML private TextField titleField;
-	 
-	 private HomeFeedController homeFeed;
+	 @FXML private Label msgLabel;
+	
+	 private AnchorPane contentPane;
 	 
 	 public CreatePostController() {
 
 	 }
 
 	 @FXML public void createPostButtonOnAction(ActionEvent event) {
-		 Post newPost = new Post(SignInController.currentUser.getUsername(), titleField.getText(), descriptionField.getText());
-		 SignInController.allPosts.add(newPost);
-		 SignInController.currentUser.getUserPosts().add(newPost);
-		 Utilities.backupPosts(SignInController.allPosts);
-		 Utilities.backupUsers(SignInController.users);	 
-		 GUIBackend.displayPost(newPost, homeFeed.getTilePane());
-		 ((Stage)((Node)event.getSource()).getScene().getWindow()).close();	 
+		 if(!titleField.getText().isEmpty() && !descriptionField.getText().isEmpty()) {
+			 Post newPost = new Post(SignInController.currentUser.getUsername(), titleField.getText(), descriptionField.getText());
+			 SignInController.allPosts.add(newPost);
+			 SignInController.currentUser.getUserPosts().add(newPost);
+			 Utilities.backupPosts(SignInController.allPosts);
+			 Utilities.backupUsers(SignInController.users);	 
+			 GUIBackend.loadPane(contentPane, GUIBackend.HomeFeedScene); 
+		 } else {
+			 titleField.clear();
+			 descriptionField.clear();
+			 msgLabel.setText("Error. Please Try Again.");
+			 msgLabel.setVisible(true);
+		 }
 	 }
 	 
 	 @FXML public void backBtnOnAction(ActionEvent event) {
-		((Stage)((Node)event.getSource()).getScene().getWindow()).close();
+		 GUIBackend.loadPane(contentPane, GUIBackend.HomeFeedScene);
 	 }
 	 
-	 //Gets Instance of HomeFeed which displays all posts. This is done so when user creates new post in this scene, the HomeFeed will automatically
-	 //display the newly created post.
-	 public void setHomeFeed(HomeFeedController homeFeed) {
-		 this.homeFeed = homeFeed;
+	 public void setContentPane(AnchorPane contentPane) {
+		 this.contentPane = contentPane;
 	 }
 
 }

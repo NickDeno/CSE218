@@ -20,12 +20,12 @@ public class GUIBackend {
 	public static final String ProfileScene = "/frontend/fxmls/Profile.fxml";
 	public static final String SettingsScene = "/frontend/fxmls/Settings.fxml";
 	public static final String CreatePostScene = "/frontend/fxmls/CreatePost.fxml";
-	public static final String PostWithRepliesScene = "/frontend/fxmls/PostWithReplies.fxml";
+	public static final String PostRepliesScene = "/frontend/fxmls/PostReplies.fxml";
+	public static final String ReplyScene = "/frontend/fxmls/Reply.fxml";
 	
 	//Loads new window with specified fxml file and returns "Controller" of specified fxml file
 	public static <T> T loadNewWindow(String fxmlFileName) {
 		try {
-//			Parent root = FXMLLoader.load(GUIBackend.class.getResource(fxmlFileName));
 			FXMLLoader loader = new FXMLLoader(GUIBackend.class.getResource(fxmlFileName));
 			Parent root = loader.load();
 			Scene scene = new Scene(root);
@@ -71,14 +71,15 @@ public class GUIBackend {
 	}
 	
 	//Takes a list of posts and creates fxml pane for each post. Then loads these posts into a tilePane to be displayed on screen
-	public static void displayPosts(PostList postList, TilePane tilePane) {
-		for (int i = 0; i < postList.size(); i++) {
+	public static void displayPosts(PostList postList, TilePane tilePane, AnchorPane contentPane) {
+		for (int i = postList.size()-1; i >= 0; i--) {
 			try {
 				FXMLLoader fxmlLoader = new FXMLLoader();
 				fxmlLoader.setLocation(GUIBackend.class.getResource("/frontend/fxmls/Post.fxml"));
 				AnchorPane ap = fxmlLoader.load();
 				PostController postController = fxmlLoader.getController();
 				postController.setPostData(postList.get(i));
+				postController.setContentPane(contentPane);
 				tilePane.getChildren().add(ap);	
 			} catch (IOException e) {
 				e.printStackTrace();

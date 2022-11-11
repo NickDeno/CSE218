@@ -46,7 +46,7 @@ public class SignInController {
 	@FXML public void signInBtnOnAction(ActionEvent event) {
 		User tempUser = users.userSearch(usernameField.getText(), passwordField.getText());
 		if(tempUser != null) {
-			currentUser = tempUser;
+			currentUser = users.userSearch(usernameField.getText(), passwordField.getText());
 			Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			GUIBackend.loadNewScene(stage, GUIBackend.LandingScene);
 		} else {
@@ -64,5 +64,6 @@ public class SignInController {
     
     @FXML public void clickHereOnAction(ActionEvent event) {
 		GUIBackend.loadNewWindow(GUIBackend.SignUpScene);
+		msgLabel.setVisible(false);
 	}
 }

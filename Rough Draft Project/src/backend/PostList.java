@@ -13,11 +13,16 @@ public class PostList implements Serializable{
 	}
 	
 	public void add(Post p) {
-		postList.addFirst(p);
+		postList.add(p);
 	}
+	
 	
 	public Post get(int idx) {
 		return postList.get(idx);
+	}
+	
+	public int size() {
+		return postList.size();
 	}
 	
 	public void display() {
@@ -25,10 +30,6 @@ public class PostList implements Serializable{
 			System.out.println(p.toString());
 		}
 		System.out.println();
-	}
-	
-	public int size() {
-		return postList.size();
 	}
 	
 	@Override

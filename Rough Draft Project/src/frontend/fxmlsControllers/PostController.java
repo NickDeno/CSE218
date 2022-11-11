@@ -21,17 +21,22 @@ public class PostController {
 	@FXML private AnchorPane postPane;
 	
 	private Post post;
-	private AnchorPane landingContentPane;
+	private AnchorPane contentPane;
 	
+	//Initializer
 	public PostController() {
-		
-	}
+	}	
 	
 	@FXML public void postOnClicked(MouseEvent event) {
 		System.out.println(post.toString());
-//		PostWithRepliesController postWithRepliesController = GUIBackend.loadPane(landingContentPane, GUIBackend.PostWithRepliesScene);
-//		postWithRepliesController.setMainPostData(post);
+		contentPane.getChildren().clear();
+		PostRepliesController postRepliesController = GUIBackend.loadPane(contentPane, GUIBackend.PostRepliesScene);
+		postRepliesController.passData(post, contentPane);
     }
+	
+	public void setContentPane(AnchorPane contentPane) {
+		this.contentPane = contentPane;
+	}
 	
 	public void setPostData(Post post) {
 		this.post = post;
@@ -40,10 +45,6 @@ public class PostController {
 		descriptionField.setText(post.getDescription());
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy h:mm aa");
 		dateLabel.setText(df.format(post.getPostDate()));	
-	}
-	
-	public void setLandingContentPane(AnchorPane landingContentPane) {
-		this.landingContentPane = landingContentPane;
 	}
 	
 	

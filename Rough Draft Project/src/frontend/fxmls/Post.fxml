@@ -8,32 +8,32 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="postPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#postOnClicked" prefHeight="306.0" prefWidth="791.0" styleClass="post" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.fxmlsControllers.PostController">
+<AnchorPane fx:id="postPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#postOnClicked" prefHeight="201.0" prefWidth="699.0" styleClass="post" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.fxmlsControllers.PostController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="DODGERBLUE" height="55.0" layoutX="11.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" width="49.0" />
-      <ImageView fx:id="profilePic" disable="true" fitHeight="49.0" fitWidth="62.0" layoutX="11.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="DODGERBLUE" height="49.0" layoutX="25.0" layoutY="5.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+      <ImageView fx:id="profilePic" disable="true" fitHeight="40.0" fitWidth="49.0" layoutX="25.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/TempProfilePic.png" />
          </image>
       </ImageView>
-      <TextArea fx:id="descriptionField" disable="true" editable="false" layoutX="35.0" layoutY="149.0" prefHeight="144.0" prefWidth="724.0" promptText="Topic Description " style="-fx-border-color: #3b93ff; -fx-border-radius: 25; -fx-border-insets: -5; -fx-border-width: 5; -fx-text-fill: white; -fx-opacity: 1;" stylesheets="@Stylesheet.css">
+      <TextArea fx:id="descriptionField" disable="true" editable="false" layoutX="25.0" layoutY="94.0" prefHeight="98.0" prefWidth="664.0" promptText="Topic Description " style="-fx-border-color: #3b93ff; -fx-border-radius: 25; -fx-border-insets: -5; -fx-border-width: 5; -fx-text-fill: white; -fx-opacity: 1;" stylesheets="@Stylesheet.css">
          <font>
             <Font size="21.0" />
          </font>
       </TextArea>
-      <Label fx:id="usernameLabel" disable="true" layoutX="60.0" layoutY="14.0" prefHeight="49.0" prefWidth="192.0" style="-fx-opacity: 1;" text="Username Here!" textFill="#fff2f2">
+      <Label fx:id="usernameLabel" disable="true" layoutX="66.0" layoutY="5.0" prefHeight="49.0" prefWidth="191.0" style="-fx-opacity: 1;" text="Username Here!" textFill="#fff2f2">
          <font>
-            <Font size="24.0" />
+            <Font size="22.0" />
          </font>
       </Label>
-      <Label fx:id="titleLabel" alignment="CENTER" disable="true" layoutX="134.0" layoutY="91.0" prefHeight="49.0" prefWidth="511.0" style="-fx-opacity: 1;" text="Title Here" textFill="WHITE">
+      <Label fx:id="titleLabel" alignment="CENTER" disable="true" layoutX="94.0" layoutY="50.0" prefHeight="40.0" prefWidth="511.0" style="-fx-opacity: 1;" text="Title Here" textFill="WHITE">
          <font>
-            <Font name="Bookman Old Style Bold" size="44.0" />
+            <Font name="Bookman Old Style Bold" size="32.0" />
          </font>
       </Label>
-      <Label fx:id="dateLabel" alignment="CENTER" disable="true" layoutX="498.0" layoutY="14.0" prefHeight="49.0" prefWidth="290.0" style="-fx-opacity: 1;" text="Date Here!" textFill="#fff2f2">
+      <Label fx:id="dateLabel" alignment="CENTER" disable="true" layoutX="434.0" layoutY="14.0" prefHeight="30.0" prefWidth="279.0" style="-fx-opacity: 1;" text="Date Here!" textFill="#fff2f2">
          <font>
-            <Font size="24.0" />
+            <Font size="21.0" />
          </font>
       </Label>
    </children>
