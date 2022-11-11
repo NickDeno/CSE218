@@ -18,7 +18,6 @@ public class PostController {
 	@FXML private ImageView profilePic;
 	@FXML private Label dateLabel;
 	@FXML private TextArea descriptionField;
-	@FXML private AnchorPane postPane;
 	
 	private Post post;
 	private AnchorPane contentPane;

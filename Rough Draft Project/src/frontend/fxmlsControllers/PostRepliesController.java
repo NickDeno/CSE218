@@ -8,7 +8,6 @@ import frontend.GUIBackend;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -21,8 +20,6 @@ public class PostRepliesController {
 	@FXML private ImageView profilePic;
 	@FXML private Label dateLabel;
 	@FXML private TextArea descriptionField;
-	@FXML private AnchorPane mainPostPane;
-    @FXML private ScrollPane scrollPane;
     @FXML private TilePane tilePane;
     @FXML private ImageView replyButton;
     

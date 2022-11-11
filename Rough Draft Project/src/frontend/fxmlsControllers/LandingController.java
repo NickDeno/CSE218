@@ -8,14 +8,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class LandingController {
-	
 	@FXML private Label userLabel;
 	@FXML private Button profileButton;
-	@FXML private BorderPane mainPane;
 	@FXML private AnchorPane contentPane;
 	@FXML private ImageView profilePic;
 	

@@ -13,7 +13,7 @@
 
 <AnchorPane fx:id="postRepliesPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1090.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #656161 0.0%, #393636 100.0%);" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.fxmlsControllers.PostRepliesController">
    <children>
-      <AnchorPane fx:id="mainPostPane" layoutX="54.0" layoutY="23.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="313.0" prefWidth="983.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #e84d4d 0.0%, #a8a8a8 100.0%); -fx-background-radius: 25;" stylesheets="@Stylesheet.css">
+      <AnchorPane layoutX="54.0" layoutY="23.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="313.0" prefWidth="983.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #e84d4d 0.0%, #a8a8a8 100.0%); -fx-background-radius: 25;" stylesheets="@Stylesheet.css">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="DODGERBLUE" height="55.0" layoutX="11.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" width="49.0" />
             <ImageView fx:id="profilePic" disable="true" fitHeight="49.0" fitWidth="62.0" layoutX="11.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
@@ -54,7 +54,7 @@
             <Font size="35.0" />
          </font>
       </Label>
-      <ScrollPane fx:id="scrollPane" layoutX="61.0" layoutY="391.0" prefHeight="368.0" prefWidth="970.0" style="-fx-background-color: transparent; -fx-background: transparent;">
+      <ScrollPane layoutX="61.0" layoutY="391.0" prefHeight="368.0" prefWidth="970.0" style="-fx-background-color: transparent; -fx-background: transparent;">
          <content>
             <TilePane fx:id="tilePane" alignment="CENTER" prefHeight="355.0" prefWidth="969.0" style="-fx-vgap: 30;" />
          </content>

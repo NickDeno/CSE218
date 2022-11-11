@@ -15,7 +15,6 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class SignInController {
@@ -25,7 +24,6 @@ public class SignInController {
 	@FXML private Button signInBtn;
 	@FXML private Button cancelBtn; 
 	@FXML private Hyperlink clickHereText;
-	@FXML private BorderPane signInPane;
 	
 	protected static UserCenter users;
 	protected static User currentUser;

@@ -13,7 +13,7 @@
             <Font name="Elephant" size="24.0" />
          </font>
       </Label>
-      <ScrollPane fx:id="scroll" layoutX="5.0" layoutY="67.0" prefHeight="679.0" prefWidth="1078.0" style="-fx-background: transparent; -fx-background-color: transparent;">
+      <ScrollPane layoutX="5.0" layoutY="67.0" prefHeight="679.0" prefWidth="1078.0" style="-fx-background: transparent; -fx-background-color: transparent;">
          <content>
             <TilePane fx:id="tilePane" alignment="CENTER" prefHeight="676.0" prefWidth="1076.0" style="-fx-vgap: 30;" />
          </content></ScrollPane>

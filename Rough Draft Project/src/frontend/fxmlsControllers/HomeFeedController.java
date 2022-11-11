@@ -10,7 +10,6 @@ import javafx.scene.layout.TilePane;
 
 public class HomeFeedController {
 	@FXML private Label userLabel;
-	@FXML private ScrollPane scroll;
 	@FXML private TilePane tilePane;
 	
 	private AnchorPane contentPane;

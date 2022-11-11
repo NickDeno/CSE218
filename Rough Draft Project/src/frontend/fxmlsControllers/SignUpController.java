@@ -11,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
@@ -22,7 +21,6 @@ public class SignUpController {
 	@FXML private PasswordField passwordField;
 	@FXML private Button signUpBtn;
 	@FXML private Button backBtn;
-	@FXML private BorderPane signUpPane;
 	@FXML private Line emailLine;
 	@FXML private Line usernameLine;
 	@FXML private Line passwordLine;
