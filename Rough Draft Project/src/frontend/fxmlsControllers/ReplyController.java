@@ -1,7 +1,6 @@
 package frontend.fxmlsControllers;
 
 import backend.Post;
-import backend.Utilities;
 import frontend.GUIBackend;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,34 +15,31 @@ public class ReplyController {
     @FXML private TextArea descriptionField;
     @FXML private Button replyBtn;
     
-    private Post postToReply;
+    private Post post;
     private TilePane tilePane;
+    private LandingController landingController;
     
     public ReplyController() {	
-    }
-    
-    public void initialize() {
-    	
-    }
-    
+    } 
     
     @FXML public void cancelBtnOnAction(ActionEvent event) {
     	((Stage)((Node)event.getSource()).getScene().getWindow()).close();
     }
 
     @FXML public void replyBtnOnAction(ActionEvent event) {
-    	Post newPost = new Post(SignInController.currentUser.getUsername(), SignInController.currentUser.getUsername() + "'s Reply:", 
-    			descriptionField.getText());
-    	postToReply.getPostReplies().add(newPost);
+    	Post newPost = new Post(SignInController.currentUser.getUsername() + "'s Reply:", null, descriptionField.getText(), SignInController.currentUser, null);
+    	post.getPostReplies().add(newPost);
     	SignInController.currentUser.getUserPosts().add(newPost);
-    	Utilities.backupPosts(SignInController.allPosts);
-		Utilities.backupUsers(SignInController.users);
-    	GUIBackend.displayPost(newPost, tilePane);
+    	GUIBackend.displayNewPost(newPost, tilePane, landingController);
     	((Stage)((Node)event.getSource()).getScene().getWindow()).close();
     }
     
-    public void passData(Post postToReply, TilePane tilePane) {
+    public void passData(Post post, TilePane tilePane) {
     	this.tilePane = tilePane; 	
-    	this.postToReply = postToReply;
+    	this.post = post;
     }
+    
+    public void setLandingController(LandingController landingController) {
+		 this.landingController = landingController;
+	 }
 }

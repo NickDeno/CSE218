@@ -9,12 +9,14 @@ public class User implements Serializable {
 	private String password;
 	private String email;
 	private PostList userPosts;
+	private FXImage profilePic;
 	
-	public User(String username, String password, String email) {
+	public User(String username, String password, String email, FXImage profilePic) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.email = email;
+		this.profilePic = profilePic;
 		this.userPosts = new PostList();
 	}
 
@@ -41,7 +43,15 @@ public class User implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
+	public FXImage getProfilePic() {
+		return profilePic;
+	}
+
+	public void setProfilePicPath(FXImage profilePic) {
+		this.profilePic = profilePic;
+	}
+
 	public PostList getUserPosts() {
 		return userPosts;
 	}

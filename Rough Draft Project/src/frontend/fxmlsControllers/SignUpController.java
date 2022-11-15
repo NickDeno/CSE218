@@ -1,18 +1,29 @@
 package frontend.fxmlsControllers;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+
+import backend.FXImage;
 import backend.User;
 import backend.UserCenter;
 import backend.Utilities;
+import frontend.GUIBackend;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Line;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 public class SignUpController {
 	@FXML private Label msgLabel;
@@ -24,27 +35,56 @@ public class SignUpController {
 	@FXML private Line emailLine;
 	@FXML private Line usernameLine;
 	@FXML private Line passwordLine;
+	@FXML private Button browseBtn;
+	@FXML private ImageView previewProfilePic;
+	
+	private File chosenImage;
+	private byte[] chosenImageBytes;
 	
 	public void initialize() {
-		System.out.println("Initialized Sign Up Page!");
+		//Sets default profile picture of user
+		chosenImage = new File("src/frontend/assets/TempProfilePic.png");
+		chosenImageBytes = GUIBackend.fileToByteArr(chosenImage);
+		previewProfilePic.setImage(new Image(new ByteArrayInputStream(chosenImageBytes)));
+	}
+	
+	@FXML public void browseBtnOnAction(ActionEvent event) {
+		FileChooser fc = new FileChooser();
+    	fc.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
+    	chosenImage = fc.showOpenDialog(null);
+    	if(chosenImage == null) {
+    		Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Invalid File");
+			alert.setHeaderText(null);
+			alert.setContentText("Either chosen image was invalid, or no image was chosen. Please try again.");
+			alert.showAndWait();
+    	} else {
+    		chosenImageBytes = GUIBackend.fileToByteArr(chosenImage);
+    		previewProfilePic.setImage(new Image(new ByteArrayInputStream(chosenImageBytes)));
+    	}
 	}
 
 	@FXML public void signUpBtnOnAction(ActionEvent event) {
-		if (!SignInController.users.usernameIsUnique(usernameField.getText()) || !UserCenter.isValidPassword(passwordField.getText()) || !UserCenter.isValidEmail(emailField.getText())) {
+		if (!SignInController.users.usernameIsUnique(usernameField.getText())|| !UserCenter.isValidPassword(passwordField.getText()) || !UserCenter.isValidEmail(emailField.getText())) {
 			msgLabel.setText("Failed, please try again.");
 			msgLabel.setVisible(true);
 			resetFields();
 		} else {
-			SignInController.users.insert(new User(usernameField.getText(), passwordField.getText(), emailField.getText()));
-			msgLabel.setText("Success, account was created!");
-			msgLabel.setVisible(true);
+			SignInController.users.insert(new User(usernameField.getText(), passwordField.getText(), emailField.getText(), new FXImage(chosenImageBytes)));
 			Utilities.backupUsers(SignInController.users);	
-			resetFields();	
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Account Sucessfully Created!");
+			alert.setHeaderText(null);
+			alert.setContentText("Your account has been successfully created!");
+			alert.showAndWait();
+			Stage stage = ((Stage)((Node)event.getSource()).getScene().getWindow());
+			GUIBackend.loadNewScene(stage, GUIBackend.SignInScene);	
 		}
 	}
 
 	@FXML public void backBtnOnAction(ActionEvent event) {
-		((Stage)((Node)event.getSource()).getScene().getWindow()).close();
+		Stage stage = ((Stage)((Node)event.getSource()).getScene().getWindow());
+		GUIBackend.loadNewScene(stage, GUIBackend.SignInScene);
 	}
 	
 	@FXML public void checkFieldIsValid(MouseEvent event) {
@@ -74,9 +114,11 @@ public class SignUpController {
 		usernameField.clear();
 		passwordField.clear();
 		emailField.clear();
+		chosenImage = new File("src/frontend/assets/TempProfilePic.png");
+		chosenImageBytes = GUIBackend.fileToByteArr(chosenImage);
+		previewProfilePic.setImage(new Image(new ByteArrayInputStream(chosenImageBytes)));
 		emailLine.setStyle("-fx-stroke: #3b93ff;");
 		usernameLine.setStyle("-fx-stroke: #3b93ff;");
 		passwordLine.setStyle("-fx-stroke: #3b93ff;");
 	}
-	
 }

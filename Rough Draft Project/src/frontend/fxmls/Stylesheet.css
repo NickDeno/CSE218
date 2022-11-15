@@ -44,7 +44,6 @@
 }
 
 .post:hover {
-	/*-fx-effect: dropshadow(three-pass-box, derive(cadetblue, -20%), 10, 0, 4, 4);*/
 	-fx-background-color: #6d7072;
 }
 

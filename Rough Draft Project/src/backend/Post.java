@@ -1,32 +1,34 @@
 package backend;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 
 public class Post implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private String username;
 	private String title;
+	private String topic;
 	private String description;
+	private User postUser;
+	private LinkedList<FXImage> postImages;
 	private Date postDate;
 	private PostList postReplies;
+	private int likeCount;
 	
-	public Post(String username, String title, String description) {
+	
+	public Post(String title, String topic, String description, User postUser, LinkedList<FXImage> postImages) {
 		super();
-		this.username = username;
 		this.title = title;
+		this.topic = topic;
 		this.description = description;
+		this.postUser = postUser;
+		this.postImages = postImages;
 		this.postDate = new Date();
 		this.postReplies = new PostList();
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
+		this.likeCount = 0;
 	}
 
 	public String getTitle() {
@@ -37,6 +39,14 @@ public class Post implements Serializable {
 		this.title = title;
 	}
 
+	public String getTopic() {
+		return topic;
+	}
+
+	public void setTopic(String topic) {
+		this.topic = topic;
+	}
+
 	public String getDescription() {
 		return description;
 	}
@@ -45,6 +55,22 @@ public class Post implements Serializable {
 		this.description = description;
 	}
 	
+	public User getPostUser() {
+		return postUser;
+	}
+
+	public void setPostUser(User postUser) {
+		this.postUser = postUser;
+	}
+	
+	public LinkedList<FXImage> getPostImages() {
+		return postImages;
+	}
+
+	public void setPostImages(LinkedList<FXImage> postImages) {
+		this.postImages = postImages;
+	}
+
 	public Date getPostDate() {
 		return postDate;
 	}
@@ -52,11 +78,20 @@ public class Post implements Serializable {
 	public PostList getPostReplies() {
 		return postReplies;
 	}
+	
+	public int getLikeCount() {
+		return likeCount;
+	}
+	
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
 
 	@Override
 	public String toString() {
-		return "Post [username=" + username + ", title=" + title + ", description=" + description + ", postDate="
-				+ postDate + ", postReplies=" + postReplies + "]";
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy h:mm aa");
+		return "Post [Created by " + postUser.getUsername() + ", title=" + title + ", topic= " + topic + ", description=" + description 
+				+ ", postDate=" + df.format(postDate) + ", likeCount=" + likeCount +", postReplies=" + postReplies + "]";
 	}
 	
 }

@@ -7,9 +7,9 @@ import backend.User;
 import backend.UserCenter;
 import backend.Utilities;
 import frontend.GUIBackend;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -29,23 +29,27 @@ public class SignInController {
 	protected static User currentUser;
 	protected static PostList allPosts;
 	
+	private Stage stage;
+	
 	public void initialize() {
 		users = new File("backupData/Users.dat").isFile() ? Utilities.restoreUsers() : new UserCenter(50);;
-		allPosts =  new File("backupData/AllUserPosts.dat").isFile() ? Utilities.restorePosts() : new PostList();;
-		
-		System.out.println("All Users:");
+		allPosts =  new File("backupData/AllPosts.dat").isFile() ? Utilities.restorePosts() : new PostList();;	
 		users.display();
-		System.out.println("All Posts:");
-		allPosts.display();
-		System.out.println("Initialized Sign In Page!");
-		
+		allPosts.display();	
+		//Runs after fxml page is initialized. At any time, if window is closed, all data will be backed up.
+		Platform.runLater(() -> {
+			stage = (Stage)signInBtn.getScene().getWindow();
+			stage.setOnCloseRequest(e -> {
+				Utilities.backupUsers(users);
+				Utilities.backupPosts(allPosts);
+			});
+		});
 	}
 	
 	@FXML public void signInBtnOnAction(ActionEvent event) {
 		User tempUser = users.userSearch(usernameField.getText(), passwordField.getText());
 		if(tempUser != null) {
 			currentUser = tempUser;
-			Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			GUIBackend.loadNewScene(stage, GUIBackend.LandingScene);
 		} else {
 			msgLabel.setText("Account not found.");
@@ -56,12 +60,13 @@ public class SignInController {
 	}
     
     @FXML public void cancelBtnOnAction(ActionEvent event) {
-    	Stage stage = (Stage) cancelBtn.getScene().getWindow();
+    	Utilities.backupUsers(users);
+		Utilities.backupPosts(allPosts);
     	stage.close();
     }
     
     @FXML public void clickHereOnAction(ActionEvent event) {
-		GUIBackend.loadNewWindow(GUIBackend.SignUpScene);
-		msgLabel.setVisible(false);
+    	GUIBackend.loadNewScene(stage, GUIBackend.SignUpScene);
 	}
+    
 }

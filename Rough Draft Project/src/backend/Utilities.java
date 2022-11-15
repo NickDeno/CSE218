@@ -33,7 +33,7 @@ public class Utilities {
 	
 	public static void backupPosts(PostList postList) {
 		try {
-			FileOutputStream fos = new FileOutputStream("backupData/AllUserPosts.dat");
+			FileOutputStream fos = new FileOutputStream("backupData/AllPosts.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(postList);
 			oos.close();
@@ -44,7 +44,7 @@ public class Utilities {
 	
 	public static PostList restorePosts() {
 		try {
-			FileInputStream fis = new FileInputStream("backupData/AllUserPosts.dat");
+			FileInputStream fis = new FileInputStream("backupData/AllPosts.dat");
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			PostList postList = (PostList) ois.readObject();
 			ois.close();

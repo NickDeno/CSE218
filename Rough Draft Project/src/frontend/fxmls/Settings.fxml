@@ -2,10 +2,13 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1090.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #656161 0.0%, #393636 100.0%);" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.fxmlsControllers.SettingsController">
    <children>
-      <Label layoutX="284.0" layoutY="38.0" prefHeight="28.0" prefWidth="133.0" text="Settings Page" />
+      <Label layoutX="458.0" layoutY="14.0" prefHeight="49.0" prefWidth="160.0" text="Settings Page" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
    </children>
 </AnchorPane>
