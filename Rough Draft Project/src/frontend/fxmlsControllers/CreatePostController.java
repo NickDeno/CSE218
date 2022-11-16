@@ -46,7 +46,6 @@ public class CreatePostController {
 	 public CreatePostController() {}
 	 
 	 public void initialize() {
-//		topicBox.setValue("Post Topic");
 		topicBox.getItems().addAll(defaultTopics);
 	 }
 	 
