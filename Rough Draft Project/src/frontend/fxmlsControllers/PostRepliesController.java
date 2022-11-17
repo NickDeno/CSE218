@@ -87,10 +87,9 @@ public class PostRepliesController {
 			alert.setContentText("You cannot like your own posts.");
 			alert.showAndWait();
 		} else {
+			//Updates likeCount in both "globalPosts" linkedList, and the "userPosts" linkedList of the user who created post since they are shallow copies
 			post.setLikeCount(post.getLikeCount() + 1);
-			System.out.println(post.getLikeCount());
-			likeCounter.setText(String.valueOf(post.getLikeCount()));
-			
+			likeCounter.setText(String.valueOf(post.getLikeCount()));	
 			ColorAdjust colorAdjust = new ColorAdjust();
 			colorAdjust.setHue(Color.PINK.getHue());
 			likeButton.setEffect(colorAdjust);

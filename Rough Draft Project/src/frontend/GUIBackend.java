@@ -125,10 +125,10 @@ public class GUIBackend {
 	/*
 	 * This method works almost exactly the same as displayPosts method. However, instead of taking in a PostList of posts, it takes in a singular post.
 	 * Then, creates an AnchorPane of this post object. Instead of adding the AnchorPane to bottom of TilePane like displayPosts, the AnchorPane is added
-	 * to the top of the TilePane since its the newest post. Then, the instance of the LandingController being passed into this method is passed into the
+	 * to the top of the TilePane. Then, the instance of the LandingController being passed into this method is passed into the
 	 * PostController of this post
 	 */
-	public static void displayNewPost(Post post, TilePane tilePane, LandingController landingController) {
+	public static void displayPost(Post post, TilePane tilePane, LandingController landingController) {
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader();
 			fxmlLoader.setLocation(GUIBackend.class.getResource("/frontend/fxmls/Post.fxml"));

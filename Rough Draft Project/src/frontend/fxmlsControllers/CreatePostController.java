@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -29,6 +30,8 @@ public class CreatePostController {
 	 @FXML private TextArea descriptionField;
 	 @FXML private TextField titleField;
 	 @FXML private ComboBox<String> topicBox;
+	 @FXML private TextField newTopicField;
+	 @FXML private Line newTopicLine;
 	 @FXML private Label msgLabel;
 	 
 	 @FXML private ImageView postImg1;
@@ -41,12 +44,23 @@ public class CreatePostController {
 	 
 	 private LandingController landingController;
 	 private LinkedList<FXImage> postImages = new LinkedList<FXImage>();
-	 private final String[] defaultTopics = {"Computer Science", "School", "Gaming", "Sports", "Misc", "Add New Topic"};
+	 private final String[] defaultTopics = {"Computer Science", "School", "Gaming", "Sports", "Other"};
 	 
 	 public CreatePostController() {}
 	 
 	 public void initialize() {
 		topicBox.getItems().addAll(defaultTopics);
+	 }
+	 
+	 @FXML public void topicBoxOnAction(ActionEvent event) {
+		 //When user selects "Other" option, a text field will pop up for them to input their own topic
+		 if(topicBox.getValue().equals("Other")) {
+			 newTopicField.setVisible(true);
+			 newTopicLine.setVisible(true);
+		 } else {
+			 newTopicField.setVisible(false);
+			 newTopicLine.setVisible(false);
+		 }
 	 }
 	 
 	 @FXML public void browseButtonOnAction(ActionEvent event) {
@@ -68,9 +82,15 @@ public class CreatePostController {
 
 	@FXML public void createPostButtonOnAction(ActionEvent event) {
 		 if(!titleField.getText().isEmpty() && !descriptionField.getText().isEmpty()) {
-			 Post newPost = new Post(titleField.getText(), topicBox.getValue(), descriptionField.getText(), SignInController.currentUser, postImages);
-			 SignInController.allPosts.add(newPost);
-			 SignInController.currentUser.getUserPosts().add(newPost);
+			 //If user does not select topic or create their own topic, topic will be set to "Misc."
+			 String newPostTopic;
+			 if(topicBox.getValue() == null) newPostTopic = "Misc.";
+			 else if(topicBox.getValue().equals("Other") && newTopicField.getText().isEmpty()) newPostTopic = "Misc.";			 
+			 else newPostTopic = topicBox.getValue(); 
+			 
+			 Post newPost = new Post(titleField.getText(), newPostTopic, descriptionField.getText(), SignInController.currentUser, postImages);
+			 SignInController.globalPosts.add(newPost);
+			 SignInController.currentUser.getUserPosts().add(newPost);	
 			 landingController.getHomeFeedNode().getFxmlController().displayNewPost(newPost);
 			 landingController.showPane(landingController.getHomeFeedNode().getPaneId());
 			 clearFields();
@@ -89,8 +109,7 @@ public class CreatePostController {
 	 private void clearFields() {
 		 titleField.clear();
 		 descriptionField.clear();
-		 topicBox.getSelectionModel().clearSelection();
-		 topicBox.setValue(null);
+//		 topicBox.setValue(null);
 		 msgLabel.setVisible(false);
 		 postImg1.setImage(null);
 		 postImg2.setImage(null);

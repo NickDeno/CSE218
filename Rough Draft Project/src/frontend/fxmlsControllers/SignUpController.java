@@ -65,13 +65,13 @@ public class SignUpController {
 	}
 
 	@FXML public void signUpBtnOnAction(ActionEvent event) {
-		if (!SignInController.users.usernameIsUnique(usernameField.getText())|| !UserCenter.isValidPassword(passwordField.getText()) || !UserCenter.isValidEmail(emailField.getText())) {
+		if (!SignInController.globalUsers.usernameIsUnique(usernameField.getText())|| !UserCenter.isValidPassword(passwordField.getText()) || !UserCenter.isValidEmail(emailField.getText())) {
 			msgLabel.setText("Failed, please try again.");
 			msgLabel.setVisible(true);
 			resetFields();
 		} else {
-			SignInController.users.insert(new User(usernameField.getText(), passwordField.getText(), emailField.getText(), new FXImage(chosenImageBytes)));
-			Utilities.backupUsers(SignInController.users);	
+			SignInController.globalUsers.insert(new User(usernameField.getText(), passwordField.getText(), emailField.getText(), new FXImage(chosenImageBytes)));
+			Utilities.backupAppState(SignInController.appState);
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Account Sucessfully Created!");
 			alert.setHeaderText(null);
@@ -97,7 +97,7 @@ public class SignUpController {
 		} else if (event.getSource().equals(usernameField)) {
 			String tempStyle = usernameField.getStyle();
 			usernameField.textProperty().addListener((observable, oldValue, newValue) -> {
-				if (SignInController.users.usernameIsUnique(newValue)) usernameLine.setStyle(tempStyle + "-fx-stroke: #38ff13;");
+				if (SignInController.globalUsers.usernameIsUnique(newValue)) usernameLine.setStyle(tempStyle + "-fx-stroke: #38ff13;");
 				else usernameLine.setStyle(tempStyle + "-fx-stroke: #ff0000;");
 			});
 

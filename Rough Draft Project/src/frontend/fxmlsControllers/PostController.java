@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 public class PostController {
 	@FXML private Label usernameLabel;
 	@FXML private Label titleLabel;
+	@FXML private Label topicLabel;
 	@FXML private ImageView profilePic;
 	@FXML private Label dateLabel;
 	@FXML private TextArea descriptionField;
@@ -42,6 +43,7 @@ public class PostController {
 		profilePic.setImage(new Image(new ByteArrayInputStream(post.getPostUser().getProfilePic().returnBytes())));
 		usernameLabel.setText(post.getPostUser().getUsername());
 		titleLabel.setText(post.getTitle());
+		topicLabel.setText("Topic: " + post.getTopic());
 		descriptionField.setText(post.getDescription());
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy h:mm aa");
 		dateLabel.setText(df.format(post.getPostDate()));	

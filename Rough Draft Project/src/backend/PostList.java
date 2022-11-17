@@ -32,6 +32,26 @@ public class PostList implements Serializable{
 		System.out.println();
 	}
 	
+	public PostList searchByTopic(String topic) {
+		PostList temp = new PostList();
+		for(int i = 0; i < postList.size(); i++) {
+			if(postList.get(i).getTopic().equals(topic)) {
+				temp.add(postList.get(i));
+			}
+		}
+		return temp;
+	}
+	
+	public PostList searchByTitle(String title) {
+		PostList temp = new PostList();
+		for(int i = 0; i < postList.size(); i++) {
+			if(postList.get(i).getTitle().equals(title)) {
+				temp.add(postList.get(i));
+			}
+		}
+		return temp;
+	}
+	
 	@Override
 	public String toString() {
 		String  s = "";

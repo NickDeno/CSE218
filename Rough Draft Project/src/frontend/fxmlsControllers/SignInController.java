@@ -2,6 +2,7 @@ package frontend.fxmlsControllers;
 
 import java.io.File;
 
+import backend.AppState;
 import backend.PostList;
 import backend.User;
 import backend.UserCenter;
@@ -25,29 +26,30 @@ public class SignInController {
 	@FXML private Button cancelBtn; 
 	@FXML private Hyperlink clickHereText;
 	
-	protected static UserCenter users;
+	protected static UserCenter globalUsers;
 	protected static User currentUser;
-	protected static PostList allPosts;
-	
+	protected static PostList globalPosts;
+	protected static AppState appState;
 	private Stage stage;
 	
 	public void initialize() {
-		users = new File("backupData/Users.dat").isFile() ? Utilities.restoreUsers() : new UserCenter(50);;
-		allPosts =  new File("backupData/AllPosts.dat").isFile() ? Utilities.restorePosts() : new PostList();;	
-		users.display();
-		allPosts.display();	
-		//Runs after fxml page is initialized. At any time, if window is closed, all data will be backed up.
+//		//"Protected" instance of the current users and posts. Can be called by any class in fxmlsControllers package.
+		appState = new File("backupData/AppState.dat").isFile() ? Utilities.restoreAppState() : new AppState(new UserCenter(50), new PostList());;
+		globalUsers = appState.getAllUsers();
+		globalPosts = appState.getAllPosts();
+		globalUsers.display();
+		globalPosts.display();	
 		Platform.runLater(() -> {
 			stage = (Stage)signInBtn.getScene().getWindow();
 			stage.setOnCloseRequest(e -> {
-				Utilities.backupUsers(users);
-				Utilities.backupPosts(allPosts);
+				Utilities.backupAppState(appState);
 			});
 		});
+
 	}
 	
 	@FXML public void signInBtnOnAction(ActionEvent event) {
-		User tempUser = users.userSearch(usernameField.getText(), passwordField.getText());
+		User tempUser = globalUsers.userSearch(usernameField.getText(), passwordField.getText());
 		if(tempUser != null) {
 			currentUser = tempUser;
 			GUIBackend.loadNewScene(stage, GUIBackend.LandingScene);
@@ -60,8 +62,7 @@ public class SignInController {
 	}
     
     @FXML public void cancelBtnOnAction(ActionEvent event) {
-    	Utilities.backupUsers(users);
-		Utilities.backupPosts(allPosts);
+    	Utilities.backupAppState(appState);
     	stage.close();
     }
     

@@ -66,8 +66,7 @@ public class LandingController {
 	}
 	
 	@FXML public void logoutButtonOnAction(ActionEvent event) {
-		Utilities.backupUsers(SignInController.users);
-		Utilities.backupPosts(SignInController.allPosts);
+		Utilities.backupAppState(SignInController.appState);
 		Stage stage = ((Stage)((Node)event.getSource()).getScene().getWindow());
 		GUIBackend.loadNewScene(stage, GUIBackend.SignInScene);	
 	}

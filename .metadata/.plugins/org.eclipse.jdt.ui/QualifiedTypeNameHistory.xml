@@ -1,17 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="javafx.scene.shape.Line"/>
-    <fullyQualifiedTypeName name="backend.Utilities"/>
-    <fullyQualifiedTypeName name="frontend.SignInPage"/>
-    <fullyQualifiedTypeName name="javafx.scene.layout.GridPane"/>
-    <fullyQualifiedTypeName name="java.util.Date"/>
-    <fullyQualifiedTypeName name="javafx.scene.layout.Region"/>
-    <fullyQualifiedTypeName name="javafx.geometry.Insets"/>
-    <fullyQualifiedTypeName name="javafx.geometry.HPos"/>
-    <fullyQualifiedTypeName name="javafx.geometry.Pos"/>
-    <fullyQualifiedTypeName name="javafx.stage.Stage"/>
-    <fullyQualifiedTypeName name="javafx.stage.StageStyle"/>
-    <fullyQualifiedTypeName name="javafx.scene.paint.Color"/>
     <fullyQualifiedTypeName name="backend.GUIPaneNode"/>
     <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
     <fullyQualifiedTypeName name="java.text.DateFormat"/>
@@ -19,9 +7,7 @@
     <fullyQualifiedTypeName name="javafx.scene.control.ScrollPane"/>
     <fullyQualifiedTypeName name="javafx.scene.input.MouseEvent"/>
     <fullyQualifiedTypeName name="javafx.fxml.FXML"/>
-    <fullyQualifiedTypeName name="javafx.scene.control.Button"/>
     <fullyQualifiedTypeName name="javafx.scene.control.TextArea"/>
-    <fullyQualifiedTypeName name="javafx.event.ActionEvent"/>
     <fullyQualifiedTypeName name="javafx.scene.layout.AnchorPane"/>
     <fullyQualifiedTypeName name="javafx.scene.layout.TilePane"/>
     <fullyQualifiedTypeName name="java.util.Arrays"/>
@@ -30,7 +16,6 @@
     <fullyQualifiedTypeName name="backend.Post"/>
     <fullyQualifiedTypeName name="backend.StackPaneNode"/>
     <fullyQualifiedTypeName name="frontend.fxmlsControllers.LandingController"/>
-    <fullyQualifiedTypeName name="java.util.ListIterator"/>
     <fullyQualifiedTypeName name="javafx.scene.image.PixelReader"/>
     <fullyQualifiedTypeName name="javafx.scene.image.WritableImage"/>
     <fullyQualifiedTypeName name="javafx.scene.image.PixelWriter"/>
@@ -44,10 +29,7 @@
     <fullyQualifiedTypeName name="java.util.LinkedList"/>
     <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
     <fullyQualifiedTypeName name="java.io.EOFException"/>
-    <fullyQualifiedTypeName name="frontend.fxmlsControllers.SignInController"/>
     <fullyQualifiedTypeName name="javafx.application.Platform"/>
-    <fullyQualifiedTypeName name="java.io.Serializable"/>
-    <fullyQualifiedTypeName name="java.util.UUID"/>
     <fullyQualifiedTypeName name="java.awt.Image"/>
     <fullyQualifiedTypeName name="java.nio.file.Files"/>
     <fullyQualifiedTypeName name="java.io.File"/>
@@ -58,6 +40,24 @@
     <fullyQualifiedTypeName name="javafx.scene.Node"/>
     <fullyQualifiedTypeName name="javafx.scene.image.Image"/>
     <fullyQualifiedTypeName name="javafx.scene.shape.Rectangle"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="javafx.scene.control.ChoiceBox"/>
+    <fullyQualifiedTypeName name="javafx.scene.control.Button"/>
+    <fullyQualifiedTypeName name="javafx.event.ActionEvent"/>
+    <fullyQualifiedTypeName name="javafx.scene.control.TextField"/>
+    <fullyQualifiedTypeName name="javafx.scene.shape.Line"/>
     <fullyQualifiedTypeName name="javafx.scene.control.ComboBox"/>
+    <fullyQualifiedTypeName name="java.util.ListIterator"/>
+    <fullyQualifiedTypeName name="backend.AppState"/>
+    <fullyQualifiedTypeName name="java.util.Map"/>
+    <fullyQualifiedTypeName name="java.util.Map.Entry"/>
+    <fullyQualifiedTypeName name="java.util.Collection"/>
+    <fullyQualifiedTypeName name="javax.swing.text.html.HTMLDocument.Iterator"/>
+    <fullyQualifiedTypeName name="java.util.Iterator"/>
+    <fullyQualifiedTypeName name="backend.User"/>
+    <fullyQualifiedTypeName name="javafx.scene.layout.HBox"/>
+    <fullyQualifiedTypeName name="java.util.UUID"/>
+    <fullyQualifiedTypeName name="java.io.Serializable"/>
+    <fullyQualifiedTypeName name="java.util.LinkedHashMap"/>
+    <fullyQualifiedTypeName name="frontend.fxmlsControllers.SignInController"/>
 </qualifiedTypeNameHistroy>

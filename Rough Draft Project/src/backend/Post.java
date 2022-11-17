@@ -16,9 +16,8 @@ public class Post implements Serializable {
 	private LinkedList<FXImage> postImages;
 	private Date postDate;
 	private PostList postReplies;
-	private int likeCount;
-	
-	
+	private Integer likeCount;
+
 	public Post(String title, String topic, String description, User postUser, LinkedList<FXImage> postImages) {
 		super();
 		this.title = title;
@@ -30,7 +29,7 @@ public class Post implements Serializable {
 		this.postReplies = new PostList();
 		this.likeCount = 0;
 	}
-
+	
 	public String getTitle() {
 		return title;
 	}
@@ -79,11 +78,11 @@ public class Post implements Serializable {
 		return postReplies;
 	}
 	
-	public int getLikeCount() {
+	public Integer getLikeCount() {
 		return likeCount;
 	}
 	
-	public void setLikeCount(int likeCount) {
+	public void setLikeCount(Integer likeCount) {
 		this.likeCount = likeCount;
 	}
 
