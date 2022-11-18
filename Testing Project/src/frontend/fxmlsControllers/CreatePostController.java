@@ -96,8 +96,7 @@ public class CreatePostController {
 			 UUID uuid = UUID.randomUUID();
 			 Post newPost = new Post(titleField.getText(), newPostTopic, descriptionField.getText(), postImages, SignInController.currentUser, uuid); 
 			 SignInController.globalPosts.add(newPost);
-			 SignInController.currentUser.getUserPosts().add(newPost);
-//			 System.out.println(uuid);
+			 SignInController.currentUser.getUserPosts().put(newPost.getUuid(), newPost);
 //			 System.out.println(SignInController.globalPosts.get(uuid).getUuid());
 //			 System.out.println(SignInController.currentUser.getUserPosts().get(uuid).getUuid());
 			 

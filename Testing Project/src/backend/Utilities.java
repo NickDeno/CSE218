@@ -31,11 +31,11 @@ public class Utilities {
 		return null;
 	}
 	
-	public static void backupPosts(PostCenter postList) {
+	public static void backupPosts() {
 		try {
 			FileOutputStream fos = new FileOutputStream("backupData/Posts.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(postList);
+			oos.writeObject(PostCenter.getInstance());
 			oos.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -46,9 +46,9 @@ public class Utilities {
 		try {
 			FileInputStream fis = new FileInputStream("backupData/Posts.dat");
 			ObjectInputStream ois = new ObjectInputStream(fis);
-			PostCenter postList = (PostCenter) ois.readObject();
+			PostCenter postCenter = (PostCenter) ois.readObject();
 			ois.close();
-			return postList;
+			return postCenter;
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}

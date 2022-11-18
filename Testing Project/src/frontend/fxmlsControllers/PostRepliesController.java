@@ -88,7 +88,7 @@ public class PostRepliesController {
 			alert.showAndWait();
 		} else {
 			post.like();
-			SignInController.globalUsers.getUser(post.getPoster().getUsername()).getUserPosts().getPost(post.getUuid()).like();
+//			SignInController.globalUsers.getUser(post.getPoster().getUsername()).getUserPosts().get(post.getUuid()).like();
 			
 			likeCounter.setText(String.valueOf(post.getLikes()));	
 			ColorAdjust colorAdjust = new ColorAdjust();

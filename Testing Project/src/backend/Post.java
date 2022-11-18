@@ -4,10 +4,9 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.UUID;
-
-import frontend.fxmlsControllers.SignInController;
 
 public class Post implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -20,7 +19,7 @@ public class Post implements Serializable {
 	private UUID uuid;
 	
 	private Date postDate;
-	private PostCenter postReplies;
+	private LinkedHashMap<UUID, Post> postReplies;
 	private Integer likes;
 
 	public Post(String title, String topic, String description, LinkedList<FXImage> postImages, User poster, UUID uuid) {
@@ -32,7 +31,7 @@ public class Post implements Serializable {
 		this.postImages = postImages;
 		this.uuid = uuid;
 		this.postDate = new Date();
-		this.postReplies = new PostCenter();
+		this.postReplies = new LinkedHashMap<UUID, Post>();
 		this.likes = 0;
 	}
 	
@@ -88,7 +87,7 @@ public class Post implements Serializable {
 		return postDate;
 	}
 	
-	public PostCenter getPostReplies() {
+	public LinkedHashMap<UUID, Post> getPostReplies() {
 		return postReplies;
 	}
 	
@@ -98,12 +97,17 @@ public class Post implements Serializable {
 	
 	public void like() {
 		likes++;
-//		if(SignInController.globalPosts.getPost(this.getUuid()) == this) return;
-//		else SignInController.globalPosts.getPost(this.getUuid()).like();		
+//		if(PostCenter.getInstance().getPost(this.getUuid()) == this) {
+//			likes++;
+//			UserCenter.getInstance().getUser(this.getPoster().getUsername()).getUserPosts().get(this.getUuid()).like();
+//		} else {
+//			likes++;
+//			PostCenter.getInstance().getPost(this.getUuid()).like();
+//		}
 	}
 	
 	public void reply(Post post) {
-		postReplies.add(post);
+		postReplies.put(post.getUuid(), post);
 	}
 
 

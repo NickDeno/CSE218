@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1330.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.fxmlsControllers.LandingController">
+   <left>
+      <AnchorPane prefHeight="760.0" prefWidth="241.0" style="-fx-background-color: #2576DF;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="profilePic" fitHeight="90.0" fitWidth="106.0" layoutX="70.0" layoutY="34.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../assets/TempProfilePic.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="userLabel" alignment="CENTER" layoutX="4.0" layoutY="133.0" prefHeight="37.0" prefWidth="233.0" text="User" textFill="WHITE">
+               <font>
+                  <Font name="Elephant" size="27.0" />
+               </font>
+            </Label>
+            <Button fx:id="homeBtn" layoutX="6.0" layoutY="180.0" mnemonicParsing="false" onAction="#homeBtnOnAction" prefHeight="77.0" prefWidth="218.0" styleClass="transparentButton" stylesheets="@Stylesheet.css" text=" Home" textFill="WHITE">
+               <font>
+                  <Font name="Georgia" size="34.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="46.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/HomeIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="profileBtn" layoutX="9.0" layoutY="274.0" mnemonicParsing="false" onAction="#profileBtnOnAction" prefHeight="82.0" prefWidth="218.0" styleClass="transparentButton" stylesheets="@Stylesheet.css" text=" Profile" textFill="WHITE">
+               <font>
+                  <Font name="Georgia" size="34.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="54.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/UserIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="settingsBtn" layoutX="8.0" layoutY="371.0" mnemonicParsing="false" onAction="#settingsBtnOnAction" prefHeight="81.0" prefWidth="221.0" styleClass="transparentButton" stylesheets="@Stylesheet.css" text=" Settings" textFill="WHITE">
+               <font>
+                  <Font name="Georgia" size="33.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="53.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/SettingsIcon.jpg" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="12.0" layoutY="678.0" mnemonicParsing="false" onAction="#logoutButtonOnAction" prefHeight="64.0" prefWidth="205.0" scaleShape="false" styleClass="transparentButton" stylesheets="@Stylesheet.css" text="Log Out" textFill="WHITE">
+               <font>
+                  <Font name="Georgia" size="30.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="54.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/LogOutIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="postBtn" layoutX="13.0" layoutY="479.0" mnemonicParsing="false" onAction="#createPostBtnOnAction" prefHeight="71.0" prefWidth="215.0" styleClass="createPostButton" stylesheets="@Stylesheet.css" text="Create Post" textFill="WHITE">
+               <font>
+                  <Font name="Bodoni MT" size="26.0" />
+               </font>
+            </Button>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="98.0" layoutX="66.0" layoutY="30.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" style="-fx-fill: transparent;" width="114.0" />
+         </children>
+      </AnchorPane>
+   </left>
+   <right>
+      <StackPane fx:id="contentPane" prefHeight="760.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
+   </right>
+</BorderPane>

@@ -25,21 +25,22 @@ public class SignInController {
 	@FXML private Button cancelBtn; 
 	@FXML private Hyperlink clickHereText;
 	
-	public static UserCenter globalUsers;
-	public static User currentUser;
-	public static PostCenter globalPosts;
+	protected static UserCenter globalUsers;
+	protected static User currentUser;
+	protected static PostCenter globalPosts;
 	private Stage stage;
 	
 	public void initialize() {
-		globalUsers = new File("backupData/Users.dat").isFile() ? Utilities.restoreUsers() : new UserCenter();;
-		globalPosts = new File("backupData/Posts.dat").isFile() ? Utilities.restorePosts() : new PostCenter();
-		globalUsers.display();
-		globalPosts.display();	
+		globalUsers = new File("backupData/Users.dat").isFile() ? Utilities.restoreUsers() : UserCenter.getInstance();
+		globalPosts = new File("backupData/Posts.dat").isFile() ? Utilities.restorePosts() : PostCenter.getInstance();
+//		globalUsers.display();
+//		globalPosts.display();	
+		PostCenter.getInstance().display();
 		Platform.runLater(() -> {
 			stage = (Stage)signInBtn.getScene().getWindow();
 			stage.setOnCloseRequest(e -> {
 				Utilities.backupUsers(globalUsers);
-				Utilities.backupPosts(globalPosts);
+				Utilities.backupPosts();
 			});
 		});
 	}
@@ -59,7 +60,7 @@ public class SignInController {
     
     @FXML public void cancelBtnOnAction(ActionEvent event) {
     	Utilities.backupUsers(globalUsers);
-    	Utilities.backupPosts(globalPosts);
+    	Utilities.backupPosts();
     	stage.close();
     }
     

@@ -12,6 +12,8 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\Users\Nickd\Downloads\CSE218-main\CSE218-main\PM L13 Binary Search Tree"/>
+			<item value="C:\Users\Nickd\Downloads\CSE218-main\CSE218-main\PM L13 Binary Search Tree\src\p2"/>
 			<item value="F:\Users\Nick DeNobrega\Desktop\CSE Workspaces\CSE218 Workspace\Rough Draft Project"/>
 			<item value="F:\Users\Nick DeNobrega\Downloads\CSE218CCA-main"/>
 			<item value="C:\Users\Nickd\Desktop\CSE Workspaces\CSE218 Workspace"/>

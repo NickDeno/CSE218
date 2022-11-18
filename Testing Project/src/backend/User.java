@@ -1,6 +1,8 @@
 package backend;
 
 import java.io.Serializable;
+import java.util.LinkedHashMap;
+import java.util.UUID;
 
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -10,7 +12,7 @@ public class User implements Serializable {
 	
 	private String password;
 	private String email;
-	private PostCenter userPosts;
+	private LinkedHashMap<UUID, Post> userPosts;
 	private FXImage profilePic;
 	
 	public User(String username, String password, String email, FXImage profilePic) {
@@ -19,7 +21,7 @@ public class User implements Serializable {
 		this.password = password;
 		this.email = email;
 		this.profilePic = profilePic;
-		this.userPosts = new PostCenter();
+		this.userPosts = new LinkedHashMap<UUID, Post>();
 	}
 
 	public String getUsername() {
@@ -54,11 +56,11 @@ public class User implements Serializable {
 		this.profilePic = profilePic;
 	}
 
-	public PostCenter getUserPosts() {
+	public LinkedHashMap<UUID, Post> getUserPosts() {
 		return userPosts;
 	}
 
-	public void setUserPosts(PostCenter userPosts) {
+	public void setUserPosts(LinkedHashMap<UUID, Post> userPosts) {
 		this.userPosts = userPosts;
 	}
 

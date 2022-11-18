@@ -8,11 +8,23 @@ import java.util.Map;
 public class UserCenter implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	private static UserCenter instance;
 	private LinkedHashMap<String, User> userCenter;
 	
-	public UserCenter() {
+	private UserCenter() {
 		userCenter = new LinkedHashMap<String, User>();
 	}
+	
+	public static UserCenter getInstance() {
+		if(instance == null) {
+          instance = new UserCenter();
+        }
+        return instance;
+    }
+	
+//	public UserCenter() {
+//		userCenter = new LinkedHashMap<String, User>();
+//	}
 	
 	public void addUser(User user) {
 		userCenter.put(user.getUsername(), user);

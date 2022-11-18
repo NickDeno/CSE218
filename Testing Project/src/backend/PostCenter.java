@@ -9,24 +9,24 @@ import java.util.UUID;
 public class PostCenter implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	private LinkedHashMap<UUID, Post> postCenter;
-//	private static PostCenter instance;
+	private LinkedHashMap<UUID, Post> postCenter;	
+	private static PostCenter instance;
 	
-	
-//	private PostCenter() {
-//		postCenter = new LinkedHashMap<UUID, Post>();
-//	}
-//	
-//	public static PostCenter getInstance() {
-//        if(instance == null) {
-//            instance = new PostCenter();
-//        }
-//        return instance;
-//    }
-	
-	public PostCenter() {
+
+	private PostCenter() {
 		postCenter = new LinkedHashMap<UUID, Post>();
 	}
+	
+	public static PostCenter getInstance() {
+		if(instance == null) {
+          instance = new PostCenter();
+        }
+        return instance;
+    }
+	
+//	public PostCenter() {
+//		postCenter = new LinkedHashMap<UUID, Post>();
+//	}
 	
 	public void add(Post p) {
 		postCenter.put(p.getUuid(), p);

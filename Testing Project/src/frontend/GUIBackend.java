@@ -4,10 +4,14 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.UUID;
 
 import backend.Post;
 import backend.PostCenter;
 import backend.StackPaneNode;
+import backend.User;
 import frontend.fxmlsControllers.LandingController;
 import frontend.fxmlsControllers.PostController;
 import javafx.fxml.FXMLLoader;
@@ -126,16 +130,19 @@ public class GUIBackend {
 		}
 	}
 	
-	public static void displayPost(PostCenter postList, TilePane tilePane) {
-		Iterator<Post> itr = postList.getValues().iterator();
-		while(itr.hasNext()) {
-			Post currPost = itr.next();
-			HBox postBox = new HBox();
-			postBox.setPrefWidth(695);
-			postBox.setPrefHeight(222);
-			postBox.setMaxWidth(postBox.getPrefWidth());
-			postBox.setMaxHeight(postBox.getPrefHeight());
-			
+	public static void displayPosts(LinkedHashMap<UUID, Post> posts, TilePane tilePane, LandingController landingController) {
+		for(Map.Entry<UUID, Post> entry: posts.entrySet()) {
+			try {
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(GUIBackend.class.getResource("/frontend/fxmls/Post.fxml"));
+				AnchorPane ap = fxmlLoader.load();
+				PostController postController = fxmlLoader.getController();
+				postController.setPostData(entry.getValue());
+				postController.setLandingController(landingController);
+				tilePane.getChildren().add(ap);	
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	

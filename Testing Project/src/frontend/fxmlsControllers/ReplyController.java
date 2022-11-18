@@ -32,7 +32,7 @@ public class ReplyController {
     	Post newReply = new Post(SignInController.currentUser.getUsername() + "'s Reply:", null, descriptionField.getText(), null, SignInController.currentUser, UUID.randomUUID()); 	
     	post.reply(newReply);
 //    	SignInController.globalUsers.getUser(post.getPoster().getUsername()).getUserPosts().add(newReply);
-    	SignInController.currentUser.getUserPosts().add(newReply);
+    	SignInController.currentUser.getUserPosts().put(newReply.getUuid(), newReply);
     	GUIBackend.displayPost(newReply, tilePane, landingController);
     	((Stage)((Node)event.getSource()).getScene().getWindow()).close();
     }
