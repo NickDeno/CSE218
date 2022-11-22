@@ -1,74 +1,71 @@
 package backend;
 
+import java.io.File;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
 
+//Singleton Class
 public class PostCenter implements Serializable{
 	private static final long serialVersionUID = 1L;
-	
-	private LinkedHashMap<UUID, Post> postCenter;	
+	private LinkedHashMap<UUID, Post> postMap;	
 	private static PostCenter instance;
-	
 
 	private PostCenter() {
-		postCenter = new LinkedHashMap<UUID, Post>();
+		postMap = new LinkedHashMap<UUID, Post>();
 	}
 	
 	public static PostCenter getInstance() {
-		if(instance == null) {
-          instance = new PostCenter();
+		if(instance == null && new File("backupData/Posts.dat").exists() == false) { //Condition will be true on first ever launch of program
+			instance = new PostCenter();
+        } else if(instance == null) { //Condition will be true on every other launch of program besides first one
+        	instance = Utilities.restorePostCenter();
         }
-        return instance;
+		return instance; 
     }
 	
-//	public PostCenter() {
-//		postCenter = new LinkedHashMap<UUID, Post>();
-//	}
-	
-	public void add(Post p) {
-		postCenter.put(p.getUuid(), p);
+	public void addPost(Post p) {
+		postMap.put(p.getUuid(), p);
 	}
 	
-	public Post remove(UUID uuid) {
-		return postCenter.remove(uuid);
+	public Post removePost(UUID uuid) {
+		return postMap.remove(uuid);
 	}
 	
 	public Post getPost(UUID uuid) {
-		return postCenter.get(uuid);
+		return postMap.get(uuid);
 	}
 	
 	public int size() {
-		return postCenter.size();
+		return postMap.size();
 	}
 	
-	public Collection<Post> getValues(){
-		return postCenter.values();
+	public LinkedHashMap<UUID, Post> getMap(){
+		return postMap;
 	}
 
 	public void display() {
-		for(Map.Entry<UUID, Post> entry: postCenter.entrySet()) {
+		for(Map.Entry<UUID, Post> entry: postMap.entrySet()) {
 			System.out.println(entry.getValue().toString());
 		}
 	}
 	
-	public PostCenter searchByTopic(String topic) {
-		PostCenter temp = new PostCenter();
-		for(Map.Entry<UUID, Post> entry: postCenter.entrySet()) {
+	public LinkedHashMap<UUID, Post> searchByTopic(String topic) {
+		LinkedHashMap<UUID, Post> temp = new LinkedHashMap<UUID, Post>();
+		for(Map.Entry<UUID, Post> entry: postMap.entrySet()) {
 			if(entry.getValue().getTopic().equals(topic)) {
-				temp.add(entry.getValue());
+				temp.put(entry.getValue().getUuid(), entry.getValue());
 			}
 		}
 		return temp;
 	}
 	
-	public PostCenter searchByTitle(String title) {
-		PostCenter temp = new PostCenter();
-		for(Map.Entry<UUID, Post> entry: postCenter.entrySet()) {
+	public LinkedHashMap<UUID, Post> searchByTitle(String title) {
+		LinkedHashMap<UUID, Post> temp = new LinkedHashMap<UUID, Post>();
+		for(Map.Entry<UUID, Post> entry: postMap.entrySet()) {
 			if(entry.getValue().getTitle().equals(title)) {
-				temp.add(entry.getValue());
+				temp.put(entry.getValue().getUuid(), entry.getValue());
 			}
 		}
 		return temp;
@@ -77,7 +74,7 @@ public class PostCenter implements Serializable{
 	@Override
 	public String toString() {
 		String  s = "";	
-		for(Map.Entry<UUID, Post> entry: postCenter.entrySet()) {
+		for(Map.Entry<UUID, Post> entry: postMap.entrySet()) {
 			s += entry.getValue().toString();
 		}
 		return s;

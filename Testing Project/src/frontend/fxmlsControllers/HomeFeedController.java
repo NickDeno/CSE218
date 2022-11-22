@@ -1,9 +1,10 @@
 package frontend.fxmlsControllers;
 
 import backend.Post;
+import backend.PostCenter;
 import backend.User;
+import backend.UserCenter;
 import frontend.GUIBackend;
-
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,7 +27,7 @@ public class HomeFeedController {
 	
 	private LandingController landingController;
 	private final String[] filterOptions = {"User", "Topic", "Title"};
-	private final String[] topicOptions = {"Computer Science", "School", "Gaming", "Sports", "Misc", "Other"};
+	private final String[] topicOptions = {"Computer Science", "School", "Gaming", "Gym", "Sports", "Misc.", "Other"};
 	
 	private String chosenFilter;
 	private String chosenTopic;
@@ -38,11 +39,11 @@ public class HomeFeedController {
 		filterBox.getItems().addAll(filterOptions);
 		topicBox.getItems().addAll(topicOptions);
 		Platform.runLater(() ->{
-			GUIBackend.displayPosts(SignInController.globalPosts, tilePane, landingController);
+			GUIBackend.displayPosts(PostCenter.getInstance(), SignInController.currentUser, tilePane, landingController);
 		});
 	}
 	
-	public void filterBoxOnAction(ActionEvent event) {
+	@FXML public void filterBoxOnAction(ActionEvent event) {
 		if(filterBox.getValue().equals("User")) {
 			chosenFilter = filterBox.getValue();
 			searchField.setVisible(true);
@@ -61,7 +62,7 @@ public class HomeFeedController {
 		}
 	}
 	
-	public void topicBoxOnAction(ActionEvent event) {
+	@FXML public void topicBoxOnAction(ActionEvent event) {
 		if(topicBox.getValue().equals("Other")) {
 			chosenTopic = topicBox.getValue();
 			searchField.setVisible(true);
@@ -73,9 +74,9 @@ public class HomeFeedController {
 		}
 	}
 	
-	public void searchBtnOnAction(ActionEvent event) {
+	@FXML public void searchBtnOnAction(ActionEvent event) {
 		if(chosenFilter.equals("User")) {
-			User searchedUser = SignInController.globalUsers.getUser(searchField.getText());
+			User searchedUser = UserCenter.getInstance().getUser(searchField.getText());
 			if(searchedUser == null) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("No User Found.");
@@ -83,34 +84,41 @@ public class HomeFeedController {
 				alert.setContentText("No user found with specified username. Please try again.");
 				alert.showAndWait();
 				searchField.clear();
+			} else if(SignInController.currentUser.getBlockedUsers().containsKey(searchedUser.getUsername())) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Blocked User.");
+				alert.setHeaderText(null);
+				alert.setContentText("Sorry. The user you searched for is in you blocked users. If you wish to see their posts, please unblock them.");
+				alert.showAndWait();
+				searchField.clear();	
 			} else {
 				tilePane.getChildren().clear();
-				GUIBackend.displayPosts(searchedUser.getUserPosts(), tilePane, landingController);
-				clearFields();
+				GUIBackend.displayPosts(searchedUser.getUserPosts(), SignInController.currentUser, tilePane, landingController);
+				resetFields();
 			}
 		} else if(chosenFilter.equals("Topic")) {
 			tilePane.getChildren().clear();
-			GUIBackend.displayPosts(SignInController.globalPosts.searchByTopic(chosenTopic), tilePane, landingController);
-			clearFields();
+			GUIBackend.displayPosts(PostCenter.getInstance().searchByTopic(chosenTopic), SignInController.currentUser, tilePane, landingController);
+			resetFields();
 		} else if(chosenFilter.equals("Title")) {
 			tilePane.getChildren().clear();
-			GUIBackend.displayPosts(SignInController.globalPosts.searchByTitle(searchField.getText()), tilePane, landingController);
-			clearFields();
+			GUIBackend.displayPosts(PostCenter.getInstance().searchByTitle(searchField.getText()), SignInController.currentUser,  tilePane, landingController);
+			resetFields();
 		}
 		
 	}
 	
-	public void removeFilterBtnOnAction(ActionEvent event) {
-		clearFields();
+	@FXML public void removeFilterBtnOnAction(ActionEvent event) {
 		tilePane.getChildren().clear();
-		GUIBackend.displayPosts(SignInController.globalPosts, tilePane, landingController);
+		GUIBackend.displayPosts(PostCenter.getInstance(), SignInController.currentUser, tilePane, landingController);
+		resetFields();
 	}
 	
 	public void displayNewPost(Post post) {
 		GUIBackend.displayPost(post, tilePane, landingController);
 	}
 	
-	private void clearFields() {
+	private void resetFields() {
 		searchField.clear();
 		searchField.setVisible(false);
 		searchFieldLine.setVisible(false);
@@ -119,7 +127,12 @@ public class HomeFeedController {
 		topicBox.setVisible(false);
 	}
 	
+	public TilePane getTilePane() {
+		return tilePane;
+	}
+	
 	public void setLandingController(LandingController landingController) {
 		this.landingController = landingController;
 	}
+	
 }

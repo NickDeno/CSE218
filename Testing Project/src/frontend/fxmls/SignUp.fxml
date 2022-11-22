@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -61,27 +62,27 @@
    <center>
       <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="711.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #656161 0.0%, #393636 100.0%);" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="121.0" fitWidth="118.0" layoutX="296.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="118.0" fitWidth="85.0" layoutX="299.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/LockIcon.png" />
                </image>
             </ImageView>
-            <Label layoutX="66.0" layoutY="148.0" prefHeight="65.0" prefWidth="164.0" text="Email" textFill="#3b93ff">
+            <Label layoutX="66.0" layoutY="136.0" prefHeight="65.0" prefWidth="164.0" text="Email" textFill="#3b93ff">
                <font>
                   <Font name="Bookman Old Style Bold" size="44.0" />
                </font>
             </Label>
-            <TextField fx:id="emailField" alignment="CENTER" layoutX="310.0" layoutY="156.0" onMouseClicked="#checkFieldIsValid" prefHeight="49.0" prefWidth="310.0" promptText="Email Address" style="-fx-background-color: transparent; -fx-text-fill: white;">
+            <TextField fx:id="emailField" alignment="CENTER" layoutX="311.0" layoutY="144.0" onMouseClicked="#checkFieldIsValid" prefHeight="49.0" prefWidth="310.0" promptText="Email Address" style="-fx-background-color: transparent; -fx-text-fill: white;">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-            <TextField fx:id="usernameField" alignment="CENTER" layoutX="311.0" layoutY="237.0" onMouseClicked="#checkFieldIsValid" prefHeight="49.0" prefWidth="308.0" promptText="Username" style="-fx-background-color: transparent; -fx-text-fill: white;">
+            <TextField fx:id="usernameField" alignment="CENTER" layoutX="311.0" layoutY="234.0" onMouseClicked="#checkFieldIsValid" prefHeight="49.0" prefWidth="308.0" promptText="Username" style="-fx-background-color: transparent; -fx-text-fill: white;">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-            <Label layoutX="66.0" layoutY="227.0" prefHeight="69.0" prefWidth="239.0" text="Username" textFill="#3b93ff">
+            <Label layoutX="66.0" layoutY="224.0" prefHeight="69.0" prefWidth="239.0" text="Username" textFill="#3b93ff">
                <font>
                   <Font name="Bookman Old Style Bold" size="41.0" />
                </font>
@@ -106,14 +107,14 @@
                   <Font name="Baskerville Old Face" size="22.0" />
                </font>
             </Button>
-            <Label fx:id="msgLabel" alignment="CENTER" layoutX="75.0" layoutY="132.0" prefHeight="36.0" prefWidth="659.0" textAlignment="CENTER" textFill="#ff0202" visible="false">
+            <Label fx:id="msgLabel" alignment="CENTER" layoutX="106.0" layoutY="126.0" prefHeight="25.0" prefWidth="477.0" textAlignment="CENTER" textFill="#ff0202" visible="false">
                <font>
                   <Font name="Consolas" size="20.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="350.0" layoutY="285.0" prefHeight="14.0" prefWidth="255.0" text="(Username must be unique)" textFill="#3b93ff">
+            <Label alignment="CENTER" layoutX="308.0" layoutY="284.0" prefHeight="25.0" prefWidth="315.0" text="(Username must be unique. Cannot change" textFill="#3b93ff">
                <font>
-                  <Font size="20.0" />
+                  <Font size="16.0" />
                </font>
             </Label>
             <Label alignment="CENTER" layoutX="309.0" layoutY="371.0" prefHeight="27.0" prefWidth="313.0" text="(Must be at least 8 characters long and" textFill="#3b93ff">
@@ -126,8 +127,8 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Line fx:id="emailLine" endX="201.0" layoutX="414.0" layoutY="205.0" startX="-100.0" stroke="#3b93ff" strokeWidth="3.0" />
-            <Line fx:id="usernameLine" endX="191.0" layoutX="419.0" layoutY="285.0" startX="-100.0" stroke="#3b93ff" strokeWidth="3.0" />
+            <Line fx:id="emailLine" endX="201.0" layoutX="415.0" layoutY="193.0" startX="-100.0" stroke="#3b93ff" strokeWidth="3.0" />
+            <Line fx:id="usernameLine" endX="200.0" endY="-1.0" layoutX="419.0" layoutY="284.0" startX="-103.0" stroke="#3b93ff" strokeWidth="3.0" />
             <Line fx:id="passwordLine" endX="197.0" layoutX="416.0" layoutY="370.0" startX="-100.0" stroke="#3b93ff" strokeWidth="3.0" />
             <Label layoutX="71.0" layoutY="436.0" prefHeight="70.0" prefWidth="198.0" text="Profile Pic:" textFill="#3b93ff">
                <font>
@@ -143,6 +144,21 @@
                <image>
                   <Image url="@../assets/TempProfilePic.png" />
                </image></ImageView>
+            <CheckBox fx:id="showPasswordBox" layoutX="633.0" layoutY="341.0" mnemonicParsing="false" onAction="#showPasswordBoxOnAction" prefHeight="30.0" prefWidth="70.0" text="Show" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </CheckBox>
+            <TextField fx:id="visiblePasswordField" alignment="CENTER" layoutX="315.0" layoutY="325.0" prefHeight="48.0" prefWidth="299.0" promptText="Password" style="-fx-background-color: transparent; -fx-text-fill: white;" visible="false">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+            <Label alignment="CENTER" layoutX="283.0" layoutY="302.0" prefHeight="25.0" prefWidth="365.0" text=" username once account is created.)" textFill="#3b93ff">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </center>

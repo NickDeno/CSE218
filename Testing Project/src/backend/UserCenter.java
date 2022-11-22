@@ -1,57 +1,56 @@
 package backend;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+//Singleton Class
 public class UserCenter implements Serializable {
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 1L;	
 	private static UserCenter instance;
-	private LinkedHashMap<String, User> userCenter;
+	private LinkedHashMap<String, User> userMap;
 	
 	private UserCenter() {
-		userCenter = new LinkedHashMap<String, User>();
+		userMap = new LinkedHashMap<String, User>();
 	}
 	
 	public static UserCenter getInstance() {
-		if(instance == null) {
-          instance = new UserCenter();
+		if(instance == null && new File("backupData/Users.dat").exists() == false) { //Condition will be true on first ever launch of program
+			instance = new UserCenter();
+        } else if(instance == null) { //Condition will be true on every other launch of program besides first one
+        	instance = Utilities.restoreUserCenter();
         }
-        return instance;
+		return instance;  
     }
 	
-//	public UserCenter() {
-//		userCenter = new LinkedHashMap<String, User>();
-//	}
-	
 	public void addUser(User user) {
-		userCenter.put(user.getUsername(), user);
+		userMap.put(user.getUsername(), user);
 	}
 	
 	public User removeUser(String username) {
-		return userCenter.remove(username);
+		return userMap.remove(username);
 	}
 	
 	public User getUser(String username) {
-		return userCenter.get(username);
+		return userMap.get(username);
 	}
 	
 	public boolean containsUser(String username) {
-		return userCenter.containsKey(username);
+		return userMap.containsKey(username);
 	}
 	
 	public int size() {
-		return userCenter.size();
+		return userMap.size();
 	}
 	
-	public Collection<User> getValues(){
-		return userCenter.values();
+	public Collection<User> getAllUsers(){
+		return userMap.values();
 	}
 	
 	public void display() {
-		for(Map.Entry<String, User> entry: userCenter.entrySet()) {
+		for(Map.Entry<String, User> entry: userMap.entrySet()) {
 			System.out.println(entry.getValue().toString());
 		}
 	}
@@ -81,7 +80,7 @@ public class UserCenter implements Serializable {
 	@Override
 	public String toString() {
 		String  s = "";	
-		for(Map.Entry<String, User> entry: userCenter.entrySet()) {
+		for(Map.Entry<String, User> entry: userMap.entrySet()) {
 			s += entry.getValue().toString();
 		}
 		return s;

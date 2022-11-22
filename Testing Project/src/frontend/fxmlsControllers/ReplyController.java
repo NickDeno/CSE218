@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import backend.Post;
 import frontend.GUIBackend;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -21,19 +22,26 @@ public class ReplyController {
     private TilePane tilePane;
     private LandingController landingController;
     
-    public ReplyController() {	
-    } 
+    public ReplyController() {} 
+    
+    public void initialize() {
+    	Platform.runLater(() -> {
+    		((Stage)cancelBtn.getScene().getWindow()).setOnCloseRequest(e -> {
+    			landingController.getPane().setEffect(null);
+    		});
+    	});
+    }
     
     @FXML public void cancelBtnOnAction(ActionEvent event) {
+    	landingController.getPane().setEffect(null);
     	((Stage)((Node)event.getSource()).getScene().getWindow()).close();
     }
 
     @FXML public void replyBtnOnAction(ActionEvent event) {
-    	Post newReply = new Post(SignInController.currentUser.getUsername() + "'s Reply:", null, descriptionField.getText(), null, SignInController.currentUser, UUID.randomUUID()); 	
-    	post.reply(newReply);
-//    	SignInController.globalUsers.getUser(post.getPoster().getUsername()).getUserPosts().add(newReply);
-    	SignInController.currentUser.getUserPosts().put(newReply.getUuid(), newReply);
+    	Post newReply = new Post(SignInController.currentUser.getUsername() + "'s Reply:", "Reply", descriptionField.getText(), null, SignInController.currentUser, UUID.randomUUID()); 	
+    	post.reply(newReply, post.getPoster());
     	GUIBackend.displayPost(newReply, tilePane, landingController);
+    	landingController.getPane().setEffect(null);
     	((Stage)((Node)event.getSource()).getScene().getWindow()).close();
     }
     

@@ -1,12 +1,12 @@
 package backend;
 
 public class StackPaneNode<T> {
-	private T fxmlController;
 	private String paneId;
+	private T fxmlController;
 	
-	public StackPaneNode(T fxmlController, String paneId) {
-		this.fxmlController = fxmlController;
+	public StackPaneNode(String paneId, T fxmlController) {
 		this.paneId = paneId;
+		this.fxmlController = fxmlController;
 	}
 
 	public T getFxmlController() {

@@ -1,14 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1090.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #656161 0.0%, #393636 100.0%);" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.fxmlsControllers.SettingsController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1090.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #656161 0.0%, #393636 100.0%);" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.fxmlsControllers.SettingsController">
    <children>
-      <Label layoutX="458.0" layoutY="14.0" prefHeight="49.0" prefWidth="160.0" text="Settings Page" textFill="WHITE">
+      <ImageView fitHeight="106.0" fitWidth="164.0" layoutX="364.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/SettingsIcon.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="476.0" layoutY="26.0" prefHeight="71.0" prefWidth="191.0" text=" Settings" textFill="WHITE">
          <font>
-            <Font size="24.0" />
+            <Font name="Bodoni MT Black" size="40.0" />
          </font></Label>
+      <Label layoutX="24.0" layoutY="230.0" prefHeight="65.0" prefWidth="409.0" text="Current Password:" textFill="#3b93ff">
+         <font>
+            <Font name="Bookman Old Style Bold" size="38.0" />
+         </font>
+      </Label>
+      <Label layoutX="24.0" layoutY="315.0" prefHeight="65.0" prefWidth="409.0" text="Current Profile Pic:" textFill="#3b93ff">
+         <font>
+            <Font name="Bookman Old Style Bold" size="38.0" />
+         </font>
+      </Label>
+      <Label layoutX="24.0" layoutY="142.0" prefHeight="65.0" prefWidth="368.0" text="Current Email:" textFill="#3b93ff">
+         <font>
+            <Font name="Bookman Old Style Bold" size="41.0" />
+         </font>
+      </Label>
+      <TextField fx:id="emailField" alignment="CENTER" disable="true" editable="false" layoutX="463.0" layoutY="142.0" onMouseClicked="#checkFieldIsValid" prefHeight="49.0" prefWidth="325.0" promptText="Current Email" style="-fx-background-color: transparent; -fx-text-fill: white;">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="passwordField" alignment="CENTER" disable="true" editable="false" layoutX="463.0" layoutY="225.0" onMouseClicked="#checkFieldIsValid" prefHeight="49.0" prefWidth="325.0" promptText="Current Password" style="-fx-background-color: transparent; -fx-text-fill: white;">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <Line fx:id="emailLine" endX="222.0" layoutX="564.0" layoutY="192.0" startX="-100.0" stroke="#3b93ff" strokeWidth="3.0" />
+      <Line fx:id="passwordLine" endX="222.0" layoutX="564.0" layoutY="272.0" startX="-100.0" stroke="#3b93ff" strokeWidth="3.0" />
+      <CheckBox fx:id="editFieldsBox" layoutX="870.0" layoutY="233.0" mnemonicParsing="false" onAction="#editFieldsBoxOnAction" prefHeight="49.0" prefWidth="191.0" text="Edit Fields" textFill="#dadada">
+         <font>
+            <Font name="Candara" size="28.0" />
+         </font>
+      </CheckBox>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="106.0" layoutX="464.0" layoutY="303.0" stroke="#3b93ff" strokeType="INSIDE" strokeWidth="5.0" style="-fx-fill: transparent;" width="124.0" />
+      <ImageView fx:id="previewProfilePic" fitHeight="96.0" fitWidth="112.0" layoutX="470.0" layoutY="308.0" pickOnBounds="true">
+         <image>
+            <Image url="@../assets/TempProfilePic.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="32.0" layoutY="493.0" prefHeight="65.0" prefWidth="313.0" text="Blocked Users:" textFill="#3b93ff">
+         <font>
+            <Font name="Bookman Old Style Bold" size="39.0" />
+         </font>
+      </Label>
+      <ListView fx:id="blockedUsersList" focusTraversable="false" layoutX="375.0" layoutY="429.0" prefHeight="300.0" prefWidth="368.0" style="-fx-font-size: 25;" />
+      <Button fx:id="browseBtn" disable="true" layoutX="598.0" layoutY="323.0" mnemonicParsing="false" onAction="#browseBtnOnAction" prefHeight="49.0" prefWidth="106.0" text="Browse" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="blockUserBtn" disable="true" layoutX="14.0" layoutY="578.0" mnemonicParsing="false" onAction="#blockUserBtnOnAction" prefHeight="39.0" prefWidth="156.0" text="Block New User" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="removeBlockedUserBtn" disable="true" layoutX="189.0" layoutY="578.0" mnemonicParsing="false" onAction="#removeBlockedUserBtnOnAction" prefHeight="39.0" prefWidth="156.0" text="Remove Blocked User" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Hyperlink fx:id="deleteAccount" alignment="CENTER" layoutX="2.0" layoutY="704.0" onAction="#deleteAccountOnAction" prefHeight="31.0" prefWidth="227.0" text="Deltete Account" textFill="#e80e0e">
+         <font>
+            <Font name="System Bold Italic" size="27.0" />
+         </font>
+      </Hyperlink>
+      <Button fx:id="saveChangesBtn" layoutX="889.0" layoutY="688.0" mnemonicParsing="false" onAction="#saveChangesBtnOnAction" prefHeight="58.0" prefWidth="187.0" styleClass="blueButton" stylesheets="@Stylesheet.css" text="Save Changes" textFill="WHITE">
+         <font>
+            <Font name="Baskerville Old Face" size="22.0" />
+         </font>
+      </Button>
+      <Button fx:id="backBtn" layoutX="889.0" layoutY="613.0" mnemonicParsing="false" onAction="#backBtnOnAction" prefHeight="58.0" prefWidth="187.0" styleClass="blueButton" stylesheets="@Stylesheet.css" text="Back" textFill="WHITE">
+         <font>
+            <Font name="Baskerville Old Face" size="22.0" />
+         </font>
+      </Button>
+      <Label alignment="CENTER" layoutX="55.0" layoutY="543.0" prefHeight="14.0" prefWidth="255.0" text="(Changes Saved Automatically)" textFill="#3b93ff">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

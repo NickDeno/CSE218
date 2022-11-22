@@ -7,6 +7,8 @@ import java.util.UUID;
 
 import backend.FXImage;
 import backend.Post;
+import backend.PostCenter;
+import backend.UserCenter;
 import frontend.GUIBackend;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,7 +47,7 @@ public class CreatePostController {
 	 
 	 private LandingController landingController;
 	 private LinkedList<FXImage> postImages = new LinkedList<FXImage>();
-	 private final String[] defaultTopics = {"Computer Science", "School", "Gaming", "Sports", "Other"};
+	 private final String[] defaultTopics = {"Computer Science", "School", "Gaming", "Gym", "Sports", "Other"};
 	 
 	 public CreatePostController() {}
 	 
@@ -88,35 +90,27 @@ public class CreatePostController {
 			 if(topicBox.getValue() == null) newPostTopic = "Misc.";
 			 else if(topicBox.getValue().equals("Other") && newTopicField.getText().isEmpty()) newPostTopic = "Misc.";			 
 			 else newPostTopic = topicBox.getValue(); 
+			
+			 Post newPost = new Post(titleField.getText(), newPostTopic, descriptionField.getText(), postImages, SignInController.currentUser, UUID.randomUUID()); 
+			 PostCenter.getInstance().addPost(newPost);
+			 UserCenter.getInstance().getUser(SignInController.currentUser.getUsername()).getUserPosts().put(newPost.getUuid(), newPost);		 
 			 
-//			 UUID uuid = UUID.randomUUID();
-//			 SignInController.globalPosts.add(new Post(titleField.getText(), newPostTopic, descriptionField.getText(), SignInController.currentUser, postImages, uuid));
-//			 SignInController.currentUser.getUserPosts().add(new Post(titleField.getText(), newPostTopic, descriptionField.getText(), SignInController.currentUser, postImages, uuid));
-//			 System.out.println(SignInController.globalPosts.get(uuid).getUuid());
-			 UUID uuid = UUID.randomUUID();
-			 Post newPost = new Post(titleField.getText(), newPostTopic, descriptionField.getText(), postImages, SignInController.currentUser, uuid); 
-			 SignInController.globalPosts.add(newPost);
-			 SignInController.currentUser.getUserPosts().put(newPost.getUuid(), newPost);
-//			 System.out.println(SignInController.globalPosts.get(uuid).getUuid());
-//			 System.out.println(SignInController.currentUser.getUserPosts().get(uuid).getUuid());
-			 
-			 
-			 landingController.getHomeFeedNode().getFxmlController().displayNewPost(newPost);
-			 landingController.showPane(landingController.getHomeFeedNode().getPaneId());
-			 clearFields();
+			 landingController.homeFeedNode.getFxmlController().displayNewPost(newPost);
+			 landingController.showPane(landingController.homeFeedNode.getPaneId());
+			 resetFields();
 		 } else {
-			 clearFields();
-			 msgLabel.setText("Error. PlgetHomeFeedNode()ase Try Again.");
+			 resetFields();
+			 msgLabel.setText("Error. Please Try Again.");
 			 msgLabel.setVisible(true);
 		 }
 	 }
 	 
 	 @FXML public void backBtnOnAction(ActionEvent event) {
-		 landingController.showPane(landingController.getHomeFeedNode().getPaneId());
-		 clearFields();
+		 landingController.showPane(landingController.homeFeedNode.getPaneId());
+		 resetFields();
 	 }
 	 
-	 private void clearFields() {
+	 private void resetFields() {
 		 titleField.clear();
 		 descriptionField.clear();
 //		 topicBox.setValue(null);

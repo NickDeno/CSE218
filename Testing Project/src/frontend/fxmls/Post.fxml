@@ -11,7 +11,7 @@
 <AnchorPane fx:id="postPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#postOnClicked" prefHeight="222.0" prefWidth="695.0" style="-fx-border-color: black;" styleClass="post" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.fxmlsControllers.PostController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="DODGERBLUE" height="56.0" layoutX="14.0" layoutY="11.0" stroke="#3b93ff" strokeType="INSIDE" strokeWidth="3.0" style="-fx-fill: transparent;" width="60.0" />
-      <ImageView fx:id="profilePic" disable="true" fitHeight="49.0" fitWidth="53.0" layoutX="17.0" layoutY="14.0" pickOnBounds="true">
+      <ImageView fx:id="profilePic" disable="true" fitHeight="50.0" fitWidth="54.0" layoutX="17.0" layoutY="14.0" pickOnBounds="true">
          <image>
             <Image url="@../assets/TempProfilePic.png" />
          </image>
@@ -21,7 +21,7 @@
             <Font size="16.0" />
          </font>
       </TextArea>
-      <Label fx:id="usernameLabel" disable="true" layoutX="80.0" layoutY="21.0" prefHeight="37.0" prefWidth="191.0" style="-fx-opacity: 1;" text="Username Here!" textFill="#fff2f2">
+      <Label fx:id="usernameLabel" disable="true" layoutX="81.0" layoutY="14.0" prefHeight="37.0" prefWidth="191.0" style="-fx-opacity: 1;" text="Username Here!" textFill="#fff2f2">
          <font>
             <Font size="22.0" />
          </font>
@@ -31,7 +31,7 @@
             <Font name="Bookman Old Style Bold" size="31.0" />
          </font>
       </Label>
-      <Label fx:id="dateLabel" alignment="CENTER_RIGHT" disable="true" layoutX="410.0" layoutY="23.0" prefHeight="31.0" prefWidth="277.0" style="-fx-opacity: 1;" text="Date Here!" textFill="#fff2f2">
+      <Label fx:id="dateLabel" alignment="CENTER_RIGHT" disable="true" layoutX="410.0" layoutY="17.0" prefHeight="31.0" prefWidth="277.0" style="-fx-opacity: 1;" text="Date Here!" textFill="#fff2f2">
          <font>
             <Font size="21.0" />
          </font>

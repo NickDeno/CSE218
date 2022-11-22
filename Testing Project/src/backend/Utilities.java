@@ -7,31 +7,31 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class Utilities {	
-	public static void backupUsers(UserCenter users) {
+	public static void backupUserCenter() {
 		try {
 			FileOutputStream fos = new FileOutputStream("backupData/Users.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(users);
+			oos.writeObject(UserCenter.getInstance());
 			oos.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public static UserCenter restoreUsers() {
+	public static UserCenter restoreUserCenter() {
 		try {
 			FileInputStream fis = new FileInputStream("backupData/Users.dat");
 			ObjectInputStream ois = new ObjectInputStream(fis);
-			UserCenter users = (UserCenter) ois.readObject();
+			UserCenter userCenter = (UserCenter) ois.readObject();
 			ois.close();
-			return users;
+			return userCenter;
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 	
-	public static void backupPosts() {
+	public static void backupPostCenter() {
 		try {
 			FileOutputStream fos = new FileOutputStream("backupData/Posts.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -42,7 +42,7 @@ public class Utilities {
 		}
 	}
 	
-	public static PostCenter restorePosts() {
+	public static PostCenter restorePostCenter() {
 		try {
 			FileInputStream fis = new FileInputStream("backupData/Posts.dat");
 			ObjectInputStream ois = new ObjectInputStream(fis);

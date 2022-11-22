@@ -10,18 +10,23 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 public class LandingController {
+	@FXML private BorderPane borderPane;
 	@FXML private Label userLabel;
 	@FXML private Button homeBtn;
 	@FXML private Button profileBtn;
 	@FXML private Button settingsBtn;
 	@FXML private Button postBtn;
-	@FXML private ImageView profilePic;
+	@FXML private Circle profilePic;
 	@FXML private StackPane contentPane;
 	
 	//StackPaneNode contains FXMLController of each pane, and id of each pane. The id of each pane is used to swap between panes in showPane method.
@@ -36,7 +41,9 @@ public class LandingController {
 	
 	public void initialize() {
 		userLabel.setText(SignInController.currentUser.getUsername());
-		profilePic.setImage(new Image(new ByteArrayInputStream(SignInController.currentUser.getProfilePic().returnBytes())));
+		userLabel.setEffect(new DropShadow(8, Color.rgb(0, 0, 0, 0.8)));
+		profilePic.setFill(new ImagePattern(new Image(new ByteArrayInputStream(SignInController.currentUser.getProfilePic().returnBytes()))));
+		profilePic.setEffect(new DropShadow(8, Color.rgb(0, 0, 0, 0.8)));
 		
 		homeFeedNode = GUIBackend.loadStackPane(contentPane, GUIBackend.HomeFeedScene, "HomeFeedPane");
 		profileNode = GUIBackend.loadStackPane(contentPane, GUIBackend.ProfileScene, "ProfilePane");
@@ -51,6 +58,7 @@ public class LandingController {
 	
 	@FXML public void homeBtnOnAction(ActionEvent event) {
 		showPane(homeFeedNode.getPaneId());
+		settingsNode.getFxmlController().resetFields();
 	}
 	
 	@FXML public void profileBtnOnAction(ActionEvent event) {
@@ -66,8 +74,8 @@ public class LandingController {
 	}
 	
 	@FXML public void logoutButtonOnAction(ActionEvent event) {
-		Utilities.backupUsers(SignInController.globalUsers);
-		Utilities.backupPosts();
+		Utilities.backupUserCenter();
+		Utilities.backupPostCenter();
 		Stage stage = ((Stage)((Node)event.getSource()).getScene().getWindow());
 		GUIBackend.loadNewScene(stage, GUIBackend.SignInScene);	
 	}
@@ -79,17 +87,17 @@ public class LandingController {
 			}
 		}
 	}
-	
-	public StackPaneNode<HomeFeedController> getHomeFeedNode(){
-		return homeFeedNode;
-	}
-	
-	public StackPaneNode<CreatePostController> getCreatePostNode() {
-		return createPostNode;
-	}
 
 	public StackPane getContentPane() {
 		return contentPane;
+	}
+	
+	public BorderPane getPane() {
+		return borderPane;
+	}
+	
+	public void setProfilePic(Image image) {
+		profilePic.setFill(new ImagePattern(image));
 	}
 	
 }

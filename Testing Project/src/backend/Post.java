@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.UUID;
 
 public class Post implements Serializable {
@@ -91,31 +92,49 @@ public class Post implements Serializable {
 		return postReplies;
 	}
 	
+	public void setPostReplies(LinkedHashMap<UUID, Post> postReplies) {
+		this.postReplies = postReplies;
+	}
+	
 	public Integer getLikes() {
 		return likes;
 	}
 	
-	public void like() {
-		likes++;
-//		if(PostCenter.getInstance().getPost(this.getUuid()) == this) {
-//			likes++;
-//			UserCenter.getInstance().getUser(this.getPoster().getUsername()).getUserPosts().get(this.getUuid()).like();
-//		} else {
-//			likes++;
-//			PostCenter.getInstance().getPost(this.getUuid()).like();
-//		}
+	public void setLikes(Integer likes) {
+		this.likes = likes;
 	}
 	
-	public void reply(Post post) {
-		postReplies.put(post.getUuid(), post);
+	public void like(User user) {
+		likes++;
+		var userCenterPostInstance = UserCenter.getInstance().getUser(user.getUsername()).getUserPosts().get(this.getUuid());
+		var postCenterPostInstance = PostCenter.getInstance().getPost(this.getUuid());
+		if(userCenterPostInstance == this) {
+			postCenterPostInstance.setLikes(this.likes);
+		} else {
+			userCenterPostInstance.setLikes(this.likes);
+		}
 	}
-
-
+	
+	public void reply(Post post, User user) {
+		postReplies.put(post.getUuid(), post);
+		var userCenterPostInstance = UserCenter.getInstance().getUser(user.getUsername()).getUserPosts().get(this.getUuid());
+		var postCenterPostInstance = PostCenter.getInstance().getPost(this.getUuid());
+		if(userCenterPostInstance == this) {
+			postCenterPostInstance.setPostReplies(this.postReplies);
+		} else {
+			userCenterPostInstance.setPostReplies(this.postReplies);
+		}
+	}
+	
 	@Override
 	public String toString() {
+		String p = "";
+		for(Map.Entry<UUID, Post> entry: postReplies.entrySet()) {
+			p += entry.getValue().toString() + ", ";
+		}
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy h:mm aa");
 		return "Post [Created by " + poster.getUsername() + ", title=" + title + ", topic= " + topic + ", description=" + description 
-				+ ", postDate=" + df.format(postDate) + ", likes=" + likes +", postReplies=" + postReplies + "]";
+				+ ", postDate=" + df.format(postDate) + ", likes=" + likes +", postReplies=" + p + "]";
 	}
 	
 }
