@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1090.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #656161 0.0%, #393636 100.0%);" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CurrentUserProfileController">
+   <children>
+      <Rectangle fx:id="bannerPic" arcHeight="5.0" arcWidth="5.0" fill="#2576df" height="238.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="4.0" width="1090.0" />
+      <Circle fx:id="profilePic" fill="#2576df" layoutX="116.0" layoutY="262.0" radius="83.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="4.0" />
+      <Label fx:id="usernameLabel" alignment="CENTER" layoutY="345.0" prefHeight="30.0" prefWidth="233.0" text="Username" textFill="WHITE">
+         <font>
+            <Font name="Elephant" size="25.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nicknameField" alignment="CENTER" disable="true" editable="false" layoutX="21.0" layoutY="375.0" prefHeight="38.0" prefWidth="189.0" promptText="NickName" style="-fx-background-color: transparent; -fx-text-fill: #e8e3e3;">
+         <font>
+            <Font name="Baskerville Old Face" size="20.0" />
+         </font>
+      </TextField>
+      <Label alignment="CENTER" layoutX="78.0" layoutY="420.0" prefHeight="30.0" prefWidth="78.0" text="Bio:" textFill="#f5f2f2">
+         <font>
+            <Font name="Baskerville Old Face" size="22.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="bioField" disable="true" editable="false" layoutX="16.0" layoutY="456.0" prefHeight="238.0" prefWidth="195.0" promptText="Bio Description" style="-fx-border-color: #2576DF; -fx-border-radius: 25; -fx-border-insets: -5; -fx-border-width: 5; -fx-text-fill: white;" stylesheets="@Stylesheet.css" text="&#10;" wrapText="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextArea>
+      <Button fx:id="postsBtn" alignment="TOP_CENTER" layoutX="337.0" layoutY="237.0" mnemonicParsing="false" onAction="#postsBtnOnAction" prefHeight="51.0" prefWidth="140.0" text="Posts">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+      <Button fx:id="followersBtn" alignment="TOP_CENTER" layoutX="477.0" layoutY="237.0" mnemonicParsing="false" onAction="#followersBtnOnAction" prefHeight="51.0" prefWidth="140.0" text="Followers">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+      <Button fx:id="followingBtn" alignment="TOP_CENTER" layoutX="617.0" layoutY="237.0" mnemonicParsing="false" onAction="#followingBtnOnAction" prefHeight="51.0" prefWidth="140.0" text="Following">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+      <Label fx:id="numPosts" alignment="BOTTOM_CENTER" layoutX="372.0" layoutY="263.0" mouseTransparent="true" prefHeight="23.0" prefWidth="66.0" text="0">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="numFollowers" alignment="CENTER" layoutX="512.0" layoutY="265.0" mouseTransparent="true" prefHeight="23.0" prefWidth="70.0" text="0">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="numFollowing" alignment="CENTER" layoutX="652.0" layoutY="265.0" mouseTransparent="true" prefHeight="23.0" prefWidth="70.0" text="0">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Line fx:id="postsBtnLine" endX="17.0" layoutX="459.0" layoutY="289.0" startX="-122.0" stroke="#2576df" strokeWidth="3.0" />
+      <Line fx:id="followersBtnLine" endX="17.0" layoutX="599.0" layoutY="289.0" startX="-121.0" stroke="#2576df" strokeWidth="3.0" visible="false" />
+      <Line fx:id="followingBtnLine" endX="17.0" layoutX="739.0" layoutY="289.0" startX="-121.0" stroke="#2576df" strokeWidth="3.0" visible="false" />
+      <Button fx:id="changeProfilePicBtn" disable="true" layoutX="81.0" layoutY="231.0" mnemonicParsing="false" onAction="#changeProfilePicBtnOnAction" prefHeight="44.0" prefWidth="47.0" style="-fx-background-radius: 30; -fx-opacity: 0.7;" visible="false">
+         <graphic>
+            <ImageView fitHeight="66.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/PictureIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="changeBannerPicBtn" disable="true" layoutX="510.0" layoutY="88.0" mnemonicParsing="false" onAction="#changeBannerPicBtnOnAction" prefHeight="44.0" prefWidth="47.0" style="-fx-background-radius: 30; -fx-opacity: 0.7;" visible="false">
+         <graphic>
+            <ImageView fitHeight="66.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/PictureIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label fx:id="viewingLabel" alignment="CENTER" layoutX="583.0" layoutY="345.0" prefHeight="32.0" prefWidth="102.0" text="Posts" textFill="WHITE">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <ListView fx:id="followingList" layoutX="481.0" layoutY="394.0" prefHeight="327.0" prefWidth="306.0" style="-fx-font-size: 25;" visible="false" />
+      <ListView fx:id="followersList" layoutX="484.0" layoutY="392.0" prefHeight="327.0" prefWidth="306.0" style="-fx-font-size: 25;" visible="false" />
+      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="288.0" layoutY="377.0" prefHeight="374.0" prefWidth="743.0" style="-fx-background: transparent; -fx-background-color: transparent;">
+         <content>
+            <TilePane fx:id="tilePane" alignment="TOP_CENTER" prefHeight="374.0" prefWidth="729.0" style="-fx-vgap: 30;" tileAlignment="TOP_CENTER" />
+         </content>
+      </ScrollPane>
+      <Button fx:id="saveChangesBtn" alignment="CENTER" layoutX="948.0" layoutY="254.0" mnemonicParsing="false" onAction="#saveChangesBtnOnAction" prefHeight="41.0" prefWidth="128.0" style="-fx-border-color: white; -fx-border-radius: 25; -fx-border-width: 3; -fx-border-insets: -3;" styleClass="blueButton" stylesheets="@Stylesheet.css" text="Save Changes" textFill="WHITE">
+         <font>
+            <Font name="Bodoni MT" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="cancelBtn" alignment="CENTER" layoutX="799.0" layoutY="254.0" mnemonicParsing="false" onAction="#cancelBtnOnAction" prefHeight="41.0" prefWidth="128.0" style="-fx-border-color: white; -fx-border-radius: 25; -fx-border-width: 3; -fx-border-insets: -3;" styleClass="blueButton" stylesheets="@Stylesheet.css" text="Cancel" textFill="WHITE">
+         <font>
+            <Font name="Bodoni MT" size="18.0" />
+         </font>
+      </Button>
+      <CheckBox fx:id="editFieldsBox" layoutX="44.0" layoutY="707.0" mnemonicParsing="false" onAction="#editFieldsBoxOnAction" prefHeight="23.0" prefWidth="140.0" text="Edit Fields" textFill="WHITE">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </CheckBox>
+   </children>
+</AnchorPane>

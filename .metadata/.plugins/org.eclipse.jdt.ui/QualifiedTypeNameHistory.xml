@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.nio.file.Files"/>
-    <fullyQualifiedTypeName name="java.io.ByteArrayInputStream"/>
-    <fullyQualifiedTypeName name="java.io.FileInputStream"/>
-    <fullyQualifiedTypeName name="javafx.scene.Node"/>
     <fullyQualifiedTypeName name="javafx.scene.image.Image"/>
     <fullyQualifiedTypeName name="javafx.scene.control.ChoiceBox"/>
     <fullyQualifiedTypeName name="javafx.scene.control.ComboBox"/>
@@ -60,4 +56,8 @@
     <fullyQualifiedTypeName name="javafx.scene.layout.AnchorPane"/>
     <fullyQualifiedTypeName name="backend.User"/>
     <fullyQualifiedTypeName name="backend.Utilities"/>
+    <fullyQualifiedTypeName name="util.Utilities"/>
+    <fullyQualifiedTypeName name="model.UserCenter"/>
+    <fullyQualifiedTypeName name="model.PostCenter"/>
+    <fullyQualifiedTypeName name="model.User"/>
 </qualifiedTypeNameHistroy>
