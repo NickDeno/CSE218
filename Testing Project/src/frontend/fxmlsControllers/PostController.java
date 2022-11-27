@@ -23,19 +23,23 @@ public class PostController {
 	@FXML private TextArea descriptionField;
 	
 	private Post post;
+	private boolean isClickable;
+	
 	private LandingController landingController;
 	
 	//Initializer
 	public PostController() {}	
 	
 	@FXML public void postOnClicked(MouseEvent event) {
-		//Ensures there is only ever one PostReplies pane loaded into contentPane
-		landingController.getContentPane().getChildren().removeIf(pane -> pane.getId().equals("PostRepliesPane"));
-		//No need to search contentPane for this pane since it will already be at the top
-		StackPaneNode<PostRepliesController> postReplies =  GUIBackend.loadStackPane(landingController.getContentPane(), 
-				GUIBackend.PostRepliesScene,"PostRepliesPane");
-		postReplies.getFxmlController().setPostData(post);
-		postReplies.getFxmlController().setLandingController(landingController);
+		if(isClickable) {
+			//Ensures there is only ever one PostReplies pane loaded into contentPane
+			landingController.getContentPane().getChildren().removeIf(currentPane -> currentPane.getId().equals("PostRepliesPane"));
+			//No need to search contentPane for this pane since it will already be at the top
+			StackPaneNode<PostRepliesController> postReplies =  GUIBackend.loadStackPane(landingController.getContentPane(), 
+					GUIBackend.PostRepliesScene,"PostRepliesPane");
+			postReplies.getFxmlController().setPostData(post);
+			postReplies.getFxmlController().setLandingController(landingController);
+		}
     }
 	
 	public void setPostData(Post post) {
@@ -51,5 +55,9 @@ public class PostController {
 	
 	 public void setLandingController(LandingController landingController) {
 		 this.landingController = landingController;
+	 }
+	 
+	 public void setClickable(boolean isClickable) {
+		 this.isClickable = isClickable;
 	 }
 }

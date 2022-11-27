@@ -3,6 +3,7 @@ package frontend.fxmlsControllers;
 import java.io.ByteArrayInputStream;
 
 import backend.StackPaneNode;
+import backend.UserCenter;
 import backend.Utilities;
 import frontend.GUIBackend;
 import javafx.event.ActionEvent;
@@ -22,6 +23,8 @@ import javafx.stage.Stage;
 public class LandingController {
 	@FXML private BorderPane borderPane;
 	@FXML private Label userLabel;
+	@FXML private Label numFollowingLabel;
+	@FXML private Label numFollowersLabel;
 	@FXML private Button homeBtn;
 	@FXML private Button profileBtn;
 	@FXML private Button settingsBtn;
@@ -32,7 +35,7 @@ public class LandingController {
 	//StackPaneNode contains FXMLController of each pane, and id of each pane. The id of each pane is used to swap between panes in showPane method.
 	//The FXMLController of each pane can be passed into another FXMLController so the 2 scenes can communicate.
 	protected StackPaneNode<HomeFeedController> homeFeedNode;
-	protected StackPaneNode<ProfileController> profileNode;
+	protected StackPaneNode<CurrentUserProfileController> profileNode;
 	protected StackPaneNode<SettingsController> settingsNode;
 	protected StackPaneNode<CreatePostController> createPostNode;
 	
@@ -40,9 +43,11 @@ public class LandingController {
 	public LandingController() {}
 	
 	public void initialize() {
-		userLabel.setText(SignInController.currentUser.getUsername());
+		userLabel.setText(UserCenter.getInstance().getCurrentUser().getUsername());
+		profilePic.setFill(new ImagePattern(new Image(new ByteArrayInputStream(UserCenter.getInstance().getCurrentUser().getProfilePic().returnBytes()))));
+		numFollowingLabel.setText(String.valueOf(UserCenter.getInstance().getCurrentUser().getFollowing().size()));
+		numFollowersLabel.setText(String.valueOf(UserCenter.getInstance().getCurrentUser().getFollowers().size()));
 		userLabel.setEffect(new DropShadow(8, Color.rgb(0, 0, 0, 0.8)));
-		profilePic.setFill(new ImagePattern(new Image(new ByteArrayInputStream(SignInController.currentUser.getProfilePic().returnBytes()))));
 		profilePic.setEffect(new DropShadow(8, Color.rgb(0, 0, 0, 0.8)));
 		
 		homeFeedNode = GUIBackend.loadStackPane(contentPane, GUIBackend.HomeFeedScene, "HomeFeedPane");
@@ -94,6 +99,10 @@ public class LandingController {
 	
 	public BorderPane getPane() {
 		return borderPane;
+	}
+	
+	public void setNumFollowingLabel(int numFollowing) {
+		numFollowingLabel.setText(String.valueOf(numFollowing));
 	}
 	
 	public void setProfilePic(Image image) {

@@ -68,13 +68,7 @@
             <TilePane fx:id="tilePane" alignment="TOP_CENTER" prefHeight="427.0" prefWidth="826.0" style="-fx-vgap: 30;" tileAlignment="TOP_CENTER" />
          </content>
       </ScrollPane>
-      <Rectangle fx:id="postImgBorder1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="119.0" layoutX="929.0" layoutY="8.0" stroke="#3b93ff" strokeType="INSIDE" strokeWidth="5.0" style="-fx-fill: transparent;" width="125.0" />
-      <Rectangle fx:id="postImgBorder2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="119.0" layoutX="929.0" layoutY="138.0" stroke="#3b93ff" strokeType="INSIDE" strokeWidth="5.0" style="-fx-fill: transparent;" width="125.0" />
-      <Rectangle fx:id="postImgBorder3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="119.0" layoutX="929.0" layoutY="265.0" stroke="#3b93ff" strokeType="INSIDE" strokeWidth="5.0" style="-fx-fill: transparent;" width="125.0" />
-      <ImageView fx:id="postImg1" fitHeight="110.0" fitWidth="115.0" layoutX="934.0" layoutY="13.0" pickOnBounds="true" />
-      <ImageView fx:id="postImg2" fitHeight="110.0" fitWidth="115.0" layoutX="934.0" layoutY="143.0" pickOnBounds="true" />
-      <ImageView fx:id="postImg3" fitHeight="110.0" fitWidth="115.0" layoutX="934.0" layoutY="270.0" pickOnBounds="true" />
-      <Button fx:id="likeBtn" alignment="TOP_LEFT" layoutX="118.0" layoutY="265.0" mnemonicParsing="false" onAction="#likeBtnOnAction" prefHeight="50.0" prefWidth="169.0" style="-fx-border-radius: 25; -fx-border-color: white; -fx-border-width: 3; -fx-border-insets: -3;" styleClass="blueButton" stylesheets="@Stylesheet.css" text=" Like Post" textFill="WHITE">
+      <Button fx:id="likeBtn" alignment="TOP_LEFT" layoutX="62.0" layoutY="265.0" mnemonicParsing="false" onAction="#likeBtnOnAction" prefHeight="50.0" prefWidth="169.0" style="-fx-border-radius: 25; -fx-border-color: white; -fx-border-width: 3; -fx-border-insets: -3;" styleClass="blueButton" stylesheets="@Stylesheet.css" text=" Like Post" textFill="WHITE">
          <graphic>
             <ImageView fitHeight="42.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -86,7 +80,7 @@
             <Font name="Bodoni MT" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="viewImagesBtn" alignment="TOP_LEFT" layoutX="324.0" layoutY="265.0" mnemonicParsing="false" onAction="#viewImagesBtnOnAction" prefHeight="50.0" prefWidth="169.0" style="-fx-border-color: white; -fx-border-radius: 25; -fx-border-width: 3; -fx-border-insets: -3;" styleClass="blueButton" stylesheets="@Stylesheet.css" text=" View Images" textFill="WHITE">
+      <Button fx:id="viewImagesBtn" alignment="TOP_LEFT" layoutX="243.0" layoutY="265.0" mnemonicParsing="false" onAction="#viewImagesBtnOnAction" prefHeight="50.0" prefWidth="169.0" style="-fx-border-color: white; -fx-border-radius: 25; -fx-border-width: 3; -fx-border-insets: -3;" styleClass="blueButton" stylesheets="@Stylesheet.css" text=" View Images" textFill="WHITE">
          <font>
             <Font name="Bodoni MT" size="18.0" />
          </font>
@@ -98,9 +92,9 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="replyBtn" alignment="TOP_LEFT" layoutX="524.0" layoutY="265.0" mnemonicParsing="false" onAction="#replyBtnOnAction" prefHeight="50.0" prefWidth="169.0" style="-fx-border-color: white; -fx-border-radius: 25; -fx-border-width: 3; -fx-border-insets: -3;" styleClass="blueButton" stylesheets="@Stylesheet.css" text="Post Reply" textFill="WHITE">
+      <Button fx:id="replyBtn" alignment="TOP_LEFT" layoutX="423.0" layoutY="265.0" mnemonicParsing="false" onAction="#replyBtnOnAction" prefHeight="50.0" prefWidth="169.0" style="-fx-border-color: white; -fx-border-radius: 25; -fx-border-width: 3; -fx-border-insets: -3;" styleClass="blueButton" stylesheets="@Stylesheet.css" text="Post Reply" textFill="WHITE">
          <font>
-            <Font name="Bodoni MT" size="19.0" />
+            <Font name="Bodoni MT" size="18.0" />
          </font>
          <graphic>
             <ImageView fitHeight="36.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
@@ -110,9 +104,9 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="followBtn" alignment="TOP_LEFT" layoutX="719.0" layoutY="265.0" mnemonicParsing="false" onAction="#followBtnOnAction" prefHeight="50.0" prefWidth="169.0" style="-fx-border-color: white; -fx-border-radius: 25; -fx-border-width: 3; -fx-border-insets: -3;" styleClass="blueButton" stylesheets="@Stylesheet.css" text="Follow User" textFill="WHITE">
+      <Button fx:id="followBtn" alignment="TOP_LEFT" layoutX="602.0" layoutY="265.0" mnemonicParsing="false" onAction="#followBtnOnAction" prefHeight="50.0" prefWidth="169.0" style="-fx-border-color: white; -fx-border-radius: 25; -fx-border-width: 3; -fx-border-insets: -3;" styleClass="blueButton" stylesheets="@Stylesheet.css" text="Follow User" textFill="WHITE">
          <font>
-            <Font name="Bodoni MT" size="18.0" />
+            <Font name="Bodoni MT" size="16.0" />
          </font>
          <graphic>
             <ImageView fitHeight="41.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
@@ -133,6 +127,18 @@
          <font>
             <Font size="16.0" />
          </font>
+      </Button>
+      <Button fx:id="viewProfileBtn" alignment="TOP_LEFT" layoutX="782.0" layoutY="265.0" mnemonicParsing="false" onAction="#viewProfileBtnOnAction" prefHeight="50.0" prefWidth="169.0" style="-fx-border-color: white; -fx-border-radius: 25; -fx-border-width: 3; -fx-border-insets: -3;" styleClass="blueButton" stylesheets="@Stylesheet.css" text=" View Profile" textFill="WHITE">
+         <font>
+            <Font name="Bodoni MT" size="17.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="39.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/UserIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
    </children>
 </AnchorPane>

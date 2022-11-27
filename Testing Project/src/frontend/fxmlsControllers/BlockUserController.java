@@ -46,7 +46,8 @@ public class BlockUserController {
 			return;
 		}
 		
-		if(userList.getSelectionModel().getSelectedItem().equals(SignInController.currentUser.getUsername())) {
+		//If selected user is the current user
+		if(userList.getSelectionModel().getSelectedItem().equals(UserCenter.getInstance().getCurrentUser().getUsername())) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Invalid Selection");
 			alert.setHeaderText(null);
@@ -56,7 +57,7 @@ public class BlockUserController {
 			return; 
 		}
 		//If selected user is already present in current users blockedUsers
-		if(SignInController.currentUser.getBlockedUsers().get(userList.getSelectionModel().getSelectedItem()) != null) {
+		if(UserCenter.getInstance().getCurrentUser().getBlockedUsers().get(userList.getSelectionModel().getSelectedItem()) != null) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Invalid Selection");
 			alert.setHeaderText(null);
@@ -65,12 +66,11 @@ public class BlockUserController {
 			userList.getSelectionModel().clearSelection();
 		} else {
 			User blockedUser = UserCenter.getInstance().getUser(userList.getSelectionModel().getSelectedItem());
-			SignInController.currentUser.getBlockedUsers().put(blockedUser.getUsername(), blockedUser);
+			UserCenter.getInstance().getCurrentUser().getBlockedUsers().put(blockedUser.getUsername(), blockedUser);
 			landingController.settingsNode.getFxmlController().getBlockedUsersList().getItems().add(blockedUser.getUsername());
 			//Refresh HomeFeed of posts so new blocked user posts wont be displyed
 			landingController.homeFeedNode.getFxmlController().getTilePane().getChildren().clear();
-			GUIBackend.displayPosts(PostCenter.getInstance(), SignInController.currentUser,
-					landingController.homeFeedNode.getFxmlController().getTilePane(), landingController);
+			GUIBackend.displayPostsNewToOld(PostCenter.getInstance().getPosts(), landingController.homeFeedNode.getFxmlController().getTilePane(), landingController, true);
 			landingController.settingsNode.getFxmlController().getPane().setEffect(null);
 			landingController.getPane().setEffect(null);
 			((Stage)((Node)event.getSource()).getScene().getWindow()).close();

@@ -12,6 +12,8 @@ public class UserCenter implements Serializable {
 	private static UserCenter instance;
 	private LinkedHashMap<String, User> userMap;
 	
+	private User currentUser;
+	
 	private UserCenter() {
 		userMap = new LinkedHashMap<String, User>();
 	}
@@ -47,6 +49,14 @@ public class UserCenter implements Serializable {
 	
 	public Collection<User> getAllUsers(){
 		return userMap.values();
+	}
+	
+	public void setCurrentUser(User user) {
+		this.currentUser = user;
+	}
+	
+	public User getCurrentUser() {
+		return currentUser;
 	}
 	
 	public void display() {

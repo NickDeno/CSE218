@@ -67,7 +67,8 @@ public class CreatePostController {
 	 }
 	 
 	 @FXML public void browseButtonOnAction(ActionEvent event) {
-			FileChooser fc = new FileChooser();
+		 System.out.println(postImages.size());	
+		 FileChooser fc = new FileChooser();
 			fc.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
 			File selectedFile = fc.showOpenDialog(null);
 			if (selectedFile == null) {
@@ -79,6 +80,7 @@ public class CreatePostController {
 			} else {
 				byte[] chosenImageBytes = GUIBackend.fileToByteArr(selectedFile);
 				postImages.add(new FXImage(chosenImageBytes));
+				System.out.println(postImages.size());
 				displayImage(chosenImageBytes);			
 			}
 	 }
@@ -90,12 +92,12 @@ public class CreatePostController {
 			 if(topicBox.getValue() == null) newPostTopic = "Misc.";
 			 else if(topicBox.getValue().equals("Other") && newTopicField.getText().isEmpty()) newPostTopic = "Misc.";			 
 			 else newPostTopic = topicBox.getValue(); 
-			
-			 Post newPost = new Post(titleField.getText(), newPostTopic, descriptionField.getText(), postImages, SignInController.currentUser, UUID.randomUUID()); 
-			 PostCenter.getInstance().addPost(newPost);
-			 UserCenter.getInstance().getUser(SignInController.currentUser.getUsername()).getUserPosts().put(newPost.getUuid(), newPost);		 
 			 
+			 Post newPost = new Post(titleField.getText(), newPostTopic, descriptionField.getText(), new LinkedList<FXImage>(postImages), UserCenter.getInstance().getCurrentUser(), UUID.randomUUID()); 
+			 PostCenter.getInstance().addPost(newPost);
+			 UserCenter.getInstance().getUser(UserCenter.getInstance().getCurrentUser().getUsername()).getUserPosts().put(newPost.getUuid(), newPost);		 
 			 landingController.homeFeedNode.getFxmlController().displayNewPost(newPost);
+			 landingController.profileNode.getFxmlController().displayNewPost(newPost);
 			 landingController.showPane(landingController.homeFeedNode.getPaneId());
 			 resetFields();
 		 } else {
@@ -118,6 +120,7 @@ public class CreatePostController {
 		 postImg1.setImage(null);
 		 postImg2.setImage(null);
 		 postImg3.setImage(null);
+		 postImages.clear();
 	 }
 	 
 	private void displayImage(byte[] chosenImageBytes) {

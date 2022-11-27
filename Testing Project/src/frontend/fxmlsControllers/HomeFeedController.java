@@ -1,5 +1,9 @@
 package frontend.fxmlsControllers;
 
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.UUID;
+
 import backend.Post;
 import backend.PostCenter;
 import backend.User;
@@ -26,7 +30,7 @@ public class HomeFeedController {
 	@FXML private Button removeFilterBtn;
 	
 	private LandingController landingController;
-	private final String[] filterOptions = {"User", "Topic", "Title"};
+	private final String[] filterOptions = {"User", "Topic", "Title", "Following"};
 	private final String[] topicOptions = {"Computer Science", "School", "Gaming", "Gym", "Sports", "Misc.", "Other"};
 	
 	private String chosenFilter;
@@ -39,7 +43,7 @@ public class HomeFeedController {
 		filterBox.getItems().addAll(filterOptions);
 		topicBox.getItems().addAll(topicOptions);
 		Platform.runLater(() ->{
-			GUIBackend.displayPosts(PostCenter.getInstance(), SignInController.currentUser, tilePane, landingController);
+			displayPosts(PostCenter.getInstance().getPosts());
 		});
 	}
 	
@@ -58,6 +62,11 @@ public class HomeFeedController {
 			chosenFilter = filterBox.getValue();
 			searchField.setVisible(true);
 			searchFieldLine.setVisible(true);
+			topicBox.setVisible(false);
+		} else if(filterBox.getValue().equals("Following")) {
+			chosenFilter = filterBox.getValue();
+			searchField.setVisible(true);
+			searchFieldLine.setVisible(true);	
 			topicBox.setVisible(false);
 		}
 	}
@@ -84,7 +93,7 @@ public class HomeFeedController {
 				alert.setContentText("No user found with specified username. Please try again.");
 				alert.showAndWait();
 				searchField.clear();
-			} else if(SignInController.currentUser.getBlockedUsers().containsKey(searchedUser.getUsername())) {
+			} else if(UserCenter.getInstance().getCurrentUser().getBlockedUsers().get(searchedUser.getUsername()) != null) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Blocked User.");
 				alert.setHeaderText(null);
@@ -92,30 +101,37 @@ public class HomeFeedController {
 				alert.showAndWait();
 				searchField.clear();	
 			} else {
-				tilePane.getChildren().clear();
-				GUIBackend.displayPosts(searchedUser.getUserPosts(), SignInController.currentUser, tilePane, landingController);
+				displayPosts(searchedUser.getUserPosts());
 				resetFields();
 			}
 		} else if(chosenFilter.equals("Topic")) {
-			tilePane.getChildren().clear();
-			GUIBackend.displayPosts(PostCenter.getInstance().searchByTopic(chosenTopic), SignInController.currentUser, tilePane, landingController);
+			displayPosts(PostCenter.getInstance().searchByTopic(chosenTopic));
 			resetFields();
 		} else if(chosenFilter.equals("Title")) {
-			tilePane.getChildren().clear();
-			GUIBackend.displayPosts(PostCenter.getInstance().searchByTitle(searchField.getText()), SignInController.currentUser,  tilePane, landingController);
+			displayPosts(PostCenter.getInstance().searchByTitle(searchField.getText()));
 			resetFields();
+		} else if(chosenFilter.equals("Following")) {
+			Iterator<User> itr = UserCenter.getInstance().getCurrentUser().getFollowing().values().iterator();
+			while(itr.hasNext()) {
+				displayPosts(itr.next().getUserPosts());
+			}
 		}
 		
 	}
 	
 	@FXML public void removeFilterBtnOnAction(ActionEvent event) {
 		tilePane.getChildren().clear();
-		GUIBackend.displayPosts(PostCenter.getInstance(), SignInController.currentUser, tilePane, landingController);
+		GUIBackend.displayPostsNewToOld(PostCenter.getInstance().getPosts(), tilePane, landingController, true);
 		resetFields();
 	}
 	
+	 public void displayPosts(LinkedHashMap<UUID, Post> posts) {
+		 tilePane.getChildren().clear();
+		 GUIBackend.displayPostsNewToOld(posts, tilePane, landingController, true);
+	   }
+	
 	public void displayNewPost(Post post) {
-		GUIBackend.displayPost(post, tilePane, landingController);
+		GUIBackend.displayPostOnTop(post, tilePane, landingController, true);
 	}
 	
 	private void resetFields() {

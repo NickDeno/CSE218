@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="postPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#postOnClicked" prefHeight="222.0" prefWidth="695.0" style="-fx-border-color: black;" styleClass="post" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.fxmlsControllers.PostController">
+<AnchorPane fx:id="postPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#postOnClicked" prefHeight="222.0" prefWidth="695.0" style="-fx-border-color: black; -fx-border-width: 3;" styleClass="post" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.fxmlsControllers.PostController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="DODGERBLUE" height="56.0" layoutX="14.0" layoutY="11.0" stroke="#3b93ff" strokeType="INSIDE" strokeWidth="3.0" style="-fx-fill: transparent;" width="60.0" />
       <ImageView fx:id="profilePic" disable="true" fitHeight="50.0" fitWidth="54.0" layoutX="17.0" layoutY="14.0" pickOnBounds="true">

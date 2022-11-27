@@ -3,14 +3,13 @@ package frontend.fxmlsControllers;
 import java.util.UUID;
 
 import backend.Post;
-import frontend.GUIBackend;
+import backend.UserCenter;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 
 public class ReplyController {
@@ -19,8 +18,8 @@ public class ReplyController {
     @FXML private Button replyBtn;
     
     private Post post;
-    private TilePane tilePane;
     private LandingController landingController;
+    private PostRepliesController postRepliesController;
     
     public ReplyController() {} 
     
@@ -38,19 +37,24 @@ public class ReplyController {
     }
 
     @FXML public void replyBtnOnAction(ActionEvent event) {
-    	Post newReply = new Post(SignInController.currentUser.getUsername() + "'s Reply:", "Reply", descriptionField.getText(), null, SignInController.currentUser, UUID.randomUUID()); 	
+    	Post newReply = new Post(UserCenter.getInstance().getCurrentUser().getUsername() + "'s Reply:", "Reply", descriptionField.getText(), 
+    			null, UserCenter.getInstance().getCurrentUser(), UUID.randomUUID()); 	
     	post.reply(newReply, post.getPoster());
-    	GUIBackend.displayPost(newReply, tilePane, landingController);
+    	postRepliesController.displayPost(newReply);
+    	landingController.profileNode.getFxmlController().displayNewPost(newReply);
     	landingController.getPane().setEffect(null);
     	((Stage)((Node)event.getSource()).getScene().getWindow()).close();
     }
     
-    public void passData(Post post, TilePane tilePane) {
-    	this.tilePane = tilePane; 	
+    public void setPost(Post post) {	
     	this.post = post;
     }
     
     public void setLandingController(LandingController landingController) {
 		 this.landingController = landingController;
 	 }
+
+	public void setPostRepliesController(PostRepliesController postRepliesController) {
+		this.postRepliesController = postRepliesController;
+	}
 }

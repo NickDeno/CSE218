@@ -1,12 +1,26 @@
 package backend;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
 
-public class Utilities {	
+public class Utilities {
+	//Takes a file (for this project mainly image files) and converts it into a byte array. This is done since by default, JavaFX images are not
+	//serializable. So instead, we can convert the image into a byte array and save the byte array into a specified file.
+	public static byte[] fileToByteArr(File file) {
+		try {
+			byte[] byteArr = Files.readAllBytes(file.toPath());
+			return byteArr;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+		
 	public static void backupUserCenter() {
 		try {
 			FileOutputStream fos = new FileOutputStream("backupData/Users.dat");

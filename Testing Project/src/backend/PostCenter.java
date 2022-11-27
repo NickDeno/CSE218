@@ -33,6 +33,7 @@ public class PostCenter implements Serializable{
 		return postMap.remove(uuid);
 	}
 	
+	//O(1) 
 	public Post getPost(UUID uuid) {
 		return postMap.get(uuid);
 	}
@@ -41,7 +42,7 @@ public class PostCenter implements Serializable{
 		return postMap.size();
 	}
 	
-	public LinkedHashMap<UUID, Post> getMap(){
+	public LinkedHashMap<UUID, Post> getPosts(){
 		return postMap;
 	}
 
@@ -51,6 +52,7 @@ public class PostCenter implements Serializable{
 		}
 	}
 	
+	//O(n) since each posts' topic has to be checked to see if it matches given topic
 	public LinkedHashMap<UUID, Post> searchByTopic(String topic) {
 		LinkedHashMap<UUID, Post> temp = new LinkedHashMap<UUID, Post>();
 		for(Map.Entry<UUID, Post> entry: postMap.entrySet()) {
@@ -61,6 +63,7 @@ public class PostCenter implements Serializable{
 		return temp;
 	}
 	
+	//O(n) since each posts' title has to be searched to see if matches given title
 	public LinkedHashMap<UUID, Post> searchByTitle(String title) {
 		LinkedHashMap<UUID, Post> temp = new LinkedHashMap<UUID, Post>();
 		for(Map.Entry<UUID, Post> entry: postMap.entrySet()) {

@@ -1,18 +1,14 @@
 package frontend.fxmlsControllers;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.UUID;
 
-import backend.FXImage;
 import backend.Post;
 import backend.PostCenter;
 import backend.User;
 import backend.UserCenter;
-import backend.Utilities;
 import frontend.GUIBackend;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,14 +22,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.FileChooser.ExtensionFilter;
 
 public class SettingsController {
 	@FXML private AnchorPane anchorPane;
@@ -43,26 +35,21 @@ public class SettingsController {
 	@FXML private Line emailLine;
 	@FXML private Line passwordLine;
 	@FXML private TextField passwordField;
-	@FXML private ImageView previewProfilePic;
 	@FXML private Hyperlink deleteAccount;
-	@FXML private Button browseBtn;
 	@FXML private Button blockUserBtn;
 	@FXML private Button removeBlockedUserBtn;
 	@FXML private Button backBtn;
 	@FXML private Button saveChangesBtn;
 	
 	private LandingController landingController;
-	private byte[] chosenImageBytes;
 	
 	//Initializer
 	public SettingsController() {}
 	
 	public void initialize() {
-		emailField.setText(SignInController.currentUser.getEmail());
-		passwordField.setText(SignInController.currentUser.getPassword());
-		chosenImageBytes = SignInController.currentUser.getProfilePic().returnBytes();
-		previewProfilePic.setImage(new Image(new ByteArrayInputStream(SignInController.currentUser.getProfilePic().returnBytes())));
-		for(User u: SignInController.currentUser.getBlockedUsers().values()) {
+		emailField.setText(UserCenter.getInstance().getCurrentUser().getEmail());
+		passwordField.setText(UserCenter.getInstance().getCurrentUser().getPassword());
+		for(User u: UserCenter.getInstance().getCurrentUser().getBlockedUsers().values()) {
 			blockedUsersList.getItems().add(u.getUsername());
 		}
 	}
@@ -73,22 +60,6 @@ public class SettingsController {
 		} else {
 			setFieldsVisibility(false);
 		}
-	}
-	
-	@FXML public void browseBtnOnAction(ActionEvent event) {
-		FileChooser fc = new FileChooser();
-    	fc.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
-    	File chosenImage = fc.showOpenDialog(null);
-    	if(chosenImage == null) {
-    		Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Invalid File");
-			alert.setHeaderText(null);
-			alert.setContentText("Either chosen image was invalid, or no image was chosen. Please try again.");
-			alert.showAndWait();
-    	} else {
-    		chosenImageBytes = GUIBackend.fileToByteArr(chosenImage);
-    		previewProfilePic.setImage(new Image(new ByteArrayInputStream(chosenImageBytes)));
-    	}
 	}
 	
 	@FXML public void blockUserBtnOnAction(ActionEvent event) {
@@ -106,12 +77,11 @@ public class SettingsController {
 			alert.setContentText("Please select a user first and try again.");
 			alert.showAndWait();
 		} else {
-			SignInController.currentUser.getBlockedUsers().remove(blockedUsersList.getSelectionModel().getSelectedItem());
+			UserCenter.getInstance().getCurrentUser().getBlockedUsers().remove(blockedUsersList.getSelectionModel().getSelectedItem());
 			blockedUsersList.getItems().remove(blockedUsersList.getSelectionModel().getSelectedIndex());
 			//Refresh HomeFeed of posts so removed blocked user posts will be displayed
 			landingController.homeFeedNode.getFxmlController().getTilePane().getChildren().clear();
-			GUIBackend.displayPosts(PostCenter.getInstance(), SignInController.currentUser, 
-					landingController.homeFeedNode.getFxmlController().getTilePane(), landingController);
+			GUIBackend.displayPostsNewToOld(PostCenter.getInstance().getPosts(), landingController.homeFeedNode.getFxmlController().getTilePane(), landingController, true);
 		}
 	}
 	
@@ -123,15 +93,13 @@ public class SettingsController {
 		Optional<ButtonType> confirm = alert.showAndWait();
 		if(confirm.isPresent() && confirm.get() == ButtonType.OK) {
 			//Removes every post instance that was made by this user from PostCenter
-			Iterator<Entry<UUID, Post>> itr = SignInController.currentUser.getUserPosts().entrySet().iterator();
+			Iterator<Entry<UUID, Post>> itr = UserCenter.getInstance().getCurrentUser().getUserPosts().entrySet().iterator();
 			while(itr.hasNext()) {
 				Post temp = itr.next().getValue();
 				PostCenter.getInstance().removePost(temp.getUuid());
 			}
 			//Removes user from UserCenter
-			UserCenter.getInstance().removeUser(SignInController.currentUser.getUsername());
-			Utilities.backupUserCenter();
-			Utilities.backupPostCenter();
+			UserCenter.getInstance().removeUser(UserCenter.getInstance().getCurrentUser().getUsername());
 			GUIBackend.loadNewScene(((Stage)((Node)event.getSource()).getScene().getWindow()) , GUIBackend.SignInScene);
 		}
 	}
@@ -151,23 +119,8 @@ public class SettingsController {
 			resetFields();
 			return;
 		}
-		//This if statement is true when user changes profile pic, thus all post objects made by user must be updated with new profile pic
-		if(SignInController.currentUser.getProfilePic().returnBytes() != chosenImageBytes){
-			SignInController.currentUser.setProfilePic(new FXImage(chosenImageBytes));
-			landingController.setProfilePic(new Image(new ByteArrayInputStream(chosenImageBytes)));
-			Iterator<Entry<UUID, Post>> itr = SignInController.currentUser.getUserPosts().entrySet().iterator();
-			while (itr.hasNext()) {
-				Post temp = itr.next().getValue();
-				temp.getPoster().setProfilePic(new FXImage(chosenImageBytes));
-				PostCenter.getInstance().getPost(temp.getUuid()).getPoster().setProfilePic(new FXImage(chosenImageBytes));
-			}
-			//Reloads Posts in HomeFeed
-			landingController.homeFeedNode.getFxmlController().getTilePane().getChildren().clear();
-			GUIBackend.displayPosts(PostCenter.getInstance(), SignInController.currentUser, 
-					landingController.homeFeedNode.getFxmlController().getTilePane(), landingController);
-		} 
-		SignInController.currentUser.setEmail(emailField.getText());
-		SignInController.currentUser.setPassword(passwordField.getText());
+		UserCenter.getInstance().getCurrentUser().setEmail(emailField.getText());
+		UserCenter.getInstance().getCurrentUser().setPassword(passwordField.getText());
 		resetFields();
 	}
 	
@@ -188,12 +141,10 @@ public class SettingsController {
 	}
 	
 	public void resetFields() {
-		emailField.setText(SignInController.currentUser.getEmail());
-		passwordField.setText(SignInController.currentUser.getPassword());
+		emailField.setText(UserCenter.getInstance().getCurrentUser().getEmail());
+		passwordField.setText(UserCenter.getInstance().getCurrentUser().getPassword());
 		emailLine.setStyle("-fx-stroke: #3b93ff;");
 		passwordLine.setStyle("-fx-stroke: #3b93ff;");
-		chosenImageBytes = SignInController.currentUser.getProfilePic().returnBytes();
-		previewProfilePic.setImage(new Image(new ByteArrayInputStream(chosenImageBytes)));
 		blockedUsersList.getSelectionModel().clearSelection();
 		editFieldsBox.setSelected(false);
 		setFieldsVisibility(false);
@@ -201,8 +152,6 @@ public class SettingsController {
 	
 	private void setFieldsVisibility(boolean bool) {
 		if(bool == true) {
-			browseBtn.setVisible(true);
-			browseBtn.setDisable(false);
 			blockUserBtn.setVisible(true);
 			blockUserBtn.setDisable(false);
 			removeBlockedUserBtn.setVisible(true);
@@ -214,8 +163,6 @@ public class SettingsController {
 			blockedUsersList.setEditable(true);
 			blockedUsersList.setFocusTraversable(true);
 		} else {
-			browseBtn.setVisible(false);
-			browseBtn.setDisable(true);
 			blockUserBtn.setVisible(false);
 			blockUserBtn.setDisable(true);
 			removeBlockedUserBtn.setVisible(false);

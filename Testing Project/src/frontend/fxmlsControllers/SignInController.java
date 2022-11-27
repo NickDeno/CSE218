@@ -26,13 +26,13 @@ public class SignInController {
 	@FXML private Button cancelBtn; 
 	@FXML private Hyperlink clickHereText;
 	
-	protected static User currentUser;
+//	protected static User currentUser;
 	private Stage stage;
 	
 	public void initialize() {	
 		UserCenter.getInstance();
 		PostCenter.getInstance();
-		if(UserCenter.getInstance() != null) UserCenter.getInstance().display();
+//		if(UserCenter.getInstance() != null) UserCenter.getInstance().display();
 		if(PostCenter.getInstance() != null) PostCenter.getInstance().display();
 		Platform.runLater(() -> {
 			stage = (Stage)signInBtn.getScene().getWindow();
@@ -62,7 +62,7 @@ public class SignInController {
 		
 		User tempUser = UserCenter.getInstance().getUser(usernameField.getText());
 		if(tempUser != null && tempUser.getPassword().equals(chosenPassword)) {
-			currentUser = tempUser;
+			UserCenter.getInstance().setCurrentUser(tempUser);
 			GUIBackend.loadNewScene(stage, GUIBackend.LandingScene);
 		} else {
 			msgLabel.setText("Account not found.");
