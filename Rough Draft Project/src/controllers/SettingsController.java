@@ -38,7 +38,7 @@ public class SettingsController {
 	@FXML private Hyperlink deleteAccount;
 	@FXML private Button blockUserBtn;
 	@FXML private Button removeBlockedUserBtn;
-	@FXML private Button backBtn;
+	@FXML private Button cancelBtn;
 	@FXML private Button saveChangesBtn;
 	
 	private User currentUser;
@@ -53,7 +53,7 @@ public class SettingsController {
 		passwordField.setText(currentUser.getPassword());
 		for(User u: currentUser.getBlockedUsers().values()) {
 			blockedUsersList.getItems().add(u.getUsername());
-		}
+		}	
 	}
 	
 	@FXML public void editFieldsBoxOnAction(ActionEvent event) {
@@ -81,7 +81,7 @@ public class SettingsController {
 			alert.showAndWait();
 		} else {
 			currentUser.getBlockedUsers().remove(blockedUsersList.getSelectionModel().getSelectedItem());
-			blockedUsersList.getItems().remove(blockedUsersList.getSelectionModel().getSelectedIndex());
+			blockedUsersList.getItems().remove(blockedUsersList.getSelectionModel().getSelectedItem());
 		}
 	}
 	
@@ -104,7 +104,7 @@ public class SettingsController {
 		}
 	}
 	
-	@FXML public void backBtnOnAction(ActionEvent event) {
+	@FXML public void cancelBtnOnAction(ActionEvent event) {
 		resetFields();
 //		landingController.showPane(landingController.homeFeedNode.getPaneId());
 	}
@@ -140,7 +140,7 @@ public class SettingsController {
 		}
 	}
 	
-	public void resetFields() {
+	private void resetFields() {
 		emailField.setText(currentUser.getEmail());
 		passwordField.setText(currentUser.getPassword());
 		emailLine.setStyle("-fx-stroke: #3b93ff;");
@@ -152,28 +152,15 @@ public class SettingsController {
 	
 	private void setFieldsVisibility(boolean bool) {
 		if(bool == true) {
-			blockUserBtn.setVisible(true);
-			blockUserBtn.setDisable(false);
-			removeBlockedUserBtn.setVisible(true);
-			removeBlockedUserBtn.setDisable(false);
 			emailField.setDisable(false);
 			emailField.setEditable(true);
 			passwordField.setDisable(false);
 			passwordField.setEditable(true);
-			blockedUsersList.setEditable(true);
-			blockedUsersList.setFocusTraversable(true);
 		} else {
-			blockUserBtn.setVisible(false);
-			blockUserBtn.setDisable(true);
-			removeBlockedUserBtn.setVisible(false);
-			removeBlockedUserBtn.setDisable(true);
 			emailField.setDisable(true);
 			emailField.setEditable(false);
 			passwordField.setDisable(true);
 			passwordField.setEditable(false);
-			blockedUsersList.setEditable(false);
-			blockedUsersList.setFocusTraversable(false);
-			blockedUsersList.getSelectionModel().clearSelection();
 		}
 	}
 	

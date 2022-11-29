@@ -76,24 +76,25 @@ public class CurrentUserProfileController {
     
     public void initialize() {
     	currentUser = UserCenter.getInstance().getCurrentUser();
+    	bannerPic.setFill(new ImagePattern(new Image(new ByteArrayInputStream(currentUser.getBannerPic().returnBytes()))));	
+		profilePic.setFill(new ImagePattern(new Image(new ByteArrayInputStream(currentUser.getProfilePic().returnBytes()))));
+		usernameLabel.setText(currentUser.getUsername());
+		nicknameField.setText(currentUser.getNickName());
+		bioField.setText(currentUser.getBio());
+		numPosts.setText(String.valueOf(currentUser.getUserPosts().size()));
+		numFollowers.setText(String.valueOf(currentUser.getFollowers().size()));
+		numFollowing.setText(String.valueOf(currentUser.getFollowing().size()));
+    	followersList.getItems().clear();
+		for(User u: currentUser.getFollowers().values()) {
+			followersList.getItems().add(u.getUsername());
+		}
+		followingList.getItems().clear();
+    	for(User u: currentUser.getFollowing().values()) {
+			followingList.getItems().add(u.getUsername());
+		}
+    	
     	Platform.runLater(() -> {	
-    		bannerPic.setFill(new ImagePattern(new Image(new ByteArrayInputStream(currentUser.getBannerPic().returnBytes()))));	
-    		profilePic.setFill(new ImagePattern(new Image(new ByteArrayInputStream(currentUser.getProfilePic().returnBytes()))));
-    		usernameLabel.setText(currentUser.getUsername());
-    		nicknameField.setText(currentUser.getNickName());
-    		bioField.setText(currentUser.getBio());
-    		numPosts.setText(String.valueOf(currentUser.getUserPosts().size()));
-    		numFollowers.setText(String.valueOf(currentUser.getFollowers().size()));
-    		numFollowing.setText(String.valueOf(currentUser.getFollowing().size()));
     		displayPosts(currentUser.getUserPosts());
-        	followersList.getItems().clear();
-    		for(User u: currentUser.getFollowers().values()) {
-    			followersList.getItems().add(u.getUsername());
-    		}
-    		followingList.getItems().clear();
-        	for(User u: currentUser.getFollowing().values()) {
-    			followingList.getItems().add(u.getUsername());
-    		}
     	});
     }
 
@@ -130,15 +131,33 @@ public class CurrentUserProfileController {
     }
     
     @FXML public void postsBtnOnAction(ActionEvent event) {
-
+    	viewingLabel.setText("Posts");
+    	scrollPane.setVisible(true);
+    	followersList.setVisible(false);
+    	followingList.setVisible(false);
+    	postsBtnLine.setVisible(true);
+    	followersBtnLine.setVisible(false);
+    	followingBtnLine.setVisible(false);
     }
 
     @FXML public void followersBtnOnAction(ActionEvent event) {
-
+    	viewingLabel.setText("Followers");
+    	scrollPane.setVisible(false);
+    	followersList.setVisible(true);
+    	followingList.setVisible(false);
+    	postsBtnLine.setVisible(false);
+    	followersBtnLine.setVisible(true);
+    	followingBtnLine.setVisible(false);
     }
 
     @FXML public void followingBtnOnAction(ActionEvent event) {
-
+    	viewingLabel.setText("Following");
+    	scrollPane.setVisible(false);
+    	followersList.setVisible(false);
+    	followingList.setVisible(true);
+    	postsBtnLine.setVisible(false);
+    	followersBtnLine.setVisible(false);
+    	followingBtnLine.setVisible(true);
     }
     
     @FXML public void cancelBtnOnAction(ActionEvent event) {

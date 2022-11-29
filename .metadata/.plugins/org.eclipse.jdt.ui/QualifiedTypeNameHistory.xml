@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="javafx.scene.image.Image"/>
-    <fullyQualifiedTypeName name="javafx.scene.control.ChoiceBox"/>
-    <fullyQualifiedTypeName name="javafx.scene.control.ComboBox"/>
-    <fullyQualifiedTypeName name="backend.AppState"/>
-    <fullyQualifiedTypeName name="java.util.Map"/>
-    <fullyQualifiedTypeName name="java.util.Map.Entry"/>
-    <fullyQualifiedTypeName name="javax.swing.text.html.HTMLDocument.Iterator"/>
     <fullyQualifiedTypeName name="javafx.scene.layout.HBox"/>
     <fullyQualifiedTypeName name="java.io.Serializable"/>
     <fullyQualifiedTypeName name="java.util.LinkedHashMap"/>
@@ -25,8 +18,6 @@
     <fullyQualifiedTypeName name="java.util.Iterator"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.util.Collection"/>
-    <fullyQualifiedTypeName name="javafx.beans.value.ChangeListener"/>
-    <fullyQualifiedTypeName name="javafx.beans.value.ObservableValue"/>
     <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="frontend.fxmlsControllers.LandingController"/>
     <fullyQualifiedTypeName name="frontend.fxmlsControllers.PostController"/>
@@ -59,5 +50,14 @@
     <fullyQualifiedTypeName name="util.Utilities"/>
     <fullyQualifiedTypeName name="model.UserCenter"/>
     <fullyQualifiedTypeName name="model.PostCenter"/>
+    <fullyQualifiedTypeName name="javafx.util.Callback"/>
+    <fullyQualifiedTypeName name="javafx.scene.control.ListCell"/>
+    <fullyQualifiedTypeName name="javafx.animation.PauseTransition"/>
+    <fullyQualifiedTypeName name="javafx.util.Duration"/>
+    <fullyQualifiedTypeName name="javafx.beans.value.ChangeListener"/>
+    <fullyQualifiedTypeName name="javafx.beans.value.ObservableValue"/>
+    <fullyQualifiedTypeName name="java.util.TreeMap"/>
+    <fullyQualifiedTypeName name="java.util.Stack"/>
     <fullyQualifiedTypeName name="model.User"/>
+    <fullyQualifiedTypeName name="util.GUIBackend"/>
 </qualifiedTypeNameHistroy>

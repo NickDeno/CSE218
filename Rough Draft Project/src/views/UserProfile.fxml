@@ -43,7 +43,7 @@
             <Font name="Bodoni MT" size="26.0" />
          </font>
       </Button>
-      <Button fx:id="followBtn" alignment="CENTER" layoutX="907.0" layoutY="252.0" mnemonicParsing="false" onAction="#followBtnOnAction" prefHeight="50.0" prefWidth="169.0" style="-fx-border-color: white; -fx-border-radius: 25; -fx-border-width: 3; -fx-border-insets: -3;" styleClass="blueButton" stylesheets="@Stylesheet.css" text="Follow" textFill="WHITE">
+      <Button fx:id="followBtn" alignment="CENTER" layoutX="907.0" layoutY="252.0" mnemonicParsing="false" onAction="#followBtnOnAction" prefHeight="50.0" prefWidth="169.0" style="-fx-border-color: white; -fx-border-radius: 25; -fx-border-width: 3; -fx-border-insets: -3;" styleClass="redButton" stylesheets="@Stylesheet.css" text="Follow" textFill="WHITE">
          <font>
             <Font name="Bodoni MT" size="26.0" />
          </font>
@@ -86,8 +86,8 @@
             <Font size="22.0" />
          </font>
       </Label>
-      <ListView fx:id="followingList" layoutX="482.0" layoutY="374.0" prefHeight="337.0" prefWidth="364.0" style="-fx-font-size: 25;" visible="false" />
-      <ListView fx:id="followersList" layoutX="480.0" layoutY="372.0" prefHeight="337.0" prefWidth="364.0" style="-fx-font-size: 25;" visible="false" />
+      <ListView fx:id="followingList" layoutX="499.0" layoutY="374.0" prefHeight="374.0" prefWidth="341.0" style="-fx-font-size: 25; -fx-border-color: #2576df; -fx-border-width: 3;" visible="false" />
+      <ListView fx:id="followersList" layoutX="499.0" layoutY="374.0" prefHeight="374.0" prefWidth="341.0" style="-fx-font-size: 25; -fx-border-color: #2576df; -fx-border-width: 3;" visible="false" />
       <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="296.0" layoutY="374.0" prefHeight="374.0" prefWidth="743.0" style="-fx-background: transparent; -fx-background-color: transparent;">
          <content>
             <TilePane fx:id="tilePane" alignment="TOP_CENTER" prefHeight="374.0" prefWidth="729.0" style="-fx-vgap: 30;" tileAlignment="TOP_CENTER" />

@@ -55,12 +55,12 @@ public class SignInController {
 	}
 	
 	@FXML public void signInBtnOnAction(ActionEvent event) {
-		String chosenPassword;
-		if(showPasswordBox.isSelected()) chosenPassword = visiblePasswordField.getText();
-		else chosenPassword = passwordField.getText();
+		String password;
+		if(showPasswordBox.isSelected()) password = visiblePasswordField.getText();
+		else password = passwordField.getText();
 		
 		User tempUser = UserCenter.getInstance().getUser(usernameField.getText());
-		if(tempUser != null && tempUser.getPassword().equals(chosenPassword)) {
+		if(tempUser != null && tempUser.getPassword().equals(password)) {
 			UserCenter.getInstance().setCurrentUser(tempUser);
 			GUIBackend.loadNewScene(stage, GUIBackend.LandingScene);
 		} else {
@@ -69,6 +69,8 @@ public class SignInController {
 			usernameField.clear();
 			passwordField.clear();
 			visiblePasswordField.clear();
+			passwordField.setVisible(true);
+			visiblePasswordField.setVisible(false);
 			showPasswordBox.setSelected(false);
 		}
 	}

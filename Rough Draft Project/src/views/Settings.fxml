@@ -50,33 +50,33 @@
             <Font name="Candara" size="28.0" />
          </font>
       </CheckBox>
-      <Label layoutX="26.0" layoutY="456.0" prefHeight="65.0" prefWidth="313.0" text="Blocked Users:" textFill="#3b93ff">
+      <Label layoutX="24.0" layoutY="457.0" prefHeight="65.0" prefWidth="313.0" text="Blocked Users:" textFill="#3b93ff">
          <font>
             <Font name="Bookman Old Style Bold" size="39.0" />
          </font>
       </Label>
-      <ListView fx:id="blockedUsersList" focusTraversable="false" layoutX="373.0" layoutY="408.0" prefHeight="300.0" prefWidth="368.0" style="-fx-font-size: 25;" />
-      <Button fx:id="blockUserBtn" disable="true" layoutX="24.0" layoutY="539.0" mnemonicParsing="false" onAction="#blockUserBtnOnAction" prefHeight="39.0" prefWidth="156.0" text="Block New User" visible="false">
+      <ListView fx:id="blockedUsersList" focusTraversable="false" layoutX="442.0" layoutY="434.0" prefHeight="312.0" prefWidth="368.0" style="-fx-font-size: 25;" />
+      <Button fx:id="blockUserBtn" layoutX="24.0" layoutY="551.0" mnemonicParsing="false" onAction="#blockUserBtnOnAction" prefHeight="39.0" prefWidth="156.0" text="Block New User">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="removeBlockedUserBtn" disable="true" layoutX="189.0" layoutY="539.0" mnemonicParsing="false" onAction="#removeBlockedUserBtnOnAction" prefHeight="39.0" prefWidth="156.0" text="Remove Blocked User" visible="false">
+      <Button fx:id="removeBlockedUserBtn" layoutX="188.0" layoutY="551.0" mnemonicParsing="false" onAction="#removeBlockedUserBtnOnAction" prefHeight="39.0" prefWidth="156.0" text="Remove Blocked User">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Hyperlink fx:id="deleteAccount" alignment="CENTER" layoutX="2.0" layoutY="704.0" onAction="#deleteAccountOnAction" prefHeight="31.0" prefWidth="227.0" text="Deltete Account" textFill="#e80e0e">
+      <Hyperlink fx:id="deleteAccount" alignment="CENTER" layoutX="14.0" layoutY="695.0" onAction="#deleteAccountOnAction" prefHeight="31.0" prefWidth="227.0" text="Deltete Account" textFill="#e80e0e">
          <font>
             <Font name="System Bold Italic" size="27.0" />
          </font>
       </Hyperlink>
-      <Button fx:id="saveChangesBtn" layoutX="889.0" layoutY="688.0" mnemonicParsing="false" onAction="#saveChangesBtnOnAction" prefHeight="58.0" prefWidth="187.0" styleClass="blueButton" stylesheets="@Stylesheet.css" text="Save Changes" textFill="WHITE">
+      <Button fx:id="saveChangesBtn" layoutX="857.0" layoutY="340.0" mnemonicParsing="false" onAction="#saveChangesBtnOnAction" prefHeight="58.0" prefWidth="187.0" styleClass="redButton" stylesheets="@Stylesheet.css" text="Save Changes" textFill="WHITE">
          <font>
             <Font name="Baskerville Old Face" size="22.0" />
          </font>
       </Button>
-      <Button fx:id="backBtn" layoutX="889.0" layoutY="613.0" mnemonicParsing="false" onAction="#backBtnOnAction" prefHeight="58.0" prefWidth="187.0" styleClass="blueButton" stylesheets="@Stylesheet.css" text="Back" textFill="WHITE">
+      <Button fx:id="cancelBtn" layoutX="636.0" layoutY="340.0" mnemonicParsing="false" onAction="#cancelBtnOnAction" prefHeight="58.0" prefWidth="187.0" styleClass="blueButton" stylesheets="@Stylesheet.css" text="Cancel" textFill="WHITE">
          <font>
             <Font name="Baskerville Old Face" size="22.0" />
          </font>

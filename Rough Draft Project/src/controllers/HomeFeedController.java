@@ -90,6 +90,7 @@ public class HomeFeedController {
 	}
 	
 	@FXML public void applyFilterBtnOnAction(ActionEvent event) {
+		if(chosenFilter == null) return;	
 		if(chosenFilter.equals("Following")) {
 			if(currentUser.getFollowing().values().size() == 0) {
 				Alert alert = new Alert(AlertType.ERROR);
@@ -97,9 +98,11 @@ public class HomeFeedController {
 				alert.setHeaderText(null);
 				alert.setContentText("Unable to filter posts by following since you are not following anyone.");
 				alert.showAndWait();
+				filterBox.setValue("");
 				resetFields();
 				return;
 			}
+			tilePane.getChildren().clear();
 			Iterator<User> itr = currentUser.getFollowing().values().iterator();
 			while(itr.hasNext()) {
 				displayPosts(itr.next().getUserPosts());
@@ -111,13 +114,17 @@ public class HomeFeedController {
 				alert.setHeaderText(null);
 				alert.setContentText("Unable to filter posts by followers since nobody follows you.");
 				alert.showAndWait();
+				filterBox.setValue("");
 				resetFields();
 				return;
 			}
+			tilePane.getChildren().clear();
 			Iterator<User> itr = currentUser.getFollowers().values().iterator();
 			while(itr.hasNext()) {
 				displayPosts(itr.next().getUserPosts());
 			}
+			
+			
 		} else if(chosenFilter.equals("User")) {
 			User searchedUser = UserCenter.getInstance().getUser(searchField.getText());
 			if(searchedUser == null) {
@@ -135,13 +142,16 @@ public class HomeFeedController {
 				alert.showAndWait();
 				searchField.clear();	
 			} else {
+				tilePane.getChildren().clear();
 				displayPosts(searchedUser.getUserPosts());
 				resetFields();
 			}
 		} else if(chosenFilter.equals("Topic")) {
+			tilePane.getChildren().clear();
 			displayPosts(PostCenter.getInstance().searchByTopic(chosenTopic));
 			resetFields();
 		} else if(chosenFilter.equals("Title")) {
+			tilePane.getChildren().clear();
 			displayPosts(PostCenter.getInstance().searchByTitle(searchField.getText()));
 			resetFields();
 		}
@@ -150,13 +160,12 @@ public class HomeFeedController {
 	
 	@FXML public void removeFilterBtnOnAction(ActionEvent event) {
 		tilePane.getChildren().clear();
-		filterBox.setValue("No Filter");
+		filterBox.setValue("");
 		displayPosts(PostCenter.getInstance().getPosts());
 		resetFields();
 	}
 	
 	 private void displayPosts(LinkedHashMap<UUID, Post> posts) {
-		 tilePane.getChildren().clear();
 		 GUIBackend.displayPostsNewToOld(posts, tilePane, landingController, true);
 	   }
 	
@@ -165,8 +174,7 @@ public class HomeFeedController {
 		searchField.clear();
 		searchField.setVisible(false);
 		searchFieldLine.setVisible(false);
-//		filterBox.setValue("No Filter");
-//		topicBox.setValue(null);
+		topicBox.setValue("");
 		topicBox.setVisible(false);
 	}
 	

@@ -32,12 +32,15 @@ public class SignUpController {
 	@FXML private TextField usernameField;
 	@FXML private PasswordField passwordField;
 	@FXML private TextField visiblePasswordField;
+	@FXML private PasswordField confirmPasswordField;
+	@FXML private TextField visibleConfirmPasswordField;
 	@FXML private CheckBox showPasswordBox;
 	@FXML private Button signUpBtn;
 	@FXML private Button backBtn;
 	@FXML private Line emailLine;
 	@FXML private Line usernameLine;
 	@FXML private Line passwordLine;
+	@FXML private Line confirmPasswordLine;
 	@FXML private Button browseBtn;
 	@FXML private ImageView previewProfilePic;
 	
@@ -55,11 +58,17 @@ public class SignUpController {
 		if(showPasswordBox.isSelected()) {
 			visiblePasswordField.setText(passwordField.getText());
 			visiblePasswordField.setVisible(true);
+			visibleConfirmPasswordField.setText(confirmPasswordField.getText());
+			visibleConfirmPasswordField.setVisible(true);		
 			passwordField.setVisible(false);
+			confirmPasswordField.setVisible(false);
 		} else {
 			passwordField.setText(visiblePasswordField.getText());
 			passwordField.setVisible(true);
+			confirmPasswordField.setText(visibleConfirmPasswordField.getText());
+			confirmPasswordField.setVisible(true);	
 			visiblePasswordField.setVisible(false);
+			visibleConfirmPasswordField.setVisible(false);
 		}
 	}
 	
@@ -80,16 +89,25 @@ public class SignUpController {
 	}
 
 	@FXML public void signUpBtnOnAction(ActionEvent event) {
-		String chosenPassword;
-		if(showPasswordBox.isSelected()) chosenPassword = visiblePasswordField.getText();
-		else chosenPassword = passwordField.getText();
+		String password;
+		String confirmPassword;
+		if(showPasswordBox.isSelected()) {
+			password = visiblePasswordField.getText();
+			confirmPassword = visibleConfirmPasswordField.getText();
+		}
+		else {
+			password = passwordField.getText();
+			confirmPassword = confirmPasswordField.getText();
+		}
 		
-		if (UserCenter.getInstance().containsUser(usernameField.getText()) == true || !UserCenter.isValidPassword(chosenPassword) || !UserCenter.isValidEmail(emailField.getText())) {
+		
+		if (UserCenter.getInstance().containsUser(usernameField.getText()) == true || !UserCenter.isValidPassword(password) ||
+				!password.equals(confirmPassword) ||!UserCenter.isValidEmail(emailField.getText())) {
 			msgLabel.setText("Failed, please try again.");
 			msgLabel.setVisible(true);
 			resetFields();
 		} else {
-			UserCenter.getInstance().addUser(new User(usernameField.getText(), chosenPassword, emailField.getText(), new FXImage(chosenImageBytes)));
+			UserCenter.getInstance().addUser(new User(usernameField.getText(), password, emailField.getText(), new FXImage(chosenImageBytes)));
 			Utilities.backupUserCenter();
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Account Sucessfully Created!");
@@ -126,18 +144,43 @@ public class SignUpController {
 				if (UserCenter.isValidPassword(newValue)) passwordLine.setStyle(tempStyle + "-fx-stroke: #38ff13;");
 				else passwordLine.setStyle(tempStyle + "-fx-stroke: #ff0000;");
 			});
+		} else if(event.getSource().equals(visiblePasswordField)) {
+			String tempStyle = visiblePasswordField.getStyle();
+			visiblePasswordField.textProperty().addListener((observable, oldValue, newValue) -> {
+				if (UserCenter.isValidPassword(newValue)) passwordLine.setStyle(tempStyle + "-fx-stroke: #38ff13;");
+				else passwordLine.setStyle(tempStyle + "-fx-stroke: #ff0000;");
+			});
+		} else if(event.getSource().equals(confirmPasswordField)) {
+			String tempStyle = confirmPasswordField.getStyle();
+			confirmPasswordField.textProperty().addListener((observable, oldValue, newValue) -> {
+				if (passwordField.getText().equals(newValue)) confirmPasswordLine.setStyle(tempStyle + "-fx-stroke: #38ff13;");
+				else confirmPasswordLine.setStyle(tempStyle + "-fx-stroke: #ff0000;");
+			});
+		} else if(event.getSource().equals(visibleConfirmPasswordField)) {
+			String tempStyle = visibleConfirmPasswordField.getStyle();
+			visibleConfirmPasswordField.textProperty().addListener((observable, oldValue, newValue) -> {
+				if (visiblePasswordField.getText().equals(newValue)) confirmPasswordLine.setStyle(tempStyle + "-fx-stroke: #38ff13;");
+				else confirmPasswordLine.setStyle(tempStyle + "-fx-stroke: #ff0000;");
+			});
 		}
 	}
 
 	private void resetFields() {
+		emailField.clear();
 		usernameField.clear();
 		passwordField.clear();
+		passwordField.setVisible(true);
 		visiblePasswordField.clear();
-		emailField.clear();
+		visiblePasswordField.setVisible(false);
+		confirmPasswordField.clear();
+		confirmPasswordField.setVisible(true);
+		visibleConfirmPasswordField.clear();
+		visibleConfirmPasswordField.setVisible(false);
 		showPasswordBox.setSelected(false);
 		emailLine.setStyle("-fx-stroke: #3b93ff;");
 		usernameLine.setStyle("-fx-stroke: #3b93ff;");
 		passwordLine.setStyle("-fx-stroke: #3b93ff;");
+		confirmPasswordLine.setStyle("-fx-stroke: #3b93ff;");
 		chosenImage = new File("src/assets/TempProfilePic.png");
 		chosenImageBytes = Utilities.fileToByteArr(chosenImage);
 		previewProfilePic.setImage(new Image(new ByteArrayInputStream(chosenImageBytes)));

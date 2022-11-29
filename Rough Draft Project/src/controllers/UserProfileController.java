@@ -49,8 +49,7 @@ public class UserProfileController {
     @FXML private ListView<String> followersList;
     @FXML private ListView<String> followingList;
     
-    //This is the post the user will return to when clicking "back" button
-    private Post returnPost;
+    
     private User user;
     private User currentUser;
     private LandingController landingController;
@@ -61,15 +60,23 @@ public class UserProfileController {
     public void initialize() {
     	currentUser = UserCenter.getInstance().getCurrentUser();
     	Platform.runLater(() -> {
-    		if(user.getBannerPic() != null) bannerPic.setFill(new ImagePattern(new Image(new ByteArrayInputStream(user.getBannerPic().returnBytes()))));
-    		if(user.getNickName() != null) nicknameLabel.setText(user.getNickName());
-    		if(user.getBio() != null) bioField.setText(user.getBio());
-    		
-    		usernameLabel.setText(user.getUsername());
+    		bannerPic.setFill(new ImagePattern(new Image(new ByteArrayInputStream(user.getBannerPic().returnBytes()))));
     		profilePic.setFill(new ImagePattern(new Image(new ByteArrayInputStream(user.getProfilePic().returnBytes()))));
+    		usernameLabel.setText(user.getUsername());
+    		nicknameLabel.setText(user.getNickName());
+    		bioField.setText(user.getBio());
     		numPosts.setText(String.valueOf(user.getUserPosts().size()));
     		numFollowers.setText(String.valueOf(user.getFollowers().size()));
-    		numFollowing.setText(String.valueOf(user.getFollowing().size())); 		
+    		numFollowing.setText(String.valueOf(user.getFollowing().size())); 	
+        	followersList.getItems().clear();
+    		for(User u: user.getFollowers().values()) {
+    			followersList.getItems().add(u.getUsername());
+    		}
+    		followingList.getItems().clear();
+        	for(User u: user.getFollowing().values()) {
+    			followingList.getItems().add(u.getUsername());
+    		}
+    		
     		if(currentUser.getUsername().equals(user.getUsername())) {
     			followBtn.setVisible(false);
     			followBtn.setDisable(true);
@@ -84,21 +91,13 @@ public class UserProfileController {
     		}	
     		
     		displayPosts(user.getUserPosts());
-        	followersList.getItems().clear();
-    		for(User u: user.getFollowers().values()) {
-    			followersList.getItems().add(u.getUsername());
-    		}
-    		followingList.getItems().clear();
-        	for(User u: user.getFollowing().values()) {
-    			followingList.getItems().add(u.getUsername());
-    		}
+    		
     	});
     }
     
     @FXML public void backBtnOnAction(ActionEvent event) {
-    	PostRepliesController postReplies =  GUIBackend.loadPane(landingController.getContentPane(), GUIBackend.PostRepliesScene);
-		postReplies.setPostData(returnPost);
-		postReplies.setLandingController(landingController);	
+    	HomeFeedController homeFeed = GUIBackend.loadPane(landingController.getContentPane(), GUIBackend.HomeFeedScene);
+    	homeFeed.setLandingController(landingController);
     }
     
     @FXML public void postsBtnOnAction(ActionEvent event) {
@@ -165,10 +164,6 @@ public class UserProfileController {
     
     public void setUser(User user) {
     	this.user = UserCenter.getInstance().getUser(user.getUsername());
-    }
-    
-    public void setReturnPost(Post returnPost) {
-    	this.returnPost = returnPost;
     }
     
     public void setLandingController(LandingController landingController) {

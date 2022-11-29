@@ -91,31 +91,31 @@
             </ImageView>
          </graphic>
       </Button>
-      <Label fx:id="viewingLabel" alignment="CENTER" layoutX="583.0" layoutY="345.0" prefHeight="32.0" prefWidth="102.0" text="Posts" textFill="WHITE">
+      <Label fx:id="viewingLabel" alignment="CENTER" layoutX="564.0" layoutY="345.0" prefHeight="32.0" prefWidth="177.0" text="Posts" textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <ListView fx:id="followingList" layoutX="481.0" layoutY="394.0" prefHeight="327.0" prefWidth="306.0" style="-fx-font-size: 25;" visible="false" />
-      <ListView fx:id="followersList" layoutX="484.0" layoutY="392.0" prefHeight="327.0" prefWidth="306.0" style="-fx-font-size: 25;" visible="false" />
+      <ListView fx:id="followingList" layoutX="493.0" layoutY="378.0" prefHeight="343.0" prefWidth="321.0" style="-fx-font-size: 25; -fx-border-color: #2576df; -fx-border-width: 3;" visible="false" />
+      <ListView fx:id="followersList" layoutX="493.0" layoutY="378.0" prefHeight="343.0" prefWidth="321.0" style="-fx-font-size: 25; -fx-border-color: #2576df; -fx-border-width: 3;" visible="false" />
       <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="288.0" layoutY="377.0" prefHeight="374.0" prefWidth="743.0" style="-fx-background: transparent; -fx-background-color: transparent;">
          <content>
             <TilePane fx:id="tilePane" alignment="TOP_CENTER" prefHeight="374.0" prefWidth="729.0" style="-fx-vgap: 30;" tileAlignment="TOP_CENTER" />
          </content>
       </ScrollPane>
-      <Button fx:id="saveChangesBtn" alignment="CENTER" layoutX="948.0" layoutY="254.0" mnemonicParsing="false" onAction="#saveChangesBtnOnAction" prefHeight="41.0" prefWidth="128.0" style="-fx-border-color: white; -fx-border-radius: 25; -fx-border-width: 3; -fx-border-insets: -3;" styleClass="blueButton" stylesheets="@Stylesheet.css" text="Save Changes" textFill="WHITE">
+      <Button fx:id="saveChangesBtn" alignment="CENTER" layoutX="948.0" layoutY="254.0" mnemonicParsing="false" onAction="#saveChangesBtnOnAction" prefHeight="41.0" prefWidth="128.0" style="-fx-border-radius: 25; -fx-border-width: 3; -fx-border-insets: -3; -fx-border-color: white;" styleClass="redButton" stylesheets="@Stylesheet.css" text="Save Changes" textFill="WHITE">
          <font>
             <Font name="Bodoni MT" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="cancelBtn" alignment="CENTER" layoutX="799.0" layoutY="254.0" mnemonicParsing="false" onAction="#cancelBtnOnAction" prefHeight="41.0" prefWidth="128.0" style="-fx-border-color: white; -fx-border-radius: 25; -fx-border-width: 3; -fx-border-insets: -3;" styleClass="blueButton" stylesheets="@Stylesheet.css" text="Cancel" textFill="WHITE">
+      <Button fx:id="cancelBtn" alignment="CENTER" layoutX="799.0" layoutY="254.0" mnemonicParsing="false" onAction="#cancelBtnOnAction" prefHeight="41.0" prefWidth="128.0" style="-fx-border-radius: 25; -fx-border-width: 3; -fx-border-insets: -3; -fx-border-color: white;" styleClass="blueButton" stylesheets="@Stylesheet.css" text="Cancel" textFill="WHITE">
          <font>
             <Font name="Bodoni MT" size="18.0" />
          </font>
       </Button>
-      <CheckBox fx:id="editFieldsBox" layoutX="44.0" layoutY="707.0" mnemonicParsing="false" onAction="#editFieldsBoxOnAction" prefHeight="23.0" prefWidth="140.0" text="Edit Fields" textFill="WHITE">
+      <CheckBox fx:id="editFieldsBox" layoutX="31.0" layoutY="709.0" mnemonicParsing="false" onAction="#editFieldsBoxOnAction" prefHeight="51.0" prefWidth="166.0" text="Edit Fields" textFill="WHITE">
          <font>
-            <Font size="19.0" />
+            <Font name="Baskerville Old Face" size="26.0" />
          </font>
       </CheckBox>
    </children>

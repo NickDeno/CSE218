@@ -29,7 +29,7 @@
          </font>
       </TextField>
       <Line fx:id="searchFieldLine" endX="280.0" layoutX="574.0" layoutY="59.0" startX="-75.0" stroke="#3b93ff" strokeWidth="3.0" visible="false" />
-      <Button fx:id="applyFilterBtn" layoutX="911.0" layoutY="6.0" mnemonicParsing="false" onAction="#applyFilterBtnOnAction" prefHeight="49.0" prefWidth="172.0" styleClass="createPostButton" stylesheets="@Stylesheet.css" text="Apply Filter" textFill="WHITE">
+      <Button fx:id="applyFilterBtn" layoutX="911.0" layoutY="6.0" mnemonicParsing="false" onAction="#applyFilterBtnOnAction" prefHeight="49.0" prefWidth="172.0" styleClass="redButton" stylesheets="@Stylesheet.css" text="Apply Filter" textFill="WHITE">
          <font>
             <Font name="Bodoni MT" size="24.0" />
          </font>

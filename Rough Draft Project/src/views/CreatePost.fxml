@@ -35,7 +35,7 @@
             <Font size="21.0" />
          </font>
       </TextArea>
-      <Button fx:id="createPostButton" layoutX="867.0" layoutY="685.0" mnemonicParsing="false" onAction="#createPostButtonOnAction" prefHeight="61.0" prefWidth="209.0" styleClass="createPostButton" stylesheets="@Stylesheet.css" text="Create Post" textFill="WHITE">
+      <Button fx:id="createPostButton" layoutX="867.0" layoutY="685.0" mnemonicParsing="false" onAction="#createPostButtonOnAction" prefHeight="61.0" prefWidth="209.0" styleClass="redButton" stylesheets="@Stylesheet.css" text="Create Post" textFill="WHITE">
          <font>
             <Font name="Bodoni MT" size="26.0" />
          </font>

@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.ByteArrayInputStream;
 
+import model.User;
 import model.UserCenter;
 import util.Utilities;
 import util.GUIBackend;
@@ -31,14 +32,17 @@ public class LandingController {
 	@FXML private Circle profilePic;
 	@FXML private AnchorPane contentPane;
 	
+	private User currentUser;
+	
 	//Initializer
 	public LandingController() {}
 	
 	public void initialize() {
-		userLabel.setText(UserCenter.getInstance().getCurrentUser().getUsername());
-		profilePic.setFill(new ImagePattern(new Image(new ByteArrayInputStream(UserCenter.getInstance().getCurrentUser().getProfilePic().returnBytes()))));
-		numFollowingLabel.setText(String.valueOf(UserCenter.getInstance().getCurrentUser().getFollowing().size()));
-		numFollowersLabel.setText(String.valueOf(UserCenter.getInstance().getCurrentUser().getFollowers().size()));
+		currentUser = UserCenter.getInstance().getCurrentUser();
+		userLabel.setText(currentUser.getUsername());
+		profilePic.setFill(new ImagePattern(new Image(new ByteArrayInputStream(currentUser.getProfilePic().returnBytes()))));
+		numFollowingLabel.setText(String.valueOf(currentUser.getFollowing().size()));
+		numFollowersLabel.setText(String.valueOf(currentUser.getFollowers().size()));
 		userLabel.setEffect(new DropShadow(8, Color.rgb(0, 0, 0, 0.8)));
 		profilePic.setEffect(new DropShadow(8, Color.rgb(0, 0, 0, 0.8)));
 		

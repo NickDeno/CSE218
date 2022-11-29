@@ -93,7 +93,6 @@ public class PostRepliesController {
 	@FXML public void viewProfileBtnOnAction(ActionEvent event) {
 		UserProfileController userProfile =  GUIBackend.loadPane(landingController.getContentPane(), GUIBackend.UserProfileScene);
 		userProfile.setUser(post.getPoster());
-		userProfile.setReturnPost(post);
 		userProfile.setLandingController(landingController);
 	}
 	

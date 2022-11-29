@@ -3,15 +3,18 @@ package util;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.Stack;
 import java.util.UUID;
 
 import model.Post;
+import model.User;
 import model.UserCenter;
 import controllers.LandingController;
 import controllers.PostController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
@@ -31,6 +34,12 @@ public class GUIBackend {
 	public static final String BlockUserScene = "/views/BlockUser.fxml";
 	public static final String UserProfileScene = "/views/UserProfile.fxml";
 	
+	public static String currentTheme = "/views/LightTheme.css";
+	
+	public static Stack<String> previousScenes = new Stack<String>();
+	public static Stack<User> previousUserPage = new Stack<User>();
+	public static Stack<Post> previousPostPage = new Stack<Post>();
+	
 	//Loads new window with specified fxmlFile and returns FXMLController of the fxmlFile being loaded
 	public static <T> T loadNewWindow(String fxmlFileName) {
 		try {
@@ -40,6 +49,7 @@ public class GUIBackend {
 			Stage stage = new Stage();
 			stage.setScene(scene);
 			stage.setResizable(false);
+			stage.getIcons().add(new Image("/assets/ChadderIcon.png"));
 			stage.show();
 			return loader.getController();
 		} catch (IOException e) {
@@ -59,6 +69,7 @@ public class GUIBackend {
 			stage.setScene(scene);
 			stage.setResizable(false);
 			stage.initStyle(StageStyle.UNDECORATED);
+			stage.getIcons().add(new Image("/assets/ChadderIcon.png"));
 			stage.show();
 			return loader.getController();
 		} catch (IOException e) {
@@ -73,7 +84,9 @@ public class GUIBackend {
 		try {
 			FXMLLoader loader = new FXMLLoader(GUIBackend.class.getResource(fxmlFileName));
 			Parent root = loader.load();
-			stage.setScene(new Scene(root));
+			Scene scene = new Scene(root);
+//			scene.getStylesheets().add(currentTheme);
+			stage.setScene(scene);
 			stage.show();
 			return loader.getController();
 		} catch (IOException e) {
@@ -88,6 +101,10 @@ public class GUIBackend {
 		try {
 			FXMLLoader loader = new FXMLLoader(GUIBackend.class.getResource(fxmlFileName));
 			AnchorPane pane = loader.load();
+			for(String s: previousScenes) {
+				System.out.println(s);
+			}
+//			pane.getStyleClass().add("pane");
 			ap.getChildren().clear();
 			ap.getChildren().setAll(pane);
 			return loader.getController();		
