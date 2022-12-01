@@ -126,6 +126,28 @@ public class Post implements Serializable {
 		}
 	}
 	
+	public void update(Post post, User user) {
+		var userCenterPostInstance = UserCenter.getInstance().getUser(user.getUsername()).getUserPosts().get(this.getUuid());
+		var postCenterPostInstance = PostCenter.getInstance().getPost(this.getUuid());
+		if(userCenterPostInstance == this) {
+			postCenterPostInstance.setTitle(post.getTitle());
+			postCenterPostInstance.setTopic(post.getTopic());
+			postCenterPostInstance.setDescription(post.getDescription());
+			postCenterPostInstance.setPostImages(post.getPostImages());
+		} else {
+			userCenterPostInstance.setTitle(post.getTitle());
+			userCenterPostInstance.setTopic(post.getTopic());
+			userCenterPostInstance.setDescription(post.getDescription());
+			userCenterPostInstance.setPostImages(post.getPostImages());
+		}
+	}
+	
+	public void delete(Post post, User user) {
+		UUID postUUID = this.getUuid();
+		PostCenter.getInstance().removePost(postUUID);
+		UserCenter.getInstance().getUser(user.getUsername()).getUserPosts().remove(postUUID);	
+	}
+	
 	@Override
 	public String toString() {
 		String p = "";

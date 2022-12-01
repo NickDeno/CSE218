@@ -33,6 +33,7 @@ public class GUIBackend {
 	public static final String ReplyScene = "/views/Reply.fxml";
 	public static final String BlockUserScene = "/views/BlockUser.fxml";
 	public static final String UserProfileScene = "/views/UserProfile.fxml";
+	public static final String EditPostScene = "/views/EditPost.fxml";
 	
 	public static String currentTheme = "/views/LightTheme.css";
 	
@@ -123,7 +124,7 @@ public class GUIBackend {
 	 * if the first posts' poster is in the current users blocked list and if they are, we can break out of method since all of the posts in this case will be from
 	 * that user.
 	 */
-	public static void displayPostsNewToOld(LinkedHashMap<UUID, Post> posts, TilePane tilePane, LandingController landingController, boolean isClickable) {
+	public static void displayPostsNewToOld(LinkedHashMap<UUID, Post> posts, TilePane tilePane, LandingController landingController) {
 		ArrayList<Post> postList = new ArrayList<Post>(posts.values());
 		for(int i = postList.size()-1; i >= 0; i--) {
 			//If this posts' poster is in the current users' "blockedUsers", it will not display post
@@ -138,19 +139,13 @@ public class GUIBackend {
 				postController.setPostData(postList.get(i));
 				postController.setLandingController(landingController);
 				tilePane.getChildren().add(ap);	
-				if(isClickable == false) {
-					//Removes "Hover" and "Clicked" effect from post when post is not clickable
-					ap.getStyleClass().clear();
-					ap.setStyle("-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #e84d4d 0.0%, #a8a8a8 100.0%); -fx-border-color: black; -fx-border-width: 3;");
-				}
-				postController.setClickable(isClickable);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 	
-	public static void displayPostsOldToNew(LinkedHashMap<UUID, Post> posts, TilePane tilePane, LandingController landingController, boolean isClickable) {
+	public static void displayPostsOldToNew(LinkedHashMap<UUID, Post> posts, TilePane tilePane, LandingController landingController) {
 		ArrayList<Post> postList = new ArrayList<Post>(posts.values());
 		for(int i = 0; i < postList.size(); i++) {
 			//If this posts' poster is in the current users' "blockedUsers", it will not display post
@@ -165,12 +160,6 @@ public class GUIBackend {
 				postController.setPostData(postList.get(i));
 				postController.setLandingController(landingController);
 				tilePane.getChildren().add(ap);	
-				if(isClickable == false) {
-					//Removes "Hover" and "Clicked" effect from post when post is not clickable
-					ap.getStyleClass().clear();
-					ap.setStyle("-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #e84d4d 0.0%, #a8a8a8 100.0%); -fx-border-color: black; -fx-border-width: 3;");
-				}
-				postController.setClickable(isClickable);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -182,7 +171,7 @@ public class GUIBackend {
 	 * users posts, it takes in a singular post.Then, creates an AnchorPane of this post object. Instead of adding the AnchorPane to bottom of TilePane 
 	 * like displayPosts, the AnchorPane is added to the top of the TilePane.
 	 */
-	public static void displayPostOnTop(Post post, TilePane tilePane, LandingController landingController, boolean isClickable) {
+	public static void displayPostOnTop(Post post, TilePane tilePane, LandingController landingController) {
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader();
 			fxmlLoader.setLocation(GUIBackend.class.getResource("/views/Post.fxml"));
@@ -191,18 +180,12 @@ public class GUIBackend {
 			postController.setPostData(post);
 			postController.setLandingController(landingController);
 			tilePane.getChildren().add(0,ap);	
-			if(isClickable == false) {
-				//Removes "Hover" and "Clicked" effect from post when post is not clickable
-				ap.getStyleClass().clear();
-				ap.setStyle("-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #e84d4d 0.0%, #a8a8a8 100.0%); -fx-border-color: black; -fx-border-width: 3;");
-			}
-			postController.setClickable(isClickable);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}	
 	
-	public static void displayPostOnBottom(Post post, TilePane tilePane, LandingController landingController, boolean isClickable) {
+	public static void displayPostOnBottom(Post post, TilePane tilePane, LandingController landingController) {
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader();
 			fxmlLoader.setLocation(GUIBackend.class.getResource("/views/Post.fxml"));
@@ -211,14 +194,34 @@ public class GUIBackend {
 			postController.setPostData(post);
 			postController.setLandingController(landingController);
 			tilePane.getChildren().add(ap);	
-			if(isClickable == false) {
-				//Removes "Hover" and "Clicked" effect from post when post is not clickable
-				ap.getStyleClass().clear();
-				ap.setStyle("-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #e84d4d 0.0%, #a8a8a8 100.0%); -fx-border-color: black; -fx-border-width: 3;");
-			}
-			postController.setClickable(isClickable);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}	
+	
+	public static void displayFollowingPosts(LinkedHashMap<UUID, Post> posts, TilePane tilePane, LandingController landingController) {
+		ArrayList<Post> postList = new ArrayList<Post>(posts.values());
+		for(int i = postList.size()-1; i >= 0; i--) {
+			//If this posts' poster is in the current users' "blocked", it will not display post
+			if(UserCenter.getInstance().getCurrentUser().getBlockedUsers().get(postList.get(i).getPoster().getUsername()) != null) {
+				continue;
+			}
+			
+			//If the posts' poster is in the current users' "following", it will display post. If not it will skip over displaying it
+			if(UserCenter.getInstance().getCurrentUser().getFollowing().get(postList.get(i).getPoster().getUsername()) != null) {
+				try {
+					FXMLLoader fxmlLoader = new FXMLLoader();
+					fxmlLoader.setLocation(GUIBackend.class.getResource("/views/Post.fxml"));
+					AnchorPane ap = fxmlLoader.load();
+					PostController postController = fxmlLoader.getController();
+					postController.setPostData(postList.get(i));
+					postController.setLandingController(landingController);
+					tilePane.getChildren().add(ap);	
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+		}
+	}
 }

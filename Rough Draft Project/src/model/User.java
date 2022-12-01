@@ -2,9 +2,10 @@ package model;
 
 import java.io.File;
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.UUID;
 
 import util.Utilities;
@@ -14,16 +15,17 @@ public class User implements Serializable {
 	
 	//Key field
 	private String username;
+	
 	private String password;
 	private String email;
 	private String nickName;
 	private String bio;
 	private FXImage profilePic;
 	private FXImage bannerPic;
-	private LinkedHashMap<UUID, Post> userPosts;
-	private HashMap<String, User> followers;
-	private HashMap<String, User> following;
-	private HashMap<String, User> blockedUsers;
+	private LinkedHashMap<UUID, Post> userPosts;	
+	private LinkedList<User> followers;
+	private TreeMap<String, User> following;
+	private TreeMap<String, User> blockedUsers;
 	
 	public User(String username, String password, String email, FXImage profilePic) {
 		super();
@@ -35,9 +37,9 @@ public class User implements Serializable {
 		this.profilePic = profilePic;
 		this.bannerPic = new FXImage(Utilities.fileToByteArr(new File("src/assets/DefaultBanner.png")));
 		this.userPosts = new LinkedHashMap<UUID, Post>();
-		this.followers = new HashMap<String, User>();
-		this.following =  new HashMap<String, User>();
-		this.blockedUsers = new HashMap<String, User>();
+		this.followers = new LinkedList<User>();
+		this.following =  new TreeMap<String, User>();
+		this.blockedUsers = new TreeMap<String, User>();
 		
 	}
 
@@ -105,15 +107,19 @@ public class User implements Serializable {
 		this.userPosts = userPosts;
 	}
 	
-	public HashMap<String, User> getFollowers(){
+	public LinkedList<User> getFollowers(){
 		return followers;
 	}
 	
-	public HashMap<String, User> getFollowing(){
+	public TreeMap<String, User> getFollowing(){
 		return following;
 	}
+	
+	public void setBlockedUsers(TreeMap<String, User> blockedUsers) {
+		this.blockedUsers = blockedUsers;
+	}
 		
-	public HashMap<String, User> getBlockedUsers(){
+	public TreeMap<String, User> getBlockedUsers(){
 		return blockedUsers;
 	}
 	

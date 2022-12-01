@@ -49,13 +49,14 @@ public class CreatePostController {
 	 
 	 private User currentUser;
 	 private LandingController landingController;
-	 private LinkedList<FXImage> postImages = new LinkedList<FXImage>();
+	 private LinkedList<FXImage> postImages;
 	 private final String[] defaultTopics = {"Computer Science", "School", "Gaming", "Gym", "Sports", "Other"};
 	 
 	 public CreatePostController() {}
 	 
 	 public void initialize() {
 		currentUser = UserCenter.getInstance().getCurrentUser();
+		postImages = new LinkedList<FXImage>();
 		topicBox.getItems().addAll(defaultTopics);
 	 }
 	 
@@ -71,29 +72,29 @@ public class CreatePostController {
 	 }
 	 
 	 @FXML public void browseButtonOnAction(ActionEvent event) {
-		 if(postImages.size() == 3) {
+		if(postImages.size() == 3) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Max Number of Images");
 			alert.setHeaderText(null);
 			alert.setContentText("Sorry, but you can only add up to 3 images per post.");
 			alert.showAndWait();
 			return;
-		 }
-		 FileChooser fc = new FileChooser();
-			fc.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
-			File selectedFile = fc.showOpenDialog(null);
-			if (selectedFile == null) {
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("Invalid File");
-				alert.setHeaderText(null);
-				alert.setContentText("Either chosen image was invalid, or no image was chosen. Please try again.");
-				alert.showAndWait();
-			} else {
-				byte[] chosenImageBytes = Utilities.fileToByteArr(selectedFile);
-				postImages.add(new FXImage(chosenImageBytes));
-				System.out.println(postImages.size());
-				displayImage(chosenImageBytes);			
-			}
+		}
+		FileChooser fc = new FileChooser();
+		fc.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
+		File selectedFile = fc.showOpenDialog(null);
+		if (selectedFile == null) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Invalid File");
+			alert.setHeaderText(null);
+			alert.setContentText("Either chosen image was invalid, or no image was chosen. Please try again.");
+			alert.showAndWait();
+		} else {
+			byte[] chosenImageBytes = Utilities.fileToByteArr(selectedFile);
+			postImages.add(new FXImage(chosenImageBytes));
+			System.out.println(postImages.size());
+			displayImage(chosenImageBytes);			
+		}
 	 }
 
 	@FXML public void createPostButtonOnAction(ActionEvent event) {

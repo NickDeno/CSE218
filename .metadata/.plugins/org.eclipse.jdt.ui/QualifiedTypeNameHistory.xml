@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="javafx.scene.layout.HBox"/>
-    <fullyQualifiedTypeName name="java.io.Serializable"/>
     <fullyQualifiedTypeName name="java.util.LinkedHashMap"/>
     <fullyQualifiedTypeName name="java.util.UUID"/>
     <fullyQualifiedTypeName name="java.util.ListIterator"/>
@@ -15,7 +14,6 @@
     <fullyQualifiedTypeName name="java.util.Optional"/>
     <fullyQualifiedTypeName name="javafx.scene.control.ButtonType"/>
     <fullyQualifiedTypeName name="backend.PostCenter"/>
-    <fullyQualifiedTypeName name="java.util.Iterator"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.util.Collection"/>
     <fullyQualifiedTypeName name="java.util.HashMap"/>
@@ -27,7 +25,6 @@
     <fullyQualifiedTypeName name="javafx.scene.effect.GaussianBlur"/>
     <fullyQualifiedTypeName name="javafx.scene.layout.BorderPane"/>
     <fullyQualifiedTypeName name="javafx.stage.StageStyle"/>
-    <fullyQualifiedTypeName name="java.util.LinkedList"/>
     <fullyQualifiedTypeName name="javafx.fxml.FXML"/>
     <fullyQualifiedTypeName name="javafx.scene.shape.Rectangle"/>
     <fullyQualifiedTypeName name="javafx.scene.control.TextArea"/>
@@ -49,7 +46,6 @@
     <fullyQualifiedTypeName name="backend.Utilities"/>
     <fullyQualifiedTypeName name="util.Utilities"/>
     <fullyQualifiedTypeName name="model.UserCenter"/>
-    <fullyQualifiedTypeName name="model.PostCenter"/>
     <fullyQualifiedTypeName name="javafx.util.Callback"/>
     <fullyQualifiedTypeName name="javafx.scene.control.ListCell"/>
     <fullyQualifiedTypeName name="javafx.animation.PauseTransition"/>
@@ -60,4 +56,8 @@
     <fullyQualifiedTypeName name="java.util.Stack"/>
     <fullyQualifiedTypeName name="model.User"/>
     <fullyQualifiedTypeName name="util.GUIBackend"/>
+    <fullyQualifiedTypeName name="java.io.Serializable"/>
+    <fullyQualifiedTypeName name="model.PostCenter"/>
+    <fullyQualifiedTypeName name="java.util.LinkedList"/>
+    <fullyQualifiedTypeName name="java.util.Iterator"/>
 </qualifiedTypeNameHistroy>

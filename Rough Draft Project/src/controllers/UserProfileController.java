@@ -69,7 +69,7 @@ public class UserProfileController {
     		numFollowers.setText(String.valueOf(user.getFollowers().size()));
     		numFollowing.setText(String.valueOf(user.getFollowing().size())); 	
         	followersList.getItems().clear();
-    		for(User u: user.getFollowers().values()) {
+    		for(User u: user.getFollowers()) {
     			followersList.getItems().add(u.getUsername());
     		}
     		followingList.getItems().clear();
@@ -131,7 +131,7 @@ public class UserProfileController {
     }
 
     @FXML public void followBtnOnAction(ActionEvent event) {
-    	user.getFollowers().put(currentUser.getUsername(), currentUser);
+    	user.getFollowers().add(currentUser);
     	currentUser.getFollowing().put(user.getUsername(), user);
     	followersList.getItems().add(currentUser.getUsername());
     	numFollowers.setText(String.valueOf(user.getFollowers().size()));
@@ -145,7 +145,7 @@ public class UserProfileController {
     }
 
     @FXML public void unfollowBtnOnAction(ActionEvent event) {
-    	user.getFollowers().remove(currentUser.getUsername());
+    	user.getFollowers().remove(currentUser);
     	currentUser.getFollowing().remove(user.getUsername());
     	followersList.getItems().remove(currentUser.getUsername());
     	numFollowers.setText(String.valueOf(user.getFollowers().size()));
@@ -159,7 +159,7 @@ public class UserProfileController {
     
     public void displayPosts(LinkedHashMap<UUID, Post> posts) {
     	tilePane.getChildren().clear();
-    	GUIBackend.displayPostsNewToOld(posts, tilePane, landingController, false);
+    	GUIBackend.displayPostsNewToOld(posts, tilePane, landingController);
     }
     
     public void setUser(User user) {

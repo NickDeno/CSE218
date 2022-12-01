@@ -3,6 +3,7 @@ package controllers;
 import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Optional;
+import java.util.TreeMap;
 import java.util.UUID;
 
 import model.Post;
@@ -38,8 +39,13 @@ public class SettingsController {
 	@FXML private Hyperlink deleteAccount;
 	@FXML private Button blockUserBtn;
 	@FXML private Button removeBlockedUserBtn;
-	@FXML private Button cancelBtn;
-	@FXML private Button saveChangesBtn;
+	@FXML private Button resetBtn;
+	@FXML private Button saveBtn;
+	
+	private TreeMap<String, User> tempBlockedUsers;
+	//This will be a copy of current users' blockedUsers. Then if user adds and removes users to blockedUsers, we make changes to this copy of blockedUsers. 
+	//That way,if user decides to reset changes, no changes have been made to the actual users' "blockedUsers". If the user wants to save the changes made, then we 
+	//can just set the users "blockedUsers" to "tempBlockedUsers" to save the changes.
 	
 	private User currentUser;
 	private LandingController landingController;
@@ -51,7 +57,9 @@ public class SettingsController {
 		currentUser = UserCenter.getInstance().getCurrentUser();
 		emailField.setText(currentUser.getEmail());
 		passwordField.setText(currentUser.getPassword());
+		tempBlockedUsers = new TreeMap<String, User>();
 		for(User u: currentUser.getBlockedUsers().values()) {
+			tempBlockedUsers.put(u.getUsername(), u);
 			blockedUsersList.getItems().add(u.getUsername());
 		}	
 	}
@@ -80,7 +88,7 @@ public class SettingsController {
 			alert.setContentText("Please select a user first and try again.");
 			alert.showAndWait();
 		} else {
-			currentUser.getBlockedUsers().remove(blockedUsersList.getSelectionModel().getSelectedItem());
+			tempBlockedUsers.remove(blockedUsersList.getSelectionModel().getSelectedItem());
 			blockedUsersList.getItems().remove(blockedUsersList.getSelectionModel().getSelectedItem());
 		}
 	}
@@ -104,12 +112,11 @@ public class SettingsController {
 		}
 	}
 	
-	@FXML public void cancelBtnOnAction(ActionEvent event) {
+	@FXML public void resetBtnOnAction(ActionEvent event) {
 		resetFields();
-//		landingController.showPane(landingController.homeFeedNode.getPaneId());
 	}
 	
-	@FXML public void saveChangesBtnOnAction(ActionEvent event) {
+	@FXML public void saveBtnOnAction(ActionEvent event) {
 		if (!UserCenter.isValidEmail(emailField.getText()) || !UserCenter.isValidPassword(passwordField.getText())) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Invalid Fields");
@@ -121,7 +128,9 @@ public class SettingsController {
 		}
 		currentUser.setEmail(emailField.getText());
 		currentUser.setPassword(passwordField.getText());
-		resetFields();
+		currentUser.setBlockedUsers(tempBlockedUsers);
+		HomeFeedController homeFeed = GUIBackend.loadPane(landingController.getContentPane(), GUIBackend.HomeFeedScene);
+		homeFeed.setLandingController(landingController);
 	}
 	
 	@FXML public void checkFieldIsValid(MouseEvent event) {
@@ -145,7 +154,12 @@ public class SettingsController {
 		passwordField.setText(currentUser.getPassword());
 		emailLine.setStyle("-fx-stroke: #3b93ff;");
 		passwordLine.setStyle("-fx-stroke: #3b93ff;");
-		blockedUsersList.getSelectionModel().clearSelection();
+		blockedUsersList.getItems().clear();
+		tempBlockedUsers.clear();
+		for(User u: currentUser.getBlockedUsers().values()) {
+			tempBlockedUsers.put(u.getUsername(), u);
+			blockedUsersList.getItems().add(u.getUsername());
+		}	
 		editFieldsBox.setSelected(false);
 		setFieldsVisibility(false);
 	}
@@ -156,11 +170,24 @@ public class SettingsController {
 			emailField.setEditable(true);
 			passwordField.setDisable(false);
 			passwordField.setEditable(true);
+			blockUserBtn.setVisible(true);
+			blockUserBtn.setDisable(false);
+			removeBlockedUserBtn.setVisible(true);
+			removeBlockedUserBtn.setDisable(false);
+			blockedUsersList.setEditable(true);
+			blockedUsersList.setFocusTraversable(true);
 		} else {
 			emailField.setDisable(true);
 			emailField.setEditable(false);
 			passwordField.setDisable(true);
 			passwordField.setEditable(false);
+			blockUserBtn.setVisible(false);
+			blockUserBtn.setDisable(true);
+			removeBlockedUserBtn.setVisible(false);
+			removeBlockedUserBtn.setDisable(true);
+			blockedUsersList.setEditable(false);
+			blockedUsersList.setFocusTraversable(false);
+			blockedUsersList.getSelectionModel().clearSelection();
 		}
 	}
 	
@@ -168,6 +195,9 @@ public class SettingsController {
 		 this.landingController = landingController;
 	 }
 	
+	public TreeMap<String, User> getTempBlockedUsers(){
+		return tempBlockedUsers;
+	}
 	
 	public ListView<String> getBlockedUsersList(){
 		return blockedUsersList;

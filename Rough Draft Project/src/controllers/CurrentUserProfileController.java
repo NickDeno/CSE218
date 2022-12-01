@@ -61,8 +61,8 @@ public class CurrentUserProfileController {
     @FXML private Button changeBannerPicBtn;
     @FXML private Button changeProfilePicBtn;
     @FXML private Button backBtn;
-    @FXML private Button cancelBtn;
-    @FXML private Button saveChangesBtn;
+    @FXML private Button resetBtn;
+    @FXML private Button saveBtn;
     @FXML private CheckBox editFieldsBox;
     
     private LandingController landingController;
@@ -85,7 +85,7 @@ public class CurrentUserProfileController {
 		numFollowers.setText(String.valueOf(currentUser.getFollowers().size()));
 		numFollowing.setText(String.valueOf(currentUser.getFollowing().size()));
     	followersList.getItems().clear();
-		for(User u: currentUser.getFollowers().values()) {
+		for(User u: currentUser.getFollowers()) {
 			followersList.getItems().add(u.getUsername());
 		}
 		followingList.getItems().clear();
@@ -160,12 +160,12 @@ public class CurrentUserProfileController {
     	followingBtnLine.setVisible(true);
     }
     
-    @FXML public void cancelBtnOnAction(ActionEvent event) {
+    @FXML public void resetBtnOnAction(ActionEvent event) {
     	resetFields();
     	
     }
 
-    @FXML public void saveChangesBtnOnAction(ActionEvent event) {	
+    @FXML public void saveBtnOnAction(ActionEvent event) {	
     	if(currentUser.getBannerPic().returnBytes() != chosenBannerPicBytes && chosenBannerPicBytes != null) {
         	currentUser.setBannerPic(new FXImage(chosenBannerPicBytes));
     	}
@@ -208,18 +208,14 @@ public class CurrentUserProfileController {
     private void setFieldsVisibility(boolean visibility) {
     	if(visibility == true) {
     		nicknameField.setEditable(true);
-    		nicknameField.setDisable(false);
     		bioField.setEditable(true);
-    		bioField.setDisable(false);
     		changeBannerPicBtn.setVisible(true);
     		changeBannerPicBtn.setDisable(false);
     		changeProfilePicBtn.setVisible(true);
     		changeProfilePicBtn.setDisable(false);
 		} else {
 			nicknameField.setEditable(false);
-    		nicknameField.setDisable(true);
     		bioField.setEditable(false);
-    		bioField.setDisable(true);
     		changeBannerPicBtn.setVisible(false);
     		changeBannerPicBtn.setDisable(true);
     		changeProfilePicBtn.setVisible(false);
@@ -229,7 +225,7 @@ public class CurrentUserProfileController {
     
     public void displayPosts(LinkedHashMap<UUID, Post> posts) {
     	tilePane.getChildren().clear();
-    	GUIBackend.displayPostsNewToOld(posts, tilePane, landingController, false);
+    	GUIBackend.displayPostsNewToOld(posts, tilePane, landingController);
     }
 	
 	public void setLandingController(LandingController landingController) {
