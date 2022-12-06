@@ -1,9 +1,9 @@
-package controllers;
+ package controllers;
 
 import java.util.Collection;
 
+import model.AppState;
 import model.User;
-import model.UserCenter;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,14 +24,14 @@ public class BlockUserController {
 	private SettingsController settingsController;
 	
 	public void initialize() {
-		currentUser = UserCenter.getInstance().getCurrentUser();
+		currentUser = AppState.getInstance().getUserCenter().getCurrentUser();
 		Platform.runLater(() -> {
 			((Stage)cancelBtn.getScene().getWindow()).setOnCloseRequest(e -> {
 				settingsController.getPane().setEffect(null);
 				landingController.getPane().setEffect(null);
 			});
 		});
-		Collection<User> allUsers = UserCenter.getInstance().getAllUsers();
+		Collection<User> allUsers = AppState.getInstance().getUserCenter().getAllUsers();
 		for(User u: allUsers) {
 			userList.getItems().add(u.getUsername());
 		}
@@ -45,14 +45,14 @@ public class BlockUserController {
 			alert.setContentText("Please select a user to block and try again.");
 			alert.showAndWait();
 			return;
-		}
+		} 
 		
 		//If selected user is the current user
 		if(userList.getSelectionModel().getSelectedItem().equals(currentUser.getUsername())) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Invalid Selection");
 			alert.setHeaderText(null);
-			alert.setContentText("Sorry. You cannot block yourself");
+			alert.setContentText("Sorry. You cannot block yourself.");
 			alert.showAndWait();
 			userList.getSelectionModel().clearSelection();
 			return; 
@@ -66,7 +66,7 @@ public class BlockUserController {
 			alert.showAndWait();
 			userList.getSelectionModel().clearSelection();
 		} else {
-			User blockedUser = UserCenter.getInstance().getUser(userList.getSelectionModel().getSelectedItem());
+			User blockedUser = AppState.getInstance().getUserCenter().getUser(userList.getSelectionModel().getSelectedItem());
 			settingsController.getTempBlockedUsers().put(blockedUser.getUsername(), blockedUser);
 			settingsController.getBlockedUsersList().getItems().add(blockedUser.getUsername());
 			settingsController.getPane().setEffect(null);

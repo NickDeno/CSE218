@@ -1,12 +1,10 @@
 package controllers;
 
-import java.util.LinkedHashMap;
-import java.util.UUID;
+import java.util.LinkedList;
 
+import model.AppState;
 import model.Post;
-import model.PostCenter;
 import model.User;
-import model.UserCenter;
 import util.GUIBackend;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -29,22 +27,22 @@ public class HomeFeedController {
 	@FXML private Button removeFilterBtn;
 	
 	private User currentUser;
-	private LandingController landingController;
-	private final String[] filterOptions = {"All Posts", "Following", "User", "Topic", "Title"};
-	private final String[] topicOptions = {"Computer Science", "School", "Gaming", "Gym", "Sports", "Misc.", "Other"};
 	private String chosenFilter;
 	private String chosenTopic;
+	private final String[] filterOptions = {"All Posts", "Following", "User", "Topic", "Title"};
+	private final String[] topicOptions = {"Computer Science", "School", "Gaming", "Gym", "Sports", "Misc.", "Other"};
+	private LandingController landingController;
 	
 	//Initializer
 	public HomeFeedController() {}
 	
 	public void initialize() {
-		currentUser = UserCenter.getInstance().getCurrentUser();
+		currentUser = AppState.getInstance().getUserCenter().getCurrentUser();
 		filterBox.getItems().addAll(filterOptions);
-		filterBox.getSelectionModel().selectFirst();
 		topicBox.getItems().addAll(topicOptions);
+		filterBox.getSelectionModel().selectFirst();
 		Platform.runLater(() ->{
-			displayPosts(PostCenter.getInstance().getPosts());
+			displayPosts(AppState.getInstance().getPostCenter().getPosts());
 		});
 	}
 	
@@ -91,7 +89,7 @@ public class HomeFeedController {
 	
 	@FXML public void applyFilterBtnOnAction(ActionEvent event) {
 		if(chosenFilter.equals("All Posts")) {
-			displayPosts(PostCenter.getInstance().getPosts());		
+			displayPosts(AppState.getInstance().getPostCenter().getPosts());		
 		} else if(chosenFilter.equals("Following")) {
 			if(currentUser.getFollowing().values().size() == 0) {
 				Alert alert = new Alert(AlertType.ERROR);
@@ -101,14 +99,14 @@ public class HomeFeedController {
 				alert.showAndWait();
 				filterBox.getSelectionModel().selectFirst();
 				tilePane.getChildren().clear();
-				displayPosts(PostCenter.getInstance().getPosts());
+				displayPosts(AppState.getInstance().getPostCenter().getPosts());
 				resetFields();
-				return;
+			} else {
+				tilePane.getChildren().clear();
+				displayFollowingPosts(AppState.getInstance().getPostCenter().getPosts());
 			}
-			tilePane.getChildren().clear();
-			displayFollowingPosts(PostCenter.getInstance().getPosts());
 		} else if(chosenFilter.equals("User")) {
-			User searchedUser = UserCenter.getInstance().getUser(searchField.getText());
+			User searchedUser = AppState.getInstance().getUserCenter().getUser(searchField.getText());
 			if(searchedUser == null) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("No User Found.");
@@ -130,11 +128,11 @@ public class HomeFeedController {
 			}
 		} else if(chosenFilter.equals("Topic")) {
 			tilePane.getChildren().clear();
-			displayPosts(PostCenter.getInstance().searchByTopic(chosenTopic));
+			displayPosts(AppState.getInstance().getPostCenter().searchByTopic(chosenTopic));
 			resetFields();
 		} else if(chosenFilter.equals("Title")) {
 			tilePane.getChildren().clear();
-			displayPosts(PostCenter.getInstance().searchByTitle(searchField.getText()));
+			displayPosts(AppState.getInstance().getPostCenter().searchByTitle(searchField.getText()));
 			resetFields();
 		}
 		
@@ -143,15 +141,15 @@ public class HomeFeedController {
 	@FXML public void removeFilterBtnOnAction(ActionEvent event) {
 		tilePane.getChildren().clear();
 		filterBox.getSelectionModel().selectFirst();
-		displayPosts(PostCenter.getInstance().getPosts());
+		displayPosts(AppState.getInstance().getPostCenter().getPosts());
 		resetFields();
 	}
 	
-	private void displayPosts(LinkedHashMap<UUID, Post> posts) {
+	private void displayPosts(LinkedList<Post> posts) {
 		 GUIBackend.displayPostsNewToOld(posts, tilePane, landingController);
 	}
-	 
-	private void displayFollowingPosts(LinkedHashMap<UUID, Post> posts) {
+	
+	private void displayFollowingPosts(LinkedList<Post> posts) {
 		 GUIBackend.displayFollowingPosts(posts, tilePane, landingController);
 	}
 	

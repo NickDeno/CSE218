@@ -1,8 +1,7 @@
 package controllers;
 
-import model.PostCenter;
+import model.AppState;
 import model.User;
-import model.UserCenter;
 import util.Utilities;
 import util.GUIBackend;
 import javafx.application.Platform;
@@ -26,19 +25,19 @@ public class SignInController {
 	@FXML private Button cancelBtn; 
 	@FXML private Hyperlink clickHereText;
 	
-	private Stage stage;
+	Stage stage;
+	//Since every scene/page shares the same stage throughout the app, to achieve data persistence, we do not have to backup every time a change is made in the 
+	//program. We can just set the stages' onCloseRequest and the cancelBtn on the SignInPage to backup the data since these are the only 2 ways to forcibly close
+	//the app.
 	
 	public void initialize() {	
-		UserCenter.getInstance();
-		PostCenter.getInstance();
-		if(UserCenter.getInstance() != null) UserCenter.getInstance().display();
-		if(PostCenter.getInstance() != null) PostCenter.getInstance().display();
+		//Initializes AppState
+		AppState.getInstance();	
+		AppState.getInstance().getUserCenter().display();
+		AppState.getInstance().getPostCenter().display();
 		Platform.runLater(() -> {
 			stage = (Stage)signInBtn.getScene().getWindow();
-			stage.setOnCloseRequest(e -> {
-				Utilities.backupUserCenter();
-				Utilities.backupPostCenter();
-			});
+			stage.setOnCloseRequest(e -> Utilities.backupAppState());
 		});
 	}
 	
@@ -59,9 +58,9 @@ public class SignInController {
 		if(showPasswordBox.isSelected()) password = visiblePasswordField.getText();
 		else password = passwordField.getText();
 		
-		User tempUser = UserCenter.getInstance().getUser(usernameField.getText());
+		User tempUser = AppState.getInstance().getUserCenter().getUser(usernameField.getText());
 		if(tempUser != null && tempUser.getPassword().equals(password)) {
-			UserCenter.getInstance().setCurrentUser(tempUser);
+			AppState.getInstance().getUserCenter().setCurrentUser(tempUser);
 			GUIBackend.loadNewScene(stage, GUIBackend.LandingScene);
 		} else {
 			msgLabel.setText("Account not found.");
@@ -76,8 +75,7 @@ public class SignInController {
 	}
     
     @FXML public void cancelBtnOnAction(ActionEvent event) {
-    	Utilities.backupUserCenter();
-		Utilities.backupPostCenter();
+    	Utilities.backupAppState();
     	stage.close();
     }
     

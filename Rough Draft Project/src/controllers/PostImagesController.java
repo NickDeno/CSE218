@@ -1,15 +1,14 @@
 package controllers;
 
-import java.io.ByteArrayInputStream;
 import java.util.LinkedList;
 
 import model.FXImage;
+import util.Utilities;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
@@ -19,13 +18,14 @@ public class PostImagesController {
 	 @FXML private Button nextBtn;
 	 @FXML private Button previousBtn;
 	 
-	 private LandingController landingController;
+	 private int imgIdx;
 	 private LinkedList<FXImage> postImages;
-	 private int imgIdx = 0;
+	 private LandingController landingController;
 	 
 	 public void initialize() {
+		 imgIdx = 0;
 		 Platform.runLater(() -> {
-			 currentImg.setImage(new Image(new ByteArrayInputStream(postImages.get(imgIdx).returnBytes())));
+			 currentImg.setImage(Utilities.byteArrToImage(postImages.get(imgIdx).returnBytes()));
 			 if(postImages.size() == 1) {
 				 previousBtn.setVisible(false);
 				 nextBtn.setVisible(false);
@@ -50,7 +50,7 @@ public class PostImagesController {
 			 imgIdx--;
 		 } else {
 			 previousBtn.setVisible(true);
-			 currentImg.setImage(new Image(new ByteArrayInputStream(postImages.get(imgIdx).returnBytes())));
+			 currentImg.setImage(Utilities.byteArrToImage(postImages.get(imgIdx).returnBytes()));
 			 if(imgIdx + 1 == postImages.size()) {
 				 nextBtn.setVisible(false);
 			 }
@@ -63,7 +63,7 @@ public class PostImagesController {
 			 imgIdx = 0; 
 		 } else {
 			 nextBtn.setVisible(true);
-			 currentImg.setImage(new Image(new ByteArrayInputStream(postImages.get(imgIdx).returnBytes())));
+			 currentImg.setImage(Utilities.byteArrToImage(postImages.get(imgIdx).returnBytes()));
 			 if(imgIdx - 1 < 0) {
 				 previousBtn.setVisible(false);
 			 }

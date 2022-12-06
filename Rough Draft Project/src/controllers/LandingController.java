@@ -1,21 +1,20 @@
 package controllers;
 
-import java.io.ByteArrayInputStream;
-
+import model.AppState;
 import model.User;
-import model.UserCenter;
-import util.Utilities;
 import util.GUIBackend;
+import util.Utilities;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -33,48 +32,88 @@ public class LandingController {
 	@FXML private AnchorPane contentPane;
 	
 	private User currentUser;
+	private Effect defaultProfilePicEffect;
 	
 	//Initializer
 	public LandingController() {}
 	
 	public void initialize() {
-		currentUser = UserCenter.getInstance().getCurrentUser();
+		currentUser = AppState.getInstance().getUserCenter().getCurrentUser();
 		userLabel.setText(currentUser.getUsername());
-		profilePic.setFill(new ImagePattern(new Image(new ByteArrayInputStream(currentUser.getProfilePic().returnBytes()))));
+		profilePic.setFill(Utilities.byteArrToImagePattern(currentUser.getProfilePic().returnBytes()));
+		defaultProfilePicEffect = profilePic.getEffect();
 		numFollowingLabel.setText(String.valueOf(currentUser.getFollowing().size()));
 		numFollowersLabel.setText(String.valueOf(currentUser.getFollowers().size()));
-		userLabel.setEffect(new DropShadow(8, Color.rgb(0, 0, 0, 0.8)));
-		profilePic.setEffect(new DropShadow(8, Color.rgb(0, 0, 0, 0.8)));
 		
 		HomeFeedController homeFeed = GUIBackend.loadPane(contentPane, GUIBackend.HomeFeedScene);
 		homeFeed.setLandingController(this);
+		homeBtn.setStyle("-fx-background-color: rgba(255,255,255,0.5)");
 	}
 	
 	@FXML public void homeBtnOnAction(ActionEvent event) {
 		HomeFeedController homeFeed = GUIBackend.loadPane(contentPane, GUIBackend.HomeFeedScene);
 		homeFeed.setLandingController(this);
+		resetBtns();
+		homeBtn.setStyle("-fx-background-color: rgba(255,255,255,0.5)");
 	}
 	
 	@FXML public void profileBtnOnAction(ActionEvent event) {
 		CurrentUserProfileController currentUserProfile = GUIBackend.loadPane(contentPane, GUIBackend.CurrentUserProfileScene);
 		currentUserProfile.setLandingController(this);
+		resetBtns();
+		profileBtn.setStyle("-fx-background-color: rgba(255,255,255,0.5)");
 	}
 	
 	@FXML public void settingsBtnOnAction(ActionEvent event) {
 		SettingsController settings = GUIBackend.loadPane(contentPane, GUIBackend.SettingsScene);
 		settings.setLandingController(this);
+		resetBtns();
+		settingsBtn.setStyle("-fx-background-color: rgba(255,255,255,0.5)");
 	}
 	
 	@FXML public void createPostBtnOnAction(ActionEvent event) {
 		CreatePostController createPost = GUIBackend.loadPane(contentPane, GUIBackend.CreatePostScene);
 		createPost.setLandingController(this);
+		resetBtns();
 	}
 	
 	@FXML public void logoutButtonOnAction(ActionEvent event) {
-		Utilities.backupUserCenter();
-		Utilities.backupPostCenter();
+		Utilities.backupAppState();
 		Stage stage = ((Stage)((Node)event.getSource()).getScene().getWindow());
 		GUIBackend.loadNewScene(stage, GUIBackend.SignInScene);	
+	}
+	
+	@FXML public void profilePicOnEntered(MouseEvent event) {
+		ColorAdjust colorAdjust = new ColorAdjust();
+		colorAdjust.setBrightness(-0.2);
+		profilePic.setEffect(colorAdjust);
+		
+	}
+	
+	@FXML public void profilePicOnExited(MouseEvent event) {
+		profilePic.setEffect(defaultProfilePicEffect);
+	}
+	
+	@FXML public void profilePicOnPressed(MouseEvent event) {
+		ColorAdjust colorAdjust = new ColorAdjust();
+		colorAdjust.setBrightness(0.5);
+		profilePic.setEffect(colorAdjust);
+	}
+	@FXML public void profilePicOnReleased(MouseEvent event) {
+		profilePic.setEffect(defaultProfilePicEffect);
+		CurrentUserProfileController currentUserProfile = GUIBackend.loadPane(contentPane, GUIBackend.CurrentUserProfileScene);
+		currentUserProfile.setLandingController(this);
+		resetBtns();
+		profileBtn.setStyle("-fx-background-color: rgba(255,255,255,0.5)");
+	}
+	
+	public void resetBtns() {
+		homeBtn.setStyle(null);
+		homeBtn.getStyleClass().add("transparentButton");
+		profileBtn.setStyle(null);
+		profileBtn.getStyleClass().add("transparentButton");
+		settingsBtn.setStyle(null);
+		settingsBtn.getStyleClass().add("transparentButton");
 	}
 
 	public AnchorPane getContentPane() {
@@ -83,6 +122,10 @@ public class LandingController {
 	
 	public BorderPane getPane() {
 		return borderPane;
+	}
+	
+	public Button getHomeBtn() {
+		return homeBtn;
 	}
 	
 	public void setNumFollowingLabel(int numFollowing) {

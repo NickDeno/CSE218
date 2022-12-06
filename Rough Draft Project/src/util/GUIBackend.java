@@ -1,14 +1,11 @@
 package util;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Stack;
-import java.util.UUID;
+import java.util.Iterator;
+import java.util.LinkedList;
 
+import model.AppState;
 import model.Post;
-import model.User;
-import model.UserCenter;
 import controllers.LandingController;
 import controllers.PostController;
 import javafx.fxml.FXMLLoader;
@@ -28,18 +25,12 @@ public class GUIBackend {
 	public static final String CurrentUserProfileScene = "/views/CurrentUserProfile.fxml";
 	public static final String SettingsScene = "/views/Settings.fxml";
 	public static final String CreatePostScene = "/views/CreatePost.fxml";
-	public static final String PostRepliesScene = "/views/PostReplies.fxml";
+	public static final String PostWithRepliesScene = "/views/PostWithReplies.fxml";
 	public static final String PostImagesScene = "/views/PostImages.fxml";
-	public static final String ReplyScene = "/views/Reply.fxml";
+	public static final String PostReplyScene = "/views/PostReply.fxml";
 	public static final String BlockUserScene = "/views/BlockUser.fxml";
 	public static final String UserProfileScene = "/views/UserProfile.fxml";
 	public static final String EditPostScene = "/views/EditPost.fxml";
-	
-	public static String currentTheme = "/views/LightTheme.css";
-	
-	public static Stack<String> previousScenes = new Stack<String>();
-	public static Stack<User> previousUserPage = new Stack<User>();
-	public static Stack<Post> previousPostPage = new Stack<Post>();
 	
 	//Loads new window with specified fxmlFile and returns FXMLController of the fxmlFile being loaded
 	public static <T> T loadNewWindow(String fxmlFileName) {
@@ -80,13 +71,12 @@ public class GUIBackend {
 		}
 	}
 	
-	// Loads new scene into specified stage with specified fxml file. Returns the FXMLController of the fxmlFile being loaded
+	// Loads new scene into specified stage with specified fxmlFile. Returns the FXMLController of the fxmlFile being loaded
 	public static <T> T loadNewScene(Stage stage, String fxmlFileName) {
 		try {
 			FXMLLoader loader = new FXMLLoader(GUIBackend.class.getResource(fxmlFileName));
 			Parent root = loader.load();
 			Scene scene = new Scene(root);
-//			scene.getStylesheets().add(currentTheme);
 			stage.setScene(scene);
 			stage.show();
 			return loader.getController();
@@ -102,12 +92,8 @@ public class GUIBackend {
 		try {
 			FXMLLoader loader = new FXMLLoader(GUIBackend.class.getResource(fxmlFileName));
 			AnchorPane pane = loader.load();
-			for(String s: previousScenes) {
-				System.out.println(s);
-			}
-//			pane.getStyleClass().add("pane");
 			ap.getChildren().clear();
-			ap.getChildren().setAll(pane);
+			ap.getChildren().add(pane);
 			return loader.getController();		
 		} catch (IOException e) {
 			System.out.println("Unable to load content pane with " + fxmlFileName);
@@ -116,76 +102,48 @@ public class GUIBackend {
 		}
 	}
 	
-	/*
-	 * Functions virtually the same as other displayPosts method. However in this method, a specific users' "userPosts" will be passed through instead
-	 * of PostCenter which contains all posts. This method will be called when a user wants to only view a specific user's posts instead of all posts. One 
-	 * difference is that in the other displayPosts method, it will check if each posts' poster is in the current users blocked list. If they are, it will
-	 * skip over displaying that post. In this case, the userPosts being displayed all come from one specific user. So all we have to do in this method is check
-	 * if the first posts' poster is in the current users blocked list and if they are, we can break out of method since all of the posts in this case will be from
-	 * that user.
-	 */
-	public static void displayPostsNewToOld(LinkedHashMap<UUID, Post> posts, TilePane tilePane, LandingController landingController) {
-		ArrayList<Post> postList = new ArrayList<Post>(posts.values());
-		for(int i = postList.size()-1; i >= 0; i--) {
-			//If this posts' poster is in the current users' "blockedUsers", it will not display post
-			if(UserCenter.getInstance().getCurrentUser().getBlockedUsers().get(postList.get(i).getPoster().getUsername()) != null) {
-				continue;
-			}
-			try {
-				FXMLLoader fxmlLoader = new FXMLLoader();
-				fxmlLoader.setLocation(GUIBackend.class.getResource("/views/Post.fxml"));
-				AnchorPane ap = fxmlLoader.load();
-				PostController postController = fxmlLoader.getController();
-				postController.setPostData(postList.get(i));
-				postController.setLandingController(landingController);
-				tilePane.getChildren().add(ap);	
-			} catch (IOException e) {
-				e.printStackTrace();
+	/* Displays a linked list of posts into a specified tilePane. Since in this case we want to display posts from newest to oldest, this method will iterate
+	 * over the linked list from rear to front. Each time it iterates, it checks if the posts' poster(user who posted that post) is in the current users 
+	 * "blockedUsers". If they are, it skips over displaying that post */
+	public static void displayPostsNewToOld(LinkedList<Post> posts, TilePane tilePane, LandingController landingController) {	
+		Iterator<Post> itr = posts.descendingIterator();
+		while(itr.hasNext()) {
+			Post post = itr.next();
+			if(AppState.getInstance().getUserCenter().getCurrentUser().getBlockedUsers().get(post.getPoster().getUsername()) == null) {
+				displayPost(post, tilePane, landingController);
 			}
 		}
 	}
 	
-	public static void displayPostsOldToNew(LinkedHashMap<UUID, Post> posts, TilePane tilePane, LandingController landingController) {
-		ArrayList<Post> postList = new ArrayList<Post>(posts.values());
-		for(int i = 0; i < postList.size(); i++) {
-			//If this posts' poster is in the current users' "blockedUsers", it will not display post
-			if(UserCenter.getInstance().getCurrentUser().getBlockedUsers().get(postList.get(i).getPoster().getUsername()) != null) {
-				continue;
-			}
-			try {
-				FXMLLoader fxmlLoader = new FXMLLoader();
-				fxmlLoader.setLocation(GUIBackend.class.getResource("/views/Post.fxml"));
-				AnchorPane ap = fxmlLoader.load();
-				PostController postController = fxmlLoader.getController();
-				postController.setPostData(postList.get(i));
-				postController.setLandingController(landingController);
-				tilePane.getChildren().add(ap);	
-			} catch (IOException e) {
-				e.printStackTrace();
+	/* This method functions virtually the same as "displayPostsNewToOld" method. However in this case the linked list of posts is iterated from front 
+	 * to rear. This means that the newest posts will be at the bottom, and the oldest will be at the top. */
+	public static void displayPostsOldToNew(LinkedList<Post> posts, TilePane tilePane, LandingController landingController) {
+		Iterator<Post> itr = posts.iterator();
+		while(itr.hasNext()) {
+			Post post = itr.next();
+			if(AppState.getInstance().getUserCenter().getCurrentUser().getBlockedUsers().get(post.getPoster().getUsername()) == null) {
+				displayPost(post, tilePane, landingController);
 			}
 		}
 	}
 	
-	/*
-	 * This method works almost exactly the same as displayPosts method. However, instead of taking in a PostCenter of posts or a specific
-	 * users posts, it takes in a singular post.Then, creates an AnchorPane of this post object. Instead of adding the AnchorPane to bottom of TilePane 
-	 * like displayPosts, the AnchorPane is added to the top of the TilePane.
-	 */
-	public static void displayPostOnTop(Post post, TilePane tilePane, LandingController landingController) {
-		try {
-			FXMLLoader fxmlLoader = new FXMLLoader();
-			fxmlLoader.setLocation(GUIBackend.class.getResource("/views/Post.fxml"));
-			AnchorPane ap = fxmlLoader.load();
-			PostController postController = fxmlLoader.getController();
-			postController.setPostData(post);
-			postController.setLandingController(landingController);
-			tilePane.getChildren().add(0,ap);	
-		} catch (IOException e) {
-			e.printStackTrace();
+	/* This method functions virtually the same as "displayPostsNewToOld" method. However, for each iteration, in addition to checking if the current posts'
+	 * poster is in the current users "blockedUsers", it also checks if the posts' poster in the current users following. If the poster is not in the current 
+	 * users' "blockedUsers", but in the current users following, it will display post. */
+	public static void displayFollowingPosts(LinkedList<Post> posts, TilePane tilePane, LandingController landingController) {
+		Iterator<Post> itr = posts.descendingIterator();
+		while(itr.hasNext()){
+			Post post = itr.next();
+			if(AppState.getInstance().getUserCenter().getCurrentUser().getBlockedUsers().get(post.getPoster().getUsername()) == null) {
+				if(AppState.getInstance().getUserCenter().getCurrentUser().getFollowing().get(post.getPoster().getUsername()) != null) {
+					displayPost(post, tilePane, landingController);
+				}
+			}
 		}
-	}	
+	}
 	
-	public static void displayPostOnBottom(Post post, TilePane tilePane, LandingController landingController) {
+	//Creates an anchorPane that displays the "Post.fxml" file. Then passes through a specified posts' data into the "Post.fxml" file such as poster, desc., etc..
+	public static void displayPost(Post post, TilePane tilePane, LandingController landingController) {
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader();
 			fxmlLoader.setLocation(GUIBackend.class.getResource("/views/Post.fxml"));
@@ -198,30 +156,4 @@ public class GUIBackend {
 			e.printStackTrace();
 		}
 	}	
-	
-	public static void displayFollowingPosts(LinkedHashMap<UUID, Post> posts, TilePane tilePane, LandingController landingController) {
-		ArrayList<Post> postList = new ArrayList<Post>(posts.values());
-		for(int i = postList.size()-1; i >= 0; i--) {
-			//If this posts' poster is in the current users' "blocked", it will not display post
-			if(UserCenter.getInstance().getCurrentUser().getBlockedUsers().get(postList.get(i).getPoster().getUsername()) != null) {
-				continue;
-			}
-			
-			//If the posts' poster is in the current users' "following", it will display post. If not it will skip over displaying it
-			if(UserCenter.getInstance().getCurrentUser().getFollowing().get(postList.get(i).getPoster().getUsername()) != null) {
-				try {
-					FXMLLoader fxmlLoader = new FXMLLoader();
-					fxmlLoader.setLocation(GUIBackend.class.getResource("/views/Post.fxml"));
-					AnchorPane ap = fxmlLoader.load();
-					PostController postController = fxmlLoader.getController();
-					postController.setPostData(postList.get(i));
-					postController.setLandingController(landingController);
-					tilePane.getChildren().add(ap);	
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			
-		}
-	}
 }

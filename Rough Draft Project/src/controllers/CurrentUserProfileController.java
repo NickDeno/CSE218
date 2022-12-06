@@ -1,20 +1,17 @@
 package controllers;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.UUID;
-import java.util.Map.Entry;
+import java.util.LinkedList;
 
+import model.AppState;
 import model.FXImage;
 import model.Post;
-import model.PostCenter;
 import model.User;
-import model.UserCenter;
 import util.Utilities;
 import util.GUIBackend;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -26,9 +23,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.Image;
 import javafx.scene.layout.TilePane;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
@@ -65,37 +60,58 @@ public class CurrentUserProfileController {
     @FXML private Button saveBtn;
     @FXML private CheckBox editFieldsBox;
     
-    private LandingController landingController;
     private User currentUser;
     private byte[] chosenProfilePicBytes;
     private byte[] chosenBannerPicBytes;
+    private LandingController landingController;
     
     //Initializer
     public CurrentUserProfileController() {}
     
     
     public void initialize() {
-    	currentUser = UserCenter.getInstance().getCurrentUser();
-    	bannerPic.setFill(new ImagePattern(new Image(new ByteArrayInputStream(currentUser.getBannerPic().returnBytes()))));	
-		profilePic.setFill(new ImagePattern(new Image(new ByteArrayInputStream(currentUser.getProfilePic().returnBytes()))));
+    	currentUser = AppState.getInstance().getUserCenter().getCurrentUser();
+    	bannerPic.setFill(Utilities.byteArrToImagePattern(currentUser.getBannerPic().returnBytes()));	
+		profilePic.setFill(Utilities.byteArrToImagePattern(currentUser.getProfilePic().returnBytes()));
 		usernameLabel.setText(currentUser.getUsername());
 		nicknameField.setText(currentUser.getNickName());
 		bioField.setText(currentUser.getBio());
 		numPosts.setText(String.valueOf(currentUser.getUserPosts().size()));
 		numFollowers.setText(String.valueOf(currentUser.getFollowers().size()));
 		numFollowing.setText(String.valueOf(currentUser.getFollowing().size()));
-    	followersList.getItems().clear();
 		for(User u: currentUser.getFollowers()) {
 			followersList.getItems().add(u.getUsername());
 		}
-		followingList.getItems().clear();
     	for(User u: currentUser.getFollowing().values()) {
 			followingList.getItems().add(u.getUsername());
 		}
     	
+    	followersList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if(newValue != null) {
+					UserProfileController userProfile =  GUIBackend.loadPane(landingController.getContentPane(), GUIBackend.UserProfileScene);
+					userProfile.setUser(AppState.getInstance().getUserCenter().getUser(newValue));
+					userProfile.setLandingController(landingController);	
+				}
+			}	
+		});
+		
+		followingList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if(newValue != null) {
+					UserProfileController userProfile =  GUIBackend.loadPane(landingController.getContentPane(), GUIBackend.UserProfileScene);
+					userProfile.setUser(AppState.getInstance().getUserCenter().getUser(newValue));
+					userProfile.setLandingController(landingController);	
+				}
+			}	
+		});
+    	
     	Platform.runLater(() -> {	
     		displayPosts(currentUser.getUserPosts());
     	});
+    	
     }
 
     @FXML public void changeBannerPicBtnOnAction(ActionEvent event) {
@@ -110,7 +126,7 @@ public class CurrentUserProfileController {
 			alert.showAndWait();
 		} else {
 			chosenBannerPicBytes = Utilities.fileToByteArr(selectedFile);
-			bannerPic.setFill(new ImagePattern(new Image(new ByteArrayInputStream(chosenBannerPicBytes))));		
+			bannerPic.setFill(Utilities.byteArrToImagePattern(chosenBannerPicBytes));		
 		}
     }
 
@@ -126,7 +142,7 @@ public class CurrentUserProfileController {
 			alert.showAndWait();
 		} else {
 			chosenProfilePicBytes = Utilities.fileToByteArr(selectedFile);
-			profilePic.setFill(new ImagePattern(new Image(new ByteArrayInputStream(chosenProfilePicBytes))));			
+			profilePic.setFill(Utilities.byteArrToImagePattern(chosenProfilePicBytes));			
 		}
     }
     
@@ -139,6 +155,7 @@ public class CurrentUserProfileController {
     	followersBtnLine.setVisible(false);
     	followingBtnLine.setVisible(false);
     }
+    
 
     @FXML public void followersBtnOnAction(ActionEvent event) {
     	viewingLabel.setText("Followers");
@@ -161,8 +178,7 @@ public class CurrentUserProfileController {
     }
     
     @FXML public void resetBtnOnAction(ActionEvent event) {
-    	resetFields();
-    	
+    	resetFields(); 	
     }
 
     @FXML public void saveBtnOnAction(ActionEvent event) {	
@@ -172,20 +188,15 @@ public class CurrentUserProfileController {
     	//This if statement is true when user changes profile pic, thus all post objects made by user must be updated with new profile pic
     	if(currentUser.getProfilePic().returnBytes() != chosenProfilePicBytes && chosenProfilePicBytes != null){
 			currentUser.setProfilePic(new FXImage(chosenProfilePicBytes));
-			landingController.setProfilePic(new Image(new ByteArrayInputStream(chosenProfilePicBytes)));
-			Iterator<Entry<UUID, Post>> itr = currentUser.getUserPosts().entrySet().iterator();
-			while (itr.hasNext()) {
-				Post temp = itr.next().getValue();
-				temp.getPoster().setProfilePic(new FXImage(chosenProfilePicBytes));
-				PostCenter.getInstance().getPost(temp.getUuid()).getPoster().setProfilePic(new FXImage(chosenProfilePicBytes));
-			}
-			//Reloads Posts displayed with new profile picture
+			landingController.setProfilePic(Utilities.byteArrToImage(chosenProfilePicBytes));
+			//Reload user posts since profile pic was changed
 			displayPosts(currentUser.getUserPosts());
 			
-		} 
-    	currentUser.setNickName(nicknameField.getText());
-    	currentUser.setBio(bioField.getText());
-		resetFields();
+		} else {
+			currentUser.setNickName(nicknameField.getText());
+	    	currentUser.setBio(bioField.getText());
+			resetFields();
+		}
     }
     
     @FXML public void editFieldsBoxOnAction(ActionEvent event) {
@@ -197,8 +208,8 @@ public class CurrentUserProfileController {
     }
     
     public void resetFields() {
-    	bannerPic.setFill(new ImagePattern(new Image(new ByteArrayInputStream(currentUser.getBannerPic().returnBytes()))));
-    	profilePic.setFill(new ImagePattern(new Image(new ByteArrayInputStream(currentUser.getProfilePic().returnBytes()))));	
+    	bannerPic.setFill(Utilities.byteArrToImagePattern(currentUser.getBannerPic().returnBytes()));	
+		profilePic.setFill(Utilities.byteArrToImagePattern(currentUser.getProfilePic().returnBytes()));	
     	nicknameField.setText(currentUser.getNickName());
     	bioField.setText(currentUser.getBio());
 		editFieldsBox.setSelected(false);
@@ -223,7 +234,7 @@ public class CurrentUserProfileController {
 		}
     }
     
-    public void displayPosts(LinkedHashMap<UUID, Post> posts) {
+    public void displayPosts(LinkedList<Post> posts) {
     	tilePane.getChildren().clear();
     	GUIBackend.displayPostsNewToOld(posts, tilePane, landingController);
     }

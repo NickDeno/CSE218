@@ -1,8 +1,8 @@
 package controllers;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 
+import model.AppState;
 import model.FXImage;
 import model.User;
 import model.UserCenter;
@@ -18,7 +18,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Line;
@@ -51,7 +50,7 @@ public class SignUpController {
 		//Sets default profile picture of user
 		chosenImage = new File("src/assets/TempProfilePic.png");
 		chosenImageBytes = Utilities.fileToByteArr(chosenImage);
-		previewProfilePic.setImage(new Image(new ByteArrayInputStream(chosenImageBytes)));
+		previewProfilePic.setImage(Utilities.byteArrToImage(chosenImageBytes));
 	}
 	
 	@FXML public void showPasswordBoxOnAction(ActionEvent event) {
@@ -84,7 +83,7 @@ public class SignUpController {
 			alert.showAndWait();
     	} else {
     		chosenImageBytes = Utilities.fileToByteArr(chosenImage);
-    		previewProfilePic.setImage(new Image(new ByteArrayInputStream(chosenImageBytes)));
+    		previewProfilePic.setImage(Utilities.byteArrToImage(chosenImageBytes));
     	}
 	}
 
@@ -101,14 +100,13 @@ public class SignUpController {
 		}
 		
 		
-		if (UserCenter.getInstance().containsUser(usernameField.getText()) == true || !UserCenter.isValidPassword(password) ||
+		if (AppState.getInstance().getUserCenter().getUser(usernameField.getText()) != null || !UserCenter.isValidPassword(password) ||
 				!password.equals(confirmPassword) ||!UserCenter.isValidEmail(emailField.getText())) {
 			msgLabel.setText("Failed, please try again.");
 			msgLabel.setVisible(true);
 			resetFields();
 		} else {
-			UserCenter.getInstance().addUser(new User(usernameField.getText(), password, emailField.getText(), new FXImage(chosenImageBytes)));
-			Utilities.backupUserCenter();
+			AppState.getInstance().getUserCenter().addUser(new User(usernameField.getText(), password, emailField.getText(), new FXImage(chosenImageBytes)));
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Account Sucessfully Created!");
 			alert.setHeaderText(null);
@@ -134,8 +132,8 @@ public class SignUpController {
 		} else if (event.getSource().equals(usernameField)) {
 			String tempStyle = usernameField.getStyle();
 			usernameField.textProperty().addListener((observable, oldValue, newValue) -> {
-				if (UserCenter.getInstance().containsUser(newValue) == false) usernameLine.setStyle(tempStyle + "-fx-stroke: #38ff13;");
-				else usernameLine.setStyle(tempStyle + "-fx-stroke: #ff0000;");
+				if (AppState.getInstance().getUserCenter().getUser(newValue) != null) usernameLine.setStyle(tempStyle + "-fx-stroke: #ff0000;");
+				else usernameLine.setStyle(tempStyle + "-fx-stroke: #38ff13;");
 			});
 
 		} else if (event.getSource().equals(passwordField)) {
@@ -183,6 +181,6 @@ public class SignUpController {
 		confirmPasswordLine.setStyle("-fx-stroke: #3b93ff;");
 		chosenImage = new File("src/assets/TempProfilePic.png");
 		chosenImageBytes = Utilities.fileToByteArr(chosenImage);
-		previewProfilePic.setImage(new Image(new ByteArrayInputStream(chosenImageBytes)));
+		previewProfilePic.setImage(Utilities.byteArrToImage(chosenImageBytes));
 	}
 }

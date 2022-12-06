@@ -1,14 +1,15 @@
 package controllers;
 
-import java.io.ByteArrayInputStream;
-import java.util.LinkedHashMap;
-import java.util.UUID;
+import java.util.LinkedList;
 
+import model.AppState;
 import model.Post;
 import model.User;
-import model.UserCenter;
 import util.GUIBackend;
+import util.Utilities;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -16,9 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
 import javafx.scene.layout.TilePane;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
@@ -58,21 +57,40 @@ public class UserProfileController {
     public UserProfileController() {}
     
     public void initialize() {
-    	currentUser = UserCenter.getInstance().getCurrentUser();
+    	currentUser = AppState.getInstance().getUserCenter().getCurrentUser();
+    	followersList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if(newValue != null) {
+					UserProfileController userProfile =  GUIBackend.loadPane(landingController.getContentPane(), GUIBackend.UserProfileScene);
+					userProfile.setUser(AppState.getInstance().getUserCenter().getUser(newValue));
+					userProfile.setLandingController(landingController);	
+				}
+			}	
+		});
+		
+		followingList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if(newValue != null) {
+					UserProfileController userProfile =  GUIBackend.loadPane(landingController.getContentPane(), GUIBackend.UserProfileScene);
+					userProfile.setUser(AppState.getInstance().getUserCenter().getUser(newValue));
+					userProfile.setLandingController(landingController);	
+				}
+			}	
+		});
     	Platform.runLater(() -> {
-    		bannerPic.setFill(new ImagePattern(new Image(new ByteArrayInputStream(user.getBannerPic().returnBytes()))));
-    		profilePic.setFill(new ImagePattern(new Image(new ByteArrayInputStream(user.getProfilePic().returnBytes()))));
+    		bannerPic.setFill(Utilities.byteArrToImagePattern(user.getBannerPic().returnBytes()));
+    		profilePic.setFill(Utilities.byteArrToImagePattern(user.getProfilePic().returnBytes()));
     		usernameLabel.setText(user.getUsername());
-    		nicknameLabel.setText(user.getNickName());
-    		bioField.setText(user.getBio());
+    		if(user.getNickName() != null) nicknameLabel.setText(user.getNickName());
+    		if(user.getBio() != null) bioField.setText(user.getBio());
     		numPosts.setText(String.valueOf(user.getUserPosts().size()));
     		numFollowers.setText(String.valueOf(user.getFollowers().size()));
     		numFollowing.setText(String.valueOf(user.getFollowing().size())); 	
-        	followersList.getItems().clear();
     		for(User u: user.getFollowers()) {
     			followersList.getItems().add(u.getUsername());
     		}
-    		followingList.getItems().clear();
         	for(User u: user.getFollowing().values()) {
     			followingList.getItems().add(u.getUsername());
     		}
@@ -88,16 +106,16 @@ public class UserProfileController {
     		} else {
     			unfollowBtn.setVisible(false);
     			unfollowBtn.setVisible(true);
-    		}	
-    		
-    		displayPosts(user.getUserPosts());
-    		
+    		}	   		
+    		displayPosts(user.getUserPosts());	
     	});
     }
     
     @FXML public void backBtnOnAction(ActionEvent event) {
     	HomeFeedController homeFeed = GUIBackend.loadPane(landingController.getContentPane(), GUIBackend.HomeFeedScene);
     	homeFeed.setLandingController(landingController);
+    	landingController.resetBtns();
+    	landingController.getHomeBtn().setStyle("-fx-background-color: rgba(255,255,255,0.5)");
     }
     
     @FXML public void postsBtnOnAction(ActionEvent event) {
@@ -157,13 +175,13 @@ public class UserProfileController {
     	followBtn.setDisable(false);
     }
     
-    public void displayPosts(LinkedHashMap<UUID, Post> posts) {
+    public void displayPosts(LinkedList<Post> posts) {
     	tilePane.getChildren().clear();
     	GUIBackend.displayPostsNewToOld(posts, tilePane, landingController);
     }
     
     public void setUser(User user) {
-    	this.user = UserCenter.getInstance().getUser(user.getUsername());
+    	this.user = AppState.getInstance().getUserCenter().getUser(user.getUsername());
     }
     
     public void setLandingController(LandingController landingController) {

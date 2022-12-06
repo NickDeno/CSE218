@@ -1,76 +1,79 @@
 package model;
 
-import java.io.File;
 import java.io.Serializable;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.UUID;
 
-import util.Utilities;
-
-//Singleton Class
 public class PostCenter implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private LinkedHashMap<UUID, Post> postMap;	
-	private static PostCenter instance;
+	private LinkedList<Post> postList;	
 
-	private PostCenter() {
-		postMap = new LinkedHashMap<UUID, Post>();
+	public PostCenter() {
+		postList = new LinkedList<Post>();
 	}
 	
-	public static PostCenter getInstance() {
-		if(instance == null && new File("backupData/Posts.dat").exists() == false) { //Condition will be true on first ever launch of program
-			instance = new PostCenter();
-        } else if(instance == null) { //Condition will be true on every other launch of program besides first one
-        	instance = Utilities.restorePostCenter();
-        }
-		return instance; 
-    }
-	
-	public void addPost(Post p) {
-		postMap.put(p.getUuid(), p);
+	public void addPost(Post post) {
+		postList.add(post);
 	}
 	
-	public Post removePost(UUID uuid) {
-		return postMap.remove(uuid);
+	public boolean removePost(Post post) {
+		return postList.remove(post);
 	}
 	
-	//O(1) 
+	public boolean removePost(UUID uuid) {
+		Iterator<Post> itr = postList.iterator();
+		while(itr.hasNext()) {
+			Post post = itr.next();
+			if(post.getUuid().equals(uuid)) {
+				postList.remove(post);
+				return true;
+			}
+		}
+		return false;
+
+	}
+
 	public Post getPost(UUID uuid) {
-		return postMap.get(uuid);
+		Iterator<Post> itr = postList.iterator();
+		while(itr.hasNext()) {
+			Post post = itr.next();
+			if(post.getUuid().equals(uuid)) {
+				return post;
+			}
+		}
+		return null;
 	}
 	
-	public int size() {
-		return postMap.size();
-	}
-	
-	public LinkedHashMap<UUID, Post> getPosts(){
-		return postMap;
+	public LinkedList<Post> getPosts(){
+		return postList;
 	}
 
 	public void display() {
-		for(Map.Entry<UUID, Post> entry: postMap.entrySet()) {
-			System.out.println(entry.getValue().toString());
-		}
+		postList.forEach(post -> System.out.println(post.toString()));
 	}
 	
 	//O(n) since each posts' topic has to be checked to see if it matches given topic
-	public LinkedHashMap<UUID, Post> searchByTopic(String topic) {
-		LinkedHashMap<UUID, Post> temp = new LinkedHashMap<UUID, Post>();
-		for(Map.Entry<UUID, Post> entry: postMap.entrySet()) {
-			if(entry.getValue().getTopic().equals(topic)) {
-				temp.put(entry.getValue().getUuid(), entry.getValue());
+	public LinkedList<Post> searchByTopic(String topic) {
+		LinkedList<Post> temp = new LinkedList<Post>();
+		Iterator<Post> itr = postList.iterator();
+		while(itr.hasNext()) {
+			Post post = itr.next();
+			if(post.getTopic().equals(topic)) {
+				temp.add(post);
 			}
 		}
 		return temp;
 	}
 	
 	//O(n) since each posts' title has to be searched to see if matches given title
-	public LinkedHashMap<UUID, Post> searchByTitle(String title) {
-		LinkedHashMap<UUID, Post> temp = new LinkedHashMap<UUID, Post>();
-		for(Map.Entry<UUID, Post> entry: postMap.entrySet()) {
-			if(entry.getValue().getTitle().equals(title)) {
-				temp.put(entry.getValue().getUuid(), entry.getValue());
+	public LinkedList<Post> searchByTitle(String title) {
+		LinkedList<Post> temp = new LinkedList<Post>();
+		Iterator<Post> itr = postList.iterator();
+		while(itr.hasNext()) {
+			Post post = itr.next();
+			if(post.getTitle().equals(title)) {
+				temp.add(post);
 			}
 		}
 		return temp;
@@ -79,8 +82,9 @@ public class PostCenter implements Serializable{
 	@Override
 	public String toString() {
 		String  s = "";	
-		for(Map.Entry<UUID, Post> entry: postMap.entrySet()) {
-			s += entry.getValue().toString();
+		Iterator<Post> itr = postList.iterator();
+		while(itr.hasNext()) {
+			s += itr.next().toString();
 		}
 		return s;
 	}

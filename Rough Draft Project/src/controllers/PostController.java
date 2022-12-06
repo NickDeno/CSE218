@@ -1,15 +1,14 @@
 package controllers;
 
-import java.io.ByteArrayInputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import model.Post;
 import util.GUIBackend;
+import util.Utilities;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
@@ -28,15 +27,14 @@ public class PostController {
 	public PostController() {}	
 	
 	@FXML public void postOnClicked(MouseEvent event) {
-		PostRepliesController postReplies =  GUIBackend.loadPane(landingController.getContentPane(), GUIBackend.PostRepliesScene);
+		PostWithRepliesController postReplies =  GUIBackend.loadPane(landingController.getContentPane(), GUIBackend.PostWithRepliesScene);
 		postReplies.setPostData(post);
-		postReplies.setLandingController(landingController);
-		
+		postReplies.setLandingController(landingController);	
     }
 	
 	public void setPostData(Post post) {
 		this.post = post;
-		profilePic.setImage(new Image(new ByteArrayInputStream(post.getPoster().getProfilePic().returnBytes())));
+		profilePic.setImage(Utilities.byteArrToImage(post.getPoster().getProfilePic().returnBytes()));
 		usernameLabel.setText(post.getPoster().getUsername());
 		titleLabel.setText(post.getTitle());
 		topicLabel.setText("Topic: " + post.getTopic());

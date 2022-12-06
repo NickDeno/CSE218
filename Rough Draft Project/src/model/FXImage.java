@@ -14,6 +14,5 @@ public class FXImage implements Serializable {
     public byte[] returnBytes() {
         return imageBuffer;
     }
-    
 
 }

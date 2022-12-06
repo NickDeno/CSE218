@@ -1,33 +1,18 @@
 package model;
 
-import java.io.File;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
 
-import util.Utilities;
-
-//Singleton Class
 public class UserCenter implements Serializable {
 	private static final long serialVersionUID = 1L;	
-	private static UserCenter instance;
 	private TreeMap<String, User> userMap;
-	
 	private User currentUser;
 	
-	private UserCenter() {
+	public UserCenter() {
 		userMap = new TreeMap<String, User>();
 	}
-	
-	public static UserCenter getInstance() {
-		if(instance == null && new File("backupData/Users.dat").exists() == false) { //Condition will be true on first ever launch of program
-			instance = new UserCenter();
-        } else if(instance == null) { //Condition will be true on every other launch of program besides first one
-        	instance = Utilities.restoreUserCenter();
-        }
-		return instance;  
-    }
 	
 	public void addUser(User user) {
 		userMap.put(user.getUsername(), user);
@@ -39,10 +24,6 @@ public class UserCenter implements Serializable {
 	
 	public User getUser(String username) {
 		return userMap.get(username);
-	}
-	
-	public boolean containsUser(String username) {
-		return userMap.containsKey(username);
 	}
 	
 	public int size() {
@@ -62,9 +43,7 @@ public class UserCenter implements Serializable {
 	}
 	
 	public void display() {
-		for(Map.Entry<String, User> entry: userMap.entrySet()) {
-			System.out.println(entry.getValue().toString());
-		}
+		userMap.values().forEach(user -> System.out.println(user.toString()));
 	}
 	
 	public static boolean isValidPassword(String password) {
@@ -91,7 +70,7 @@ public class UserCenter implements Serializable {
 	
 	@Override
 	public String toString() {
-		String  s = "";	
+		String s = "";	
 		for(Map.Entry<String, User> entry: userMap.entrySet()) {
 			s += entry.getValue().toString();
 		}

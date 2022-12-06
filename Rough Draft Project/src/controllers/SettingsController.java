@@ -1,13 +1,12 @@
 package controllers;
 
 import java.util.Iterator;
-import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.TreeMap;
-import java.util.UUID;
 
+import model.AppState;
 import model.Post;
-import model.PostCenter;
+import model.ReplyPost;
 import model.User;
 import model.UserCenter;
 import util.GUIBackend;
@@ -54,7 +53,7 @@ public class SettingsController {
 	public SettingsController() {}
 	
 	public void initialize() {
-		currentUser = UserCenter.getInstance().getCurrentUser();
+		currentUser = AppState.getInstance().getUserCenter().getCurrentUser();
 		emailField.setText(currentUser.getEmail());
 		passwordField.setText(currentUser.getPassword());
 		tempBlockedUsers = new TreeMap<String, User>();
@@ -100,14 +99,20 @@ public class SettingsController {
 		alert.setContentText("Are you sure you want to delete your account?");
 		Optional<ButtonType> confirm = alert.showAndWait();
 		if(confirm.isPresent() && confirm.get() == ButtonType.OK) {
-			//Removes every post instance that was made by this user from PostCenter
-			Iterator<Entry<UUID, Post>> itr = currentUser.getUserPosts().entrySet().iterator();
+//			Removes every post instance that was made by this user from PostCenter
+			Iterator<Post> itr = currentUser.getUserPosts().iterator();
 			while(itr.hasNext()) {
-				Post temp = itr.next().getValue();
-				PostCenter.getInstance().removePost(temp.getUuid());
+				Post post = itr.next();
+				AppState.getInstance().getPostCenter().removePost(post);
+			}
+//			Removes every reply post instance that was made by this user from PostCenter
+			Iterator<ReplyPost> itr2  = currentUser.getUserPostReplies().iterator();
+			while(itr2.hasNext()) {
+				ReplyPost replyPost = itr2.next();
+				AppState.getInstance().getPostCenter().getPost(replyPost.getRepliedPost().getUuid()).getPostReplies().remove(replyPost);
 			}
 			//Removes user from UserCenter
-			UserCenter.getInstance().removeUser(currentUser.getUsername());
+			AppState.getInstance().getUserCenter().removeUser(currentUser.getUsername());
 			GUIBackend.loadNewScene(((Stage)((Node)event.getSource()).getScene().getWindow()) , GUIBackend.SignInScene);
 		}
 	}
@@ -124,13 +129,15 @@ public class SettingsController {
 			alert.setContentText("One or more of entered fields was invalid. Please try again.");
 			alert.showAndWait();
 			resetFields();
-			return;
+		} else {
+			currentUser.setEmail(emailField.getText());
+			currentUser.setPassword(passwordField.getText());
+			currentUser.setBlockedUsers(tempBlockedUsers);
+			HomeFeedController homeFeed = GUIBackend.loadPane(landingController.getContentPane(), GUIBackend.HomeFeedScene);
+			homeFeed.setLandingController(landingController);
+			landingController.resetBtns();
+			landingController.getHomeBtn().setStyle("-fx-background-color: rgba(255,255,255,0.5)");
 		}
-		currentUser.setEmail(emailField.getText());
-		currentUser.setPassword(passwordField.getText());
-		currentUser.setBlockedUsers(tempBlockedUsers);
-		HomeFeedController homeFeed = GUIBackend.loadPane(landingController.getContentPane(), GUIBackend.HomeFeedScene);
-		homeFeed.setLandingController(landingController);
 	}
 	
 	@FXML public void checkFieldIsValid(MouseEvent event) {

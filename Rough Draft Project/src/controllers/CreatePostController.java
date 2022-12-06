@@ -1,15 +1,13 @@
 package controllers;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.util.LinkedList;
 import java.util.UUID;
 
+import model.AppState;
 import model.FXImage;
 import model.Post;
-import model.PostCenter;
 import model.User;
-import model.UserCenter;
 import util.Utilities;
 import util.GUIBackend;
 import javafx.event.ActionEvent;
@@ -21,7 +19,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
@@ -37,25 +34,24 @@ public class CreatePostController {
 	 @FXML private ComboBox<String> topicBox;
 	 @FXML private TextField newTopicField;
 	 @FXML private Line newTopicLine;
-	 @FXML private Label msgLabel;
-	 
+	 @FXML private Label msgLabel; 
 	 @FXML private ImageView postImg1;
 	 @FXML private ImageView postImg2;
-	 @FXML private ImageView postImg3;
-	 
+	 @FXML private ImageView postImg3; 
 	 @FXML private Rectangle postImgBorder1;
 	 @FXML private Rectangle postImgBorder2;
 	 @FXML private Rectangle postImgBorder3;
 	 
 	 private User currentUser;
-	 private LandingController landingController;
 	 private LinkedList<FXImage> postImages;
 	 private final String[] defaultTopics = {"Computer Science", "School", "Gaming", "Gym", "Sports", "Other"};
+	 private LandingController landingController;
 	 
+	 //Initializer
 	 public CreatePostController() {}
 	 
 	 public void initialize() {
-		currentUser = UserCenter.getInstance().getCurrentUser();
+		currentUser = AppState.getInstance().getUserCenter().getCurrentUser();
 		postImages = new LinkedList<FXImage>();
 		topicBox.getItems().addAll(defaultTopics);
 	 }
@@ -78,22 +74,21 @@ public class CreatePostController {
 			alert.setHeaderText(null);
 			alert.setContentText("Sorry, but you can only add up to 3 images per post.");
 			alert.showAndWait();
-			return;
-		}
-		FileChooser fc = new FileChooser();
-		fc.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
-		File selectedFile = fc.showOpenDialog(null);
-		if (selectedFile == null) {
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Invalid File");
-			alert.setHeaderText(null);
-			alert.setContentText("Either chosen image was invalid, or no image was chosen. Please try again.");
-			alert.showAndWait();
 		} else {
-			byte[] chosenImageBytes = Utilities.fileToByteArr(selectedFile);
-			postImages.add(new FXImage(chosenImageBytes));
-			System.out.println(postImages.size());
-			displayImage(chosenImageBytes);			
+			FileChooser fc = new FileChooser();
+			fc.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
+			File selectedFile = fc.showOpenDialog(null);
+			if (selectedFile == null) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Invalid File");
+				alert.setHeaderText(null);
+				alert.setContentText("Either chosen image was invalid, or no image was chosen. Please try again.");
+				alert.showAndWait();
+			} else {
+				byte[] chosenImageBytes = Utilities.fileToByteArr(selectedFile);
+				postImages.add(new FXImage(chosenImageBytes));
+				displayImage(chosenImageBytes);			
+			}
 		}
 	 }
 
@@ -103,13 +98,14 @@ public class CreatePostController {
 			 String newPostTopic;
 			 if(topicBox.getValue() == null) newPostTopic = "Misc.";
 			 else if(topicBox.getValue().equals("Other") && newTopicField.getText().isEmpty()) newPostTopic = "Misc.";			 
-			 else newPostTopic = topicBox.getValue(); 
+			 else newPostTopic = topicBox.getValue();  
 			 
-			 Post newPost = new Post(titleField.getText(), newPostTopic, descriptionField.getText(), new LinkedList<FXImage>(postImages), currentUser, UUID.randomUUID()); 
-			 PostCenter.getInstance().addPost(newPost);
-			 UserCenter.getInstance().getUser(UserCenter.getInstance().getCurrentUser().getUsername()).getUserPosts().put(newPost.getUuid(), newPost);		 
+			 Post newPost = new Post(titleField.getText(), newPostTopic, descriptionField.getText(), postImages, currentUser, UUID.randomUUID()); 
+			 AppState.getInstance().getPostCenter().addPost(newPost);
+			 currentUser.getUserPosts().add(newPost);
 			 HomeFeedController homeFeed = GUIBackend.loadPane(landingController.getContentPane(), GUIBackend.HomeFeedScene);
 			 homeFeed.setLandingController(landingController);
+			 landingController.getHomeBtn().setStyle("-fx-background-color: rgba(255,255,255,0.5)");
 		 } else {
 			 resetFields();
 			 msgLabel.setText("Error. Please Try Again.");
@@ -120,6 +116,8 @@ public class CreatePostController {
 	 @FXML public void backBtnOnAction(ActionEvent event) {
 		 HomeFeedController homeFeed = GUIBackend.loadPane(landingController.getContentPane(), GUIBackend.HomeFeedScene);
 		 homeFeed.setLandingController(landingController);
+		 landingController.getHomeBtn().setStyle("-fx-background-color: rgba(255,255,255,0.5)");
+
 	 }
 	 
 	 private void resetFields() {
@@ -135,11 +133,11 @@ public class CreatePostController {
 	 
 	private void displayImage(byte[] chosenImageBytes) {
 		if(postImg1.getImage() == null) {
-			postImg1.setImage(new Image(new ByteArrayInputStream(chosenImageBytes)));
+			postImg1.setImage(Utilities.byteArrToImage(chosenImageBytes));
 		} else if(postImg2.getImage() == null) {
-			postImg2.setImage(new Image(new ByteArrayInputStream(chosenImageBytes)));
+			postImg2.setImage(Utilities.byteArrToImage(chosenImageBytes));
 		} else if(postImg3.getImage() == null) {
-			postImg3.setImage(new Image(new ByteArrayInputStream(chosenImageBytes)));
+			postImg3.setImage(Utilities.byteArrToImage(chosenImageBytes));
 		} 
 	}
 	 

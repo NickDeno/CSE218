@@ -16,7 +16,6 @@
 }
 	
 .transparentButton {
-	-fx-background-radius: 25;
 	-fx-background-color: transparent;
 }
 

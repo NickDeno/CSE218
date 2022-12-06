@@ -113,7 +113,7 @@
                   <Font size="18.0" />
                </font>
             </PasswordField>
-            <Button fx:id="signInBtn" layoutX="191.0" layoutY="367.0" mnemonicParsing="false" onAction="#signInBtnOnAction" prefHeight="59.0" prefWidth="293.0" styleClass="redButton" stylesheets="@Stylesheet.css" text="Sign In" textFill="WHITE">
+            <Button fx:id="signInBtn" layoutX="191.0" layoutY="367.0" mnemonicParsing="false" onAction="#signInBtnOnAction" prefHeight="59.0" prefWidth="293.0" style="-fx-border-color: transparent;" styleClass="redButton" stylesheets="@Stylesheet.css" text="Sign In" textFill="WHITE">
                <font>
                   <Font name="Baskerville Old Face" size="22.0" />
                </font>
@@ -121,10 +121,13 @@
                   <DropShadow radius="20.9925" width="64.97" />
                </effect>
             </Button>
-            <Button fx:id="cancelBtn" layoutX="192.0" layoutY="450.0" mnemonicParsing="false" onAction="#cancelBtnOnAction" prefHeight="60.0" prefWidth="292.0" styleClass="blueButton" stylesheets="@Stylesheet.css" text="Cancel" textFill="WHITE">
+            <Button fx:id="cancelBtn" layoutX="192.0" layoutY="450.0" mnemonicParsing="false" onAction="#cancelBtnOnAction" prefHeight="60.0" prefWidth="292.0" style="-fx-border-color: transparent;" styleClass="blueButton" stylesheets="@Stylesheet.css" text="Cancel" textFill="WHITE">
                <font>
                   <Font name="Baskerville Old Face" size="22.0" />
                </font>
+               <effect>
+                  <DropShadow radius="15.13" width="41.52" />
+               </effect>
             </Button>
             <ImageView fitHeight="123.0" fitWidth="105.0" layoutX="283.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
