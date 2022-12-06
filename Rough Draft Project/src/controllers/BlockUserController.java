@@ -58,7 +58,7 @@ public class BlockUserController {
 			return; 
 		}
 		//If selected user is already present in current users blockedUsers
-		if(currentUser.getBlockedUsers().get(userList.getSelectionModel().getSelectedItem()) != null) {
+		if(settingsController.getTempBlockedUsers().get(userList.getSelectionModel().getSelectedItem()) != null) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Invalid Selection");
 			alert.setHeaderText(null);
@@ -71,7 +71,7 @@ public class BlockUserController {
 			settingsController.getBlockedUsersList().getItems().add(blockedUser.getUsername());
 			settingsController.getPane().setEffect(null);
 			landingController.getPane().setEffect(null);
-			((Stage)((Node)event.getSource()).getScene().getWindow()).close();
+			((Stage)((Node)event.getSource()).getScene().getWindow()).close();	
 		}
 		
 	}
@@ -84,7 +84,7 @@ public class BlockUserController {
 	
 	public void setLandingController(LandingController landingController) {
 		 this.landingController = landingController;
-	 }
+	}
 	
 	public void setSettingsController(SettingsController settingsController) {
 		this.settingsController = settingsController;

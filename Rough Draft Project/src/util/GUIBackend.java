@@ -109,7 +109,7 @@ public class GUIBackend {
 		Iterator<Post> itr = posts.descendingIterator();
 		while(itr.hasNext()) {
 			Post post = itr.next();
-			if(AppState.getInstance().getUserCenter().getCurrentUser().getBlockedUsers().get(post.getPoster().getUsername()) == null) {
+			if(AppState.getInstance().getUserCenter().getCurrentUser().getBlockedUsers().get(post.getPoster().getUsername()) == null) { //O(Log(n))
 				displayPost(post, tilePane, landingController);
 			}
 		}
@@ -121,7 +121,7 @@ public class GUIBackend {
 		Iterator<Post> itr = posts.iterator();
 		while(itr.hasNext()) {
 			Post post = itr.next();
-			if(AppState.getInstance().getUserCenter().getCurrentUser().getBlockedUsers().get(post.getPoster().getUsername()) == null) {
+			if(AppState.getInstance().getUserCenter().getCurrentUser().getBlockedUsers().get(post.getPoster().getUsername()) == null) { //O(Log(n))
 				displayPost(post, tilePane, landingController);
 			}
 		}
@@ -134,8 +134,8 @@ public class GUIBackend {
 		Iterator<Post> itr = posts.descendingIterator();
 		while(itr.hasNext()){
 			Post post = itr.next();
-			if(AppState.getInstance().getUserCenter().getCurrentUser().getBlockedUsers().get(post.getPoster().getUsername()) == null) {
-				if(AppState.getInstance().getUserCenter().getCurrentUser().getFollowing().get(post.getPoster().getUsername()) != null) {
+			if(AppState.getInstance().getUserCenter().getCurrentUser().getBlockedUsers().get(post.getPoster().getUsername()) == null) {  //O(Log(n))
+				if(AppState.getInstance().getUserCenter().getCurrentUser().getFollowing().get(post.getPoster().getUsername()) != null) { //O(Log(n))
 					displayPost(post, tilePane, landingController);
 				}
 			}

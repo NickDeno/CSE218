@@ -111,7 +111,7 @@ public class SettingsController {
 				ReplyPost replyPost = itr2.next();
 				AppState.getInstance().getPostCenter().getPost(replyPost.getRepliedPost().getUuid()).getPostReplies().remove(replyPost);
 			}
-			//Removes user from UserCenter
+//          Removes user from UserCenter
 			AppState.getInstance().getUserCenter().removeUser(currentUser.getUsername());
 			GUIBackend.loadNewScene(((Stage)((Node)event.getSource()).getScene().getWindow()) , GUIBackend.SignInScene);
 		}
@@ -122,7 +122,7 @@ public class SettingsController {
 	}
 	
 	@FXML public void saveBtnOnAction(ActionEvent event) {
-		if (!UserCenter.isValidEmail(emailField.getText()) || !UserCenter.isValidPassword(passwordField.getText())) {
+		if(!UserCenter.isValidEmail(emailField.getText()) || !UserCenter.isValidPassword(passwordField.getText())) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Invalid Fields");
 			alert.setHeaderText(null);

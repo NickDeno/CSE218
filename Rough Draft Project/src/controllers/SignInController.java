@@ -55,9 +55,11 @@ public class SignInController {
 	
 	@FXML public void signInBtnOnAction(ActionEvent event) {
 		String password;
-		if(showPasswordBox.isSelected()) password = visiblePasswordField.getText();
-		else password = passwordField.getText();
-		
+		if(showPasswordBox.isSelected()) {
+    		password = visiblePasswordField.getText();
+    	} else {
+			password =  passwordField.getText();
+		}
 		User tempUser = AppState.getInstance().getUserCenter().getUser(usernameField.getText());
 		if(tempUser != null && tempUser.getPassword().equals(password)) {
 			AppState.getInstance().getUserCenter().setCurrentUser(tempUser);

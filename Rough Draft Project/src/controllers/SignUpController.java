@@ -93,12 +93,10 @@ public class SignUpController {
 		if(showPasswordBox.isSelected()) {
 			password = visiblePasswordField.getText();
 			confirmPassword = visibleConfirmPasswordField.getText();
-		}
-		else {
+		} else {
 			password = passwordField.getText();
 			confirmPassword = confirmPasswordField.getText();
 		}
-		
 		
 		if (AppState.getInstance().getUserCenter().getUser(usernameField.getText()) != null || !UserCenter.isValidPassword(password) ||
 				!password.equals(confirmPassword) ||!UserCenter.isValidEmail(emailField.getText())) {
