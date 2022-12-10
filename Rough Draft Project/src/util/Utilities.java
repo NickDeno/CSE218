@@ -89,7 +89,7 @@ public class Utilities {
 		//Sets initial capacity of the HashSet to 99171(the amount of words in dictionary.txt file)
 		dictionary = new HashSet<String>(99500);
 		try {
-			BufferedReader br = new BufferedReader(new FileReader("src/assets/dictionary.txt"));
+			BufferedReader br = new BufferedReader(new FileReader("rawData/dictionary.txt"));
 			String newLine = "";
 			while(newLine != null) {
 				newLine = br.readLine();
