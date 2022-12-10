@@ -5,11 +5,9 @@ import java.util.LinkedList;
 import model.AppState;
 import model.Post;
 import model.User;
-import util.GUIBackend;
+import util.GUIUtilities;
 import util.Utilities;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -43,8 +41,8 @@ public class UserProfileController {
     @FXML private Line followersBtnLine;
     @FXML private Line followingBtnLine;
     
-    @FXML private ScrollPane scrollPane;
-    @FXML private TilePane tilePane;
+    @FXML private ScrollPane postsScrollPane;
+    @FXML private TilePane postsTilePane;
     @FXML private ListView<String> followersList;
     @FXML private ListView<String> followingList;
     
@@ -58,27 +56,21 @@ public class UserProfileController {
     
     public void initialize() {
     	currentUser = AppState.getInstance().getUserCenter().getCurrentUser();
-    	followersList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-			@Override
-			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				if(newValue != null) {
-					UserProfileController userProfile =  GUIBackend.loadPane(landingController.getContentPane(), GUIBackend.UserProfileScene);
-					userProfile.setUser(AppState.getInstance().getUserCenter().getUser(newValue));
-					userProfile.setLandingController(landingController);	
-				}
-			}	
-		});
+    	followersList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+    		if(newValue != null) {
+    			UserProfileController userProfile =  GUIUtilities.loadPane(landingController.getContentPane(), GUIUtilities.UserProfileScene);
+				userProfile.setUser(AppState.getInstance().getUserCenter().getUser(newValue));
+				userProfile.setLandingController(landingController);
+    		}
+    	});
 		
-		followingList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-			@Override
-			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				if(newValue != null) {
-					UserProfileController userProfile =  GUIBackend.loadPane(landingController.getContentPane(), GUIBackend.UserProfileScene);
-					userProfile.setUser(AppState.getInstance().getUserCenter().getUser(newValue));
-					userProfile.setLandingController(landingController);	
-				}
-			}	
-		});
+    	followingList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+    		if(newValue != null) {
+    			UserProfileController userProfile =  GUIUtilities.loadPane(landingController.getContentPane(), GUIUtilities.UserProfileScene);
+				userProfile.setUser(AppState.getInstance().getUserCenter().getUser(newValue));
+				userProfile.setLandingController(landingController);
+    		}
+    	});
     	Platform.runLater(() -> {
     		bannerPic.setFill(Utilities.byteArrToImagePattern(user.getBannerPic().returnBytes()));
     		profilePic.setFill(Utilities.byteArrToImagePattern(user.getProfilePic().returnBytes()));
@@ -112,7 +104,7 @@ public class UserProfileController {
     }
     
     @FXML public void backBtnOnAction(ActionEvent event) {
-    	HomeFeedController homeFeed = GUIBackend.loadPane(landingController.getContentPane(), GUIBackend.HomeFeedScene);
+    	HomeFeedController homeFeed = GUIUtilities.loadPane(landingController.getContentPane(), GUIUtilities.HomeFeedScene);
     	homeFeed.setLandingController(landingController);
     	landingController.resetBtns();
     	landingController.getHomeBtn().setStyle("-fx-background-color: rgba(255,255,255,0.5)");
@@ -120,7 +112,7 @@ public class UserProfileController {
     
     @FXML public void postsBtnOnAction(ActionEvent event) {
     	viewingLabel.setText("Posts");
-    	scrollPane.setVisible(true);
+    	postsScrollPane.setVisible(true);
     	followersList.setVisible(false);
     	followingList.setVisible(false);
     	postsBtnLine.setVisible(true);
@@ -130,7 +122,7 @@ public class UserProfileController {
     
     @FXML public void followersBtnOnAction(ActionEvent event) {
     	viewingLabel.setText("Followers");
-    	scrollPane.setVisible(false);
+    	postsScrollPane.setVisible(false);
     	followersList.setVisible(true);
     	followingList.setVisible(false);
     	postsBtnLine.setVisible(false);
@@ -140,7 +132,7 @@ public class UserProfileController {
     
     @FXML public void followingBtnOnAction(ActionEvent event) {
     	viewingLabel.setText("Following");
-    	scrollPane.setVisible(false);
+    	postsScrollPane.setVisible(false);
     	followersList.setVisible(false);
     	followingList.setVisible(true);
     	postsBtnLine.setVisible(false);
@@ -176,8 +168,8 @@ public class UserProfileController {
     }
     
     public void displayPosts(LinkedList<Post> posts) {
-    	tilePane.getChildren().clear();
-    	GUIBackend.displayPostsNewToOld(posts, tilePane, landingController);
+    	postsTilePane.getChildren().clear();
+    	GUIUtilities.displayPostsNewToOld(posts, postsTilePane, landingController);
     }
     
     public void setUser(User user) {

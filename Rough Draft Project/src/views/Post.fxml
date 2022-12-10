@@ -26,9 +26,9 @@
             <Font size="22.0" />
          </font>
       </Label>
-      <Label fx:id="titleLabel" alignment="CENTER" disable="true" layoutX="121.0" layoutY="54.0" prefHeight="37.0" prefWidth="453.0" style="-fx-opacity: 1;" text="Title Here" textFill="WHITE">
+      <Label fx:id="titleLabel" alignment="CENTER" disable="true" layoutX="99.0" layoutY="54.0" prefHeight="37.0" prefWidth="487.0" style="-fx-opacity: 1;" text="Title Here" textFill="WHITE">
          <font>
-            <Font name="Bookman Old Style Bold" size="31.0" />
+            <Font name="Bookman Old Style Bold" size="29.0" />
          </font>
       </Label>
       <Label fx:id="dateLabel" alignment="CENTER_RIGHT" disable="true" layoutX="410.0" layoutY="17.0" prefHeight="31.0" prefWidth="277.0" style="-fx-opacity: 1;" text="Date Here!" textFill="#fff2f2">

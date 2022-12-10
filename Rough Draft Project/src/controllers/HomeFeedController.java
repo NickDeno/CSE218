@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import model.AppState;
 import model.Post;
 import model.User;
-import util.GUIBackend;
+import util.GUIUtilities;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,8 +27,6 @@ public class HomeFeedController {
 	@FXML private Button removeFilterBtn;
 	
 	private User currentUser;
-	private String chosenFilter;
-	private String chosenTopic;
 	private final String[] filterOptions = {"All Posts", "Following", "User", "Topic", "Title"};
 	private final String[] topicOptions = {"Computer Science", "School", "Gaming", "Gym", "Sports", "Misc.", "Other"};
 	private LandingController landingController;
@@ -47,95 +45,106 @@ public class HomeFeedController {
 	}
 	
 	@FXML public void filterBoxOnAction(ActionEvent event) {	
-		if(filterBox.getValue().equals("All Posts")) {
-			chosenFilter = filterBox.getValue();
-			searchField.setVisible(false);
-			searchFieldLine.setVisible(false);	
-			topicBox.setVisible(false);
-		} else if(filterBox.getValue().equals("Following")) {
-			chosenFilter = filterBox.getValue();
-			searchField.setVisible(false);
-			searchFieldLine.setVisible(false);	
-			topicBox.setVisible(false);
-		} else if(filterBox.getValue().equals("User")) {
-			chosenFilter = filterBox.getValue();
-			searchField.setVisible(true);
-			searchFieldLine.setVisible(true);	
-			topicBox.setVisible(false);
-		} else if(filterBox.getValue().equals("Topic")) {
-			chosenFilter = filterBox.getValue();
-			searchField.setVisible(false);
-			searchFieldLine.setVisible(false);
-			topicBox.setVisible(true);
-		} else if(filterBox.getValue().equals("Title")) {
-			chosenFilter = filterBox.getValue();
-			searchField.setVisible(true);
-			searchFieldLine.setVisible(true);
-			topicBox.setVisible(false);
-		}	
+		switch(filterBox.getValue()) {
+			case "User":
+				searchField.setVisible(true);
+				searchFieldLine.setVisible(true);	
+				topicBox.setVisible(false);
+				break;
+			case "Topic":
+				searchField.setVisible(false);
+				searchFieldLine.setVisible(false);
+				topicBox.setVisible(true);
+				break;
+			case "Title":
+				searchField.setVisible(true);
+				searchFieldLine.setVisible(true);
+				topicBox.setVisible(false);
+				break;
+			default:
+				searchField.setVisible(false);
+				searchFieldLine.setVisible(false);	
+				topicBox.setVisible(false);
+				break;
+		}
 	}
 	
 	@FXML public void topicBoxOnAction(ActionEvent event) {
 		if(topicBox.getValue().equals("Other")) {
-			chosenTopic = topicBox.getValue();
 			searchField.setVisible(true);
 			searchFieldLine.setVisible(true);
 		} else {
-			chosenTopic = topicBox.getValue();
 			searchField.setVisible(false);
 			searchFieldLine.setVisible(false);
 		}
 	}
 	
 	@FXML public void applyFilterBtnOnAction(ActionEvent event) {
-		if(chosenFilter.equals("All Posts")) {
-			displayPosts(AppState.getInstance().getPostCenter().getPosts());		
-		} else if(chosenFilter.equals("Following")) {
-			if(currentUser.getFollowing().values().size() == 0) {
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("No Followed Users.");
-				alert.setHeaderText(null);
-				alert.setContentText("Unable to filter posts by following since you are not following anyone.");
-				alert.showAndWait();
-				filterBox.getSelectionModel().selectFirst();
+		switch(filterBox.getValue()) {
+			case "All Posts":
 				tilePane.getChildren().clear();
 				displayPosts(AppState.getInstance().getPostCenter().getPosts());
-				resetFields();
-			} else {
+				break;
+			case "Following":
+				if(currentUser.getFollowing().values().size() == 0) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("No Followed Users.");
+					alert.setHeaderText(null);
+					alert.setContentText("Unable to filter posts by following since you are not following anyone.");
+					alert.showAndWait();
+					filterBox.getSelectionModel().selectFirst();
+					tilePane.getChildren().clear();
+					displayPosts(AppState.getInstance().getPostCenter().getPosts());
+					resetFields();
+				} else {
+					tilePane.getChildren().clear();
+					displayFollowingPosts();
+				}
+				break;
+			case "User":
+				User searchedUser = AppState.getInstance().getUserCenter().getUser(searchField.getText());
+				if(searchedUser == null) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("No User Found.");
+					alert.setHeaderText(null);
+					alert.setContentText("No user found with specified username. Please try again.");
+					alert.showAndWait();
+					searchField.clear();
+				} else if(currentUser.getBlockedUsers().get(searchedUser.getUsername()) != null) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Blocked User");
+					alert.setHeaderText(null);
+					alert.setContentText("Sorry. The user you searched for is in you blocked users. If you wish to see their posts, please unblock them.");
+					alert.showAndWait();
+					searchField.clear();	
+				} else {
+					tilePane.getChildren().clear();
+					displayPosts(searchedUser.getUserPosts());
+					resetFields();
+				}
+				break;
+			case "Topic":
+				if(topicBox.getValue() == null) {
+					filterBox.getSelectionModel().selectFirst();
+					tilePane.getChildren().clear();
+					displayPosts(AppState.getInstance().getPostCenter().getPosts());
+					resetFields();
+				} else if(topicBox.getValue().equals("Other")) {
+					tilePane.getChildren().clear();
+					displayPosts(AppState.getInstance().getPostCenter().searchByTopic(searchField.getText()));
+					resetFields();
+				} else {
+					tilePane.getChildren().clear();
+					displayPosts(AppState.getInstance().getPostCenter().searchByTopic(topicBox.getValue()));
+					resetFields();
+				}
+				break;
+			case "Title":
 				tilePane.getChildren().clear();
-				displayFollowingPosts(AppState.getInstance().getPostCenter().getPosts());
-			}
-		} else if(chosenFilter.equals("User")) {
-			User searchedUser = AppState.getInstance().getUserCenter().getUser(searchField.getText());
-			if(searchedUser == null) {
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("No User Found.");
-				alert.setHeaderText(null);
-				alert.setContentText("No user found with specified username. Please try again.");
-				alert.showAndWait();
-				searchField.clear();
-			} else if(currentUser.getBlockedUsers().get(searchedUser.getUsername()) != null) {
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("Blocked User.");
-				alert.setHeaderText(null);
-				alert.setContentText("Sorry. The user you searched for is in you blocked users. If you wish to see their posts, please unblock them.");
-				alert.showAndWait();
-				searchField.clear();	
-			} else {
-				tilePane.getChildren().clear();
-				displayPosts(searchedUser.getUserPosts());
-				resetFields();
-			}
-		} else if(chosenFilter.equals("Topic")) {
-			tilePane.getChildren().clear();
-			displayPosts(AppState.getInstance().getPostCenter().searchByTopic(chosenTopic));
-			resetFields();
-		} else if(chosenFilter.equals("Title")) {
-			tilePane.getChildren().clear();
-			displayPosts(AppState.getInstance().getPostCenter().searchByTitle(searchField.getText()));
-			resetFields();
-		}
-		
+				displayPosts(AppState.getInstance().getPostCenter().searchByTitle(searchField.getText()));
+				resetFields();		
+				break;
+		}	
 	}
 	
 	@FXML public void removeFilterBtnOnAction(ActionEvent event) {
@@ -145,14 +154,6 @@ public class HomeFeedController {
 		resetFields();
 	}
 	
-	private void displayPosts(LinkedList<Post> posts) {
-		 GUIBackend.displayPostsNewToOld(posts, tilePane, landingController);
-	}
-	
-	private void displayFollowingPosts(LinkedList<Post> posts) {
-		 GUIBackend.displayFollowingPosts(posts, tilePane, landingController);
-	}
-	
 	private void resetFields() {
 		searchField.clear();
 		searchField.setVisible(false);
@@ -160,6 +161,15 @@ public class HomeFeedController {
 		topicBox.setValue("");
 		topicBox.setVisible(false);
 	}
+	
+	private void displayPosts(LinkedList<Post> posts) {
+		 GUIUtilities.displayPostsNewToOld(posts, tilePane, landingController);
+	}
+	
+	private void displayFollowingPosts() {
+		 GUIUtilities.displayFollowingPosts(AppState.getInstance().getPostCenter().getPosts(), tilePane, landingController);
+	}
+	
 	
 	public void setLandingController(LandingController landingController) {
 		this.landingController = landingController;

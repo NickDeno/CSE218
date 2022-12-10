@@ -2,34 +2,37 @@ package controllers;
 
 import java.io.File;
 import java.util.LinkedList;
+import java.util.Optional;
 import java.util.UUID;
 
 import model.AppState;
 import model.FXImage;
 import model.Post;
+import model.SpellCheckTextArea;
 import model.User;
 import util.Utilities;
-import util.GUIBackend;
+import util.GUIUtilities;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 public class CreatePostController {
+	 @FXML private AnchorPane createPostPane;
 	 @FXML private Button backBtn;
 	 @FXML private Button createPostButton;
 	 @FXML private Button browseButton;
-	 @FXML private TextArea descriptionField;
 	 @FXML private TextField titleField;
 	 @FXML private ComboBox<String> topicBox;
 	 @FXML private TextField newTopicField;
@@ -41,6 +44,7 @@ public class CreatePostController {
 	 @FXML private Rectangle postImgBorder1;
 	 @FXML private Rectangle postImgBorder2;
 	 @FXML private Rectangle postImgBorder3;
+	 private SpellCheckTextArea descriptionField;
 	 
 	 private User currentUser;
 	 private LinkedList<FXImage> postImages;
@@ -54,6 +58,8 @@ public class CreatePostController {
 		currentUser = AppState.getInstance().getUserCenter().getCurrentUser();
 		postImages = new LinkedList<FXImage>();
 		topicBox.getItems().addAll(defaultTopics);
+		descriptionField = new SpellCheckTextArea(660, 300, 172, 190, true);
+		createPostPane.getChildren().add(descriptionField.getPane());
 	 }
 	 
 	 @FXML public void topicBoxOnAction(ActionEvent event) {
@@ -93,28 +99,50 @@ public class CreatePostController {
 	 }
 
 	@FXML public void createPostButtonOnAction(ActionEvent event) {
-		 if(!titleField.getText().isEmpty() && !descriptionField.getText().isEmpty()) {
-			 //If user does not select topic or create their own topic, topic will be set to "Misc."
-			 String newPostTopic;
-			 if(topicBox.getValue() == null) newPostTopic = "Misc.";
-			 else if(topicBox.getValue().equals("Other") && newTopicField.getText().isEmpty()) newPostTopic = "Misc.";			 
-			 else newPostTopic = topicBox.getValue();  
+		if(!descriptionField.getMisspelledWords().isEmpty()) {
+			String misspelledWords = "";
+			for(int i = 0; i < descriptionField.getMisspelledWords().size(); i++) {
+				String currWord = descriptionField.getMisspelledWords().get(i);
+				if(i < descriptionField.getMisspelledWords().size()-1) {
+					misspelledWords += currWord + ", ";
+				} else {
+					misspelledWords += currWord + ".";
+				}
+			}
+			
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Misspelled Words");
+			alert.setHeaderText(null);
+			alert.setContentText("Your post description contains the misspelled word(s) " + misspelledWords + " Do you still wish to continue?");
+			Optional<ButtonType> confirm = alert.showAndWait();
+			if(confirm.isPresent() && confirm.get() == ButtonType.CANCEL) {
+				return;
+			}
+		}
+		
+		if(!titleField.getText().isEmpty() && !descriptionField.getTextArea().getText().isEmpty()) {
+			//If user does not select topic or create their own topic, topic will be set to "Misc."
+			String newPostTopic;
+			if(topicBox.getValue() == null || topicBox.getValue().equals("")) newPostTopic = "Misc.";
+			else if(topicBox.getValue().equals("Other") && newTopicField.getText().isEmpty()) newPostTopic = "Misc.";	
+			else if(topicBox.getValue().equals("Other") && !newTopicField.getText().isEmpty()) newPostTopic = newTopicField.getText();
+			else newPostTopic = topicBox.getValue();
 			 
-			 Post newPost = new Post(titleField.getText(), newPostTopic, descriptionField.getText(), postImages, currentUser, UUID.randomUUID()); 
-			 AppState.getInstance().getPostCenter().addPost(newPost);
-			 currentUser.getUserPosts().add(newPost);
-			 HomeFeedController homeFeed = GUIBackend.loadPane(landingController.getContentPane(), GUIBackend.HomeFeedScene);
-			 homeFeed.setLandingController(landingController);
-			 landingController.getHomeBtn().setStyle("-fx-background-color: rgba(255,255,255,0.5)");
-		 } else {
-			 resetFields();
-			 msgLabel.setText("Error. Please Try Again.");
-			 msgLabel.setVisible(true);
-		 }
-	 }
+			Post newPost = new Post(titleField.getText(), newPostTopic, descriptionField.getTextArea().getText(), postImages, currentUser, UUID.randomUUID()); 
+			AppState.getInstance().getPostCenter().addPost(newPost);
+			currentUser.getUserPosts().add(newPost);
+			HomeFeedController homeFeed = GUIUtilities.loadPane(landingController.getContentPane(), GUIUtilities.HomeFeedScene);
+			homeFeed.setLandingController(landingController);
+			landingController.getHomeBtn().setStyle("-fx-background-color: rgba(255,255,255,0.5)");
+		} else {
+			resetFields();
+			msgLabel.setText("Error. Please Try Again.");
+			msgLabel.setVisible(true);
+		}
+	}
 	 
 	 @FXML public void backBtnOnAction(ActionEvent event) {
-		 HomeFeedController homeFeed = GUIBackend.loadPane(landingController.getContentPane(), GUIBackend.HomeFeedScene);
+		 HomeFeedController homeFeed = GUIUtilities.loadPane(landingController.getContentPane(), GUIUtilities.HomeFeedScene);
 		 homeFeed.setLandingController(landingController);
 		 landingController.getHomeBtn().setStyle("-fx-background-color: rgba(255,255,255,0.5)");
 
@@ -122,7 +150,7 @@ public class CreatePostController {
 	 
 	 private void resetFields() {
 		 titleField.clear();
-		 descriptionField.clear();
+		 descriptionField.getTextArea().clear();
 		 topicBox.setValue("");
 		 msgLabel.setVisible(false);
 		 postImg1.setImage(null);

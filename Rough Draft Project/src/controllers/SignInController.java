@@ -3,7 +3,7 @@ package controllers;
 import model.AppState;
 import model.User;
 import util.Utilities;
-import util.GUIBackend;
+import util.GUIUtilities;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,14 +27,16 @@ public class SignInController {
 	
 	Stage stage;
 	//Since every scene/page shares the same stage throughout the app, to achieve data persistence, we do not have to backup every time a change is made in the 
-	//program. We can just set the stages' onCloseRequest and the cancelBtn on the SignInPage to backup the data since these are the only 2 ways to forcibly close
+	//program. We can just set the stages' onCloseRequest and the cancelBtn on the SignInPage to backup the AppState since these are the only 2 ways to forcibly close
 	//the app.
 	
 	public void initialize() {	
 		//Initializes AppState
 		AppState.getInstance();	
-		AppState.getInstance().getUserCenter().display();
-		AppState.getInstance().getPostCenter().display();
+		//Initializes Dictionary
+		Utilities.loadDictionary();
+		//Comment out if you don't wish to see data displayed in console
+		AppState.getInstance().displayState();	
 		Platform.runLater(() -> {
 			stage = (Stage)signInBtn.getScene().getWindow();
 			stage.setOnCloseRequest(e -> Utilities.backupAppState());
@@ -63,7 +65,7 @@ public class SignInController {
 		User tempUser = AppState.getInstance().getUserCenter().getUser(usernameField.getText());
 		if(tempUser != null && tempUser.getPassword().equals(password)) {
 			AppState.getInstance().getUserCenter().setCurrentUser(tempUser);
-			GUIBackend.loadNewScene(stage, GUIBackend.LandingScene);
+			GUIUtilities.loadNewScene(stage, GUIUtilities.LandingScene);
 		} else {
 			msgLabel.setText("Account not found.");
 			msgLabel.setVisible(true);
@@ -82,7 +84,7 @@ public class SignInController {
     }
     
     @FXML public void clickHereOnAction(ActionEvent event) {
-    	GUIBackend.loadNewScene(stage, GUIBackend.SignUpScene);
+    	GUIUtilities.loadNewScene(stage, GUIUtilities.SignUpScene);
 	}
     
 }

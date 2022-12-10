@@ -20,6 +20,7 @@ public class Post implements Serializable {
 	private LinkedList<Post> postReplies;
 	private Integer likes;
 	
+	//Key Field
 	private UUID uuid;
 	//Since the UUID of each post is always unique, when a certain post in the PostCenter is being searched for, it will be searched for by the UUID since
 	//it will only ever return either that specific post, or nothing, since there wont ever be any duplicate UUIDS for multiple posts.

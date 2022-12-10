@@ -11,10 +11,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
@@ -23,11 +24,13 @@ import model.AppState;
 import model.FXImage;
 import model.Post;
 import model.ReplyPost;
+import model.SpellCheckTextArea;
 import model.User;
-import util.GUIBackend;
+import util.GUIUtilities;
 import util.Utilities;
 
 public class EditPostController {
+		@FXML private AnchorPane editPostPane;
 	    @FXML private Button backBtn;
 	    @FXML private Button resetBtn;
 		@FXML private Button browseButton;
@@ -37,7 +40,6 @@ public class EditPostController {
 		@FXML private ComboBox<String> topicBox;
 		@FXML private TextField newTopicField;
 		@FXML private Line newTopicLine;
-		@FXML private TextArea descriptionField; 
 		@FXML private ImageView postImg1;
 		@FXML private ImageView postImg2;
 		@FXML private ImageView postImg3;	 
@@ -47,6 +49,8 @@ public class EditPostController {
 		@FXML private Button deletePostImg1Btn;
 		@FXML private Button deletePostImg2Btn;
 		@FXML private Button deletePostImg3Btn;
+		@FXML private Label msgLabel;
+		private SpellCheckTextArea descriptionField;
 		
 		private Post post;
 		private User currentUser;
@@ -61,6 +65,9 @@ public class EditPostController {
 		public void initialize() {
 			currentUser = AppState.getInstance().getUserCenter().getCurrentUser();
 			topicBox.getItems().addAll(defaultTopics);
+			descriptionField = new SpellCheckTextArea(780, 245, 110, 275, true);
+			editPostPane.getChildren().add(descriptionField.getPane());
+			
 			Platform.runLater(() -> {
 				tempPostImages = new LinkedList<FXImage>();
 				if(post.getPostImages() != null) {
@@ -73,7 +80,7 @@ public class EditPostController {
 		}
 
 	    @FXML public void backBtnOnAction(ActionEvent event) {
-	    	PostWithRepliesController postReplies =  GUIBackend.loadPane(landingController.getContentPane(), GUIBackend.PostWithRepliesScene);
+	    	PostWithRepliesController postReplies =  GUIUtilities.loadPane(landingController.getContentPane(), GUIUtilities.PostWithRepliesScene);
 			postReplies.setPostData(post);
 			postReplies.setLandingController(landingController);
 	    }
@@ -104,20 +111,32 @@ public class EditPostController {
 					//If exception was caught, => post to be deleted is a regular post => post will be deleted from PostCenter and from the current users posts. 
 					post.delete(post, currentUser);
 				}	
-				HomeFeedController homeFeed = GUIBackend.loadPane(landingController.getContentPane(), GUIBackend.HomeFeedScene);
+				HomeFeedController homeFeed = GUIUtilities.loadPane(landingController.getContentPane(), GUIUtilities.HomeFeedScene);
 				homeFeed.setLandingController(landingController);
 				
 			}
 	    }
 
 	    @FXML public void saveChangesBtnOnAction(ActionEvent event) {
-	    	post.setTitle(titleField.getText());
-	    	post.setTopic(topicBox.getValue());
-	    	post.setDescription(descriptionField.getText());
-	    	post.setPostImages(tempPostImages);
-	    	PostWithRepliesController postReplies =  GUIBackend.loadPane(landingController.getContentPane(), GUIBackend.PostWithRepliesScene);
-			postReplies.setPostData(post);
-			postReplies.setLandingController(landingController);
+	    	if(!titleField.getText().isEmpty() && !descriptionField.getTextArea().getText().isEmpty()) {
+	    		String newPostTopic;
+	    		if(topicBox.getValue() == null || topicBox.getValue().equals("")) newPostTopic = "Misc.";
+				else if(topicBox.getValue().equals("Other") && newTopicField.getText().isEmpty()) newPostTopic = "Misc.";	
+				else if(topicBox.getValue().equals("Other") && !newTopicField.getText().isEmpty()) newPostTopic = newTopicField.getText();
+				else newPostTopic = topicBox.getValue();
+				
+		    	post.setTitle(titleField.getText());
+		    	post.setTopic(newPostTopic);
+		    	post.setDescription(descriptionField.getTextArea().getText());
+		    	post.setPostImages(tempPostImages);
+		    	PostWithRepliesController postReplies =  GUIUtilities.loadPane(landingController.getContentPane(), GUIUtilities.PostWithRepliesScene);
+				postReplies.setPostData(post);
+				postReplies.setLandingController(landingController);
+	    	} else {
+	    		resetFields();
+				msgLabel.setText("Error. Please Try Again.");
+				msgLabel.setVisible(true);
+	    	}
 	    }
 	    
 	    @FXML public void topicBoxOnAction(ActionEvent event) {
@@ -198,13 +217,14 @@ public class EditPostController {
 	    private void resetFields() {
 	    	titleField.setText(post.getTitle());
 	    	topicBox.setValue(post.getTopic());
-	    	descriptionField.setText(post.getDescription());
+	    	descriptionField.getTextArea().replaceText(post.getDescription());
 	    	postImg1.setImage(null);
 	    	postImg2.setImage(null);
 	    	postImg3.setImage(null);
 	    	deletePostImg1Btn.setVisible(false);
 	    	deletePostImg2Btn.setVisible(false);
 	    	deletePostImg3Btn.setVisible(false);
+	    	msgLabel.setVisible(false);
 	    }
 	    
 	    private void displayImage(byte[] chosenImageBytes) {
@@ -247,6 +267,6 @@ public class EditPostController {
 	    	this.post = post;
 	    	titleField.setText(post.getTitle());
 	    	topicBox.setValue(post.getTopic());
-	    	descriptionField.setText(post.getDescription());
+	    	descriptionField.getTextArea().replaceText(post.getDescription());
 	    }
 }

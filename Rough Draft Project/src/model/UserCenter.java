@@ -46,28 +46,6 @@ public class UserCenter implements Serializable {
 		userMap.values().forEach(user -> System.out.println(user.toString()));
 	}
 	
-	public static boolean isValidPassword(String password) {
-		if(password.length() < 8) return false;
-		boolean hasDigit = false;
-		boolean hasUpperCase = false;
-		for(int i = 0; i < password.length(); i++) {
-			if(Character.isUpperCase(password.charAt(i))) hasUpperCase = true;
-			if(Character.isDigit(password.charAt(i))) hasDigit = true;
-		}
-		return hasDigit && hasUpperCase;
-	}
-
-	public static boolean isValidEmail(String email) {
-		if(email.isBlank()) return false;
-		boolean hasAt = false;
-		boolean hasDot = false;
-		for(int i = 0; i < email.length(); i++) {
-			if(email.charAt(i) == '@') hasAt = true;
-			if(email.charAt(i) == '.') hasDot = true;	
-		}
-		return hasAt && hasDot;	
-	}
-	
 	@Override
 	public String toString() {
 		String s = "";	

@@ -93,7 +93,7 @@
                   <Font name="Consolas" size="23.0" />
                </font>
             </Label>
-            <TextField id="userNameField" fx:id="usernameField" alignment="CENTER" layoutX="285.0" layoutY="185.0" prefHeight="47.0" prefWidth="307.0" promptText="Username" style="-fx-background-color: transparent; -fx-text-fill: white;">
+            <TextField id="userNameField" fx:id="usernameField" alignment="CENTER" layoutX="285.0" layoutY="185.0" prefHeight="47.0" prefWidth="307.0" promptText="Username" styleClass="transparentTextField" stylesheets="@Stylesheet.css">
                <font>
                   <Font size="18.0" />
                </font>
@@ -108,7 +108,7 @@
                   <Font name="Bookman Old Style Bold" size="41.0" />
                </font>
             </Label>
-            <PasswordField fx:id="passwordField" alignment="CENTER" layoutX="285.0" layoutY="262.0" prefHeight="46.0" prefWidth="307.0" promptText="Password" style="-fx-background-color: transparent; -fx-text-fill: white;">
+            <PasswordField fx:id="passwordField" alignment="CENTER" layoutX="285.0" layoutY="262.0" prefHeight="46.0" prefWidth="307.0" promptText="Password" styleClass="transparentTextField" stylesheets="@Stylesheet.css">
                <font>
                   <Font size="18.0" />
                </font>

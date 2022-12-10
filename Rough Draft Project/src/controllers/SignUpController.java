@@ -5,9 +5,8 @@ import java.io.File;
 import model.AppState;
 import model.FXImage;
 import model.User;
-import model.UserCenter;
 import util.Utilities;
-import util.GUIBackend;
+import util.GUIUtilities;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -98,8 +97,8 @@ public class SignUpController {
 			confirmPassword = confirmPasswordField.getText();
 		}
 		
-		if (AppState.getInstance().getUserCenter().getUser(usernameField.getText()) != null || !UserCenter.isValidPassword(password) ||
-				!password.equals(confirmPassword) ||!UserCenter.isValidEmail(emailField.getText())) {
+		if (!usernameField.getText().isEmpty() || AppState.getInstance().getUserCenter().getUser(usernameField.getText()) != null 
+				|| !Utilities.isValidPassword(password) || !password.equals(confirmPassword) || !Utilities.isValidEmail(emailField.getText())) {
 			msgLabel.setText("Failed, please try again.");
 			msgLabel.setVisible(true);
 			resetFields();
@@ -111,51 +110,51 @@ public class SignUpController {
 			alert.setContentText("Your account has been successfully created!");
 			alert.showAndWait();
 			Stage stage = ((Stage)((Node)event.getSource()).getScene().getWindow());
-			GUIBackend.loadNewScene(stage, GUIBackend.SignInScene);	
+			GUIUtilities.loadNewScene(stage, GUIUtilities.SignInScene);	
 		}
 	}
 
 	@FXML public void backBtnOnAction(ActionEvent event) {
 		Stage stage = ((Stage)((Node)event.getSource()).getScene().getWindow());
-		GUIBackend.loadNewScene(stage, GUIBackend.SignInScene);
+		GUIUtilities.loadNewScene(stage, GUIUtilities.SignInScene);
 	}
 	
 	@FXML public void checkFieldIsValid(MouseEvent event) {
 		if (event.getSource().equals(emailField)) {
 			String tempStyle = emailLine.getStyle();
 			emailField.textProperty().addListener((observable, oldValue, newValue) -> {
-				if (UserCenter.isValidEmail(newValue)) emailLine.setStyle(tempStyle + "-fx-stroke: #38ff13;");
+				if (!newValue.isEmpty() && Utilities.isValidEmail(newValue)) emailLine.setStyle(tempStyle + "-fx-stroke: #38ff13;");
 				else emailLine.setStyle(tempStyle + "-fx-stroke: #ff0000;");
 			});
 		} else if (event.getSource().equals(usernameField)) {
 			String tempStyle = usernameField.getStyle();
 			usernameField.textProperty().addListener((observable, oldValue, newValue) -> {
-				if (AppState.getInstance().getUserCenter().getUser(newValue) != null) usernameLine.setStyle(tempStyle + "-fx-stroke: #ff0000;");
+				if (newValue.isEmpty() && AppState.getInstance().getUserCenter().getUser(newValue) != null) usernameLine.setStyle(tempStyle + "-fx-stroke: #ff0000;");
 				else usernameLine.setStyle(tempStyle + "-fx-stroke: #38ff13;");
 			});
 
 		} else if (event.getSource().equals(passwordField)) {
 			String tempStyle = passwordField.getStyle();
 			passwordField.textProperty().addListener((observable, oldValue, newValue) -> {
-				if (UserCenter.isValidPassword(newValue)) passwordLine.setStyle(tempStyle + "-fx-stroke: #38ff13;");
+				if (!newValue.isEmpty() && Utilities.isValidPassword(newValue)) passwordLine.setStyle(tempStyle + "-fx-stroke: #38ff13;");
 				else passwordLine.setStyle(tempStyle + "-fx-stroke: #ff0000;");
 			});
 		} else if(event.getSource().equals(visiblePasswordField)) {
 			String tempStyle = visiblePasswordField.getStyle();
 			visiblePasswordField.textProperty().addListener((observable, oldValue, newValue) -> {
-				if (UserCenter.isValidPassword(newValue)) passwordLine.setStyle(tempStyle + "-fx-stroke: #38ff13;");
+				if (!newValue.isEmpty() && Utilities.isValidPassword(newValue)) passwordLine.setStyle(tempStyle + "-fx-stroke: #38ff13;");
 				else passwordLine.setStyle(tempStyle + "-fx-stroke: #ff0000;");
 			});
 		} else if(event.getSource().equals(confirmPasswordField)) {
 			String tempStyle = confirmPasswordField.getStyle();
 			confirmPasswordField.textProperty().addListener((observable, oldValue, newValue) -> {
-				if (passwordField.getText().equals(newValue)) confirmPasswordLine.setStyle(tempStyle + "-fx-stroke: #38ff13;");
+				if (!newValue.isEmpty() && passwordField.getText().equals(newValue)) confirmPasswordLine.setStyle(tempStyle + "-fx-stroke: #38ff13;");
 				else confirmPasswordLine.setStyle(tempStyle + "-fx-stroke: #ff0000;");
 			});
 		} else if(event.getSource().equals(visibleConfirmPasswordField)) {
 			String tempStyle = visibleConfirmPasswordField.getStyle();
 			visibleConfirmPasswordField.textProperty().addListener((observable, oldValue, newValue) -> {
-				if (visiblePasswordField.getText().equals(newValue)) confirmPasswordLine.setStyle(tempStyle + "-fx-stroke: #38ff13;");
+				if (!newValue.isEmpty() && visiblePasswordField.getText().equals(newValue)) confirmPasswordLine.setStyle(tempStyle + "-fx-stroke: #38ff13;");
 				else confirmPasswordLine.setStyle(tempStyle + "-fx-stroke: #ff0000;");
 			});
 		}

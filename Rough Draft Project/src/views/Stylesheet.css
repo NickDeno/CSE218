@@ -44,6 +44,11 @@
 	-fx-background-color: #979191;
 }
 
+.transparentTextField {
+	-fx-background-color: transparent;
+	-fx-text-fill: white;
+}
+
 .post {
 	 -fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #e84d4d 0.0%, #a8a8a8 100.0%);
 }
@@ -56,9 +61,13 @@
 	-fx-background-color: #979191;	
 }
 
-/*This is used to make text areas transparent since this is unable to be done in SceneBuilder*/
 .text-area {
     -fx-background-color: transparent;
+    -fx-border-color: #3b93ff;
+    -fx-border-radius: 25;
+    -fx-border-insets: -5;
+    -fx-border-width: 5;
+    -fx-text-fill: white; 
 }
 
 .text-area .scroll-pane {
@@ -74,16 +83,28 @@
     -fx-background-color: transparent;
 }
 
-.text-area .scroll-bar:vertical {
-    -fx-pref-width: 1;
-    -fx-opacity: 0;
-}
-.text-area .scroll-bar:horizontal {
-    -fx-pref-height: 1;
-    -fx-opacity: 0;
+.spell-error {
+    -fx-effect: dropshadow(gaussian, red, 2, 0, 0, 0);
 }
 
-.tab-pane .tab-header-area .tab-header-background {
-	-fx-opacity: 0;
+.underlined {
+	/*RichTextFX Text Properties. Since these properties are from external library, they are not recognized as valid properties */
+    -rtfx-underline-color: red;
+    -rtfx-underline-dash-array: 2 2;
+    -rtfx-underline-width: 1;
+    -rtfx-underline-cap: butt;
+}
+
+#spellCheckTextArea {
+	-fx-border-radius: 25; 
+	-fx-background-radius: 25; 
+	-fx-border-width: 5; 
+	-fx-border-insets: -5; 
+	-fx-border-color: #3b93ff; 
+	-fx-font-size: 21;
+}
+
+#spellCheckTextArea .text {
+    -fx-fill: white;
 }
 

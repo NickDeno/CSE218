@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import model.AppState;
 import model.Post;
 import model.User;
-import util.GUIBackend;
+import util.GUIUtilities;
 import util.Utilities;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -51,6 +51,10 @@ public class PostWithRepliesController {
 			likeCounter.setText(String.valueOf(post.getLikes()));
 			if(currentUser.getUsername().equals(post.getPoster().getUsername())) {
 				editPostBtn.setVisible(true);
+				likeBtn.setLayoutX(likeBtn.getLayoutX() + 75);
+				viewImagesBtn.setLayoutX(viewImagesBtn.getLayoutX() + 75);
+				replyBtn.setLayoutX(replyBtn.getLayoutX() + 75);
+				viewProfileBtn.setLayoutX(viewProfileBtn.getLayoutX() + 75);
 			}
 		});
 	}
@@ -77,7 +81,7 @@ public class PostWithRepliesController {
 			alert.showAndWait();
 		} else {
 			landingController.getPane().setEffect(new GaussianBlur(15));
-			PostImagesController postImagesController = GUIBackend.loadNewUndecoratedWindow(GUIBackend.PostImagesScene);
+			PostImagesController postImagesController = GUIUtilities.loadNewUndecoratedWindow(GUIUtilities.PostImagesScene);
 			postImagesController.setPostImages(post.getPostImages());
 			postImagesController.setLandingController(landingController);
 		}	
@@ -85,25 +89,25 @@ public class PostWithRepliesController {
 	
 	@FXML public void replyBtnOnAction(ActionEvent event) {
 		landingController.getPane().setEffect(new GaussianBlur(15));
-		PostReplyController replyController = GUIBackend.loadNewUndecoratedWindow(GUIBackend.PostReplyScene);
+		PostReplyController replyController = GUIUtilities.loadNewUndecoratedWindow(GUIUtilities.PostReplyScene);
 		replyController.setPost(post);	
 		replyController.setLandingController(landingController);
 		replyController.setPostRepliesController(this);
 	}
 	
 	@FXML public void viewProfileBtnOnAction(ActionEvent event) {
-		UserProfileController userProfile =  GUIBackend.loadPane(landingController.getContentPane(), GUIBackend.UserProfileScene);
+		UserProfileController userProfile =  GUIUtilities.loadPane(landingController.getContentPane(), GUIUtilities.UserProfileScene);
 		userProfile.setUser(post.getPoster());
 		userProfile.setLandingController(landingController);	
 	}
 	
 	@FXML public void backBtnOnAction(ActionEvent event) {
-		HomeFeedController homeFeed = GUIBackend.loadPane(landingController.getContentPane(), GUIBackend.HomeFeedScene);
+		HomeFeedController homeFeed = GUIUtilities.loadPane(landingController.getContentPane(), GUIUtilities.HomeFeedScene);
 		homeFeed.setLandingController(landingController);
 	}
 	
 	@FXML public void editPostBtnOnAction(ActionEvent event) {
-		EditPostController editPost = GUIBackend.loadPane(landingController.getContentPane(), GUIBackend.EditPostScene);
+		EditPostController editPost = GUIUtilities.loadPane(landingController.getContentPane(), GUIUtilities.EditPostScene);
 		editPost.setLandingController(landingController);
 		editPost.setPostData(post);
 	}
@@ -120,11 +124,11 @@ public class PostWithRepliesController {
 	}
 	
 	public void displayPosts(LinkedList<Post> posts) {
-		GUIBackend.displayPostsOldToNew(posts, tilePane, landingController);
+		GUIUtilities.displayPostsOldToNew(posts, tilePane, landingController);
 	}
 	
 	public void displayPost(Post post) {
-		GUIBackend.displayPost(post, tilePane, landingController);
+		GUIUtilities.displayPost(post, tilePane, landingController);
 	}
 	
 	public void setLandingController(LandingController landingController) {

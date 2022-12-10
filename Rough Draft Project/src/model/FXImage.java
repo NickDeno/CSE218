@@ -4,15 +4,14 @@ import java.io.Serializable;
 
 public class FXImage implements Serializable {
 	private static final long serialVersionUID = 12L;
-	
-	private byte[] imageBuffer;
+	private byte[] imgBuffer;
 
-    public FXImage(byte[] imageBuffer) {
-        this.imageBuffer = imageBuffer;
+    public FXImage(byte[] imgBuffer) {
+        this.imgBuffer = imgBuffer;
     }
     
     public byte[] returnBytes() {
-        return imageBuffer;
+        return imgBuffer;
     }
 
 }

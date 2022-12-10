@@ -58,7 +58,7 @@ public class BlockUserController {
 			return; 
 		}
 		//If selected user is already present in current users blockedUsers
-		if(settingsController.getTempBlockedUsers().get(userList.getSelectionModel().getSelectedItem()) != null) {
+		if(settingsController.getTempBlockedUsers().containsKey(userList.getSelectionModel().getSelectedItem())) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Invalid Selection");
 			alert.setHeaderText(null);

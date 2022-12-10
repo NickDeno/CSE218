@@ -8,8 +8,8 @@ import model.AppState;
 import model.Post;
 import model.ReplyPost;
 import model.User;
-import model.UserCenter;
-import util.GUIBackend;
+import util.GUIUtilities;
+import util.Utilities;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -74,7 +74,7 @@ public class SettingsController {
 	@FXML public void blockUserBtnOnAction(ActionEvent event) {
 		anchorPane.setEffect(new GaussianBlur(15));
 		landingController.getPane().setEffect(new GaussianBlur(15));
-		BlockUserController blockUserController = GUIBackend.loadNewUndecoratedWindow(GUIBackend.BlockUserScene);
+		BlockUserController blockUserController = GUIUtilities.loadNewUndecoratedWindow(GUIUtilities.BlockUserScene);
 		blockUserController.setLandingController(landingController);
 		blockUserController.setSettingsController(this);
 	}
@@ -113,7 +113,7 @@ public class SettingsController {
 			}
 //          Removes user from UserCenter
 			AppState.getInstance().getUserCenter().removeUser(currentUser.getUsername());
-			GUIBackend.loadNewScene(((Stage)((Node)event.getSource()).getScene().getWindow()) , GUIBackend.SignInScene);
+			GUIUtilities.loadNewScene(((Stage)((Node)event.getSource()).getScene().getWindow()) , GUIUtilities.SignInScene);
 		}
 	}
 	
@@ -122,7 +122,7 @@ public class SettingsController {
 	}
 	
 	@FXML public void saveBtnOnAction(ActionEvent event) {
-		if(!UserCenter.isValidEmail(emailField.getText()) || !UserCenter.isValidPassword(passwordField.getText())) {
+		if(!Utilities.isValidEmail(emailField.getText()) || !Utilities.isValidPassword(passwordField.getText())) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Invalid Fields");
 			alert.setHeaderText(null);
@@ -133,7 +133,7 @@ public class SettingsController {
 			currentUser.setEmail(emailField.getText());
 			currentUser.setPassword(passwordField.getText());
 			currentUser.setBlockedUsers(tempBlockedUsers);
-			HomeFeedController homeFeed = GUIBackend.loadPane(landingController.getContentPane(), GUIBackend.HomeFeedScene);
+			HomeFeedController homeFeed = GUIUtilities.loadPane(landingController.getContentPane(), GUIUtilities.HomeFeedScene);
 			homeFeed.setLandingController(landingController);
 			landingController.resetBtns();
 			landingController.getHomeBtn().setStyle("-fx-background-color: rgba(255,255,255,0.5)");
@@ -144,13 +144,13 @@ public class SettingsController {
 		if (event.getSource().equals(emailField)) {
 			String tempStyle = emailLine.getStyle();
 			emailField.textProperty().addListener((observable, oldValue, newValue) -> {
-				if (UserCenter.isValidEmail(newValue)) emailLine.setStyle(tempStyle + "-fx-stroke: #38ff13;");
+				if (!newValue.isEmpty() && Utilities.isValidEmail(newValue)) emailLine.setStyle(tempStyle + "-fx-stroke: #38ff13;");
 				else emailLine.setStyle(tempStyle + "-fx-stroke: #ff0000;");
 			});
 		} else if (event.getSource().equals(passwordField)) {
 			String tempStyle = passwordField.getStyle();
 			passwordField.textProperty().addListener((observable, oldValue, newValue) -> {
-				if (UserCenter.isValidPassword(newValue)) passwordLine.setStyle(tempStyle + "-fx-stroke: #38ff13;");
+				if (!newValue.isEmpty() && Utilities.isValidPassword(newValue)) passwordLine.setStyle(tempStyle + "-fx-stroke: #38ff13;");
 				else passwordLine.setStyle(tempStyle + "-fx-stroke: #ff0000;");
 			});
 		}

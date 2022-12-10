@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="postRepliesPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1090.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #656161 0.0%, #393636 100.0%);" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PostWithRepliesController">
+<AnchorPane fx:id="postRepliesPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="742.0" prefWidth="996.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #656161 0.0%, #393636 100.0%);" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PostWithRepliesController">
    <children>
       <AnchorPane layoutX="118.0" layoutY="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="249.0" prefWidth="767.0" style="-fx-border-color: black; -fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #e84d4d 0.0%, #a8a8a8 100.0%); -fx-border-width: 3;" stylesheets="@Stylesheet.css">
          <children>
@@ -31,9 +31,9 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label fx:id="titleLabel" alignment="CENTER" disable="true" layoutX="132.0" layoutY="58.0" prefHeight="46.0" prefWidth="529.0" style="-fx-opacity: 1;" text="Title Here" textFill="WHITE">
+            <Label fx:id="titleLabel" alignment="CENTER" disable="true" layoutX="92.0" layoutY="65.0" prefHeight="46.0" prefWidth="569.0" style="-fx-opacity: 1;" text="Title Here" textFill="WHITE">
                <font>
-                  <Font name="Bookman Old Style Bold" size="39.0" />
+                  <Font name="Bookman Old Style Bold" size="31.0" />
                </font>
             </Label>
             <Label fx:id="dateLabel" alignment="CENTER_RIGHT" disable="true" layoutX="501.0" layoutY="22.0" prefHeight="36.0" prefWidth="252.0" style="-fx-opacity: 1;" text="Date Here!" textFill="#fff2f2">
@@ -41,7 +41,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label fx:id="likeCounter" alignment="CENTER" layoutX="700.0" layoutY="108.0" prefHeight="34.0" prefWidth="62.0" text="1000" textFill="WHITE">
+            <Label fx:id="likeCounter" alignment="CENTER" layoutX="700.0" layoutY="108.0" prefHeight="34.0" prefWidth="62.0" text="0" textFill="WHITE">
                <font>
                   <Font name="Bell MT Bold" size="26.0" />
                </font>
@@ -58,9 +58,9 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <ScrollPane hbarPolicy="NEVER" layoutX="91.0" layoutY="334.0" prefHeight="427.0" prefWidth="832.0" style="-fx-background-color: transparent; -fx-background: transparent;">
+      <ScrollPane hbarPolicy="NEVER" layoutX="139.0" layoutY="333.0" prefHeight="409.0" prefWidth="721.0" style="-fx-background-color: transparent; -fx-background: transparent;">
          <content>
-            <TilePane fx:id="tilePane" alignment="TOP_CENTER" prefHeight="427.0" prefWidth="826.0" style="-fx-vgap: 30;" tileAlignment="TOP_CENTER" />
+            <TilePane fx:id="tilePane" alignment="TOP_CENTER" prefHeight="408.0" prefWidth="710.0" style="-fx-vgap: 30;" tileAlignment="TOP_CENTER" />
          </content>
       </ScrollPane>
       <Button fx:id="likeBtn" alignment="TOP_LEFT" layoutX="126.0" layoutY="267.0" mnemonicParsing="false" onAction="#likeBtnOnAction" prefHeight="50.0" prefWidth="169.0" style="-fx-border-radius: 25; -fx-border-color: white; -fx-border-width: 3; -fx-border-insets: -3;" styleClass="blueButton" stylesheets="@Stylesheet.css" text=" Like Post" textFill="WHITE">
@@ -99,7 +99,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backBtnOnAction" prefHeight="34.0" prefWidth="95.0" style="-fx-border-radius: 25; -fx-border-width: 3; -fx-border-insets: -3; -fx-border-color: white;" styleClass="blueButton" stylesheets="@Stylesheet.css" text="Back" textFill="WHITE">
+      <Button fx:id="backBtn" layoutX="5.0" layoutY="14.0" mnemonicParsing="false" onAction="#backBtnOnAction" prefHeight="41.0" prefWidth="104.0" style="-fx-border-radius: 25; -fx-border-width: 3; -fx-border-insets: -3; -fx-border-color: white;" styleClass="blueButton" stylesheets="@Stylesheet.css" text="Back" textFill="WHITE">
          <graphic>
             <ImageView fitHeight="37.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -123,12 +123,12 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="editPostBtn" alignment="TOP_LEFT" layoutX="891.0" layoutY="265.0" mnemonicParsing="false" onAction="#editPostBtnOnAction" prefHeight="51.0" prefWidth="169.0" style="-fx-border-color: white; -fx-border-width: 3; -fx-border-radius: 25; -fx-border-insets: -3;" styleClass="redButton" stylesheets="@Stylesheet.css" text="  Edit Post" textFill="WHITE" visible="false">
+      <Button fx:id="editPostBtn" layoutX="14.0" layoutY="267.0" mnemonicParsing="false" onAction="#editPostBtnOnAction" prefHeight="50.0" prefWidth="169.0" style="-fx-border-color: white; -fx-border-width: 3; -fx-border-radius: 25; -fx-border-insets: -3;" styleClass="redButton" stylesheets="@Stylesheet.css" text=" Edit Post" textFill="WHITE" visible="false">
          <font>
-            <Font name="Bodoni MT" size="19.0" />
+            <Font name="Bodoni MT" size="21.0" />
          </font>
          <graphic>
-            <ImageView fitHeight="36.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="28.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/EditIcon.png" />
                </image>

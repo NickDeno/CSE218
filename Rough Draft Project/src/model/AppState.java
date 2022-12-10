@@ -5,7 +5,10 @@ import java.io.Serializable;
 
 import util.Utilities;
 
-//Singleton Class
+//Singleton Class containing the applications' UserCenter and PostCenter. Since this class uses a Singleton design pattern, this ensures there is only one instance
+//of the "AppState" (UserCenter and PostCenter). Also, using this Singleton design pattern for the "AppState" allows for global access to the UserCenter and PostCenter
+//throughout the program. Furthermore, since there is only one instance of the UserCenter and PostCenter, any changes made to these data centers will always be 
+//applied to this one instance.
 public class AppState implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private UserCenter userCenter;
@@ -13,6 +16,7 @@ public class AppState implements Serializable {
 	
 	private static AppState instance;
 	
+	//Private constructor. Only accessed on the first ever launch of this program.
 	private AppState(UserCenter userCenter, PostCenter postCenter) {
 		this.userCenter = userCenter;
 		this.postCenter = postCenter;
@@ -27,21 +31,17 @@ public class AppState implements Serializable {
 		return instance; 	
 	}
 	
+	public void displayState() {
+		userCenter.display();
+		postCenter.display();
+	}
+	
 	public UserCenter getUserCenter() {
 		return userCenter;
-	}
-
-	public void setUserCenter(UserCenter userCenter) {
-		this.userCenter = userCenter;
 	}
 
 	public PostCenter getPostCenter() {
 		return postCenter;
 	}
-
-	public void setAllPosts(PostCenter postCenter) {
-		this.postCenter = postCenter;
-	}
 	
-
 }

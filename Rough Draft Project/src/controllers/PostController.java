@@ -4,7 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import model.Post;
-import util.GUIBackend;
+import util.GUIUtilities;
 import util.Utilities;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -27,9 +27,11 @@ public class PostController {
 	public PostController() {}	
 	
 	@FXML public void postOnClicked(MouseEvent event) {
-		PostWithRepliesController postReplies =  GUIBackend.loadPane(landingController.getContentPane(), GUIBackend.PostWithRepliesScene);
+		PostWithRepliesController postReplies =  GUIUtilities.loadPane(landingController.getContentPane(), GUIUtilities.PostWithRepliesScene);
 		postReplies.setPostData(post);
 		postReplies.setLandingController(landingController);	
+		landingController.resetBtns();
+		landingController.getHomeBtn().setStyle("-fx-background-color: rgba(255,255,255,0.5)");
     }
 	
 	public void setPostData(Post post) {

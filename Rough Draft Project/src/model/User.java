@@ -30,7 +30,7 @@ public class User implements Serializable {
 	//in this users' userPosts and one in the PostCenter.
 	
 	private LinkedList<ReplyPost> userPostReplies;
-	//Stores shallow copy of all reply posts created by this user. The main reason for this is on deletion of account. When account is deleted, all posts and
+	//Stores shallow copy of all reply posts created by this user. The main use case for this is on deletion of account. When account is deleted, all posts and
 	//post replies created by this user need to be deleted in the PostCenter. So instead of iterating through each post in PostCenter to check if it was created
 	//by this user, and also check if each posts post replies contain a post created by this user, which would be very slow in terms of time complexity,
 	//we can store a shallow copy of all the post replies this user created. Then on deletion of account, we can iterate through the userPosts and userPostReplies
@@ -123,10 +123,6 @@ public class User implements Serializable {
 	public LinkedList<Post> getUserPosts() {
 		return userPosts;
 	}
-
-	public void setUserPosts(LinkedList<Post> userPosts) {
-		this.userPosts = userPosts;
-	}
 	
 	public LinkedList<ReplyPost> getUserPostReplies(){
 		return userPostReplies;
@@ -162,7 +158,7 @@ public class User implements Serializable {
 		for(User u: this.followers) followers += u.getUsername() + ", ";
 		for(User u: this.following.values()) following += u.getUsername() + ", ";
 		for(User u: this.blockedUsers.values()) blockedUsers += u.getUsername() + ", ";
-		return "User [username=" + username + ", password=" + password + ", email=" + email + ", userPosts=" + userPosts + ", followers=" + followers 
-				+ "], following=" + following + "], blockedUsers=" + blockedUsers + "]]";
+		return "User [username=" + username + ", password=" + password + ", email=" + email + ", bio=" + bio + ", followers=" 
+				+ followers + "], following=" + following + "], blockedUsers=" + blockedUsers +  "], userPosts=" + userPosts + "]";
 	}
 }
