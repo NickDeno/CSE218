@@ -148,6 +148,18 @@ public class GUIUtilities {
 		}
 	}
 	
+	/* Instead of taking in a LinkedList of posts, this method takes in an array of Posts. This is because when we want to display the posts by likes,
+	 * we need to first sort the posts by likes using QuickSort. To do this, the LinkedList of posts is converted to an array, then sorted using the
+	 * Utilities.quickSortByLikes method. So instead of converting the sorted array back into a list, then calling "displayPostsNewToOld", we can just have 
+	 * this method that functions virtually the same as that method, but takes in an array instead of a LinkedList. */
+	public static void displayPostsByLikes(Post[] postsArr, TilePane tilePane, LandingController landingController) {
+		for(int i = postsArr.length-1; i >= 0; i--) {
+			if(!AppState.getInstance().getUserCenter().getCurrentUser().getBlockedUsers().containsKey(postsArr[i].getPoster().getUsername())) {
+				displayPost(postsArr[i], tilePane, landingController);
+			}
+		}
+	}
+	
 	//Creates an anchorPane that displays the "Post.fxml" file. Then passes through a specified posts' data into the "Post.fxml" file such as poster, desc., etc..
 	public static void displayPost(Post post, TilePane tilePane, LandingController landingController) {
 		try {

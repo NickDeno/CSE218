@@ -13,6 +13,10 @@ public class PostCenter implements Serializable{
 		postList = new LinkedList<Post>();
 	}
 	
+	public void display() {
+		postList.forEach(post -> System.out.println(post.toString()));
+	}
+	
 	public void addPost(Post post) {
 		postList.add(post);
 	}
@@ -48,12 +52,7 @@ public class PostCenter implements Serializable{
 	public LinkedList<Post> getPosts(){
 		return postList;
 	}
-
-	public void display() {
-		postList.forEach(post -> System.out.println(post.toString()));
-	}
 	
-	//O(n) since each posts' topic has to be checked to see if it matches given topic
 	public LinkedList<Post> searchByTopic(String topic) {
 		LinkedList<Post> temp = new LinkedList<Post>();
 		Iterator<Post> itr = postList.iterator();
@@ -66,7 +65,6 @@ public class PostCenter implements Serializable{
 		return temp;
 	}
 	
-	//O(n) since each posts' title has to be searched to see if matches given title
 	public LinkedList<Post> searchByTitle(String title) {
 		LinkedList<Post> temp = new LinkedList<Post>();
 		Iterator<Post> itr = postList.iterator();
@@ -77,6 +75,48 @@ public class PostCenter implements Serializable{
 			}
 		}
 		return temp;
+	}
+	
+	//Takes postList and sorts them based on likes using quickSort algorithm.
+	public Post[] searchByLikes() {
+		Post[] postsArr = new Post[postList.size()];
+		postList.toArray(postsArr);
+		quickSort(postsArr, 0, postsArr.length-1);
+		return postsArr;
+	}
+	
+	private void quickSort(Post[] arr, int left, int right) {
+		if (left >= right) {
+			return;
+		} else {
+			int pivot = arr[right].getLikes().intValue();
+			int partition = partition(arr, left, right, pivot);
+			quickSort(arr, left, partition - 1);
+			quickSort(arr, partition + 1, right);
+		}
+	}
+
+	private int partition(Post[] arr, int left, int right, long pivot) {
+		int leftPtr = left - 1;
+		int rightPtr = right + 1;
+
+		while (true) {
+			while (leftPtr < right && arr[++leftPtr].getLikes().intValue() < pivot);
+			while (rightPtr > left && arr[--rightPtr].getLikes().intValue() >= pivot);
+			
+			if (leftPtr >= rightPtr) {
+				break;
+			} else {
+				Post temp = arr[rightPtr];
+				arr[rightPtr] = arr[leftPtr];
+				arr[leftPtr] = temp;
+			}
+
+		}
+		Post temp = arr[right];
+		arr[right] = arr[leftPtr];
+		arr[leftPtr] = temp;
+		return leftPtr;
 	}
 	
 	@Override

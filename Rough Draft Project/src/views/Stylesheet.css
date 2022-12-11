@@ -83,18 +83,6 @@
     -fx-background-color: transparent;
 }
 
-.spell-error {
-    -fx-effect: dropshadow(gaussian, red, 2, 0, 0, 0);
-}
-
-.underlined {
-	/*RichTextFX Text Properties. Since these properties are from external library, they are not recognized as valid properties */
-    -rtfx-underline-color: red;
-    -rtfx-underline-dash-array: 2 2;
-    -rtfx-underline-width: 1;
-    -rtfx-underline-cap: butt;
-}
-
 #spellCheckTextArea {
 	-fx-border-radius: 25; 
 	-fx-background-radius: 25; 
@@ -106,5 +94,17 @@
 
 #spellCheckTextArea .text {
     -fx-fill: white;
+}
+
+#spellCheckTextArea .caret {
+	-fx-stroke: white;
+}
+
+.underlined {
+	/*RichTextFX Text Properties. Since these properties are from external library, they are not recognized as valid properties */
+    -rtfx-underline-color: red;
+    -rtfx-underline-dash-array: 2 2;
+    -rtfx-underline-width: 1;
+    -rtfx-underline-cap: butt;
 }
 

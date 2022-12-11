@@ -19,6 +19,7 @@ public class PostController {
 	@FXML private ImageView profilePic;
 	@FXML private Label dateLabel;
 	@FXML private TextArea descriptionField;
+	@FXML private Label likeCounter;
 	
 	private Post post;
 	private LandingController landingController;
@@ -43,6 +44,7 @@ public class PostController {
 		descriptionField.setText(post.getDescription());
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy h:mm aa");
 		dateLabel.setText(df.format(post.getPostDate()));	
+		likeCounter.setText(String.valueOf(post.getLikes()));
 	}
 	
 	 public void setLandingController(LandingController landingController) {

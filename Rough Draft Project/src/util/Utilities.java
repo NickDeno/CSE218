@@ -100,6 +100,5 @@ public class Utilities {
 			e.printStackTrace();
 			System.out.println("Unable to load dictionary.");
 		} 
-	}
-		
+	}	
 }

@@ -23,7 +23,7 @@
             </ImageView>
             <TextArea fx:id="descriptionField" editable="false" layoutX="42.0" layoutY="115.0" prefHeight="100.0" prefWidth="654.0" promptText="Topic Description " style="-fx-border-color: #3b93ff; -fx-border-radius: 25; -fx-border-insets: -5; -fx-border-width: 5; -fx-text-fill: white;" styleClass="scroll-bar" stylesheets="@Stylesheet.css" wrapText="true">
                <font>
-                  <Font size="15.0" />
+                  <Font name="System Bold" size="15.0" />
                </font>
             </TextArea>
             <Label fx:id="usernameLabel" disable="true" layoutX="80.0" layoutY="16.0" prefHeight="49.0" prefWidth="192.0" style="-fx-opacity: 1;" text="Username Here!" textFill="#fff2f2">

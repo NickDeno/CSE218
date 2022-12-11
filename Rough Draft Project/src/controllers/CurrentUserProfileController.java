@@ -188,7 +188,7 @@ public class CurrentUserProfileController {
     @FXML public void saveBtnOnAction(ActionEvent event) {	
     	//This if statement will be true when there are misspelled words in the users bio
     	if(bioField.getMisspelledWords().isEmpty() == false) {
-			String misspelledWords = ".";
+			String misspelledWords = "";
 			for(int i = 0; i < bioField.getMisspelledWords().size(); i++) {
 				String currWord = bioField.getMisspelledWords().get(i);
 				if(i < bioField.getMisspelledWords().size()-1) {

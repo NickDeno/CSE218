@@ -48,7 +48,6 @@ public class PostWithRepliesController {
 		currentUser = AppState.getInstance().getUserCenter().getCurrentUser();
 		Platform.runLater(() -> {
 			displayPosts(post.getPostReplies());
-			likeCounter.setText(String.valueOf(post.getLikes()));
 			if(currentUser.getUsername().equals(post.getPoster().getUsername())) {
 				editPostBtn.setVisible(true);
 				likeBtn.setLayoutX(likeBtn.getLayoutX() + 75);
@@ -121,6 +120,7 @@ public class PostWithRepliesController {
 		topicLabel.setText("Topic: " + post.getTopic());
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy h:mm aa");
 		dateLabel.setText(df.format(post.getPostDate()));
+		likeCounter.setText(String.valueOf(post.getLikes()));
 	}
 	
 	public void displayPosts(LinkedList<Post> posts) {

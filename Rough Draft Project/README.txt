@@ -1,11 +1,11 @@
 CSE218 Final Project-Social Media Application
 
 How To Run Application:
-	1) Ensure JavaFX Libraries are installed in Eclipse. For example, create a User Library that contains all JavaFx jars called "MyJavaFXLib" and add
+	1) Ensure JavaFX Libraries are installed in Eclipse: For example, create a User Library that contains all JavaFx jars called "MyJavaFXLib" and add
 	   library to project by right-clicking on project -> Build Path -> Configure Build Path -> ClassPath -> Add Library -> User Library -> then add your JavaFX 
 	   library.
 	      
-	2) Add External Jar Dependencies to project classpath. The external jars used for this program are located in the "ExternalLibs" folder. To add these jars
+	2) Add External Jars: The external jars used for this program are located in the "ExternalLibs" folder. To add these jars
 	   to classpath, go to ExternalLibs folder -> right-click on jar file -> Build Path -> Add to Build Path. The jar will then be added to a "Referenced Libraries"
 	   library in the project. This only has to be done for the first time, after that the jar will always be in the class path. Also if you prefer, you can
 	   add the external jars directly to your "MyJavaFXLib" library instead.	

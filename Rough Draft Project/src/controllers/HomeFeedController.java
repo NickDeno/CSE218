@@ -27,7 +27,7 @@ public class HomeFeedController {
 	@FXML private Button removeFilterBtn;
 	
 	private User currentUser;
-	private final String[] filterOptions = {"All Posts", "Following", "User", "Topic", "Title"};
+	private final String[] filterOptions = {"All Posts", "Following", "User", "Topic", "Title", "Likes"};
 	private final String[] topicOptions = {"Computer Science", "School", "Gaming", "Gym", "Sports", "Misc.", "Other"};
 	private LandingController landingController;
 	
@@ -60,7 +60,7 @@ public class HomeFeedController {
 				searchField.setVisible(true);
 				searchFieldLine.setVisible(true);
 				topicBox.setVisible(false);
-				break;
+				break;				
 			default:
 				searchField.setVisible(false);
 				searchFieldLine.setVisible(false);	
@@ -144,9 +144,14 @@ public class HomeFeedController {
 				displayPosts(AppState.getInstance().getPostCenter().searchByTitle(searchField.getText()));
 				resetFields();		
 				break;
+			case "Likes":
+				tilePane.getChildren().clear();
+				displayPostsByLikes();
+				resetFields();
+				break;
 		}	
 	}
-	
+
 	@FXML public void removeFilterBtnOnAction(ActionEvent event) {
 		tilePane.getChildren().clear();
 		filterBox.getSelectionModel().selectFirst();
@@ -170,6 +175,9 @@ public class HomeFeedController {
 		 GUIUtilities.displayFollowingPosts(AppState.getInstance().getPostCenter().getPosts(), tilePane, landingController);
 	}
 	
+	private void displayPostsByLikes() {
+		GUIUtilities.displayPostsByLikes(AppState.getInstance().getPostCenter().searchByLikes(), tilePane, landingController);
+	}
 	
 	public void setLandingController(LandingController landingController) {
 		this.landingController = landingController;
