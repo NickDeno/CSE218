@@ -173,7 +173,7 @@ public class UserProfileController {
     }
     
     public void setUser(User user) {
-    	this.user = AppState.getInstance().getUserCenter().getUser(user.getUsername());
+    	this.user = user;
     }
     
     public void setLandingController(LandingController landingController) {

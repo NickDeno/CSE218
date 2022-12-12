@@ -80,6 +80,7 @@ public class PostWithRepliesController {
 			alert.showAndWait();
 		} else {
 			landingController.getPane().setEffect(new GaussianBlur(15));
+			landingController.getPane().setMouseTransparent(true);
 			PostImagesController postImagesController = GUIUtilities.loadNewUndecoratedWindow(GUIUtilities.PostImagesScene);
 			postImagesController.setPostImages(post.getPostImages());
 			postImagesController.setLandingController(landingController);
@@ -88,6 +89,7 @@ public class PostWithRepliesController {
 	
 	@FXML public void replyBtnOnAction(ActionEvent event) {
 		landingController.getPane().setEffect(new GaussianBlur(15));
+		landingController.getPane().setMouseTransparent(true);
 		PostReplyController replyController = GUIUtilities.loadNewUndecoratedWindow(GUIUtilities.PostReplyScene);
 		replyController.setPost(post);	
 		replyController.setLandingController(landingController);

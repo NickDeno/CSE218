@@ -12,16 +12,16 @@ How To Run Application:
 	      
 	3) Add runtime args to "AppDemo": --module-path "Path to JavaFX library" --add-modules=javafx.controls,javafx.fxml
 	
-	4) Run AppDemo.java
+	4) Run AppDemo.java located in src/app/AppDemo.java
 	
 	NOTE: All backup data is stored in backupData/AppState.dat file. If you attempt to launch the program before adding the External jar dependencies, there 
 		  will be an error pop up. If you still continue and attempt to launch it before adding the external jars to class path, the backupData/AppStte.dat file 
 		  could possibly get corrupted in the process. In that case, add the external jars, delete the backupData/AppState.dat file, copy the rawData/DemoAppState.dat 
 		  file into the backupData folder, and rename it to AppState.dat. 
 		  
-		  The DemoAppState.dat file is just a "Demo" backup file that contains some pre added users and posts to show off the functionality of program. If you wish 
-		  to start with no pre added users or posts, delete the backupData/AppState.dat file. In this case, a brand new AppState.dat file will be created on launch 
-		  of the program,
+		  The DemoAppState.dat file is just a "Demo" backup file that contains some pre added users and posts to show off the functionality of program. All demo 
+		  users have a password of "Password21". If you wish to start with no pre added users or posts, delete the backupData/AppState.dat file. In this case, a 
+		  brand new AppState.dat file will be created on launch of the program,
 
 Data Structures Used:
 	1) UserCenter - Data Structure Used - TreeMap (Red-Black Binary Tree): 

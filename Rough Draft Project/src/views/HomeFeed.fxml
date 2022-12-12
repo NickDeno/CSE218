@@ -59,5 +59,10 @@
             </ImageView>
          </graphic>
       </Button>
+      <Label fx:id="filterLabel" alignment="CENTER" layoutX="25.0" layoutY="56.0" prefHeight="32.0" prefWidth="339.0" text="(Newest to Oldest)" textFill="WHITE">
+         <font>
+            <Font name="Baskerville Old Face" size="26.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

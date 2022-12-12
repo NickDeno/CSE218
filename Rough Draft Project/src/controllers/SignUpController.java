@@ -97,7 +97,7 @@ public class SignUpController {
 			confirmPassword = confirmPasswordField.getText();
 		}
 		
-		if (!usernameField.getText().isEmpty() || AppState.getInstance().getUserCenter().getUser(usernameField.getText()) != null 
+		if (usernameField.getText().isEmpty() || AppState.getInstance().getUserCenter().getUser(usernameField.getText()) != null 
 				|| !Utilities.isValidPassword(password) || !password.equals(confirmPassword) || !Utilities.isValidEmail(emailField.getText())) {
 			msgLabel.setText("Failed, please try again.");
 			msgLabel.setVisible(true);

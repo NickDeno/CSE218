@@ -66,8 +66,7 @@ public class EditPostController {
 			currentUser = AppState.getInstance().getUserCenter().getCurrentUser();
 			topicBox.getItems().addAll(defaultTopics);
 			descriptionField = new SpellCheckTextArea(780, 245, 110, 275, true);
-			editPostPane.getChildren().add(descriptionField.getPane());
-			
+			editPostPane.getChildren().add(descriptionField.getPane());	
 			Platform.runLater(() -> {
 				tempPostImages = new LinkedList<FXImage>();
 				if(post.getPostImages() != null) {
@@ -93,8 +92,7 @@ public class EditPostController {
 		    	}
 	    	}
 	    	resetFields();
-	    	displayImages(tempPostImages);
-	    	
+	    	displayImages(tempPostImages);   	
 	    }
 	    
 	    @FXML public void deletePostBtnOnAction(ActionEvent event) {
@@ -112,8 +110,7 @@ public class EditPostController {
 					post.delete(post, currentUser);
 				}	
 				HomeFeedController homeFeed = GUIUtilities.loadPane(landingController.getContentPane(), GUIUtilities.HomeFeedScene);
-				homeFeed.setLandingController(landingController);
-				
+				homeFeed.setLandingController(landingController);	
 			}
 	    }
 
@@ -204,8 +201,7 @@ public class EditPostController {
 	    		postImg2.setImage(postImg3.getImage());
 	    		postImg3.setImage(null);
 	    		deletePostImg3Btn.setVisible(false);
-	    	}
-	    	
+	    	}    	
 	    }
 	    
 	    @FXML public void deletePostImg3BtnOnAction(ActionEvent event) {

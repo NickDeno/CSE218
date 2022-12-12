@@ -25,7 +25,7 @@ public class PostController {
 	private LandingController landingController;
 	
 	//Initializer
-	public PostController() {}	
+	public PostController() {}
 	
 	@FXML public void postOnClicked(MouseEvent event) {
 		PostWithRepliesController postReplies =  GUIUtilities.loadPane(landingController.getContentPane(), GUIUtilities.PostWithRepliesScene);

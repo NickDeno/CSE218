@@ -88,7 +88,7 @@
    <right>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="602.0" prefWidth="714.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #656161 0.0%, #393636 100.0%);" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="msgLabel" alignment="CENTER" layoutX="67.0" layoutY="326.0" prefHeight="41.0" prefWidth="573.0" textFill="#e42525" visible="false">
+            <Label fx:id="msgLabel" alignment="CENTER" layoutX="155.0" layoutY="320.0" prefHeight="37.0" prefWidth="367.0" textFill="#e42525" visible="false">
                <font>
                   <Font name="Consolas" size="23.0" />
                </font>

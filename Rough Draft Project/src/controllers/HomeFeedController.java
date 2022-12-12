@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.TilePane;
@@ -19,6 +20,7 @@ import javafx.scene.shape.Line;
 
 public class HomeFeedController {
 	@FXML private TilePane tilePane;
+	@FXML private Label filterLabel;
 	@FXML private ComboBox<String> filterBox;
 	@FXML private ComboBox<String> topicBox;
 	@FXML private TextField searchField;
@@ -27,7 +29,7 @@ public class HomeFeedController {
 	@FXML private Button removeFilterBtn;
 	
 	private User currentUser;
-	private final String[] filterOptions = {"All Posts", "Following", "User", "Topic", "Title", "Likes"};
+	private final String[] filterOptions = {"All Posts", "Following", "Likes", "User", "Topic", "Title"};
 	private final String[] topicOptions = {"Computer Science", "School", "Gaming", "Gym", "Sports", "Misc.", "Other"};
 	private LandingController landingController;
 	
@@ -50,21 +52,31 @@ public class HomeFeedController {
 				searchField.setVisible(true);
 				searchFieldLine.setVisible(true);	
 				topicBox.setVisible(false);
+				filterLabel.setText("(Newest to Oldest)");
 				break;
 			case "Topic":
 				searchField.setVisible(false);
 				searchFieldLine.setVisible(false);
 				topicBox.setVisible(true);
+				filterLabel.setText("(Newest to Oldest)");
 				break;
 			case "Title":
 				searchField.setVisible(true);
 				searchFieldLine.setVisible(true);
 				topicBox.setVisible(false);
-				break;				
+				filterLabel.setText("(Newest to Oldest)");
+				break;	
+			case "Likes":
+				searchField.setVisible(false);
+				searchFieldLine.setVisible(false);	
+				topicBox.setVisible(false);
+				filterLabel.setText("(Most to Least Likes)");
+				break;
 			default:
 				searchField.setVisible(false);
 				searchFieldLine.setVisible(false);	
 				topicBox.setVisible(false);
+				filterLabel.setText("(Newest to Oldest)");
 				break;
 		}
 	}
@@ -146,7 +158,7 @@ public class HomeFeedController {
 				break;
 			case "Likes":
 				tilePane.getChildren().clear();
-				displayPostsByLikes();
+				displayPosts(AppState.getInstance().getPostCenter().searchByLikes());
 				resetFields();
 				break;
 		}	
@@ -173,10 +185,6 @@ public class HomeFeedController {
 	
 	private void displayFollowingPosts() {
 		 GUIUtilities.displayFollowingPosts(AppState.getInstance().getPostCenter().getPosts(), tilePane, landingController);
-	}
-	
-	private void displayPostsByLikes() {
-		GUIUtilities.displayPostsByLikes(AppState.getInstance().getPostCenter().searchByLikes(), tilePane, landingController);
 	}
 	
 	public void setLandingController(LandingController landingController) {

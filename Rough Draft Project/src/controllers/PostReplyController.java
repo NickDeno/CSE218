@@ -37,12 +37,16 @@ public class PostReplyController {
     	descriptionField = new SpellCheckTextArea(670, 255, 75, 45, true);
     	postReplyPane.getChildren().add(descriptionField.getPane());
     	Platform.runLater(() -> {
-    		((Stage)cancelBtn.getScene().getWindow()).setOnCloseRequest(e -> landingController.getPane().setEffect(null));
+    		((Stage)cancelBtn.getScene().getWindow()).setOnCloseRequest(e -> {
+    			landingController.getPane().setEffect(null);
+    			landingController.getPane().setMouseTransparent(false);
+    		});
     	});
     }
     
     @FXML public void cancelBtnOnAction(ActionEvent event) {
     	landingController.getPane().setEffect(null);
+    	landingController.getPane().setMouseTransparent(false);
     	((Stage)((Node)event.getSource()).getScene().getWindow()).close();
     }
 
@@ -70,6 +74,7 @@ public class PostReplyController {
     	post.reply(newReply, currentUser);
     	postRepliesController.displayPost(newReply);
     	landingController.getPane().setEffect(null);
+    	landingController.getPane().setMouseTransparent(false);
     	((Stage)((Node)event.getSource()).getScene().getWindow()).close();
     }
     

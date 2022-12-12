@@ -35,12 +35,14 @@ public class PostImagesController {
 			 
 			 ((Stage)nextBtn.getScene().getWindow()).setOnCloseRequest(e -> {
 	    			landingController.getPane().setEffect(null);
+	    			landingController.getPane().setMouseTransparent(false);
 	    		});
 		 });
 	 }
 	 
 	 @FXML public void closeBtnOnAction(ActionEvent event) {
 		 landingController.getPane().setEffect(null);
+		 landingController.getPane().setMouseTransparent(false);
 		 ((Stage)((Node)event.getSource()).getScene().getWindow()).close();
 	 }
 

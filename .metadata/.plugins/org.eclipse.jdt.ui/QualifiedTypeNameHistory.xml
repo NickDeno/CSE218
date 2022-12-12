@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="javafx.scene.shape.Line"/>
-    <fullyQualifiedTypeName name="javafx.scene.control.ScrollPane"/>
     <fullyQualifiedTypeName name="backend.User"/>
     <fullyQualifiedTypeName name="backend.Utilities"/>
     <fullyQualifiedTypeName name="model.UserCenter"/>
@@ -33,14 +31,12 @@
     <fullyQualifiedTypeName name="java.io.BufferedReader"/>
     <fullyQualifiedTypeName name="org.fxmisc.richtext.StyleClassedTextArea"/>
     <fullyQualifiedTypeName name="javafx.scene.control.ComboBox"/>
-    <fullyQualifiedTypeName name="javafx.scene.control.Label"/>
     <fullyQualifiedTypeName name="org.fxmisc.flowless.VirtualizedScrollPane"/>
     <fullyQualifiedTypeName name="javafx.scene.layout.StackPane"/>
     <fullyQualifiedTypeName name="model.SpellCheckerTextArea"/>
     <fullyQualifiedTypeName name="org.fxmisc.richtext.model.StyleSpans"/>
     <fullyQualifiedTypeName name="java.util.Collection"/>
     <fullyQualifiedTypeName name="org.fxmisc.richtext.model.StyleSpansBuilder"/>
-    <fullyQualifiedTypeName name="java.util.Collections"/>
     <fullyQualifiedTypeName name="javafx.scene.control.IndexRange"/>
     <fullyQualifiedTypeName name="java.text.BreakIterator"/>
     <fullyQualifiedTypeName name="java.text.StringCharacterIterator"/>
@@ -60,4 +56,8 @@
     <fullyQualifiedTypeName name="util.PostArrayQuick"/>
     <fullyQualifiedTypeName name="java.util.LinkedList"/>
     <fullyQualifiedTypeName name="util.Utilities"/>
+    <fullyQualifiedTypeName name="javafx.scene.layout.BorderPane"/>
+    <fullyQualifiedTypeName name="java.util.Collections"/>
+    <fullyQualifiedTypeName name="javafx.scene.control.Label"/>
+    <fullyQualifiedTypeName name="javafx.scene.control.ScrollBar"/>
 </qualifiedTypeNameHistroy>

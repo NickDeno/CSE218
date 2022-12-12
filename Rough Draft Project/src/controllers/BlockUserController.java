@@ -25,16 +25,16 @@ public class BlockUserController {
 	
 	public void initialize() {
 		currentUser = AppState.getInstance().getUserCenter().getCurrentUser();
-		Platform.runLater(() -> {
-			((Stage)cancelBtn.getScene().getWindow()).setOnCloseRequest(e -> {
-				settingsController.getPane().setEffect(null);
-				landingController.getPane().setEffect(null);
-			});
-		});
 		Collection<User> allUsers = AppState.getInstance().getUserCenter().getAllUsers();
 		for(User u: allUsers) {
 			userList.getItems().add(u.getUsername());
 		}
+		Platform.runLater(() -> {
+			((Stage)cancelBtn.getScene().getWindow()).setOnCloseRequest(e -> {
+				landingController.getPane().setEffect(null);
+				landingController.getPane().setMouseTransparent(false);
+			});
+		});
 	}
 	
 	@FXML public void blockSelectedUserBtnOnAction(ActionEvent event) {
@@ -69,16 +69,16 @@ public class BlockUserController {
 			User blockedUser = AppState.getInstance().getUserCenter().getUser(userList.getSelectionModel().getSelectedItem());
 			settingsController.getTempBlockedUsers().put(blockedUser.getUsername(), blockedUser);
 			settingsController.getBlockedUsersList().getItems().add(blockedUser.getUsername());
-			settingsController.getPane().setEffect(null);
 			landingController.getPane().setEffect(null);
+			landingController.getPane().setMouseTransparent(false);
 			((Stage)((Node)event.getSource()).getScene().getWindow()).close();	
 		}
 		
 	}
 	
 	@FXML public void cancelBtnOnAction(ActionEvent event) {
-		settingsController.getPane().setEffect(null);
 		landingController.getPane().setEffect(null);
+		landingController.getPane().setMouseTransparent(false);
 		((Stage)((Node)event.getSource()).getScene().getWindow()).close();
 	}
 	

@@ -90,8 +90,7 @@ public class CurrentUserProfileController {
 		}
     	for(User u: currentUser.getFollowing().values()) {
 			followingList.getItems().add(u.getUsername());
-		}
-    	
+		}	
     	followersList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
     		if(newValue != null) {
     			UserProfileController userProfile =  GUIUtilities.loadPane(landingController.getContentPane(), GUIUtilities.UserProfileScene);
@@ -110,8 +109,7 @@ public class CurrentUserProfileController {
 				landingController.resetBtns();
 				landingController.getHomeBtn().setStyle("-fx-background-color: rgba(255,255,255,0.5)");
     		}
-    	});
-    	
+    	}); 	
     	Platform.runLater(() -> {	
     		displayPosts(currentUser.getUserPosts());
     	});
@@ -211,11 +209,11 @@ public class CurrentUserProfileController {
     	if(currentUser.getBannerPic().returnBytes() != chosenBannerPicBytes && chosenBannerPicBytes != null) {
         	currentUser.setBannerPic(new FXImage(chosenBannerPicBytes));
     	}
-    	//This if statement is true when user changes profile pic, thus all post objects made by user must be updated with new profile pic
+    	//This if statement is true when user changes profile pic, thus posts must be reloaded after profile pic is changed
     	if(currentUser.getProfilePic().returnBytes() != chosenProfilePicBytes && chosenProfilePicBytes != null){
 			currentUser.setProfilePic(new FXImage(chosenProfilePicBytes));
 			landingController.setProfilePic(Utilities.byteArrToImage(chosenProfilePicBytes));
-			//Reload user posts since profile pic was changed
+			//Reloads user posts after profile pic is changed
 			displayPosts(currentUser.getUserPosts());
 			
 		} else {
@@ -238,8 +236,8 @@ public class CurrentUserProfileController {
 		profilePic.setFill(Utilities.byteArrToImagePattern(currentUser.getProfilePic().returnBytes()));	
 		chosenBannerPicBytes = currentUser.getBannerPic().returnBytes();
 		chosenProfilePicBytes = currentUser.getProfilePic().returnBytes();
-    	nicknameField.setText(currentUser.getNickName());
-    	bioField.getTextArea().replaceText(currentUser.getBio());
+    	if(currentUser.getNickName() != null) nicknameField.setText(currentUser.getNickName());
+    	if(currentUser.getBio() != null) bioField.getTextArea().replaceText(currentUser.getBio());
 		editFieldsBox.setSelected(false);
 		setFieldsVisibility(false);
     }

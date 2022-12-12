@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.UUID;
@@ -77,46 +78,13 @@ public class PostCenter implements Serializable{
 		return temp;
 	}
 	
-	//Takes postList and sorts them based on likes using quickSort algorithm.
-	public Post[] searchByLikes() {
-		Post[] postsArr = new Post[postList.size()];
-		postList.toArray(postsArr);
-		quickSort(postsArr, 0, postsArr.length-1);
-		return postsArr;
-	}
-	
-	private void quickSort(Post[] arr, int left, int right) {
-		if (left >= right) {
-			return;
-		} else {
-			int pivot = arr[right].getLikes().intValue();
-			int partition = partition(arr, left, right, pivot);
-			quickSort(arr, left, partition - 1);
-			quickSort(arr, partition + 1, right);
-		}
-	}
-
-	private int partition(Post[] arr, int left, int right, long pivot) {
-		int leftPtr = left - 1;
-		int rightPtr = right + 1;
-
-		while (true) {
-			while (leftPtr < right && arr[++leftPtr].getLikes().intValue() < pivot);
-			while (rightPtr > left && arr[--rightPtr].getLikes().intValue() >= pivot);
-			
-			if (leftPtr >= rightPtr) {
-				break;
-			} else {
-				Post temp = arr[rightPtr];
-				arr[rightPtr] = arr[leftPtr];
-				arr[leftPtr] = temp;
-			}
-
-		}
-		Post temp = arr[right];
-		arr[right] = arr[leftPtr];
-		arr[leftPtr] = temp;
-		return leftPtr;
+	public LinkedList<Post> searchByLikes() {
+		//Creates Deep Copy of postList with shallow copies of posts. This allows us to modify order of this temp list without
+		//modifying order of PostCenter "postList". However, the Post objects inside the temp list are still shallow copies.
+		LinkedList<Post> temp = new LinkedList<Post>(postList);	
+		//Collections.sort uses a modified MergeSort algorithm, so the time complexity of sorting the list by likes is O(nlogn)
+		Collections.sort(temp, (p1, p2) -> (int)(p1.getLikes().compareTo(p2.getLikes())));
+		return temp;
 	}
 	
 	@Override

@@ -28,7 +28,7 @@ import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
 public class SettingsController {
-	@FXML private AnchorPane anchorPane;
+	@FXML private AnchorPane settingsPane;
 	@FXML private ListView<String> blockedUsersList;
 	@FXML private CheckBox editFieldsBox;
 	@FXML private TextField emailField;
@@ -72,8 +72,8 @@ public class SettingsController {
 	}
 	
 	@FXML public void blockUserBtnOnAction(ActionEvent event) {
-		anchorPane.setEffect(new GaussianBlur(15));
 		landingController.getPane().setEffect(new GaussianBlur(15));
+		landingController.getPane().setMouseTransparent(true);
 		BlockUserController blockUserController = GUIUtilities.loadNewUndecoratedWindow(GUIUtilities.BlockUserScene);
 		blockUserController.setLandingController(landingController);
 		blockUserController.setSettingsController(this);
@@ -210,7 +210,4 @@ public class SettingsController {
 		return blockedUsersList;
 	}
 	
-	public AnchorPane getPane() {
-		return anchorPane;
-	}
 }
