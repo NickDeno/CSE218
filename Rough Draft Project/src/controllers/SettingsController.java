@@ -111,6 +111,21 @@ public class SettingsController {
 				ReplyPost replyPost = itr2.next();
 				AppState.getInstance().getPostCenter().getPost(replyPost.getRepliedPost().getUuid()).getPostReplies().remove(replyPost);
 			}
+			
+			//Removes this user from every user that they follow 's followers list.
+			Iterator<User> itr3 = currentUser.getFollowing().values().iterator();
+			while(itr3.hasNext()) {
+				User followedUser = itr3.next();
+				followedUser.getFollowers().remove(currentUser);
+				
+			}
+			//Removes this user from user that follows them 's following list.
+			Iterator<User> itr4 = currentUser.getFollowers().iterator();
+			while(itr4.hasNext()) {
+				User followingUser = itr4.next();
+				followingUser.getFollowing().remove(currentUser.getUsername());
+				
+			}
 //          Removes user from UserCenter
 			AppState.getInstance().getUserCenter().removeUser(currentUser.getUsername());
 			GUIUtilities.loadNewScene(((Stage)((Node)event.getSource()).getScene().getWindow()) , GUIUtilities.SignInScene);

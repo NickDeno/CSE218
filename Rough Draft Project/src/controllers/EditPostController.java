@@ -155,7 +155,7 @@ public class EditPostController {
 				alert.showAndWait();
 	    	} else {
 	    		FileChooser fc = new FileChooser();
-	    		fc.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
+	    		fc.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
 	    		File selectedFile = fc.showOpenDialog(null);
 	    		if (selectedFile == null) {
 	    			Alert alert = new Alert(AlertType.ERROR);

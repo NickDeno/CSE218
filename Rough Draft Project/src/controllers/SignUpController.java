@@ -105,7 +105,7 @@ public class SignUpController {
 		} else {
 			AppState.getInstance().getUserCenter().addUser(new User(usernameField.getText(), password, emailField.getText(), new FXImage(chosenImageBytes)));
 			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Account Sucessfully Created!");
+			alert.setTitle("Success!");
 			alert.setHeaderText(null);
 			alert.setContentText("Your account has been successfully created!");
 			alert.showAndWait();
@@ -129,7 +129,7 @@ public class SignUpController {
 		} else if (event.getSource().equals(usernameField)) {
 			String tempStyle = usernameField.getStyle();
 			usernameField.textProperty().addListener((observable, oldValue, newValue) -> {
-				if (newValue.isEmpty() && AppState.getInstance().getUserCenter().getUser(newValue) != null) usernameLine.setStyle(tempStyle + "-fx-stroke: #ff0000;");
+				if (AppState.getInstance().getUserCenter().getUser(newValue) != null) usernameLine.setStyle(tempStyle + "-fx-stroke: #ff0000;");
 				else usernameLine.setStyle(tempStyle + "-fx-stroke: #38ff13;");
 			});
 

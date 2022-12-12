@@ -5,10 +5,11 @@ How To Run Application:
 	   library to project by right-clicking on project -> Build Path -> Configure Build Path -> ClassPath -> Add Library -> User Library -> then add your JavaFX 
 	   library.
 	      
-	2) Add External Jars: The external jars used for this program are located in the "ExternalLibs" folder. To add these jars
-	   to classpath, go to ExternalLibs folder -> right-click on jar file -> Build Path -> Add to Build Path. The jar will then be added to a "Referenced Libraries"
-	   library in the project. This only has to be done for the first time, after that the jar will always be in the class path. Also if you prefer, you can
-	   add the external jars directly to your "MyJavaFXLib" library instead.	
+	2) Add External Jars: If a "Referenced Libraries" library containing RichTextFx already appears in the project folder, you can skip this step.
+	   The external jars used for this program are located in the "ExternalLibs" folder. To add these jars to class path, go to ExternalLibs folder -> right-click on 
+	   jar file -> Build Path -> Add to Build Path. The jar will then be added to a "Referenced Libraries" library in the project. This only has to be done for the 
+	   first time, after that the jar will always be in the class path. Also if you prefer, you can add the external jars directly to your "MyJavaFXLib" library 
+	   instead.	
 	      
 	3) Add runtime args to "AppDemo": --module-path "Path to JavaFX library" --add-modules=javafx.controls,javafx.fxml
 	
@@ -54,8 +55,8 @@ Data Structures Used:
 	   
 	   Justifications for not using different data structures: If we did not care about the insertion order of the posts, we could have also used a TreeMap. If we cared 
 	   about the insertion order, but knew the max number of Posts that would be created, we could have used a LinkedHashMap which benefits from a O(1) search time like 
-	   a HashMap, and also preserves insertion order since its backed by a LinkedList. But since a HashMap and LinkedHashMap are array based, it is not ideal when you
-	   do not know the max number of objects being added to it.
+	   a HashMap, and also preserves insertion order like a Linked List. But since a HashMap and LinkedHashMap are array based, it is not ideal when you
+	   do not know the max number of objects being added to it, which is the case.
 	   
 	3) User:
 		Main Data Structures:

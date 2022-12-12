@@ -59,7 +59,7 @@ public class PostCenter implements Serializable{
 		Iterator<Post> itr = postList.iterator();
 		while(itr.hasNext()) {
 			Post post = itr.next();
-			if(post.getTopic().equals(topic)) {
+			if(post.getTopic().toLowerCase().equals(topic.toLowerCase())) {
 				temp.add(post);
 			}
 		}
@@ -71,7 +71,7 @@ public class PostCenter implements Serializable{
 		Iterator<Post> itr = postList.iterator();
 		while(itr.hasNext()) {
 			Post post = itr.next();
-			if(post.getTitle().equals(title)) {
+			if(post.getTitle().toLowerCase().equals(title.toLowerCase())) {
 				temp.add(post);
 			}
 		}

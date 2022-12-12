@@ -18,7 +18,7 @@
 
 <AnchorPane fx:id="currentUserProfilePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="742.0" prefWidth="996.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #656161 0.0%, #393636 100.0%);" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CurrentUserProfileController">
    <children>
-      <Rectangle fx:id="bannerPic" arcHeight="5.0" arcWidth="5.0" fill="#2576df" height="238.0" layoutY="1.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="4.0" width="996.0">
+      <Rectangle fx:id="bannerPic" arcHeight="5.0" arcWidth="5.0" fill="#2576df" height="239.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="4.0" width="996.0">
          <effect>
             <DropShadow height="50.31" radius="17.3275" spread="0.2" />
          </effect></Rectangle>

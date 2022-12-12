@@ -34,9 +34,10 @@ public class SpellCheckTextArea {
 		textArea.setMinHeight(height);
 		textArea.setWrapText(true);
 		textArea.setPadding(new Insets(7));
-		textArea.setId("spellCheckTextArea");
 		textArea.setUseInitialStyleForInsertion(true);
 		textArea.setEditable(isEditable);
+		//Adds ID for CSS Styling
+		textArea.setId("spellCheckTextArea");
 		
 		stackPane = new StackPane();
 		stackPane.setMinWidth(width);
@@ -66,9 +67,9 @@ public class SpellCheckTextArea {
 		});	
 	}
 	
-	//Iterates through given text and checks if each word is misspelled. To do this, it checks if the current word is not in the "dictionary" HashTable, => the word 
-	//is misspelled. If the word is misspelled, the startingIdx and endingIdx of the word in the text will be added as an IndexRange object into the errorsList. 
-	//Then, the misspelled word is added to the misspelledWords List
+	//Iterates through given text and checks if each word is misspelled. To do this, it gets the current words and checks if its not in the "dictionary" HashTable, 
+	//=> the word is misspelled. If the word is misspelled, the startingIdx and endingIdx of the word in the text will be added as an IndexRange object into the 
+	//errorsList. Then, the misspelled word is added to the misspelledWords List
 	public void spellCheck(String text) {
 		BreakIterator itr = BreakIterator.getWordInstance();
 		itr.setText(text);	

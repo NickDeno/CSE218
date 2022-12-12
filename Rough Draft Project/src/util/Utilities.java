@@ -19,6 +19,30 @@ import model.AppState;
 public class Utilities {
 	public static HashSet<String> dictionary;
 	
+	public static void backupAppState() {
+		try {
+			FileOutputStream fos = new FileOutputStream("backupData/AppState.dat");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(AppState.getInstance());
+			oos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static AppState restoreAppState() {
+		try {
+			FileInputStream fis = new FileInputStream("backupData/AppState.dat");
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			AppState appState = (AppState) ois.readObject();
+			ois.close();
+			return appState;
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	//Takes a file (for this project mainly image files) and converts it into a byte array. This is done since by default, JavaFX images are not
 	//serializable. So instead, we can convert the image into a byte array and save the byte array into a specified file.
 	public static byte[] fileToByteArr(File file) {
@@ -59,30 +83,6 @@ public class Utilities {
 			if(email.charAt(i) == '.') hasDot = true;	
 		}
 		return hasAt && hasDot;	
-	}
-	
-	public static void backupAppState() {
-		try {
-			FileOutputStream fos = new FileOutputStream("backupData/AppState.dat");
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(AppState.getInstance());
-			oos.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public static AppState restoreAppState() {
-		try {
-			FileInputStream fis = new FileInputStream("backupData/AppState.dat");
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			AppState appState = (AppState) ois.readObject();
-			ois.close();
-			return appState;
-		} catch (IOException | ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 	
 	public static void loadDictionary() {
