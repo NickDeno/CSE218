@@ -60,8 +60,7 @@ public class User implements Serializable {
 		this.userPostReplies = new LinkedList<ReplyPost>();
 		this.followers = new LinkedList<User>();
 		this.following =  new TreeMap<String, User>();
-		this.blockedUsers = new TreeMap<String, User>();
-		
+		this.blockedUsers = new TreeMap<String, User>();	
 	}
 
 	public String getUsername() {

@@ -74,7 +74,7 @@ public class UserProfileController {
     	Platform.runLater(() -> {
     		bannerPic.setFill(Utilities.byteArrToImagePattern(user.getBannerPic().returnBytes()));
     		profilePic.setFill(Utilities.byteArrToImagePattern(user.getProfilePic().returnBytes()));
-    		usernameLabel.setText(user.getUsername());
+    		usernameLabel.setText("@" + user.getUsername());
     		if(user.getNickName() != null) nicknameLabel.setText(user.getNickName());
     		if(user.getBio() != null) bioField.setText(user.getBio());
     		numPosts.setText(String.valueOf(user.getUserPosts().size()));

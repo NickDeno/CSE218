@@ -20,6 +20,5 @@ public class AppDemo extends Application {
 		primaryStage.getIcons().add(new Image("/assets/ChadderIcon.png"));
 		primaryStage.setResizable(false);
 		GUIUtilities.loadNewScene(primaryStage, GUIUtilities.SignInScene);
-	}
-	
+	}	
 }

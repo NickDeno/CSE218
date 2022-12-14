@@ -29,51 +29,51 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 public class CreatePostController {
-	 @FXML private AnchorPane createPostPane;
-	 @FXML private Button backBtn;
-	 @FXML private Button createPostButton;
-	 @FXML private Button browseButton;
-	 @FXML private TextField titleField;
-	 @FXML private ComboBox<String> topicBox;
-	 @FXML private TextField newTopicField;
-	 @FXML private Line newTopicLine;
-	 @FXML private Label msgLabel; 
-	 @FXML private ImageView postImg1;
-	 @FXML private ImageView postImg2;
-	 @FXML private ImageView postImg3; 
-	 @FXML private Rectangle postImgBorder1;
-	 @FXML private Rectangle postImgBorder2;
-	 @FXML private Rectangle postImgBorder3;
-	 private SpellCheckTextArea descriptionField;
+	@FXML private AnchorPane createPostPane;
+	@FXML private Button backBtn;
+	@FXML private Button createPostButton;
+	@FXML private Button browseButton;
+	@FXML private TextField titleField;
+	@FXML private ComboBox<String> topicBox;
+	@FXML private TextField newTopicField;
+	@FXML private Line newTopicLine;
+	@FXML private Label msgLabel; 
+	@FXML private ImageView postImg1;
+	@FXML private ImageView postImg2;
+	@FXML private ImageView postImg3; 
+	@FXML private Rectangle postImgBorder1;
+	@FXML private Rectangle postImgBorder2;
+	@FXML private Rectangle postImgBorder3;
+	private SpellCheckTextArea descriptionField;
 	 
-	 private User currentUser;
-	 private LinkedList<FXImage> postImages;
-	 private final String[] defaultTopics = {"Computer Science", "School", "Gaming", "Gym", "Sports", "Other"};
-	 private LandingController landingController;
+	private User currentUser;
+	private LinkedList<FXImage> postImages;
+	private final String[] defaultTopics = {"Computer Science", "School", "Gaming", "Gym", "Sports", "Other"};
+	private LandingController landingController;
 	 
-	 //Initializer
-	 public CreatePostController() {}
+	//Initializer
+	public CreatePostController() {}
 	 
-	 public void initialize() {
+	public void initialize() {
 		currentUser = AppState.getInstance().getUserCenter().getCurrentUser();
 		postImages = new LinkedList<FXImage>();
 		topicBox.getItems().addAll(defaultTopics);
 		descriptionField = new SpellCheckTextArea(660, 300, 172, 190, true);
 		createPostPane.getChildren().add(descriptionField.getPane());
-	 }
+	}
 	 
-	 @FXML public void topicBoxOnAction(ActionEvent event) {
-		 //When user selects "Other" option, a text field will pop up for them to input their own topic
-		 if(topicBox.getValue().equals("Other")) {
-			 newTopicField.setVisible(true);
-			 newTopicLine.setVisible(true);
-		 } else {
-			 newTopicField.setVisible(false);
-			 newTopicLine.setVisible(false);
-		 }
-	 }
+	@FXML public void topicBoxOnAction(ActionEvent event) {
+		//When user selects "Other" option, a text field will pop up for them to input their own topic
+		if(topicBox.getValue().equals("Other")) {
+			newTopicField.setVisible(true);
+			newTopicLine.setVisible(true);
+		} else {
+			newTopicField.setVisible(false);
+			newTopicLine.setVisible(false);
+		}
+	}
 	 
-	 @FXML public void browseButtonOnAction(ActionEvent event) {
+	@FXML public void browseButtonOnAction(ActionEvent event) {
 		if(postImages.size() == 3) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Max Number of Images");
@@ -99,7 +99,7 @@ public class CreatePostController {
 	 }
 
 	@FXML public void createPostButtonOnAction(ActionEvent event) {
-		if(!descriptionField.getMisspelledWords().isEmpty()) {
+		if(descriptionField.getMisspelledWords().isEmpty() == false) {
 			String misspelledWords = "";
 			for(int i = 0; i < descriptionField.getMisspelledWords().size(); i++) {
 				String currWord = descriptionField.getMisspelledWords().get(i);
@@ -108,8 +108,7 @@ public class CreatePostController {
 				} else {
 					misspelledWords += currWord + ".";
 				}
-			}
-			
+			}	
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Misspelled Words");
 			alert.setHeaderText(null);
@@ -126,13 +125,13 @@ public class CreatePostController {
 			if(topicBox.getValue() == null || topicBox.getValue().equals("")) newPostTopic = "Misc.";
 			else if(topicBox.getValue().equals("Other") && newTopicField.getText().isEmpty()) newPostTopic = "Misc.";	
 			else if(topicBox.getValue().equals("Other") && !newTopicField.getText().isEmpty()) newPostTopic = newTopicField.getText();
-			else newPostTopic = topicBox.getValue();
-			 
+			else newPostTopic = topicBox.getValue();	 
 			Post newPost = new Post(titleField.getText(), newPostTopic, descriptionField.getTextArea().getText(), postImages, currentUser, UUID.randomUUID()); 
 			AppState.getInstance().getPostCenter().addPost(newPost);
 			currentUser.getUserPosts().add(newPost);
-			HomeFeedController homeFeed = GUIUtilities.loadPane(landingController.getContentPane(), GUIUtilities.HomeFeedScene);
-			homeFeed.setLandingController(landingController);
+			
+			HomeFeedController homeFeedController = GUIUtilities.loadPane(landingController.getContentPane(), GUIUtilities.HomeFeedScene);
+			homeFeedController.setLandingController(landingController);
 			landingController.getHomeBtn().setStyle("-fx-background-color: rgba(255,255,255,0.5)");
 		} else {
 			resetFields();
@@ -142,10 +141,9 @@ public class CreatePostController {
 	}
 	 
 	 @FXML public void backBtnOnAction(ActionEvent event) {
-		 HomeFeedController homeFeed = GUIUtilities.loadPane(landingController.getContentPane(), GUIUtilities.HomeFeedScene);
-		 homeFeed.setLandingController(landingController);
+		 HomeFeedController homeFeedController = GUIUtilities.loadPane(landingController.getContentPane(), GUIUtilities.HomeFeedScene);
+		 homeFeedController.setLandingController(landingController);
 		 landingController.getHomeBtn().setStyle("-fx-background-color: rgba(255,255,255,0.5)");
-
 	 }
 	 
 	 private void resetFields() {

@@ -168,12 +168,12 @@
                   <Font name="Bookman Old Style Bold" size="34.0" />
                </font>
             </Label>
-            <Button fx:id="browseBtn" layoutX="124.0" layoutY="433.0" mnemonicParsing="false" onAction="#browseBtnOnAction" prefHeight="31.0" prefWidth="94.0" text="Browse">
+            <Button fx:id="browseBtn" layoutX="153.0" layoutY="433.0" mnemonicParsing="false" onAction="#browseBtnOnAction" prefHeight="31.0" prefWidth="94.0" text="Browse">
                <font>
                   <Font size="14.0" />
                </font></Button>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="78.0" layoutX="23.0" layoutY="402.0" stroke="#3b93ff" strokeType="INSIDE" strokeWidth="5.0" style="-fx-fill: transparent;" width="89.0" />
-            <ImageView fx:id="previewProfilePic" fitHeight="68.0" fitWidth="79.0" layoutX="28.0" layoutY="407.0" pickOnBounds="true">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="94.0" layoutX="23.0" layoutY="386.0" stroke="#3b93ff" strokeType="INSIDE" strokeWidth="5.0" style="-fx-fill: transparent;" width="118.0" />
+            <ImageView fx:id="previewProfilePic" fitHeight="85.0" fitWidth="109.0" layoutX="28.0" layoutY="390.0" pickOnBounds="true">
                <image>
                   <Image url="@../assets/TempProfilePic.png" />
                </image></ImageView>

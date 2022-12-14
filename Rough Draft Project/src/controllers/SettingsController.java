@@ -99,27 +99,28 @@ public class SettingsController {
 		alert.setContentText("Are you sure you want to delete your account?");
 		Optional<ButtonType> confirm = alert.showAndWait();
 		if(confirm.isPresent() && confirm.get() == ButtonType.OK) {
-//			Removes every post instance that was made by this user from PostCenter
-			Iterator<Post> itr = currentUser.getUserPosts().iterator();
-			while(itr.hasNext()) {
-				Post post = itr.next();
-				AppState.getInstance().getPostCenter().removePost(post);
-			}
 //			Removes every reply post instance that was made by this user from PostCenter
-			Iterator<ReplyPost> itr2  = currentUser.getUserPostReplies().iterator();
-			while(itr2.hasNext()) {
-				ReplyPost replyPost = itr2.next();
+			Iterator<ReplyPost> itr  = currentUser.getUserPostReplies().iterator();
+			while(itr.hasNext()) {
+				ReplyPost replyPost = itr.next();
 				AppState.getInstance().getPostCenter().getPost(replyPost.getRepliedPost().getUuid()).getPostReplies().remove(replyPost);
 			}
 			
-			//Removes this user from every user that they follow 's followers list.
+//			Removes every post instance that was made by this user from PostCenter
+			Iterator<Post> itr2 = currentUser.getUserPosts().iterator();
+			while(itr2.hasNext()) {
+				Post post = itr2.next();
+				AppState.getInstance().getPostCenter().removePost(post);
+			}
+			
+//			Removes this user from every user that they follow 's followers list.
 			Iterator<User> itr3 = currentUser.getFollowing().values().iterator();
 			while(itr3.hasNext()) {
 				User followedUser = itr3.next();
 				followedUser.getFollowers().remove(currentUser);
 				
 			}
-			//Removes this user from user that follows them 's following list.
+//			Removes this user from every user that follows them 's following list.
 			Iterator<User> itr4 = currentUser.getFollowers().iterator();
 			while(itr4.hasNext()) {
 				User followingUser = itr4.next();

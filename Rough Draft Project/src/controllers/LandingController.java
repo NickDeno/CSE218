@@ -45,35 +45,35 @@ public class LandingController {
 		numFollowingLabel.setText(String.valueOf(currentUser.getFollowing().size()));
 		numFollowersLabel.setText(String.valueOf(currentUser.getFollowers().size()));
 		
-		HomeFeedController homeFeed = GUIUtilities.loadPane(contentPane, GUIUtilities.HomeFeedScene);
-		homeFeed.setLandingController(this);
+		HomeFeedController homeFeedController = GUIUtilities.loadPane(contentPane, GUIUtilities.HomeFeedScene);
+		homeFeedController.setLandingController(this);
 		homeBtn.setStyle("-fx-background-color: rgba(255,255,255,0.5)");
 	}
 	
 	@FXML public void homeBtnOnAction(ActionEvent event) {
-		HomeFeedController homeFeed = GUIUtilities.loadPane(contentPane, GUIUtilities.HomeFeedScene);
-		homeFeed.setLandingController(this);
+		HomeFeedController homeFeedController = GUIUtilities.loadPane(contentPane, GUIUtilities.HomeFeedScene);
+		homeFeedController.setLandingController(this);
 		resetBtns();
 		homeBtn.setStyle("-fx-background-color: rgba(255,255,255,0.5)");
 	}
 	
 	@FXML public void profileBtnOnAction(ActionEvent event) {
-		CurrentUserProfileController currentUserProfile = GUIUtilities.loadPane(contentPane, GUIUtilities.CurrentUserProfileScene);
-		currentUserProfile.setLandingController(this);
+		CurrentUserProfileController currentUserProfileController = GUIUtilities.loadPane(contentPane, GUIUtilities.CurrentUserProfileScene);
+		currentUserProfileController.setLandingController(this);
 		resetBtns();
 		profileBtn.setStyle("-fx-background-color: rgba(255,255,255,0.5)");
 	}
 	
 	@FXML public void settingsBtnOnAction(ActionEvent event) {
-		SettingsController settings = GUIUtilities.loadPane(contentPane, GUIUtilities.SettingsScene);
-		settings.setLandingController(this);
+		SettingsController settingsController = GUIUtilities.loadPane(contentPane, GUIUtilities.SettingsScene);
+		settingsController.setLandingController(this);
 		resetBtns();
 		settingsBtn.setStyle("-fx-background-color: rgba(255,255,255,0.5)");
 	}
 	
 	@FXML public void createPostBtnOnAction(ActionEvent event) {
-		CreatePostController createPost = GUIUtilities.loadPane(contentPane, GUIUtilities.CreatePostScene);
-		createPost.setLandingController(this);
+		CreatePostController createPostController = GUIUtilities.loadPane(contentPane, GUIUtilities.CreatePostScene);
+		createPostController.setLandingController(this);
 		resetBtns();
 	}
 	
@@ -86,8 +86,7 @@ public class LandingController {
 	@FXML public void profilePicOnEntered(MouseEvent event) {
 		ColorAdjust colorAdjust = new ColorAdjust();
 		colorAdjust.setBrightness(-0.2);
-		profilePic.setEffect(colorAdjust);
-		
+		profilePic.setEffect(colorAdjust);	
 	}
 	
 	@FXML public void profilePicOnExited(MouseEvent event) {

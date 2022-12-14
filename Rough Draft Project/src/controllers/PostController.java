@@ -28,9 +28,9 @@ public class PostController {
 	public PostController() {}
 	
 	@FXML public void postOnClicked(MouseEvent event) {
-		PostWithRepliesController postReplies =  GUIUtilities.loadPane(landingController.getContentPane(), GUIUtilities.PostWithRepliesScene);
-		postReplies.setPostData(post);
-		postReplies.setLandingController(landingController);	
+		PostWithRepliesController postWithRepliesController =  GUIUtilities.loadPane(landingController.getContentPane(), GUIUtilities.PostWithRepliesScene);
+		postWithRepliesController.setPostData(post);
+		postWithRepliesController.setLandingController(landingController);	
 		landingController.resetBtns();
 		landingController.getHomeBtn().setStyle("-fx-background-color: rgba(255,255,255,0.5)");
     }
@@ -47,7 +47,7 @@ public class PostController {
 		likeCounter.setText(String.valueOf(post.getLikes()));
 	}
 	
-	 public void setLandingController(LandingController landingController) {
+	public void setLandingController(LandingController landingController) {
 		 this.landingController = landingController;
 	 }
 }

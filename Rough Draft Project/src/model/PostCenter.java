@@ -36,7 +36,6 @@ public class PostCenter implements Serializable{
 			}
 		}
 		return false;
-
 	}
 
 	public Post getPost(UUID uuid) {

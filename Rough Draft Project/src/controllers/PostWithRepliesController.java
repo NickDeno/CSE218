@@ -97,20 +97,20 @@ public class PostWithRepliesController {
 	}
 	
 	@FXML public void viewProfileBtnOnAction(ActionEvent event) {
-		UserProfileController userProfile =  GUIUtilities.loadPane(landingController.getContentPane(), GUIUtilities.UserProfileScene);
-		userProfile.setUser(post.getPoster());
-		userProfile.setLandingController(landingController);	
+		UserProfileController userProfileController =  GUIUtilities.loadPane(landingController.getContentPane(), GUIUtilities.UserProfileScene);
+		userProfileController.setUser(post.getPoster());
+		userProfileController.setLandingController(landingController);	
 	}
 	
 	@FXML public void backBtnOnAction(ActionEvent event) {
-		HomeFeedController homeFeed = GUIUtilities.loadPane(landingController.getContentPane(), GUIUtilities.HomeFeedScene);
-		homeFeed.setLandingController(landingController);
+		HomeFeedController homeFeedController = GUIUtilities.loadPane(landingController.getContentPane(), GUIUtilities.HomeFeedScene);
+		homeFeedController.setLandingController(landingController);
 	}
 	
 	@FXML public void editPostBtnOnAction(ActionEvent event) {
-		EditPostController editPost = GUIUtilities.loadPane(landingController.getContentPane(), GUIUtilities.EditPostScene);
-		editPost.setLandingController(landingController);
-		editPost.setPostData(post);
+		EditPostController editPostController = GUIUtilities.loadPane(landingController.getContentPane(), GUIUtilities.EditPostScene);
+		editPostController.setLandingController(landingController);
+		editPostController.setPostData(post);
 	}
 	
 	public void setPostData(Post post) {

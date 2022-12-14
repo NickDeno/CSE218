@@ -67,7 +67,7 @@ public class SpellCheckTextArea {
 		});	
 	}
 	
-	//Iterates through given text and checks if each word is misspelled. To do this, it gets the current words and checks if its not in the "dictionary" HashTable, 
+	//Iterates through given text and checks if each word is misspelled. To do this, it gets the current word and checks if its not in the "dictionary" HashTable, 
 	//=> the word is misspelled. If the word is misspelled, the startingIdx and endingIdx of the word in the text will be added as an IndexRange object into the 
 	//errorsList. Then, the misspelled word is added to the misspelledWords List
 	public void spellCheck(String text) {

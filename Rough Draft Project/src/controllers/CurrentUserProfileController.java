@@ -79,7 +79,7 @@ public class CurrentUserProfileController {
     	
     	bannerPic.setFill(Utilities.byteArrToImagePattern(currentUser.getBannerPic().returnBytes()));	
 		profilePic.setFill(Utilities.byteArrToImagePattern(currentUser.getProfilePic().returnBytes()));
-		usernameLabel.setText(currentUser.getUsername());
+		usernameLabel.setText("@" + currentUser.getUsername());
 		if(currentUser.getNickName() != null) nicknameField.setText(currentUser.getNickName());
 		if(currentUser.getBio() != null) bioField.getTextArea().appendText(currentUser.getBio());
 		numPosts.setText(String.valueOf(currentUser.getUserPosts().size()));
@@ -157,7 +157,6 @@ public class CurrentUserProfileController {
     	followersBtnLine.setVisible(false);
     	followingBtnLine.setVisible(false);
     }
-    
 
     @FXML public void followersBtnOnAction(ActionEvent event) {
     	viewingLabel.setText("Followers");
@@ -203,8 +202,7 @@ public class CurrentUserProfileController {
 			if(confirm.isPresent() && confirm.get() == ButtonType.CANCEL) {
 				return;
 			}
-    	}
-    	
+    	}	
     	//This if statement will be true if the user changes their banner pic
     	if(currentUser.getBannerPic().returnBytes() != chosenBannerPicBytes && chosenBannerPicBytes != null) {
         	currentUser.setBannerPic(new FXImage(chosenBannerPicBytes));
@@ -214,8 +212,7 @@ public class CurrentUserProfileController {
 			currentUser.setProfilePic(new FXImage(chosenProfilePicBytes));
 			landingController.setProfilePic(Utilities.byteArrToImage(chosenProfilePicBytes));
 			//Reloads user posts after profile pic is changed
-			displayPosts(currentUser.getUserPosts());
-			
+			displayPosts(currentUser.getUserPosts());	
 		} else {
 			currentUser.setNickName(nicknameField.getText());
 	    	currentUser.setBio(bioField.getTextArea().getText());

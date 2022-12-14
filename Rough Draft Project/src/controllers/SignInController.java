@@ -34,10 +34,10 @@ public class SignInController {
 		//Initializes AppState
 		AppState.getInstance();	
 		//Initializes Dictionary
-		
 		Utilities.loadDictionary();
 		//Comment out if you don't wish to see data displayed in console
-		AppState.getInstance().displayState();	
+		AppState.getInstance().displayState();
+		
 		Platform.runLater(() -> {
 			stage = (Stage)signInBtn.getScene().getWindow();
 			stage.setOnCloseRequest(e -> Utilities.backupAppState());
