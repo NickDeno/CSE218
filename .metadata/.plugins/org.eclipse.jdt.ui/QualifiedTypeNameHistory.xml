@@ -12,7 +12,6 @@
     <fullyQualifiedTypeName name="javafx.scene.layout.CornerRadii"/>
     <fullyQualifiedTypeName name="javafx.scene.layout.Background"/>
     <fullyQualifiedTypeName name="model.User"/>
-    <fullyQualifiedTypeName name="java.io.Serializable"/>
     <fullyQualifiedTypeName name="java.io.File"/>
     <fullyQualifiedTypeName name="model.ReplyPost"/>
     <fullyQualifiedTypeName name="javafx.beans.value.ChangeListener"/>
@@ -23,7 +22,6 @@
     <fullyQualifiedTypeName name="javafx.scene.image.Image"/>
     <fullyQualifiedTypeName name="java.io.ByteArrayInputStream"/>
     <fullyQualifiedTypeName name="javafx.scene.paint.ImagePattern"/>
-    <fullyQualifiedTypeName name="java.util.HashSet"/>
     <fullyQualifiedTypeName name="java.io.FileReader"/>
     <fullyQualifiedTypeName name="java.io.BufferedReader"/>
     <fullyQualifiedTypeName name="org.fxmisc.richtext.StyleClassedTextArea"/>
@@ -47,12 +45,10 @@
     <fullyQualifiedTypeName name="javafx.util.Duration"/>
     <fullyQualifiedTypeName name="javafx.animation.KeyFrame"/>
     <fullyQualifiedTypeName name="java.util.Iterator"/>
-    <fullyQualifiedTypeName name="model.AppState"/>
     <fullyQualifiedTypeName name="java.util.Arrays"/>
     <fullyQualifiedTypeName name="model.Post"/>
     <fullyQualifiedTypeName name="util.PostArrayQuick"/>
     <fullyQualifiedTypeName name="java.util.LinkedList"/>
-    <fullyQualifiedTypeName name="util.Utilities"/>
     <fullyQualifiedTypeName name="javafx.scene.layout.BorderPane"/>
     <fullyQualifiedTypeName name="java.util.Collections"/>
     <fullyQualifiedTypeName name="javafx.scene.control.Label"/>
@@ -60,4 +56,8 @@
     <fullyQualifiedTypeName name="javafx.scene.control.ScrollPane"/>
     <fullyQualifiedTypeName name="java.awt.Desktop"/>
     <fullyQualifiedTypeName name="java.net.URI"/>
+    <fullyQualifiedTypeName name="java.io.Serializable"/>
+    <fullyQualifiedTypeName name="java.util.HashSet"/>
+    <fullyQualifiedTypeName name="util.Utilities"/>
+    <fullyQualifiedTypeName name="model.AppState"/>
 </qualifiedTypeNameHistroy>

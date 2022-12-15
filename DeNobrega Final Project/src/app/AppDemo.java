@@ -3,9 +3,11 @@ package app;
 import java.io.IOException;
 
 import util.GUIUtilities;
+import util.Utilities;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import model.AppState;
 
 public class AppDemo extends Application {
 	//Descriptions of all data structures used in this application and their functionality are located in README.txt File
@@ -16,6 +18,12 @@ public class AppDemo extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
+		//Initializes AppState
+		AppState.getInstance();	
+		//Initializes Dictionary
+		Utilities.loadDictionary();
+		//Comment out if you don't wish to see data displayed in console on launch
+		AppState.getInstance().displayState();
 		primaryStage.setTitle("Chadder!");
 		primaryStage.getIcons().add(new Image("/assets/ChadderIcon.png"));
 		primaryStage.setResizable(false);

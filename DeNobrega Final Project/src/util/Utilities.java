@@ -44,7 +44,7 @@ public class Utilities {
 	}
 	
 	public static void loadDictionary() {
-		//Sets initial capacity of the HashSet to 99171(the amount of words in dictionary.txt file)
+		//Sets initial capacity of the HashSet to 99500(Roughly the amount of words in default dictionary.txt file)
 		dictionary = new HashSet<String>(99500);
 		try {
 			BufferedReader br = new BufferedReader(new FileReader("rawData/dictionary.txt"));
