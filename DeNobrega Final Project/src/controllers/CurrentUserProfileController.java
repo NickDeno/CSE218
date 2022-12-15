@@ -71,7 +71,7 @@ public class CurrentUserProfileController {
     
     public void initialize() {
     	currentUser = AppState.getInstance().getUserCenter().getCurrentUser();
-    	bioField = new SpellCheckTextArea(195, 250, 20, 430, false);
+    	bioField = new SpellCheckTextArea(195, 250, 20, 435, false);
     	bioField.getTextArea().getStyleClass().clear();
     	bioField.getTextArea().setStyle("-fx-font-size: 14;");
     	currentUserProfilePane.getChildren().add(bioField.getPane());

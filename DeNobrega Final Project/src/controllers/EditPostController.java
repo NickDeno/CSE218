@@ -106,6 +106,26 @@ public class EditPostController {
     }
 
     @FXML public void saveChangesBtnOnAction(ActionEvent event) {
+    	if(descriptionField.getMisspelledWords().isEmpty() == false) {
+			String misspelledWords = "";
+			for(int i = 0; i < descriptionField.getMisspelledWords().size(); i++) {
+				String currWord = descriptionField.getMisspelledWords().get(i);
+				if(i < descriptionField.getMisspelledWords().size()-1) {
+					misspelledWords += currWord + ", ";
+				} else {
+					misspelledWords += currWord + ".";
+				}
+			}	
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Misspelled Words");
+			alert.setHeaderText(null);
+			alert.setContentText("Your post description contains the misspelled word(s) " + misspelledWords + " Do you still wish to continue?");
+			Optional<ButtonType> confirm = alert.showAndWait();
+			if(confirm.isPresent() && confirm.get() == ButtonType.CANCEL) {
+				return;
+			}
+		}
+    	
     	if(!titleField.getText().isEmpty() && !descriptionField.getTextArea().getText().isEmpty()) {
 	   		String newPostTopic;
 	   		if(topicBox.getValue() == null || topicBox.getValue().equals("")) newPostTopic = "Misc.";

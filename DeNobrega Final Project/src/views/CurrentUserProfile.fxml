@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="currentUserProfilePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="742.0" prefWidth="996.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #656161 0.0%, #393636 100.0%);" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CurrentUserProfileController">
+<AnchorPane fx:id="currentUserProfilePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="742.0" prefWidth="996.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #656161 0.0%, #393636 100.0%);" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CurrentUserProfileController">
    <children>
       <Rectangle fx:id="bannerPic" arcHeight="5.0" arcWidth="5.0" fill="#2576df" height="239.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="4.0" width="996.0">
          <effect>
@@ -36,7 +36,7 @@
             <Font name="Baskerville Old Face" size="20.0" />
          </font>
       </TextField>
-      <Label alignment="CENTER" layoutX="75.0" layoutY="386.0" prefHeight="38.0" prefWidth="78.0" text="Bio:" textFill="#f5f2f2">
+      <Label alignment="CENTER" layoutX="75.0" layoutY="392.0" prefHeight="38.0" prefWidth="78.0" text="Bio:" textFill="#f5f2f2">
          <font>
             <Font name="Baskerville Old Face" size="22.0" />
          </font>
@@ -128,7 +128,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <CheckBox fx:id="editFieldsBox" layoutX="31.0" layoutY="685.0" mnemonicParsing="false" onAction="#editFieldsBoxOnAction" prefHeight="51.0" prefWidth="166.0" text="Edit Fields" textFill="WHITE">
+      <CheckBox fx:id="editFieldsBox" layoutX="30.0" layoutY="690.0" mnemonicParsing="false" onAction="#editFieldsBoxOnAction" prefHeight="51.0" prefWidth="166.0" text="Edit Fields" textFill="WHITE">
          <font>
             <Font name="Baskerville Old Face" size="26.0" />
          </font>

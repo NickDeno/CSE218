@@ -103,7 +103,14 @@ public class SettingsController {
 			Iterator<ReplyPost> itr  = currentUser.getUserPostReplies().iterator();
 			while(itr.hasNext()) {
 				ReplyPost replyPost = itr.next();
-				AppState.getInstance().getPostCenter().getPost(replyPost.getRepliedPost().getUuid()).getPostReplies().remove(replyPost);
+				try {		
+					AppState.getInstance().getPostCenter().getPost(replyPost.getRepliedPost().getUuid()).getPostReplies().remove(replyPost);
+				} catch(NullPointerException e) {
+					//Exception will be caught if the post that this replyPost was added to is already deleted. => When we try to 
+					//remove this post from the post this reply was added to, that post will be null. => We can skip over deleting
+					//this post
+					continue;
+				}
 			}
 			
 //			Removes every post instance that was made by this user from PostCenter

@@ -23,8 +23,7 @@ public class AppDemo extends Application {
 		//Initializes Dictionary
 		Utilities.loadDictionary();
 		//Comment out if you don't wish to see data displayed in console on launch
-		AppState.getInstance().displayState();
-		
+		AppState.getInstance().displayState();	
 		primaryStage.setTitle("Chadder!");
 		primaryStage.getIcons().add(new Image("/assets/ChadderIcon.png"));
 		primaryStage.setResizable(false);
