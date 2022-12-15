@@ -53,8 +53,7 @@ public class CurrentUserProfileController {
     @FXML private ScrollPane postsScrollPane;
     @FXML private TilePane postsTilePane;
     @FXML private ListView<String> followersList;
-    @FXML private ListView<String> followingList;
-    
+    @FXML private ListView<String> followingList;   
     @FXML private Button changeBannerPicBtn;
     @FXML private Button changeProfilePicBtn;
     @FXML private Button backBtn;
@@ -90,7 +89,8 @@ public class CurrentUserProfileController {
 		}
     	for(User u: currentUser.getFollowing().values()) {
 			followingList.getItems().add(u.getUsername());
-		}	
+		}
+    	
     	followersList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
     		if(newValue != null) {
     			UserProfileController userProfile =  GUIUtilities.loadPane(landingController.getContentPane(), GUIUtilities.UserProfileScene);
@@ -112,8 +112,7 @@ public class CurrentUserProfileController {
     	}); 	
     	Platform.runLater(() -> {	
     		displayPosts(currentUser.getUserPosts());
-    	});
-    	
+    	}); 	
     }
 
     @FXML public void changeBannerPicBtnOnAction(ActionEvent event) {

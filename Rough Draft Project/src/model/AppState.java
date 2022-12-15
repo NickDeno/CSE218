@@ -13,7 +13,6 @@ public class AppState implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private UserCenter userCenter;
 	private PostCenter postCenter;
-	
 	private static AppState instance;
 	
 	//Private constructor. Only accessed on the first ever launch of this program.
@@ -42,6 +41,5 @@ public class AppState implements Serializable {
 
 	public PostCenter getPostCenter() {
 		return postCenter;
-	}
-	
+	}	
 }

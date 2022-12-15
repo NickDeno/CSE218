@@ -20,9 +20,9 @@
 
 <BorderPane fx:id="signUpPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="598.0" prefWidth="1002.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignUpController">
    <left>
-      <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="598.0" prefWidth="285.0" style="-fx-background-color: #2576DF;" BorderPane.alignment="CENTER">
+      <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="598.0" prefWidth="268.0" style="-fx-background-color: #2576DF;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="278.0" fitWidth="266.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="273.0" fitWidth="274.0" layoutX="-12.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/ChadderIcon.png" />
                </image>
@@ -30,7 +30,7 @@
                   <DropShadow radius="22.4575" width="70.83" />
                </effect>
             </ImageView>
-            <Label layoutX="12.0" layoutY="370.0" prefHeight="84.0" prefWidth="261.0" text="Chadder">
+            <Label layoutX="4.0" layoutY="362.0" prefHeight="84.0" prefWidth="261.0" text="Chadder">
                <font>
                   <Font name="Eras Demi ITC" size="60.0" />
                </font>
@@ -59,7 +59,7 @@
                   <DropShadow />
                </effect>
             </Label>
-            <Label alignment="CENTER" layoutX="22.0" layoutY="435.0" prefHeight="55.0" prefWidth="223.0" text="&quot;Twitter for Chads.&quot;" textFill="WHITE">
+            <Label alignment="CENTER" layoutX="14.0" layoutY="426.0" prefHeight="55.0" prefWidth="223.0" text="&quot;Twitter for Chads.&quot;" textFill="WHITE">
                <font>
                   <Font name="Century Schoolbook Italic" size="23.0" />
                </font>

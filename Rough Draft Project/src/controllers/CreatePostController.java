@@ -37,6 +37,7 @@ public class CreatePostController {
 	@FXML private ComboBox<String> topicBox;
 	@FXML private TextField newTopicField;
 	@FXML private Line newTopicLine;
+	private SpellCheckTextArea descriptionField;
 	@FXML private Label msgLabel; 
 	@FXML private ImageView postImg1;
 	@FXML private ImageView postImg2;
@@ -44,7 +45,6 @@ public class CreatePostController {
 	@FXML private Rectangle postImgBorder1;
 	@FXML private Rectangle postImgBorder2;
 	@FXML private Rectangle postImgBorder3;
-	private SpellCheckTextArea descriptionField;
 	 
 	private User currentUser;
 	private LinkedList<FXImage> postImages;

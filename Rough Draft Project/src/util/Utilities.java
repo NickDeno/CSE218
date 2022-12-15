@@ -43,6 +43,23 @@ public class Utilities {
 		return null;
 	}
 	
+	public static void loadDictionary() {
+		//Sets initial capacity of the HashSet to 99171(the amount of words in dictionary.txt file)
+		dictionary = new HashSet<String>(99500);
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("rawData/dictionary.txt"));
+			String newLine = "";
+			while(newLine != null) {
+				newLine = br.readLine();
+				dictionary.add(newLine);	
+			}
+			br.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("Unable to load dictionary.");
+		} 
+	}	
+	
 	//Takes a file (for this project mainly image files) and converts it into a byte array. This is done since by default, JavaFX images are not
 	//serializable. So instead, we can convert the image into a byte array and save the byte array into a specified file.
 	public static byte[] fileToByteArr(File file) {
@@ -84,21 +101,4 @@ public class Utilities {
 		}
 		return hasAt && hasDot;	
 	}
-	
-	public static void loadDictionary() {
-		//Sets initial capacity of the HashSet to 99171(the amount of words in dictionary.txt file)
-		dictionary = new HashSet<String>(99500);
-		try {
-			BufferedReader br = new BufferedReader(new FileReader("rawData/dictionary.txt"));
-			String newLine = "";
-			while(newLine != null) {
-				newLine = br.readLine();
-				dictionary.add(newLine);	
-			}
-			br.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.out.println("Unable to load dictionary.");
-		} 
-	}	
 }

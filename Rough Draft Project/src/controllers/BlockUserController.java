@@ -45,8 +45,7 @@ public class BlockUserController {
 			alert.setContentText("Please select a user to block and try again.");
 			alert.showAndWait();
 			return;
-		} 
-		
+		} 	
 		//If selected user is the current user
 		if(userList.getSelectionModel().getSelectedItem().equals(currentUser.getUsername())) {
 			Alert alert = new Alert(AlertType.ERROR);
@@ -72,8 +71,7 @@ public class BlockUserController {
 			landingController.getPane().setEffect(null);
 			landingController.getPane().setMouseTransparent(false);
 			((Stage)((Node)event.getSource()).getScene().getWindow()).close();	
-		}
-		
+		}	
 	}
 	
 	@FXML public void cancelBtnOnAction(ActionEvent event) {

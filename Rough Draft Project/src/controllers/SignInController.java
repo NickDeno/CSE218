@@ -4,6 +4,12 @@ import model.AppState;
 import model.User;
 import util.Utilities;
 import util.GUIUtilities;
+
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +29,7 @@ public class SignInController {
 	@FXML private Label msgLabel;
 	@FXML private Button signInBtn;
 	@FXML private Button cancelBtn; 
+	@FXML private Button gitHubBtn;
 	@FXML private Hyperlink clickHereText;
 	
 	Stage stage;
@@ -42,6 +49,7 @@ public class SignInController {
 			stage = (Stage)signInBtn.getScene().getWindow();
 			stage.setOnCloseRequest(e -> Utilities.backupAppState());
 		});
+		
 	}
 	
 	@FXML public void showPasswordBoxOnAction(ActionEvent event) {
@@ -82,6 +90,10 @@ public class SignInController {
     @FXML public void cancelBtnOnAction(ActionEvent event) {
     	Utilities.backupAppState();
     	stage.close();
+    }
+    
+    @FXML public void gitHubBtnOnAction(ActionEvent event) throws IOException, URISyntaxException {
+    	Desktop.getDesktop().browse(new URI("https://github.com/NickDeno"));
     }
     
     @FXML public void clickHereOnAction(ActionEvent event) {
