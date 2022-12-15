@@ -62,9 +62,9 @@ Data Structures Used:
 		Main Data Structures:
 			userPosts (Posts Created by User) - Data Structure Used - LinkedList<Post>()
 			userPostReplies (Reply Posts Created by User) - Data Structure Used - LinkedList<ReplyPost>()
-			following (Users that this user is following) - Data Structure Used - TreeMap<String(username),User>()
+			following (Users that this user is following) - Data Structure Used - TreeMap<String,User>() <-String = key = username
 			followers (Users that follow this user) - Data Structure Used - LinkedList<User>()
-			blockedUsers(Users that this user has blocked) - Data Structure Used - TreeMap<String(username),User>()
+			blockedUsers(Users that this user has blocked) - Data Structure Used - TreeMap<String,User>() <-String = key = username
 		
 		userPosts: 
 			The purpose of the userPosts LinkedList is to store only the Posts that were created by that user. In regards to the reasoning of choosing a 

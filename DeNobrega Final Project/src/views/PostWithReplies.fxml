@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="postRepliesPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="742.0" prefWidth="996.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #656161 0.0%, #393636 100.0%);" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PostWithRepliesController">
+<AnchorPane fx:id="postRepliesPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="742.0" prefWidth="996.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #656161 0.0%, #393636 100.0%);" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PostWithRepliesController">
    <children>
       <AnchorPane layoutX="118.0" layoutY="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="249.0" prefWidth="767.0" style="-fx-border-color: black; -fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #e84d4d 0.0%, #a8a8a8 100.0%); -fx-border-width: 3;" stylesheets="@Stylesheet.css">
          <children>
@@ -46,7 +46,7 @@
                   <Font name="Bell MT Bold" size="26.0" />
                </font>
             </Label>
-            <Label fx:id="topicLabel" alignment="CENTER_RIGHT" disable="true" layoutX="369.0" layoutY="213.0" prefHeight="36.0" prefWidth="333.0" style="-fx-opacity: 1;" text="Topic:" textFill="WHITE">
+            <Label fx:id="topicLabel" alignment="CENTER" disable="true" layoutX="203.0" layoutY="214.0" prefHeight="36.0" prefWidth="348.0" style="-fx-opacity: 1;" text="Topic:" textFill="WHITE">
                <font>
                   <Font name="Bookman Old Style Bold" size="22.0" />
                </font>
