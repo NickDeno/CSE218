@@ -1,7 +1,7 @@
 
 # CSE218 Repository
 
-This repo contains code from my CSE218-Data Structures and Algorithms class at SCC College in Fall 2022. Topics mainly included from lecture and homework code were data structures such as Linked Lists, Queues, Stacks, BS Trees, etc. The data stuctures were implemented both with Java API's and from scratch. Also included was sorting algorithms such as Quick Sort and Merge Sort, Recursion, GUI, and Generics.
+This repo contains code from my CSE218-Data Structures and Algorithms class at SCC College in Fall 2022. Topics mainly included from lecture and homework code were data structures such as Linked Lists, Queues, Stacks, BS Trees, etc. The data stuctures were implemented both with Java API's and from scratch. Also included was sorting algorithms such as Quick Sort and Merge Sort, Recursion, GUI, and Generics. Folders starting with "HW" correspond to homework code, and folders starting with "PM" correspond to lecture code.
 
 
 ## Topics/Code Included:
